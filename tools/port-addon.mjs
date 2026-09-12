@@ -502,18 +502,15 @@ function addVillagerAnimations(models, prefix) {
     "this.sx": "(0.75+vnap_mouth_width*0.25)*vnap_speaking+(1-vnap_speaking)",
     "this.sy": "(1+vnap_mouth_open*1.5)*vnap_speaking+(1-vnap_speaking)",
   });
-  const mouthGroup = findModelById(models, `${prefix}_l66l9`);
-  if (mouthGroup) appendAnimation(mouthGroup, {
-    "this.sx": "(0.75+vnap_mouth_width*0.25-vnap_mouth_closed)*vnap_speaking+(1-vnap_speaking)",
-    "this.sy": "(1-vnap_mouth_closed)*vnap_speaking+(1-vnap_speaking)",
-    "this.sz": "(1-vnap_mouth_closed)*vnap_speaking+(1-vnap_speaking)",
-  });
-  for (const [boneName, direction] of [["l66l9lgh", 1], ["l66l93gllge", -1]]) {
+  for (const [boneName, direction] of [["l66l9lgh", -1], ["l66l93gllge", 1]]) {
     const lip = findModelById(models, `${prefix}_${boneName}`);
     if (!lip) continue;
     const baseY = preparedTranslate(lip.translate)[1];
     appendAnimation(lip, {
       "this.ty": `${cleanNumber(baseY)}+vnap_speaking*vnap_mouth_open*${direction * 0.75}`,
+      "this.sx": "(0.75+vnap_mouth_width*0.25-vnap_mouth_closed)*vnap_speaking",
+      "this.sy": "(1-vnap_mouth_closed)*vnap_speaking",
+      "this.sz": "(1-vnap_mouth_closed)*vnap_speaking",
     });
   }
 
@@ -625,18 +622,19 @@ function addRootVillagerAnimations(models, prefix, rigScale = 1) {
     "this.sy": "(1+vnap_mouth_open*1.5)*vnap_speaking+(1-vnap_speaking)",
     "this.sz": "1",
   });
-  const mouthGroup = findModelById(models, `${prefix}_l66l9`);
-  if (mouthGroup) appendAnimation(mouthGroup, {
-    "this.sx": "(0.75+vnap_mouth_width*0.25-vnap_mouth_closed)*vnap_speaking",
-    "this.sy": "(1-vnap_mouth_closed)*vnap_speaking",
-    "this.sz": "(1-vnap_mouth_closed)*vnap_speaking",
-  });
-  for (const [boneName, direction] of [["l66l9lgh", 1], ["l66l93gllge", -1]]) {
+  // EMF does not consistently propagate animated scale from the empty l66l9
+  // controller to its rendered children. Drive both visible tooth strips
+  // directly. Their Y directions are inverted from Bedrock by invertAxis.
+  const toothTravel = rigScale === 1 ? 0.75 : 1.5;
+  for (const [boneName, direction] of [["l66l9lgh", -1], ["l66l93gllge", 1]]) {
     const lip = findModelById(models, `${prefix}_${boneName}`);
     if (!lip) continue;
     const baseY = preparedTranslate(lip.translate)[1];
     appendAnimation(lip, {
-      "this.ty": `${cleanNumber(baseY)}+vnap_speaking*vnap_mouth_open*${direction * 0.75}`,
+      "this.ty": `${cleanNumber(baseY)}+vnap_speaking*vnap_mouth_open*${direction * toothTravel}`,
+      "this.sx": "(0.75+vnap_mouth_width*0.25-vnap_mouth_closed)*vnap_speaking",
+      "this.sy": "(1-vnap_mouth_closed)*vnap_speaking",
+      "this.sz": "(1-vnap_mouth_closed)*vnap_speaking",
     });
   }
 
@@ -870,6 +868,13 @@ function rootSheepModels(prefix, texture, sheared = false) {
 
 const modelDefinitions = {
   "villager.jem": { models: rootVillagerModels("villager_news") },
+  // Minecraft 26.2 renders babies through a distinct villager_baby model
+  // layer. The original render controller selects this large-head rig at 1/3
+  // scale and pairs it with dkn, its dedicated baby UV layout.
+  "villager_baby.jem": { models: rootVillagerModels("villager_news_baby", undefined, [], {
+    baseGeometry: "geometry.oreville_vn.-1769484142",
+    rigScale: 1 / 3,
+  }) },
   "villager2.jem": { models: rootVillagerModels("mayor", "mayor", [
     { geometry: "geometry.oreville_vn.292718674", texture: "dtd" },
   ], {
@@ -1011,6 +1016,7 @@ for (const [name, layers] of Object.entries(compositeTextures)) composeTexture(n
 
 const vanillaVillagerTextures = {
   "villager.png": "dil",
+  "villager_baby.png": "dkn",
   "type/desert.png": "djp",
   "type/jungle.png": "djq",
   "type/plains.png": "dim",
@@ -1437,8 +1443,8 @@ execFileSync(ffmpeg, [
   "-t", "0.1", "-c:a", "libvorbis", silenceFile,
 ]);
 
-// Adult stock grunts are muted. Contextual speech is selected by the Java
-// controller; baby villagers deliberately fail this rule and keep vanilla audio.
+// Stock villager grunts are muted for both ages. Contextual adult and baby
+// speech is selected by the Java controller.
 for (const event of ["ambient", "hurt", "death", "trade", "no"]) {
   const eventRoot = join(minecraftAssets, "esf", "entity", "villager");
   writeJson(join(eventRoot, `${event}2.json`), {
@@ -1446,7 +1452,20 @@ for (const event of ["ambient", "hurt", "death", "trade", "no"]) {
   });
   writeText(join(eventRoot, `${event}.properties`), [
     "sounds.1=2",
-    "baby.1=false",
+    "",
+  ].join("\n"));
+}
+
+// Wooly keeps the add-on's contextual dialogue without also producing the
+// vanilla sheep vocals. The name rule leaves ordinary sheep unchanged.
+for (const event of ["ambient", "hurt", "death"]) {
+  const eventRoot = join(minecraftAssets, "esf", "entity", "sheep");
+  writeJson(join(eventRoot, `${event}2.json`), {
+    sounds: [{ name: `${modNamespace}:silence`, volume: 0.01, weight: 1 }],
+  });
+  writeText(join(eventRoot, `${event}.properties`), [
+    "sounds.1=2",
+    "name.1=iregex:(Wooly|Wooly The Sheep)",
     "",
   ].join("\n"));
 }

@@ -1188,15 +1188,16 @@
           "unreachable_base_egml9.sz": "1"
         },
         {
-          "unreachable_base_l66l9.sx": "(0.75+vnap_mouth_width*0.25-vnap_mouth_closed)*vnap_speaking",
-          "unreachable_base_l66l9.sy": "(1-vnap_mouth_closed)*vnap_speaking",
-          "unreachable_base_l66l9.sz": "(1-vnap_mouth_closed)*vnap_speaking"
+          "unreachable_base_l66l9lgh.ty": "-0.2625+vnap_speaking*vnap_mouth_open*-0.75",
+          "unreachable_base_l66l9lgh.sx": "(0.75+vnap_mouth_width*0.25-vnap_mouth_closed)*vnap_speaking",
+          "unreachable_base_l66l9lgh.sy": "(1-vnap_mouth_closed)*vnap_speaking",
+          "unreachable_base_l66l9lgh.sz": "(1-vnap_mouth_closed)*vnap_speaking"
         },
         {
-          "unreachable_base_l66l9lgh.ty": "-0.2625+vnap_speaking*vnap_mouth_open*0.75"
-        },
-        {
-          "unreachable_base_l66l93gllge.ty": "0.2625+vnap_speaking*vnap_mouth_open*-0.75"
+          "unreachable_base_l66l93gllge.ty": "0.2625+vnap_speaking*vnap_mouth_open*0.75",
+          "unreachable_base_l66l93gllge.sx": "(0.75+vnap_mouth_width*0.25-vnap_mouth_closed)*vnap_speaking",
+          "unreachable_base_l66l93gllge.sy": "(1-vnap_mouth_closed)*vnap_speaking",
+          "unreachable_base_l66l93gllge.sz": "(1-vnap_mouth_closed)*vnap_speaking"
         },
         {
           "unreachable_base_2jek.rx": "-0.74997+vnap_arms_rx",

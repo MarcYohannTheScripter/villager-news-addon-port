@@ -52,6 +52,7 @@ check(existsSync(join(root, "src/main/java/com/vnap/mixin/AbstractVillagerMixin.
 
 for (const { file, localScale, armsRest } of [
   { file: "villager.jem", localScale: 1, armsRest: "-0.74997+vnap_arms_rx" },
+  { file: "villager_baby.jem", localScale: 3, armsRest: "-1.0472+vnap_arms_rx" },
   { file: "villager2.jem", localScale: 3, armsRest: "-1.0472+vnap_arms_rx" },
   { file: "villager3.jem", localScale: 1, armsRest: "-0.74997+vnap_arms_rx" },
   { file: "villager4.jem", localScale: 1, armsRest: "-0.74997+vnap_arms_rx" },
@@ -87,6 +88,14 @@ for (const { file, localScale, armsRest } of [
   check(animationText.includes(armsRest), `${file} has malformed crossed-arm motion`);
   check(animationText.includes("_egml9.sx") && animationText.includes("vnap_mouth_open"), `${file} mouth animation was not hoisted`);
   check(animationText.includes('_base_egml9.sz":"1"'), `${file} does not show the neutral mouth line at rest`);
+  check(animationText.includes('_l66l9lgh.sx":"(0.75+vnap_mouth_width*0.25-vnap_mouth_closed)*vnap_speaking"')
+    && animationText.includes('_l66l93gllge.sx":"(0.75+vnap_mouth_width*0.25-vnap_mouth_closed)*vnap_speaking"'),
+  `${file} does not resize both rendered teeth strips directly`);
+  const toothTravel = localScale === 3 ? "1.5" : "0.75";
+  check(animationText.includes('_l66l9lgh.ty":"') && animationText.includes(`vnap_mouth_open*-${toothTravel}`)
+    && animationText.includes('_l66l93gllge.ty":"') && animationText.includes(`vnap_mouth_open*${toothTravel}`),
+  `${file} does not separate its upper and lower teeth while speaking`);
+  check(!animationText.includes('_l66l9.sx"'), `${file} still applies tooth scaling to the empty parent bone`);
   check(animationText.includes("_egfg3jgo.ty") && animationText.includes("vnap_brow_ty"), `${file} brow animation was not hoisted`);
   check(animationText.includes("6q6da5kmhh6j.sy") && animationText.includes("6q6da5kdgo6j.sy") && animationText.includes("2.02"), `${file} does not animate both eyelid halves`);
   check(animationText.includes("_leftleg.rx\":\"sin(limb_swing") && animationText.includes("_rightleg.rx\":\"sin(limb_swing"), `${file} does not walk from the upper-leg pivots`);
@@ -104,6 +113,10 @@ for (const { file, localScale, armsRest } of [
     check(animationText.includes("0.33333*vnap_root_sx"), "Mayor base rig is not scaled to its Bedrock entity size");
     const extraRoot = model.models.find((entry) => entry.id === "mayor_extra_0_root");
     check(JSON.stringify(extraRoot?.animations ?? []).includes("0.33333*vnap_root_sx"), "Mayor hat does not share the base rig scale");
+  } else if (file === "villager_baby.jem") {
+    check(head?.boxes?.some((box) => box.coordinates?.slice(3).includes(24)), "Baby villager is not using the add-on's large-head rig");
+    check(animationText.includes("0.33333*vnap_root_sx") && animationText.includes("0.33333*vnap_root_sy")
+      && animationText.includes("0.33333*vnap_root_sz"), "Baby villager does not apply its authored one-third rig scale");
   } else {
     check(JSON.stringify(head?.boxes?.[0]?.coordinates) === "[-4,0,-4,8,10,8]", `${file} has malformed local head geometry`);
     check(JSON.stringify(head?.boxes?.[0]?.uvSouth) === "[24,8,32,18]", `${file} has unconverted Bedrock face UVs`);
@@ -113,6 +126,23 @@ for (const { file, localScale, armsRest } of [
     check(JSON.stringify(arms?.boxes?.[0]?.coordinates) === "[-4,-6,-2,8,4,4]", `${file} has malformed local crossed-arm geometry`);
     check(bodywear?.boxes?.[0]?.sizeAdd === 0.5, `${file} does not preserve the authored robe shell size`);
   }
+}
+
+check(existsSync(join(resources, "assets", "minecraft", "textures", "entity", "villager", "villager_baby.png")),
+  "Baby villager base texture is missing");
+check(readFileSync(join(resources, "assets", "minecraft", "textures", "entity", "villager", "villager_baby.png"))
+  .equals(readFileSync(join(modAssets, "textures", "entity", "dkn.png"))),
+"Baby villager is not using the original add-on's dedicated baby face texture");
+
+for (const event of ["ambient", "hurt", "death", "trade", "no"]) {
+  const properties = readFileSync(join(resources, "assets", "minecraft", "esf", "entity", "villager", `${event}.properties`), "utf8");
+  check(properties.includes("sounds.1=2") && !properties.includes("baby.1=false"),
+    `Baby villagers are not covered by the ${event} vanilla-sound replacement`);
+}
+for (const event of ["ambient", "hurt", "death"]) {
+  const properties = readFileSync(join(resources, "assets", "minecraft", "esf", "entity", "sheep", `${event}.properties`), "utf8");
+  check(properties.includes("sounds.1=2") && properties.includes("name.1=iregex:(Wooly|Wooly The Sheep)"),
+    `Wooly's ${event} vanilla sound is not selectively replaced`);
 }
 
 {

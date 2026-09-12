@@ -5,7 +5,7 @@
   ],
   "models": [
     {
-      "id": "mayor_base_root",
+      "id": "villager_news_baby_base_root",
       "invertAxis": "xy",
       "translate": [
         0,
@@ -14,7 +14,7 @@
       ],
       "submodels": [
         {
-          "id": "mayor_base_waist",
+          "id": "villager_news_baby_base_waist",
           "invertAxis": "xy",
           "translate": [
             0,
@@ -23,7 +23,7 @@
           ],
           "submodels": [
             {
-              "id": "mayor_base_body",
+              "id": "villager_news_baby_base_body",
               "invertAxis": "xy",
               "translate": [
                 0,
@@ -80,7 +80,7 @@
               ],
               "submodels": [
                 {
-                  "id": "mayor_base_jg36",
+                  "id": "villager_news_baby_base_jg36",
                   "invertAxis": "xy",
                   "translate": [
                     0,
@@ -138,7 +138,7 @@
                   ]
                 },
                 {
-                  "id": "mayor_base_head",
+                  "id": "villager_news_baby_base_head",
                   "invertAxis": "xy",
                   "translate": [
                     0,
@@ -147,7 +147,7 @@
                   ],
                   "submodels": [
                     {
-                      "id": "mayor_base_headjgl2l6",
+                      "id": "villager_news_baby_base_headjgl2l6",
                       "invertAxis": "xy",
                       "translate": [
                         0,
@@ -376,7 +376,7 @@
                       ],
                       "submodels": [
                         {
-                          "id": "mayor_base_fgk6",
+                          "id": "villager_news_baby_base_fgk6",
                           "invertAxis": "xy",
                           "translate": [
                             0,
@@ -433,7 +433,7 @@
                           ]
                         },
                         {
-                          "id": "mayor_base_d67l_6q6",
+                          "id": "villager_news_baby_base_d67l_6q6",
                           "invertAxis": "xy",
                           "translate": [
                             -4.5,
@@ -460,7 +460,7 @@
                           ]
                         },
                         {
-                          "id": "mayor_base_ja89l_6q6",
+                          "id": "villager_news_baby_base_ja89l_6q6",
                           "invertAxis": "xy",
                           "translate": [
                             4.5,
@@ -487,7 +487,7 @@
                           ]
                         },
                         {
-                          "id": "mayor_base_6q6da5kmhh6j",
+                          "id": "villager_news_baby_base_6q6da5kmhh6j",
                           "invertAxis": "xy",
                           "translate": [
                             0,
@@ -496,7 +496,7 @@
                           ],
                           "submodels": [
                             {
-                              "id": "mayor_base_6q6da5kmhh6jd67l",
+                              "id": "villager_news_baby_base_6q6da5kmhh6jd67l",
                               "invertAxis": "xy",
                               "translate": [
                                 -6,
@@ -523,7 +523,7 @@
                               ]
                             },
                             {
-                              "id": "mayor_base_6q6da5kmhh6jja89l",
+                              "id": "villager_news_baby_base_6q6da5kmhh6jja89l",
                               "invertAxis": "xy",
                               "translate": [
                                 6,
@@ -552,7 +552,7 @@
                           ]
                         },
                         {
-                          "id": "mayor_base_6q6da5kdgo6j",
+                          "id": "villager_news_baby_base_6q6da5kdgo6j",
                           "invertAxis": "xy",
                           "translate": [
                             0,
@@ -561,7 +561,7 @@
                           ],
                           "submodels": [
                             {
-                              "id": "mayor_base_6q6da5kdgo6jja89l",
+                              "id": "villager_news_baby_base_6q6da5kdgo6jja89l",
                               "invertAxis": "xy",
                               "translate": [
                                 6,
@@ -588,7 +588,7 @@
                               ]
                             },
                             {
-                              "id": "mayor_base_6q6da5kdgo6jd67l",
+                              "id": "villager_news_baby_base_6q6da5kdgo6jd67l",
                               "invertAxis": "xy",
                               "translate": [
                                 -6,
@@ -617,7 +617,7 @@
                           ]
                         },
                         {
-                          "id": "mayor_base_egfg3jgo",
+                          "id": "villager_news_baby_base_egfg3jgo",
                           "invertAxis": "xy",
                           "translate": [
                             0,
@@ -674,7 +674,7 @@
                           ]
                         },
                         {
-                          "id": "mayor_base_helmet",
+                          "id": "villager_news_baby_base_helmet",
                           "invertAxis": "xy",
                           "translate": [
                             0,
@@ -732,7 +732,7 @@
                           ]
                         },
                         {
-                          "id": "mayor_base_3jae",
+                          "id": "villager_news_baby_base_3jae",
                           "invertAxis": "xy",
                           "translate": [
                             0,
@@ -789,7 +789,7 @@
                           ]
                         },
                         {
-                          "id": "mayor_base_egml9",
+                          "id": "villager_news_baby_base_egml9",
                           "invertAxis": "xy",
                           "translate": [
                             0,
@@ -846,7 +846,7 @@
                           ]
                         },
                         {
-                          "id": "mayor_base_l66l9",
+                          "id": "villager_news_baby_base_l66l9",
                           "invertAxis": "xy",
                           "translate": [
                             0,
@@ -855,7 +855,7 @@
                           ],
                           "submodels": [
                             {
-                              "id": "mayor_base_l66l9lgh",
+                              "id": "villager_news_baby_base_l66l9lgh",
                               "invertAxis": "xy",
                               "translate": [
                                 0,
@@ -912,7 +912,7 @@
                               ]
                             },
                             {
-                              "id": "mayor_base_l66l93gllge",
+                              "id": "villager_news_baby_base_l66l93gllge",
                               "invertAxis": "xy",
                               "translate": [
                                 0,
@@ -975,7 +975,7 @@
                   ]
                 },
                 {
-                  "id": "mayor_base_2jek",
+                  "id": "villager_news_baby_base_2jek",
                   "invertAxis": "xy",
                   "translate": [
                     0,
@@ -1133,7 +1133,7 @@
           ]
         },
         {
-          "id": "mayor_base_jggl_leftleg",
+          "id": "villager_news_baby_base_jggl_leftleg",
           "invertAxis": "xy",
           "translate": [
             0,
@@ -1142,7 +1142,7 @@
           ],
           "submodels": [
             {
-              "id": "mayor_base_leftleg",
+              "id": "villager_news_baby_base_leftleg",
               "invertAxis": "xy",
               "translate": [
                 -3,
@@ -1201,7 +1201,7 @@
           ]
         },
         {
-          "id": "mayor_base_jggl_rightleg",
+          "id": "villager_news_baby_base_jggl_rightleg",
           "invertAxis": "xy",
           "translate": [
             0,
@@ -1210,7 +1210,7 @@
           ],
           "submodels": [
             {
-              "id": "mayor_base_rightleg",
+              "id": "villager_news_baby_base_rightleg",
               "invertAxis": "xy",
               "translate": [
                 3,
@@ -1275,7 +1275,6 @@
         64,
         64
       ],
-      "texture": "villager-news-addon-port:textures/entity/mayor.png",
       "animations": [
         {
           "this.rx": "vnap_root_rx",
@@ -1289,797 +1288,260 @@
           "this.sz": "0.33333*vnap_root_sz"
         },
         {
-          "mayor_base_waist.rx": "vnap_waist_rx",
-          "mayor_base_waist.tx": "vnap_waist_tx",
-          "mayor_base_waist.sx": "vnap_waist_sx",
-          "mayor_base_waist.ry": "vnap_waist_ry",
-          "mayor_base_waist.ty": "-9+vnap_waist_ty",
-          "mayor_base_waist.sy": "vnap_waist_sy",
-          "mayor_base_waist.rz": "vnap_waist_rz",
-          "mayor_base_waist.tz": "vnap_waist_tz",
-          "mayor_base_waist.sz": "vnap_waist_sz"
+          "villager_news_baby_base_waist.rx": "vnap_waist_rx",
+          "villager_news_baby_base_waist.tx": "vnap_waist_tx",
+          "villager_news_baby_base_waist.sx": "vnap_waist_sx",
+          "villager_news_baby_base_waist.ry": "vnap_waist_ry",
+          "villager_news_baby_base_waist.ty": "-9+vnap_waist_ty",
+          "villager_news_baby_base_waist.sy": "vnap_waist_sy",
+          "villager_news_baby_base_waist.rz": "vnap_waist_rz",
+          "villager_news_baby_base_waist.tz": "vnap_waist_tz",
+          "villager_news_baby_base_waist.sz": "vnap_waist_sz"
         },
         {
-          "mayor_base_body.rx": "vnap_body_rx",
-          "mayor_base_body.tx": "vnap_body_tx",
-          "mayor_base_body.sx": "vnap_body_sx",
-          "mayor_base_body.ry": "vnap_body_ry",
-          "mayor_base_body.ty": "-15+vnap_body_ty",
-          "mayor_base_body.sy": "vnap_body_sy",
-          "mayor_base_body.rz": "vnap_body_rz",
-          "mayor_base_body.tz": "vnap_body_tz",
-          "mayor_base_body.sz": "vnap_body_sz"
+          "villager_news_baby_base_body.rx": "vnap_body_rx",
+          "villager_news_baby_base_body.tx": "vnap_body_tx",
+          "villager_news_baby_base_body.sx": "vnap_body_sx",
+          "villager_news_baby_base_body.ry": "vnap_body_ry",
+          "villager_news_baby_base_body.ty": "-15+vnap_body_ty",
+          "villager_news_baby_base_body.sy": "vnap_body_sy",
+          "villager_news_baby_base_body.rz": "vnap_body_rz",
+          "villager_news_baby_base_body.tz": "vnap_body_tz",
+          "villager_news_baby_base_body.sz": "vnap_body_sz"
         },
         {
-          "mayor_base_head.rx": "torad(head_pitch)+vnap_head_rx",
-          "mayor_base_head.tx": "vnap_head_tx",
-          "mayor_base_head.sx": "vnap_head_sx",
-          "mayor_base_head.ry": "torad(head_yaw)+vnap_head_ry",
-          "mayor_base_head.ty": "vnap_head_ty",
-          "mayor_base_head.sy": "vnap_head_sy",
-          "mayor_base_head.rz": "vnap_head_rz",
-          "mayor_base_head.tz": "vnap_head_tz",
-          "mayor_base_head.sz": "vnap_head_sz"
+          "villager_news_baby_base_head.rx": "torad(head_pitch)+vnap_head_rx",
+          "villager_news_baby_base_head.tx": "vnap_head_tx",
+          "villager_news_baby_base_head.sx": "vnap_head_sx",
+          "villager_news_baby_base_head.ry": "torad(head_yaw)+vnap_head_ry",
+          "villager_news_baby_base_head.ty": "vnap_head_ty",
+          "villager_news_baby_base_head.sy": "vnap_head_sy",
+          "villager_news_baby_base_head.rz": "vnap_head_rz",
+          "villager_news_baby_base_head.tz": "vnap_head_tz",
+          "villager_news_baby_base_head.sz": "vnap_head_sz"
         },
         {
-          "mayor_base_headjgl2l6.rx": "vnap_head_inner_rx",
-          "mayor_base_headjgl2l6.tx": "vnap_head_inner_tx",
-          "mayor_base_headjgl2l6.sx": "vnap_head_inner_sx",
-          "mayor_base_headjgl2l6.ry": "vnap_head_inner_ry",
-          "mayor_base_headjgl2l6.ty": "vnap_head_inner_ty",
-          "mayor_base_headjgl2l6.sy": "vnap_head_inner_sy",
-          "mayor_base_headjgl2l6.rz": "vnap_head_inner_rz",
-          "mayor_base_headjgl2l6.tz": "vnap_head_inner_tz",
-          "mayor_base_headjgl2l6.sz": "vnap_head_inner_sz"
+          "villager_news_baby_base_headjgl2l6.rx": "vnap_head_inner_rx",
+          "villager_news_baby_base_headjgl2l6.tx": "vnap_head_inner_tx",
+          "villager_news_baby_base_headjgl2l6.sx": "vnap_head_inner_sx",
+          "villager_news_baby_base_headjgl2l6.ry": "vnap_head_inner_ry",
+          "villager_news_baby_base_headjgl2l6.ty": "vnap_head_inner_ty",
+          "villager_news_baby_base_headjgl2l6.sy": "vnap_head_inner_sy",
+          "villager_news_baby_base_headjgl2l6.rz": "vnap_head_inner_rz",
+          "villager_news_baby_base_headjgl2l6.tz": "vnap_head_inner_tz",
+          "villager_news_baby_base_headjgl2l6.sz": "vnap_head_inner_sz"
         },
         {
-          "mayor_base_fgk6.rx": "vnap_nose_rx",
-          "mayor_base_fgk6.tx": "vnap_nose_tx",
-          "mayor_base_fgk6.sx": "vnap_nose_sx",
-          "mayor_base_fgk6.ry": "vnap_nose_ry",
-          "mayor_base_fgk6.ty": "-4.5+vnap_nose_ty",
-          "mayor_base_fgk6.sy": "vnap_nose_sy",
-          "mayor_base_fgk6.rz": "vnap_nose_rz",
-          "mayor_base_fgk6.tz": "-10.5+vnap_nose_tz",
-          "mayor_base_fgk6.sz": "vnap_nose_sz"
+          "villager_news_baby_base_fgk6.rx": "vnap_nose_rx",
+          "villager_news_baby_base_fgk6.tx": "vnap_nose_tx",
+          "villager_news_baby_base_fgk6.sx": "vnap_nose_sx",
+          "villager_news_baby_base_fgk6.ry": "vnap_nose_ry",
+          "villager_news_baby_base_fgk6.ty": "-4.5+vnap_nose_ty",
+          "villager_news_baby_base_fgk6.sy": "vnap_nose_sy",
+          "villager_news_baby_base_fgk6.rz": "vnap_nose_rz",
+          "villager_news_baby_base_fgk6.tz": "-10.5+vnap_nose_tz",
+          "villager_news_baby_base_fgk6.sz": "vnap_nose_sz"
         },
         {
-          "mayor_base_d67l_6q6.rx": "vnap_pupil_right_rx",
-          "mayor_base_d67l_6q6.tx": "4.5+vnap_pupil_right_tx",
-          "mayor_base_d67l_6q6.sx": "vnap_pupil_right_sx",
-          "mayor_base_d67l_6q6.ry": "vnap_pupil_right_ry",
-          "mayor_base_d67l_6q6.ty": "-7.5+vnap_pupil_right_ty",
-          "mayor_base_d67l_6q6.sy": "vnap_pupil_right_sy",
-          "mayor_base_d67l_6q6.rz": "vnap_pupil_right_rz",
-          "mayor_base_d67l_6q6.tz": "-10.45+vnap_pupil_right_tz",
-          "mayor_base_d67l_6q6.sz": "vnap_pupil_right_sz"
+          "villager_news_baby_base_d67l_6q6.rx": "vnap_pupil_right_rx",
+          "villager_news_baby_base_d67l_6q6.tx": "4.5+vnap_pupil_right_tx",
+          "villager_news_baby_base_d67l_6q6.sx": "vnap_pupil_right_sx",
+          "villager_news_baby_base_d67l_6q6.ry": "vnap_pupil_right_ry",
+          "villager_news_baby_base_d67l_6q6.ty": "-7.5+vnap_pupil_right_ty",
+          "villager_news_baby_base_d67l_6q6.sy": "vnap_pupil_right_sy",
+          "villager_news_baby_base_d67l_6q6.rz": "vnap_pupil_right_rz",
+          "villager_news_baby_base_d67l_6q6.tz": "-10.45+vnap_pupil_right_tz",
+          "villager_news_baby_base_d67l_6q6.sz": "vnap_pupil_right_sz"
         },
         {
-          "mayor_base_ja89l_6q6.rx": "vnap_pupil_left_rx",
-          "mayor_base_ja89l_6q6.tx": "-4.5+vnap_pupil_left_tx",
-          "mayor_base_ja89l_6q6.sx": "vnap_pupil_left_sx",
-          "mayor_base_ja89l_6q6.ry": "vnap_pupil_left_ry",
-          "mayor_base_ja89l_6q6.ty": "-7.5+vnap_pupil_left_ty",
-          "mayor_base_ja89l_6q6.sy": "vnap_pupil_left_sy",
-          "mayor_base_ja89l_6q6.rz": "vnap_pupil_left_rz",
-          "mayor_base_ja89l_6q6.tz": "-10.45+vnap_pupil_left_tz",
-          "mayor_base_ja89l_6q6.sz": "vnap_pupil_left_sz"
+          "villager_news_baby_base_ja89l_6q6.rx": "vnap_pupil_left_rx",
+          "villager_news_baby_base_ja89l_6q6.tx": "-4.5+vnap_pupil_left_tx",
+          "villager_news_baby_base_ja89l_6q6.sx": "vnap_pupil_left_sx",
+          "villager_news_baby_base_ja89l_6q6.ry": "vnap_pupil_left_ry",
+          "villager_news_baby_base_ja89l_6q6.ty": "-7.5+vnap_pupil_left_ty",
+          "villager_news_baby_base_ja89l_6q6.sy": "vnap_pupil_left_sy",
+          "villager_news_baby_base_ja89l_6q6.rz": "vnap_pupil_left_rz",
+          "villager_news_baby_base_ja89l_6q6.tz": "-10.45+vnap_pupil_left_tz",
+          "villager_news_baby_base_ja89l_6q6.sz": "vnap_pupil_left_sz"
         },
         {
-          "mayor_base_6q6da5kmhh6j.rx": "vnap_eye_group_rx",
-          "mayor_base_6q6da5kmhh6j.tx": "vnap_eye_group_tx",
-          "mayor_base_6q6da5kmhh6j.sx": "vnap_eye_group_sx",
-          "mayor_base_6q6da5kmhh6j.ry": "vnap_eye_group_ry",
-          "mayor_base_6q6da5kmhh6j.ty": "-12+vnap_eye_group_ty",
-          "mayor_base_6q6da5kmhh6j.sy": "vnap_eye_group_sy",
-          "mayor_base_6q6da5kmhh6j.rz": "vnap_eye_group_rz",
-          "mayor_base_6q6da5kmhh6j.tz": "-10.5+vnap_eye_group_tz",
-          "mayor_base_6q6da5kmhh6j.sz": "vnap_eye_group_sz"
+          "villager_news_baby_base_6q6da5kmhh6j.rx": "vnap_eye_group_rx",
+          "villager_news_baby_base_6q6da5kmhh6j.tx": "vnap_eye_group_tx",
+          "villager_news_baby_base_6q6da5kmhh6j.sx": "vnap_eye_group_sx",
+          "villager_news_baby_base_6q6da5kmhh6j.ry": "vnap_eye_group_ry",
+          "villager_news_baby_base_6q6da5kmhh6j.ty": "-12+vnap_eye_group_ty",
+          "villager_news_baby_base_6q6da5kmhh6j.sy": "vnap_eye_group_sy",
+          "villager_news_baby_base_6q6da5kmhh6j.rz": "vnap_eye_group_rz",
+          "villager_news_baby_base_6q6da5kmhh6j.tz": "-10.5+vnap_eye_group_tz",
+          "villager_news_baby_base_6q6da5kmhh6j.sz": "vnap_eye_group_sz"
         },
         {
-          "mayor_base_6q6da5kmhh6j.sy": "if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.08,1+12.75*fmod(time+id*0.37,1.25+fmod(id,3)*0.5),if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.18,2.02,if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.26,2.02-12.75*(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)-0.18),1)))*vnap_eye_group_sy"
+          "villager_news_baby_base_6q6da5kmhh6j.sy": "if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.08,1+12.75*fmod(time+id*0.37,1.25+fmod(id,3)*0.5),if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.18,2.02,if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.26,2.02-12.75*(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)-0.18),1)))*vnap_eye_group_sy"
         },
         {
-          "mayor_base_6q6da5kmhh6jd67l.rx": "vnap_eye_right_rx",
-          "mayor_base_6q6da5kmhh6jd67l.tx": "6+vnap_eye_right_tx",
-          "mayor_base_6q6da5kmhh6jd67l.sx": "vnap_eye_right_sx",
-          "mayor_base_6q6da5kmhh6jd67l.ry": "vnap_eye_right_ry",
-          "mayor_base_6q6da5kmhh6jd67l.ty": "vnap_eye_right_ty",
-          "mayor_base_6q6da5kmhh6jd67l.sy": "vnap_eye_right_sy",
-          "mayor_base_6q6da5kmhh6jd67l.rz": "vnap_eye_right_rz",
-          "mayor_base_6q6da5kmhh6jd67l.tz": "vnap_eye_right_tz",
-          "mayor_base_6q6da5kmhh6jd67l.sz": "vnap_eye_right_sz"
+          "villager_news_baby_base_6q6da5kmhh6jd67l.rx": "vnap_eye_right_rx",
+          "villager_news_baby_base_6q6da5kmhh6jd67l.tx": "6+vnap_eye_right_tx",
+          "villager_news_baby_base_6q6da5kmhh6jd67l.sx": "vnap_eye_right_sx",
+          "villager_news_baby_base_6q6da5kmhh6jd67l.ry": "vnap_eye_right_ry",
+          "villager_news_baby_base_6q6da5kmhh6jd67l.ty": "vnap_eye_right_ty",
+          "villager_news_baby_base_6q6da5kmhh6jd67l.sy": "vnap_eye_right_sy",
+          "villager_news_baby_base_6q6da5kmhh6jd67l.rz": "vnap_eye_right_rz",
+          "villager_news_baby_base_6q6da5kmhh6jd67l.tz": "vnap_eye_right_tz",
+          "villager_news_baby_base_6q6da5kmhh6jd67l.sz": "vnap_eye_right_sz"
         },
         {
-          "mayor_base_6q6da5kmhh6jja89l.rx": "vnap_eye_left_rx",
-          "mayor_base_6q6da5kmhh6jja89l.tx": "-6+vnap_eye_left_tx",
-          "mayor_base_6q6da5kmhh6jja89l.sx": "vnap_eye_left_sx",
-          "mayor_base_6q6da5kmhh6jja89l.ry": "vnap_eye_left_ry",
-          "mayor_base_6q6da5kmhh6jja89l.ty": "vnap_eye_left_ty",
-          "mayor_base_6q6da5kmhh6jja89l.sy": "vnap_eye_left_sy",
-          "mayor_base_6q6da5kmhh6jja89l.rz": "vnap_eye_left_rz",
-          "mayor_base_6q6da5kmhh6jja89l.tz": "vnap_eye_left_tz",
-          "mayor_base_6q6da5kmhh6jja89l.sz": "vnap_eye_left_sz"
+          "villager_news_baby_base_6q6da5kmhh6jja89l.rx": "vnap_eye_left_rx",
+          "villager_news_baby_base_6q6da5kmhh6jja89l.tx": "-6+vnap_eye_left_tx",
+          "villager_news_baby_base_6q6da5kmhh6jja89l.sx": "vnap_eye_left_sx",
+          "villager_news_baby_base_6q6da5kmhh6jja89l.ry": "vnap_eye_left_ry",
+          "villager_news_baby_base_6q6da5kmhh6jja89l.ty": "vnap_eye_left_ty",
+          "villager_news_baby_base_6q6da5kmhh6jja89l.sy": "vnap_eye_left_sy",
+          "villager_news_baby_base_6q6da5kmhh6jja89l.rz": "vnap_eye_left_rz",
+          "villager_news_baby_base_6q6da5kmhh6jja89l.tz": "vnap_eye_left_tz",
+          "villager_news_baby_base_6q6da5kmhh6jja89l.sz": "vnap_eye_left_sz"
         },
         {
-          "mayor_base_6q6da5kdgo6j.rx": "vnap_lower_face_rx",
-          "mayor_base_6q6da5kdgo6j.tx": "vnap_lower_face_tx",
-          "mayor_base_6q6da5kdgo6j.sx": "vnap_lower_face_sx",
-          "mayor_base_6q6da5kdgo6j.ry": "vnap_lower_face_ry",
-          "mayor_base_6q6da5kdgo6j.ty": "-3+vnap_lower_face_ty",
-          "mayor_base_6q6da5kdgo6j.sy": "vnap_lower_face_sy",
-          "mayor_base_6q6da5kdgo6j.rz": "vnap_lower_face_rz",
-          "mayor_base_6q6da5kdgo6j.tz": "-10.5+vnap_lower_face_tz",
-          "mayor_base_6q6da5kdgo6j.sz": "vnap_lower_face_sz"
+          "villager_news_baby_base_6q6da5kdgo6j.rx": "vnap_lower_face_rx",
+          "villager_news_baby_base_6q6da5kdgo6j.tx": "vnap_lower_face_tx",
+          "villager_news_baby_base_6q6da5kdgo6j.sx": "vnap_lower_face_sx",
+          "villager_news_baby_base_6q6da5kdgo6j.ry": "vnap_lower_face_ry",
+          "villager_news_baby_base_6q6da5kdgo6j.ty": "-3+vnap_lower_face_ty",
+          "villager_news_baby_base_6q6da5kdgo6j.sy": "vnap_lower_face_sy",
+          "villager_news_baby_base_6q6da5kdgo6j.rz": "vnap_lower_face_rz",
+          "villager_news_baby_base_6q6da5kdgo6j.tz": "-10.5+vnap_lower_face_tz",
+          "villager_news_baby_base_6q6da5kdgo6j.sz": "vnap_lower_face_sz"
         },
         {
-          "mayor_base_6q6da5kdgo6j.sy": "if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.08,1+12.75*fmod(time+id*0.37,1.25+fmod(id,3)*0.5),if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.18,2.02,if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.26,2.02-12.75*(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)-0.18),1)))*vnap_lower_face_sy"
+          "villager_news_baby_base_6q6da5kdgo6j.sy": "if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.08,1+12.75*fmod(time+id*0.37,1.25+fmod(id,3)*0.5),if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.18,2.02,if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.26,2.02-12.75*(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)-0.18),1)))*vnap_lower_face_sy"
         },
         {
-          "mayor_base_egfg3jgo.rx": "vnap_brow_rx",
-          "mayor_base_egfg3jgo.tx": "vnap_brow_tx",
-          "mayor_base_egfg3jgo.sx": "vnap_brow_sx",
-          "mayor_base_egfg3jgo.ry": "vnap_brow_ry",
-          "mayor_base_egfg3jgo.ty": "-9+vnap_brow_ty",
-          "mayor_base_egfg3jgo.sy": "vnap_brow_sy",
-          "mayor_base_egfg3jgo.rz": "vnap_brow_rz",
-          "mayor_base_egfg3jgo.tz": "-10.65+vnap_brow_tz",
-          "mayor_base_egfg3jgo.sz": "vnap_brow_sz"
+          "villager_news_baby_base_egfg3jgo.rx": "vnap_brow_rx",
+          "villager_news_baby_base_egfg3jgo.tx": "vnap_brow_tx",
+          "villager_news_baby_base_egfg3jgo.sx": "vnap_brow_sx",
+          "villager_news_baby_base_egfg3jgo.ry": "vnap_brow_ry",
+          "villager_news_baby_base_egfg3jgo.ty": "-9+vnap_brow_ty",
+          "villager_news_baby_base_egfg3jgo.sy": "vnap_brow_sy",
+          "villager_news_baby_base_egfg3jgo.rz": "vnap_brow_rz",
+          "villager_news_baby_base_egfg3jgo.tz": "-10.65+vnap_brow_tz",
+          "villager_news_baby_base_egfg3jgo.sz": "vnap_brow_sz"
         },
         {
-          "mayor_base_egml9.sx": "(0.75+vnap_mouth_width*0.25)*vnap_speaking+(1-vnap_speaking)",
-          "mayor_base_egml9.sy": "(1+vnap_mouth_open*1.5)*vnap_speaking+(1-vnap_speaking)",
-          "mayor_base_egml9.sz": "1"
+          "villager_news_baby_base_egml9.sx": "(0.75+vnap_mouth_width*0.25)*vnap_speaking+(1-vnap_speaking)",
+          "villager_news_baby_base_egml9.sy": "(1+vnap_mouth_open*1.5)*vnap_speaking+(1-vnap_speaking)",
+          "villager_news_baby_base_egml9.sz": "1"
         },
         {
-          "mayor_base_l66l9lgh.ty": "-0.575+vnap_speaking*vnap_mouth_open*-1.5",
-          "mayor_base_l66l9lgh.sx": "(0.75+vnap_mouth_width*0.25-vnap_mouth_closed)*vnap_speaking",
-          "mayor_base_l66l9lgh.sy": "(1-vnap_mouth_closed)*vnap_speaking",
-          "mayor_base_l66l9lgh.sz": "(1-vnap_mouth_closed)*vnap_speaking"
+          "villager_news_baby_base_l66l9lgh.ty": "-0.575+vnap_speaking*vnap_mouth_open*-1.5",
+          "villager_news_baby_base_l66l9lgh.sx": "(0.75+vnap_mouth_width*0.25-vnap_mouth_closed)*vnap_speaking",
+          "villager_news_baby_base_l66l9lgh.sy": "(1-vnap_mouth_closed)*vnap_speaking",
+          "villager_news_baby_base_l66l9lgh.sz": "(1-vnap_mouth_closed)*vnap_speaking"
         },
         {
-          "mayor_base_l66l93gllge.ty": "0.575+vnap_speaking*vnap_mouth_open*1.5",
-          "mayor_base_l66l93gllge.sx": "(0.75+vnap_mouth_width*0.25-vnap_mouth_closed)*vnap_speaking",
-          "mayor_base_l66l93gllge.sy": "(1-vnap_mouth_closed)*vnap_speaking",
-          "mayor_base_l66l93gllge.sz": "(1-vnap_mouth_closed)*vnap_speaking"
+          "villager_news_baby_base_l66l93gllge.ty": "0.575+vnap_speaking*vnap_mouth_open*1.5",
+          "villager_news_baby_base_l66l93gllge.sx": "(0.75+vnap_mouth_width*0.25-vnap_mouth_closed)*vnap_speaking",
+          "villager_news_baby_base_l66l93gllge.sy": "(1-vnap_mouth_closed)*vnap_speaking",
+          "villager_news_baby_base_l66l93gllge.sz": "(1-vnap_mouth_closed)*vnap_speaking"
         },
         {
-          "mayor_base_2jek.rx": "-1.0472+vnap_arms_rx",
-          "mayor_base_2jek.tx": "vnap_arms_tx",
-          "mayor_base_2jek.sx": "vnap_arms_sx",
-          "mayor_base_2jek.ry": "vnap_arms_ry",
-          "mayor_base_2jek.ty": "4.275+vnap_arms_ty",
-          "mayor_base_2jek.sy": "vnap_arms_sy",
-          "mayor_base_2jek.rz": "vnap_arms_rz",
-          "mayor_base_2jek.tz": "-0.25+vnap_arms_tz",
-          "mayor_base_2jek.sz": "vnap_arms_sz"
+          "villager_news_baby_base_2jek.rx": "-1.0472+vnap_arms_rx",
+          "villager_news_baby_base_2jek.tx": "vnap_arms_tx",
+          "villager_news_baby_base_2jek.sx": "vnap_arms_sx",
+          "villager_news_baby_base_2jek.ry": "vnap_arms_ry",
+          "villager_news_baby_base_2jek.ty": "4.275+vnap_arms_ty",
+          "villager_news_baby_base_2jek.sy": "vnap_arms_sy",
+          "villager_news_baby_base_2jek.rz": "vnap_arms_rz",
+          "villager_news_baby_base_2jek.tz": "-0.25+vnap_arms_tz",
+          "villager_news_baby_base_2jek.sz": "vnap_arms_sz"
         },
         {
-          "mayor_base_jggl_leftleg.rx": "vnap_left_leg_root_rx",
-          "mayor_base_jggl_leftleg.tx": "vnap_left_leg_root_tx",
-          "mayor_base_jggl_leftleg.sx": "vnap_left_leg_root_sx",
-          "mayor_base_jggl_leftleg.ry": "vnap_left_leg_root_ry",
-          "mayor_base_jggl_leftleg.ty": "vnap_left_leg_root_ty",
-          "mayor_base_jggl_leftleg.sy": "vnap_left_leg_root_sy",
-          "mayor_base_jggl_leftleg.rz": "vnap_left_leg_root_rz",
-          "mayor_base_jggl_leftleg.tz": "vnap_left_leg_root_tz",
-          "mayor_base_jggl_leftleg.sz": "vnap_left_leg_root_sz"
+          "villager_news_baby_base_jggl_leftleg.rx": "vnap_left_leg_root_rx",
+          "villager_news_baby_base_jggl_leftleg.tx": "vnap_left_leg_root_tx",
+          "villager_news_baby_base_jggl_leftleg.sx": "vnap_left_leg_root_sx",
+          "villager_news_baby_base_jggl_leftleg.ry": "vnap_left_leg_root_ry",
+          "villager_news_baby_base_jggl_leftleg.ty": "vnap_left_leg_root_ty",
+          "villager_news_baby_base_jggl_leftleg.sy": "vnap_left_leg_root_sy",
+          "villager_news_baby_base_jggl_leftleg.rz": "vnap_left_leg_root_rz",
+          "villager_news_baby_base_jggl_leftleg.tz": "vnap_left_leg_root_tz",
+          "villager_news_baby_base_jggl_leftleg.sz": "vnap_left_leg_root_sz"
         },
         {
-          "mayor_base_leftleg.rx": "sin(limb_swing*0.6662)*1.4*limb_speed+vnap_left_leg_rx",
-          "mayor_base_leftleg.tx": "3+vnap_left_leg_tx",
-          "mayor_base_leftleg.sx": "vnap_left_leg_sx",
-          "mayor_base_leftleg.ry": "vnap_left_leg_ry",
-          "mayor_base_leftleg.ty": "-9+vnap_left_leg_ty",
-          "mayor_base_leftleg.sy": "vnap_left_leg_sy",
-          "mayor_base_leftleg.rz": "vnap_left_leg_rz",
-          "mayor_base_leftleg.tz": "vnap_left_leg_tz",
-          "mayor_base_leftleg.sz": "vnap_left_leg_sz"
+          "villager_news_baby_base_leftleg.rx": "sin(limb_swing*0.6662)*1.4*limb_speed+vnap_left_leg_rx",
+          "villager_news_baby_base_leftleg.tx": "3+vnap_left_leg_tx",
+          "villager_news_baby_base_leftleg.sx": "vnap_left_leg_sx",
+          "villager_news_baby_base_leftleg.ry": "vnap_left_leg_ry",
+          "villager_news_baby_base_leftleg.ty": "-9+vnap_left_leg_ty",
+          "villager_news_baby_base_leftleg.sy": "vnap_left_leg_sy",
+          "villager_news_baby_base_leftleg.rz": "vnap_left_leg_rz",
+          "villager_news_baby_base_leftleg.tz": "vnap_left_leg_tz",
+          "villager_news_baby_base_leftleg.sz": "vnap_left_leg_sz"
         },
         {
-          "mayor_base_jggl_rightleg.rx": "vnap_right_leg_root_rx",
-          "mayor_base_jggl_rightleg.tx": "vnap_right_leg_root_tx",
-          "mayor_base_jggl_rightleg.sx": "vnap_right_leg_root_sx",
-          "mayor_base_jggl_rightleg.ry": "vnap_right_leg_root_ry",
-          "mayor_base_jggl_rightleg.ty": "vnap_right_leg_root_ty",
-          "mayor_base_jggl_rightleg.sy": "vnap_right_leg_root_sy",
-          "mayor_base_jggl_rightleg.rz": "vnap_right_leg_root_rz",
-          "mayor_base_jggl_rightleg.tz": "vnap_right_leg_root_tz",
-          "mayor_base_jggl_rightleg.sz": "vnap_right_leg_root_sz"
+          "villager_news_baby_base_jggl_rightleg.rx": "vnap_right_leg_root_rx",
+          "villager_news_baby_base_jggl_rightleg.tx": "vnap_right_leg_root_tx",
+          "villager_news_baby_base_jggl_rightleg.sx": "vnap_right_leg_root_sx",
+          "villager_news_baby_base_jggl_rightleg.ry": "vnap_right_leg_root_ry",
+          "villager_news_baby_base_jggl_rightleg.ty": "vnap_right_leg_root_ty",
+          "villager_news_baby_base_jggl_rightleg.sy": "vnap_right_leg_root_sy",
+          "villager_news_baby_base_jggl_rightleg.rz": "vnap_right_leg_root_rz",
+          "villager_news_baby_base_jggl_rightleg.tz": "vnap_right_leg_root_tz",
+          "villager_news_baby_base_jggl_rightleg.sz": "vnap_right_leg_root_sz"
         },
         {
-          "mayor_base_rightleg.rx": "sin(limb_swing*0.6662+pi)*1.4*limb_speed+vnap_right_leg_rx",
-          "mayor_base_rightleg.tx": "-3+vnap_right_leg_tx",
-          "mayor_base_rightleg.sx": "vnap_right_leg_sx",
-          "mayor_base_rightleg.ry": "vnap_right_leg_ry",
-          "mayor_base_rightleg.ty": "-9+vnap_right_leg_ty",
-          "mayor_base_rightleg.sy": "vnap_right_leg_sy",
-          "mayor_base_rightleg.rz": "vnap_right_leg_rz",
-          "mayor_base_rightleg.tz": "vnap_right_leg_tz",
-          "mayor_base_rightleg.sz": "vnap_right_leg_sz"
-        }
-      ]
-    },
-    {
-      "id": "mayor_extra_0_root",
-      "invertAxis": "xy",
-      "translate": [
-        0,
-        -24,
-        0
-      ],
-      "submodels": [
-        {
-          "id": "mayor_extra_0_waist",
-          "invertAxis": "xy",
-          "translate": [
-            0,
-            9,
-            0
-          ],
-          "submodels": [
-            {
-              "id": "mayor_extra_0_body",
-              "invertAxis": "xy",
-              "translate": [
-                0,
-                15,
-                0
-              ],
-              "submodels": [
-                {
-                  "id": "mayor_extra_0_head",
-                  "invertAxis": "xy",
-                  "translate": [
-                    0,
-                    0,
-                    0
-                  ],
-                  "submodels": [
-                    {
-                      "id": "mayor_extra_0_headjgl2l6",
-                      "invertAxis": "xy",
-                      "translate": [
-                        0,
-                        0,
-                        0
-                      ],
-                      "submodels": [
-                        {
-                          "id": "mayor_extra_0_egfg4d6",
-                          "invertAxis": "xy",
-                          "translate": [
-                            -6,
-                            7.5,
-                            -10.8
-                          ],
-                          "boxes": [
-                            {
-                              "coordinates": [
-                                2.99,
-                                -2.5,
-                                -0.3,
-                                3,
-                                6,
-                                0.6
-                              ],
-                              "uvNorth": [
-                                21,
-                                1,
-                                22,
-                                3
-                              ],
-                              "uvSouth": [
-                                22,
-                                1,
-                                21,
-                                3
-                              ],
-                              "uvEast": [
-                                21,
-                                1,
-                                22,
-                                3
-                              ],
-                              "uvWest": [
-                                21,
-                                1,
-                                22,
-                                3
-                              ],
-                              "uvUp": [
-                                21,
-                                2,
-                                22,
-                                1
-                              ],
-                              "uvDown": [
-                                21,
-                                3,
-                                22,
-                                2
-                              ]
-                            },
-                            {
-                              "coordinates": [
-                                -6,
-                                -2.5,
-                                -0.3,
-                                3,
-                                6,
-                                0.6
-                              ],
-                              "uvNorth": [
-                                24,
-                                1,
-                                25,
-                                3
-                              ],
-                              "uvSouth": [
-                                25,
-                                1,
-                                24,
-                                3
-                              ],
-                              "uvEast": [
-                                24,
-                                1,
-                                25,
-                                3
-                              ],
-                              "uvWest": [
-                                24,
-                                1,
-                                25,
-                                3
-                              ],
-                              "uvUp": [
-                                24,
-                                2,
-                                25,
-                                1
-                              ],
-                              "uvDown": [
-                                24,
-                                3,
-                                25,
-                                2
-                              ]
-                            },
-                            {
-                              "coordinates": [
-                                -3,
-                                3.5,
-                                -0.3,
-                                6,
-                                3,
-                                0.6
-                              ],
-                              "uvNorth": [
-                                22,
-                                0,
-                                24,
-                                1
-                              ],
-                              "uvSouth": [
-                                24,
-                                0,
-                                22,
-                                1
-                              ],
-                              "uvEast": [
-                                22,
-                                0,
-                                23,
-                                1
-                              ],
-                              "uvWest": [
-                                23,
-                                0,
-                                24,
-                                1
-                              ],
-                              "uvUp": [
-                                22,
-                                1,
-                                24,
-                                0
-                              ],
-                              "uvDown": [
-                                22,
-                                1,
-                                24,
-                                0
-                              ]
-                            },
-                            {
-                              "coordinates": [
-                                -3,
-                                -5.5,
-                                -0.3,
-                                6,
-                                3,
-                                0.6
-                              ],
-                              "uvNorth": [
-                                22,
-                                3,
-                                24,
-                                4
-                              ],
-                              "uvSouth": [
-                                24,
-                                3,
-                                22,
-                                4
-                              ],
-                              "uvEast": [
-                                22,
-                                3,
-                                23,
-                                4
-                              ],
-                              "uvWest": [
-                                23,
-                                3,
-                                24,
-                                4
-                              ],
-                              "uvUp": [
-                                22,
-                                4,
-                                24,
-                                3
-                              ],
-                              "uvDown": [
-                                22,
-                                4,
-                                24,
-                                3
-                              ]
-                            }
-                          ],
-                          "submodels": [
-                            {
-                              "id": "mayor_extra_0_egfg4d6_cube_3",
-                              "invertAxis": "xy",
-                              "translate": [
-                                5,
-                                -38.5,
-                                -2.2
-                              ],
-                              "boxes": [
-                                {
-                                  "coordinates": [
-                                    -8,
-                                    33,
-                                    -11.6,
-                                    6,
-                                    3,
-                                    0.6
-                                  ],
-                                  "uvNorth": [
-                                    25,
-                                    3,
-                                    27,
-                                    4
-                                  ],
-                                  "uvSouth": [
-                                    27,
-                                    3,
-                                    25,
-                                    4
-                                  ],
-                                  "uvEast": [
-                                    25,
-                                    3,
-                                    26,
-                                    4
-                                  ],
-                                  "uvWest": [
-                                    26,
-                                    3,
-                                    27,
-                                    4
-                                  ],
-                                  "uvUp": [
-                                    25,
-                                    4,
-                                    27,
-                                    3
-                                  ],
-                                  "uvDown": [
-                                    25,
-                                    4,
-                                    27,
-                                    3
-                                  ]
-                                }
-                              ],
-                              "rotate": [
-                                0,
-                                90,
-                                0
-                              ]
-                            },
-                            {
-                              "id": "mayor_extra_0_egfg4d6_cube_4",
-                              "invertAxis": "xy",
-                              "translate": [
-                                5,
-                                -35.5,
-                                0.8
-                              ],
-                              "boxes": [
-                                {
-                                  "coordinates": [
-                                    -8,
-                                    33,
-                                    -11.6,
-                                    3,
-                                    3,
-                                    0.6
-                                  ],
-                                  "uvNorth": [
-                                    27,
-                                    2,
-                                    28,
-                                    3
-                                  ],
-                                  "uvSouth": [
-                                    28,
-                                    2,
-                                    27,
-                                    3
-                                  ],
-                                  "uvEast": [
-                                    27,
-                                    2,
-                                    28,
-                                    3
-                                  ],
-                                  "uvWest": [
-                                    27,
-                                    2,
-                                    28,
-                                    3
-                                  ],
-                                  "uvUp": [
-                                    27,
-                                    3,
-                                    28,
-                                    2
-                                  ],
-                                  "uvDown": [
-                                    27,
-                                    3,
-                                    28,
-                                    2
-                                  ]
-                                }
-                              ],
-                              "rotate": [
-                                0,
-                                90,
-                                0
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "id": "mayor_extra_0_lghhat",
-                          "invertAxis": "xy",
-                          "translate": [
-                            0,
-                            23.24997,
-                            0
-                          ],
-                          "boxes": [
-                            {
-                              "coordinates": [
-                                -7.5,
-                                2.75003,
-                                -7.5,
-                                15,
-                                10,
-                                15
-                              ],
-                              "uvNorth": [
-                                13,
-                                10,
-                                20,
-                                16
-                              ],
-                              "uvSouth": [
-                                13,
-                                10,
-                                20,
-                                16
-                              ],
-                              "uvEast": [
-                                13,
-                                18,
-                                20,
-                                24
-                              ],
-                              "uvWest": [
-                                13,
-                                18,
-                                20,
-                                24
-                              ],
-                              "uvUp": [
-                                20,
-                                8,
-                                13,
-                                1
-                              ]
-                            },
-                            {
-                              "coordinates": [
-                                -9,
-                                0.75003,
-                                -9,
-                                18,
-                                2,
-                                18
-                              ],
-                              "uvNorth": [
-                                0,
-                                12,
-                                12,
-                                13
-                              ],
-                              "uvSouth": [
-                                0,
-                                12,
-                                12,
-                                13
-                              ],
-                              "uvEast": [
-                                0,
-                                12,
-                                12,
-                                13
-                              ],
-                              "uvWest": [
-                                0,
-                                12,
-                                12,
-                                13
-                              ],
-                              "uvUp": [
-                                12,
-                                12,
-                                0,
-                                0
-                              ],
-                              "uvDown": [
-                                12,
-                                25,
-                                0,
-                                13
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "part": "root",
-      "attach": true,
-      "textureSize": [
-        32,
-        32
-      ],
-      "texture": "villager-news-addon-port:textures/entity/dtd.png",
-      "animations": [
-        {
-          "this.rx": "vnap_root_rx",
-          "this.tx": "vnap_root_tx",
-          "this.sx": "0.33333*vnap_root_sx",
-          "this.ry": "vnap_root_ry",
-          "this.ty": "24+vnap_root_ty",
-          "this.sy": "0.33333*vnap_root_sy",
-          "this.rz": "vnap_root_rz",
-          "this.tz": "vnap_root_tz",
-          "this.sz": "0.33333*vnap_root_sz"
-        },
-        {
-          "mayor_extra_0_waist.rx": "vnap_waist_rx",
-          "mayor_extra_0_waist.tx": "vnap_waist_tx",
-          "mayor_extra_0_waist.sx": "vnap_waist_sx",
-          "mayor_extra_0_waist.ry": "vnap_waist_ry",
-          "mayor_extra_0_waist.ty": "-9+vnap_waist_ty",
-          "mayor_extra_0_waist.sy": "vnap_waist_sy",
-          "mayor_extra_0_waist.rz": "vnap_waist_rz",
-          "mayor_extra_0_waist.tz": "vnap_waist_tz",
-          "mayor_extra_0_waist.sz": "vnap_waist_sz"
-        },
-        {
-          "mayor_extra_0_body.rx": "vnap_body_rx",
-          "mayor_extra_0_body.tx": "vnap_body_tx",
-          "mayor_extra_0_body.sx": "vnap_body_sx",
-          "mayor_extra_0_body.ry": "vnap_body_ry",
-          "mayor_extra_0_body.ty": "-15+vnap_body_ty",
-          "mayor_extra_0_body.sy": "vnap_body_sy",
-          "mayor_extra_0_body.rz": "vnap_body_rz",
-          "mayor_extra_0_body.tz": "vnap_body_tz",
-          "mayor_extra_0_body.sz": "vnap_body_sz"
-        },
-        {
-          "mayor_extra_0_head.rx": "torad(head_pitch)+vnap_head_rx",
-          "mayor_extra_0_head.tx": "vnap_head_tx",
-          "mayor_extra_0_head.sx": "vnap_head_sx",
-          "mayor_extra_0_head.ry": "torad(head_yaw)+vnap_head_ry",
-          "mayor_extra_0_head.ty": "vnap_head_ty",
-          "mayor_extra_0_head.sy": "vnap_head_sy",
-          "mayor_extra_0_head.rz": "vnap_head_rz",
-          "mayor_extra_0_head.tz": "vnap_head_tz",
-          "mayor_extra_0_head.sz": "vnap_head_sz"
-        },
-        {
-          "mayor_extra_0_headjgl2l6.rx": "vnap_head_inner_rx",
-          "mayor_extra_0_headjgl2l6.tx": "vnap_head_inner_tx",
-          "mayor_extra_0_headjgl2l6.sx": "vnap_head_inner_sx",
-          "mayor_extra_0_headjgl2l6.ry": "vnap_head_inner_ry",
-          "mayor_extra_0_headjgl2l6.ty": "vnap_head_inner_ty",
-          "mayor_extra_0_headjgl2l6.sy": "vnap_head_inner_sy",
-          "mayor_extra_0_headjgl2l6.rz": "vnap_head_inner_rz",
-          "mayor_extra_0_headjgl2l6.tz": "vnap_head_inner_tz",
-          "mayor_extra_0_headjgl2l6.sz": "vnap_head_inner_sz"
+          "villager_news_baby_base_rightleg.rx": "sin(limb_swing*0.6662+pi)*1.4*limb_speed+vnap_right_leg_rx",
+          "villager_news_baby_base_rightleg.tx": "-3+vnap_right_leg_tx",
+          "villager_news_baby_base_rightleg.sx": "vnap_right_leg_sx",
+          "villager_news_baby_base_rightleg.ry": "vnap_right_leg_ry",
+          "villager_news_baby_base_rightleg.ty": "-9+vnap_right_leg_ty",
+          "villager_news_baby_base_rightleg.sy": "vnap_right_leg_sy",
+          "villager_news_baby_base_rightleg.rz": "vnap_right_leg_rz",
+          "villager_news_baby_base_rightleg.tz": "vnap_right_leg_tz",
+          "villager_news_baby_base_rightleg.sz": "vnap_right_leg_sz"
         }
       ]
     },
     {
       "part": "head",
-      "id": "mayor_hide_head",
+      "id": "villager_news_baby_hide_head",
       "attach": false
     },
     {
       "part": "nose",
-      "id": "mayor_hide_nose",
+      "id": "villager_news_baby_hide_nose",
       "attach": false
     },
     {
       "part": "headwear",
-      "id": "mayor_hide_headwear",
+      "id": "villager_news_baby_hide_headwear",
       "attach": false
     },
     {
       "part": "headwear2",
-      "id": "mayor_hide_headwear2",
+      "id": "villager_news_baby_hide_headwear2",
       "attach": false
     },
     {
       "part": "body",
-      "id": "mayor_hide_body",
+      "id": "villager_news_baby_hide_body",
       "attach": false
     },
     {
       "part": "bodywear",
-      "id": "mayor_hide_bodywear",
+      "id": "villager_news_baby_hide_bodywear",
       "attach": false
     },
     {
       "part": "arms",
-      "id": "mayor_hide_arms",
+      "id": "villager_news_baby_hide_arms",
       "attach": false
     },
     {
       "part": "right_leg",
-      "id": "mayor_hide_right_leg",
+      "id": "villager_news_baby_hide_right_leg",
       "attach": false
     },
     {
       "part": "left_leg",
-      "id": "mayor_hide_left_leg",
+      "id": "villager_news_baby_hide_left_leg",
       "attach": false
     }
   ]
