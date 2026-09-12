@@ -97,6 +97,16 @@ Run the asset and dialogue verification with:
 node tools/verify-port.mjs
 ```
 
+After extracting the original Bedrock packs into `build/bedrock-source`, create
+a readable Wooly source copy and symbol map with:
+
+```powershell
+node tools/deobfuscate-wooly.mjs
+```
+
+The output is written to `build/deobfuscated-bedrock-source/wooly`. The known
+source symbols are documented in [`docs/bedrock-deobfuscation/wooly.md`](docs/bedrock-deobfuscation/wooly.md).
+
 ## Credits
 
 Villager News and the original add-on assets were created by **Oreville

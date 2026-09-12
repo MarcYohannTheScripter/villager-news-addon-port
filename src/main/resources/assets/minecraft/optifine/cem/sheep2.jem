@@ -5,16 +5,16 @@
   ],
   "models": [
     {
-      "id": "wooly_0_root",
+      "id": "wooly_base_root",
       "invertAxis": "xy",
       "translate": [
         0,
-        0,
+        -24,
         0
       ],
       "submodels": [
         {
-          "id": "wooly_0_body",
+          "id": "wooly_base_body",
           "invertAxis": "xy",
           "translate": [
             0,
@@ -23,7 +23,7 @@
           ],
           "submodels": [
             {
-              "id": "wooly_0_46fljga5",
+              "id": "wooly_base_46fljga5",
               "invertAxis": "xy",
               "translate": [
                 0,
@@ -53,7 +53,7 @@
               ],
               "submodels": [
                 {
-                  "id": "wooly_0_oggd_46fljga5",
+                  "id": "wooly_base_oggd_46fljga5",
                   "invertAxis": "xy",
                   "translate": [
                     0.55,
@@ -81,7 +81,7 @@
               ]
             },
             {
-              "id": "wooly_0_k966h_head",
+              "id": "wooly_base_k966h_head",
               "invertAxis": "xy",
               "translate": [
                 0,
@@ -127,12 +127,18 @@
                     8,
                     20,
                     0
+                  ],
+                  "uvNorth": [
+                    8,
+                    8,
+                    14,
+                    14
                   ]
                 }
               ],
               "submodels": [
                 {
-                  "id": "wooly_0_oggd_head",
+                  "id": "wooly_base_oggd_head",
                   "invertAxis": "xy",
                   "translate": [
                     0,
@@ -158,7 +164,7 @@
                   ]
                 },
                 {
-                  "id": "wooly_0_3dafc",
+                  "id": "wooly_base_3dafc",
                   "invertAxis": "xy",
                   "translate": [
                     0,
@@ -203,22 +209,22 @@
                   ]
                 },
                 {
-                  "id": "wooly_0_7246gn6jd2q",
+                  "id": "wooly_base_7246gn6jd2q",
                   "invertAxis": "xy",
                   "translate": [
                     0,
                     0,
-                    0
+                    -0.025
                   ],
                   "boxes": [
                     {
                       "coordinates": [
                         -3,
                         -1,
-                        -6.75,
+                        -6.775,
                         6,
                         4,
-                        0
+                        0.05
                       ],
                       "uvNorth": [
                         8,
@@ -231,10 +237,10 @@
                       "coordinates": [
                         -3,
                         -3,
-                        -6.75,
+                        -6.775,
                         2,
                         2,
-                        0
+                        0.05
                       ],
                       "uvNorth": [
                         12,
@@ -247,10 +253,10 @@
                       "coordinates": [
                         1,
                         -3,
-                        -6.75,
+                        -6.775,
                         2,
                         2,
-                        0
+                        0.05
                       ],
                       "uvNorth": [
                         8,
@@ -263,10 +269,10 @@
                       "coordinates": [
                         0,
                         -3,
-                        -6.75,
+                        -6.775,
                         1,
                         2,
-                        0
+                        0.05
                       ],
                       "uvNorth": [
                         9.5,
@@ -279,10 +285,10 @@
                       "coordinates": [
                         -1,
                         -3,
-                        -6.75,
+                        -6.775,
                         1,
                         2,
-                        0
+                        0.05
                       ],
                       "uvNorth": [
                         12.5,
@@ -294,16 +300,16 @@
                   ]
                 },
                 {
-                  "id": "wooly_0_l66l9",
+                  "id": "wooly_base_l66l9",
                   "invertAxis": "xy",
                   "translate": [
                     0,
                     -1,
-                    -6.775
+                    -6.875
                   ],
                   "submodels": [
                     {
-                      "id": "wooly_0_l66l9lgh",
+                      "id": "wooly_base_l66l9lgh",
                       "invertAxis": "xy",
                       "translate": [
                         0,
@@ -321,46 +327,46 @@
                             0.05
                           ],
                           "uvNorth": [
-                            12.5,
-                            10.5,
-                            12.5,
-                            10.5
+                            12,
+                            10,
+                            13,
+                            11
                           ],
                           "uvSouth": [
-                            12.5,
-                            10.5,
-                            12.5,
-                            10.5
+                            12,
+                            10,
+                            13,
+                            11
                           ],
                           "uvEast": [
-                            12.5,
-                            10.5,
-                            12.5,
-                            10.5
+                            12,
+                            10,
+                            13,
+                            11
                           ],
                           "uvWest": [
-                            12.5,
-                            10.5,
-                            12.5,
-                            10.5
+                            12,
+                            10,
+                            13,
+                            11
                           ],
                           "uvUp": [
-                            12.5,
-                            10.5,
-                            12.5,
-                            10.5
+                            12,
+                            10,
+                            13,
+                            11
                           ],
                           "uvDown": [
-                            12.5,
-                            10.5,
-                            12.5,
-                            10.5
+                            12,
+                            10,
+                            13,
+                            11
                           ]
                         }
                       ]
                     },
                     {
-                      "id": "wooly_0_l66l93gllge",
+                      "id": "wooly_base_l66l93gllge",
                       "invertAxis": "xy",
                       "translate": [
                         0,
@@ -378,40 +384,40 @@
                             0.05
                           ],
                           "uvNorth": [
-                            12.5,
-                            10.5,
-                            12.5,
-                            10.5
+                            12,
+                            10,
+                            13,
+                            11
                           ],
                           "uvSouth": [
-                            12.5,
-                            10.5,
-                            12.5,
-                            10.5
+                            12,
+                            10,
+                            13,
+                            11
                           ],
                           "uvEast": [
-                            12.5,
-                            10.5,
-                            12.5,
-                            10.5
+                            12,
+                            10,
+                            13,
+                            11
                           ],
                           "uvWest": [
-                            12.5,
-                            10.5,
-                            12.5,
-                            10.5
+                            12,
+                            10,
+                            13,
+                            11
                           ],
                           "uvUp": [
-                            12.5,
-                            10.5,
-                            12.5,
-                            10.5
+                            12,
+                            10,
+                            13,
+                            11
                           ],
                           "uvDown": [
-                            12.5,
-                            10.5,
-                            12.5,
-                            10.5
+                            12,
+                            10,
+                            13,
+                            11
                           ]
                         }
                       ]
@@ -419,12 +425,12 @@
                   ]
                 },
                 {
-                  "id": "wooly_0_egml9",
+                  "id": "wooly_base_egml9",
                   "invertAxis": "xy",
                   "translate": [
                     0,
                     -1.7,
-                    -6.275
+                    -6.35
                   ],
                   "boxes": [
                     {
@@ -480,7 +486,7 @@
           ]
         },
         {
-          "id": "wooly_0_root_d680",
+          "id": "wooly_base_root_d680",
           "invertAxis": "xy",
           "translate": [
             0,
@@ -489,7 +495,7 @@
           ],
           "submodels": [
             {
-              "id": "wooly_0_d0_7dggj",
+              "id": "wooly_base_d0_7dggj",
               "invertAxis": "xy",
               "translate": [
                 2.75,
@@ -498,7 +504,7 @@
               ],
               "submodels": [
                 {
-                  "id": "wooly_0_d680",
+                  "id": "wooly_base_d680",
                   "invertAxis": "xy",
                   "translate": [
                     0,
@@ -524,7 +530,7 @@
                   ],
                   "submodels": [
                     {
-                      "id": "wooly_0_oggd_d680",
+                      "id": "wooly_base_oggd_d680",
                       "invertAxis": "xy",
                       "translate": [
                         0,
@@ -556,7 +562,7 @@
           ]
         },
         {
-          "id": "wooly_0_root_d681",
+          "id": "wooly_base_root_d681",
           "invertAxis": "xy",
           "translate": [
             0,
@@ -565,7 +571,7 @@
           ],
           "submodels": [
             {
-              "id": "wooly_0_d1_7dggj",
+              "id": "wooly_base_d1_7dggj",
               "invertAxis": "xy",
               "translate": [
                 -2.75,
@@ -574,7 +580,7 @@
               ],
               "submodels": [
                 {
-                  "id": "wooly_0_d681",
+                  "id": "wooly_base_d681",
                   "invertAxis": "xy",
                   "translate": [
                     0,
@@ -583,7 +589,7 @@
                   ],
                   "submodels": [
                     {
-                      "id": "wooly_0_d681_cube_0",
+                      "id": "wooly_base_d681_cube_0",
                       "invertAxis": "xy",
                       "translate": [
                         0,
@@ -610,7 +616,7 @@
                       "mirrorTexture": "u"
                     },
                     {
-                      "id": "wooly_0_oggd_d681",
+                      "id": "wooly_base_oggd_d681",
                       "invertAxis": "xy",
                       "translate": [
                         0,
@@ -619,7 +625,7 @@
                       ],
                       "submodels": [
                         {
-                          "id": "wooly_0_oggd_d681_cube_0",
+                          "id": "wooly_base_oggd_d681_cube_0",
                           "invertAxis": "xy",
                           "translate": [
                             0,
@@ -654,7 +660,7 @@
           ]
         },
         {
-          "id": "wooly_0_root_d682",
+          "id": "wooly_base_root_d682",
           "invertAxis": "xy",
           "translate": [
             0,
@@ -663,7 +669,7 @@
           ],
           "submodels": [
             {
-              "id": "wooly_0_d2_7dggj",
+              "id": "wooly_base_d2_7dggj",
               "invertAxis": "xy",
               "translate": [
                 2.75,
@@ -672,7 +678,7 @@
               ],
               "submodels": [
                 {
-                  "id": "wooly_0_d682",
+                  "id": "wooly_base_d682",
                   "invertAxis": "xy",
                   "translate": [
                     0,
@@ -698,7 +704,7 @@
                   ],
                   "submodels": [
                     {
-                      "id": "wooly_0_oggd_d682",
+                      "id": "wooly_base_oggd_d682",
                       "invertAxis": "xy",
                       "translate": [
                         0,
@@ -730,7 +736,7 @@
           ]
         },
         {
-          "id": "wooly_0_root_d683",
+          "id": "wooly_base_root_d683",
           "invertAxis": "xy",
           "translate": [
             0,
@@ -739,7 +745,7 @@
           ],
           "submodels": [
             {
-              "id": "wooly_0_d3_7dggj",
+              "id": "wooly_base_d3_7dggj",
               "invertAxis": "xy",
               "translate": [
                 -2.75,
@@ -748,7 +754,7 @@
               ],
               "submodels": [
                 {
-                  "id": "wooly_0_d683",
+                  "id": "wooly_base_d683",
                   "invertAxis": "xy",
                   "translate": [
                     0,
@@ -757,7 +763,7 @@
                   ],
                   "submodels": [
                     {
-                      "id": "wooly_0_d683_cube_0",
+                      "id": "wooly_base_d683_cube_0",
                       "invertAxis": "xy",
                       "translate": [
                         0,
@@ -784,7 +790,7 @@
                       "mirrorTexture": "u"
                     },
                     {
-                      "id": "wooly_0_oggd_d683",
+                      "id": "wooly_base_oggd_d683",
                       "invertAxis": "xy",
                       "translate": [
                         0,
@@ -793,7 +799,7 @@
                       ],
                       "submodels": [
                         {
-                          "id": "wooly_0_oggd_d683_cube_0",
+                          "id": "wooly_base_oggd_d683_cube_0",
                           "invertAxis": "xy",
                           "translate": [
                             0,
@@ -829,7 +835,7 @@
         }
       ],
       "part": "root",
-      "attach": false,
+      "attach": true,
       "textureSize": [
         64,
         64
@@ -837,24 +843,89 @@
       "texture": "villager-news-addon-port:textures/entity/diw.png",
       "animations": [
         {
-          "wooly_0_k966h_head.rx": "torad(head_pitch)"
+          "wooly_base_d680.rx": "sin(limb_swing*0.6662)*1.4*limb_speed"
         },
         {
-          "wooly_0_k966h_head.ry": "torad(head_yaw)"
+          "wooly_base_d681.rx": "sin(limb_swing*0.6662+pi)*1.4*limb_speed"
         },
         {
-          "wooly_0_root_d680.rx": "sin(limb_swing * 0.6662) * 1.4 * limb_speed"
+          "wooly_base_d682.rx": "sin(limb_swing*0.6662+pi)*1.4*limb_speed"
         },
         {
-          "wooly_0_root_d681.rx": "sin(limb_swing * 0.6662 + pi) * 1.4 * limb_speed"
+          "wooly_base_d683.rx": "sin(limb_swing*0.6662)*1.4*limb_speed"
         },
         {
-          "wooly_0_root_d682.rx": "sin(limb_swing * 0.6662 + pi) * 1.4 * limb_speed"
+          "wooly_base_46fljga5.rx": "1.5708+torad(cos(limb_swing*0.6662)*6.2)*limb_speed",
+          "wooly_base_46fljga5.ty": "0+(1.5-sin(limb_swing*0.6662)*1.125)*limb_speed",
+          "wooly_base_k966h_head.rx": "torad(head_pitch)+torad((sin(limb_swing*0.6662+torad(22))*6.2+1)*limb_speed)",
+          "wooly_base_k966h_head.ry": "torad(head_yaw)",
+          "wooly_base_k966h_head.ty": "-3.75+(1.5+cos(limb_swing*0.6662+torad(30))*1.125)*limb_speed"
         },
         {
-          "wooly_0_root_d683.rx": "sin(limb_swing * 0.6662) * 1.4 * limb_speed"
+          "wooly_base_3dafc.sx": "if(fmod(time+id*3.46,36.6666)>33.334,1,0)",
+          "wooly_base_3dafc.sy": "if(fmod(time+id*3.46,36.6666)>33.334,1,0)",
+          "wooly_base_3dafc.sz": "if(fmod(time+id*3.46,36.6666)>33.334,1,0)"
+        },
+        {
+          "wooly_base_oggd_46fljga5.visible": "!nbt(Sheared,1)"
+        },
+        {
+          "wooly_base_oggd_head.visible": "!nbt(Sheared,1)"
+        },
+        {
+          "wooly_base_oggd_d680.visible": "!nbt(Sheared,1)"
+        },
+        {
+          "wooly_base_oggd_d681.visible": "!nbt(Sheared,1)"
+        },
+        {
+          "wooly_base_oggd_d682.visible": "!nbt(Sheared,1)"
+        },
+        {
+          "wooly_base_oggd_d683.visible": "!nbt(Sheared,1)"
+        },
+        {
+          "wooly_base_egml9.ty": "1.7+vnap_speaking*vnap_mouth_open*0.5",
+          "wooly_base_egml9.sx": "(0.5+vnap_mouth_width*0.5)*vnap_speaking+(1-vnap_speaking)",
+          "wooly_base_egml9.sy": "(1+vnap_mouth_open)*vnap_speaking+(1-vnap_speaking)",
+          "wooly_base_l66l9.ty": "1+vnap_speaking*vnap_mouth_open*0.5",
+          "wooly_base_l66l9.sx": "(0.5+vnap_mouth_width*0.5-vnap_mouth_closed)*vnap_speaking",
+          "wooly_base_l66l9.sy": "(1-vnap_mouth_closed)*vnap_speaking",
+          "wooly_base_l66l9.sz": "(1-vnap_mouth_closed)*vnap_speaking",
+          "wooly_base_l66l9lgh.ty": "0.525-vnap_speaking*vnap_mouth_open*0.29",
+          "wooly_base_l66l93gllge.ty": "0.86875+vnap_speaking*vnap_mouth_open*0.29"
         }
       ]
+    },
+    {
+      "part": "head",
+      "id": "wooly_hide_head",
+      "attach": false
+    },
+    {
+      "part": "body",
+      "id": "wooly_hide_body",
+      "attach": false
+    },
+    {
+      "part": "leg1",
+      "id": "wooly_hide_leg1",
+      "attach": false
+    },
+    {
+      "part": "leg2",
+      "id": "wooly_hide_leg2",
+      "attach": false
+    },
+    {
+      "part": "leg3",
+      "id": "wooly_hide_leg3",
+      "attach": false
+    },
+    {
+      "part": "leg4",
+      "id": "wooly_hide_leg4",
+      "attach": false
     }
   ]
 }
