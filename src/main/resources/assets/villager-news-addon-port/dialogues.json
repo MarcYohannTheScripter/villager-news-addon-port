@@ -4611,7 +4611,7 @@
       ]
     },
     "vevdkl": {
-      "title": "",
+      "title": "Attacked by the Player",
       "body": "§eTrigger\n\n§7Directly attack a Villager.\n\n§eReaction\n\n§7Angry and alarmed reactions to being attacked by the player.",
       "speaker": "villager",
       "maximumDuration": 5.15,
@@ -8345,7 +8345,7 @@
       ]
     },
     "hxlyuc": {
-      "title": "",
+      "title": "Sees the Player",
       "body": "§eTrigger\n\n§7Move close enough for a Wandering Trader to notice you.\n\n§eReaction\n\n§7Wandering Trader greetings and sales pitches.",
       "speaker": "wandering_trader",
       "maximumDuration": 6.63,
@@ -8401,7 +8401,7 @@
       ]
     },
     "stqafd": {
-      "title": "",
+      "title": "Wandering",
       "body": "§eTrigger\n\n§7Stay near a Wandering Trader while it is wandering around.\n\n§eReaction\n\n§7Travel, Trading and Llama-related idle chatter.",
       "speaker": "wandering_trader",
       "maximumDuration": 4.81,
@@ -8523,7 +8523,7 @@
       ]
     },
     "xxehbq": {
-      "title": "",
+      "title": "Wandering",
       "body": "§eTrigger\n\n§7Stay near The Mayor while they are wandering.\n\n§eReaction\n\n§7Mayor-specific idle chatter while wandering.",
       "speaker": "mayor",
       "maximumDuration": 8.04,
@@ -8573,7 +8573,7 @@
       ]
     },
     "ssbhiv": {
-      "title": "",
+      "title": "Takes Damage",
       "body": "§eTrigger\n\n§7Have The Mayor take damage from any source.\n\n§eReaction\n\n§7General Mayor reactions to taking damage.",
       "speaker": "mayor",
       "maximumDuration": 5.29,
@@ -13111,7 +13111,7 @@
       ]
     },
     "uzdvsi": {
-      "title": "",
+      "title": "Close Trades After Buying",
       "body": "§eTrigger\n\n§7Complete at least one Trade with a Wandering Trader, then close the Trading window.\n\n§eReaction\n\n§7Friendly farewells after closing the window following a Trade.",
       "speaker": "wandering_trader",
       "maximumDuration": 4.04,
@@ -13143,7 +13143,7 @@
       ]
     },
     "erbcfn": {
-      "title": "",
+      "title": "Leave Without Trading",
       "body": "§eTrigger\n\n§7Open a Wandering Trader's Trading window, buy nothing, then close it.\n\n§eReaction\n\n§7Disappointed or sarcastic comments after leaving without Trading.",
       "speaker": "wandering_trader",
       "maximumDuration": 3.85,
@@ -13213,7 +13213,7 @@
       ]
     },
     "yubpbb": {
-      "title": "",
+      "title": "Open Trade Window",
       "body": "§eTrigger\n\n§7Open a Wandering Trader's Trading window.\n\n§eReaction\n\n§7Sales pitches when the Wandering Trader's Trade window opens.",
       "speaker": "wandering_trader",
       "maximumDuration": 9.2,
@@ -13271,7 +13271,7 @@
       ]
     },
     "shrrya": {
-      "title": "",
+      "title": "Close Trades After Buying",
       "body": "§eTrigger\n\n§7Complete a Trade with The Mayor, then close the Trading window.\n\n§eReaction\n\n§7Satisfied farewells after a successful Trade.",
       "speaker": "mayor",
       "maximumDuration": 7.13,
@@ -13315,7 +13315,7 @@
       ]
     },
     "bgzmea": {
-      "title": "",
+      "title": "Leave Without Trading",
       "body": "§eTrigger\n\n§7Open The Mayor's Trading window, buy nothing, then close it.\n\n§eReaction\n\n§7Disappointed comments when you leave without Trading.",
       "speaker": "mayor",
       "maximumDuration": 6.2,
@@ -13353,7 +13353,7 @@
       ]
     },
     "ltdnvy": {
-      "title": "",
+      "title": "Attacked by the Player",
       "body": "§eTrigger\n\n§7Directly attack The Mayor.\n\n§eReaction\n\n§7Stronger Mayor reactions when the player is responsible for the damage.",
       "speaker": "mayor",
       "maximumDuration": 5.69,
@@ -13391,7 +13391,7 @@
       ]
     },
     "njyapy": {
-      "title": "",
+      "title": "Open Trade Window",
       "body": "§eTrigger\n\n§7Open The Mayor's Trading window.\n\n§eReaction\n\n§7Mayor-specific comments when the Trade window opens.",
       "speaker": "mayor",
       "maximumDuration": 7.9,
@@ -13423,7 +13423,7 @@
       ]
     },
     "dpwhhs": {
-      "title": "",
+      "title": "Sees the Player",
       "body": "§eTrigger\n\n§7Move close enough for The Mayor to notice you.\n\n§eReaction\n\n§7Suspicious greetings and evasive comments when The Mayor notices you.",
       "speaker": "mayor",
       "maximumDuration": 11.93,
@@ -13541,7 +13541,7 @@
       ]
     },
     "eyiraw": {
-      "title": "",
+      "title": "Takes Damage",
       "body": "§eTrigger\n\n§7Have Wooly take damage from any source.\n\n§eReaction\n\n§7Wooly's general reactions to taking damage.",
       "speaker": "wooly",
       "maximumDuration": 0.48,
@@ -13585,7 +13585,7 @@
       ]
     },
     "ncyeaw": {
-      "title": "",
+      "title": "Attacked by the Player",
       "body": "§eTrigger\n\n§7Directly attack Wooly.\n\n§eReaction\n\n§7Stronger Wooly reactions when the player is responsible for the damage.",
       "speaker": "wooly",
       "maximumDuration": 1.35,
@@ -13645,7 +13645,7 @@
       ]
     },
     "vmohcm": {
-      "title": "",
+      "title": "Wandering",
       "body": "§eTrigger\n\n§7Stay near Wooly while they are wandering.\n\n§eReaction\n\n§7Deadpan Wooly idle chatter while wandering.",
       "speaker": "wooly",
       "maximumDuration": 3.75,
@@ -13677,7 +13677,7 @@
       ]
     },
     "uvtocs": {
-      "title": "",
+      "title": "Sees the Player",
       "body": "§eTrigger\n\n§7Move close enough for Wooly to notice you.\n\n§eReaction\n\n§7Wooly's typically unenthusiastic greeting when they notice you.",
       "speaker": "wooly",
       "maximumDuration": 1.84,
@@ -15801,7 +15801,7 @@
       ]
     },
     "ctzfzj": {
-      "title": "",
+      "title": "Close Trade Window",
       "body": "§eTrigger\n\n§7Close Testificate Man's Trading window.\n\n§eReaction\n\n§7Testificate Man farewells when the Trade window closes.",
       "speaker": "testificate_man",
       "maximumDuration": 5.24,
@@ -15815,7 +15815,7 @@
       ]
     },
     "xcjort": {
-      "title": "",
+      "title": "Close Trades After Buying",
       "body": "§eTrigger\n\n§7Complete a Trade with Testificate Man, then close the Trading window.\n\n§eReaction\n\n§7Successful-Trade farewells from Testificate Man.",
       "speaker": "testificate_man",
       "maximumDuration": 4.38,
@@ -15841,7 +15841,7 @@
       ]
     },
     "rdugrl": {
-      "title": "",
+      "title": "Leave Without Trading",
       "body": "§eTrigger\n\n§7Open Testificate Man's Trading window, buy nothing, then close it.\n\n§eReaction\n\n§7Disappointed Testificate Man comments when you leave without Trading.",
       "speaker": "testificate_man",
       "maximumDuration": 3.29,
@@ -15867,7 +15867,7 @@
       ]
     },
     "luoibc": {
-      "title": "",
+      "title": "Wandering",
       "body": "§eTrigger\n\n§7Stay near Testificate Man while they are wandering.\n\n§eReaction\n\n§7Superhero-themed idle chatter while Testificate Man wanders.",
       "speaker": "testificate_man",
       "maximumDuration": 6.34,
@@ -15911,7 +15911,7 @@
       ]
     },
     "mpbnsm": {
-      "title": "",
+      "title": "Open Trade Window",
       "body": "§eTrigger\n\n§7Open Testificate Man's Trading window.\n\n§eReaction\n\n§7Testificate Man comments when the Trade window opens.",
       "speaker": "testificate_man",
       "maximumDuration": 6.19,
@@ -15943,7 +15943,7 @@
       ]
     },
     "nmwmrz": {
-      "title": "",
+      "title": "Sees the Player",
       "body": "§eTrigger\n\n§7Move close enough for Testificate Man to notice you.\n\n§eReaction\n\n§7Heroic greetings and Trade offers from Testificate Man.",
       "speaker": "testificate_man",
       "maximumDuration": 10.1,
@@ -16051,7 +16051,7 @@
       ]
     },
     "fzoqwd": {
-      "title": "",
+      "title": "Takes Damage",
       "body": "§eTrigger\n\n§7Have Testificate Man take damage from any source.\n\n§eReaction\n\n§7Testificate Man reactions to taking damage.",
       "speaker": "testificate_man",
       "maximumDuration": 3.89,
@@ -16083,7 +16083,7 @@
       ]
     },
     "nfdery": {
-      "title": "",
+      "title": "Close Trade Window",
       "body": "§eTrigger\n\n§7Close Villager #5's Trading window.\n\n§eReaction\n\n§7Villager #5 farewells when the Trade window closes.",
       "speaker": "number_5",
       "maximumDuration": 3.48,
@@ -16103,7 +16103,7 @@
       ]
     },
     "msofrj": {
-      "title": "",
+      "title": "Close Trades After Buying",
       "body": "§eTrigger\n\n§7Complete a Trade with Villager #5, then close the Trading window.\n\n§eReaction\n\n§7Successful-Trade farewells from Villager #5.",
       "speaker": "number_5",
       "maximumDuration": 2.63,
@@ -16129,7 +16129,7 @@
       ]
     },
     "legnsy": {
-      "title": "",
+      "title": "Wandering",
       "body": "§eTrigger\n\n§7Stay near Villager #5 while they are wandering.\n\n§eReaction\n\n§7News-themed idle chatter while Villager #5 wanders.",
       "speaker": "number_5",
       "maximumDuration": 4.1,
@@ -16173,7 +16173,7 @@
       ]
     },
     "sclaoa": {
-      "title": "",
+      "title": "Open Trade Window",
       "body": "§eTrigger\n\n§7Open Villager #5's Trading window.\n\n§eReaction\n\n§7Villager #5 comments when the Trade window opens.",
       "speaker": "number_5",
       "maximumDuration": 3.39,
@@ -16225,7 +16225,7 @@
       ]
     },
     "xccwah": {
-      "title": "",
+      "title": "Sees the Player",
       "body": "§eTrigger\n\n§7Move close enough for Villager #5 to notice you.\n\n§eReaction\n\n§7Villager #5 greetings, celebrity comments and News-style introductions.",
       "speaker": "number_5",
       "maximumDuration": 7.39,
@@ -16251,7 +16251,7 @@
       ]
     },
     "behifz": {
-      "title": "",
+      "title": "Takes Damage",
       "body": "§eTrigger\n\n§7Have Villager #5 take damage from any source.\n\n§eReaction\n\n§7Villager #5 reactions to taking damage.",
       "speaker": "number_5",
       "maximumDuration": 2.72,
@@ -16289,7 +16289,7 @@
       ]
     },
     "hvjfnk": {
-      "title": "",
+      "title": "Close Trade Window",
       "body": "§eTrigger\n\n§7Close Villager #9's Trading window.\n\n§eReaction\n\n§7Villager #9 farewells when the Trade window closes.",
       "speaker": "number_9",
       "maximumDuration": 1.1,
@@ -16329,7 +16329,7 @@
       ]
     },
     "ezgbfw": {
-      "title": "",
+      "title": "Wandering",
       "body": "§eTrigger\n\n§7Stay near Villager #9 while they are wandering.\n\n§eReaction\n\n§7Reporter-style idle chatter while Villager #9 wanders.",
       "speaker": "number_9",
       "maximumDuration": 5.43,
@@ -16367,7 +16367,7 @@
       ]
     },
     "kzogzi": {
-      "title": "",
+      "title": "Sees the Player",
       "body": "§eTrigger\n\n§7Move close enough for Villager #9 to notice you.\n\n§eReaction\n\n§7Reporter-style greetings, questions and interview attempts from Villager #9.",
       "speaker": "number_9",
       "maximumDuration": 8.12,
@@ -16405,7 +16405,7 @@
       ]
     },
     "wrbvvp": {
-      "title": "",
+      "title": "Takes Damage",
       "body": "§eTrigger\n\n§7Have Villager #9 take damage from any source.\n\n§eReaction\n\n§7Villager #9 reactions to taking damage.",
       "speaker": "number_9",
       "maximumDuration": 3.28,
@@ -16443,7 +16443,7 @@
       ]
     },
     "asuufu": {
-      "title": "",
+      "title": "Attacked by the Player",
       "body": "§eTrigger\n\n§7Directly attack Villager #9.\n\n§eReaction\n\n§7Stronger Villager #9 reactions when the player is responsible for the damage.",
       "speaker": "number_9",
       "maximumDuration": 3.4,
@@ -16481,7 +16481,7 @@
       ]
     },
     "snnkrl": {
-      "title": "",
+      "title": "Open Trade Window",
       "body": "§eTrigger\n\n§7Open Villager #9's Trading window.\n\n§eReaction\n\n§7Villager #9 comments when the Trade window opens.",
       "speaker": "number_9",
       "maximumDuration": 1.73,
@@ -17566,6 +17566,7 @@
     "Shepherd at Work": "opxfuo",
     "Suddenly Turns to Day": "mgmzeh",
     "Suddenly Turns to Night": "ohdwnz",
+    "Attacked by the Player": "asuufu",
     "Attacked with a Firework": "gesjov",
     "Attacked with a Hoe": "qqyjjg",
     "Attacked with a Shovel": "hpnsfu",
@@ -17666,6 +17667,9 @@
     "Uses a Potion with Two Llamas": "myajyt",
     "Uses a Potion with One Llama": "jkeahu",
     "Uses an Invisibility Potion": "vggdrt",
+    "Sees the Player": "kzogzi",
+    "Wandering": "ezgbfw",
+    "Takes Damage": "wrbvvp",
     "Try to Reach the Untouchable Villager": "eltxge",
     "Suddenly Turn to Day": "wkwcrf",
     "Remove a Cosmetic": "ckjbyd",
@@ -17796,6 +17800,9 @@
     "Meet Villager #5": "kmvqxe",
     "Meet Villager #9": "sifqsj",
     "See a Villager Wearing a Cosmetic": "anrhns",
+    "Close Trades After Buying": "msofrj",
+    "Leave Without Trading": "rdugrl",
+    "Open Trade Window": "snnkrl",
     "Player Wears the Mayor Hat": "cmkesu",
     "Interact with Wooly": "fskcce",
     "Shear Wooly": "jqaekk",
@@ -17873,6 +17880,7 @@
     "Fish": "trkugw",
     "Happy Ghast": "lxvofx",
     "Llama": "ysbfqu",
+    "Close Trade Window": "hvjfnk",
     "Player Wears Testificate Man's Helmet": "rooiup",
     "Villager Wears Testificate Man's Helmet": "pbbywc",
     "Player Wears Villager #5's Moustache": "mjyhgw",

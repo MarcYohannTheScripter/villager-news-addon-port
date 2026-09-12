@@ -1,8 +1,12 @@
 package com.vnap;
 
+import com.vnap.config.VillagerNewsSettings;
 import com.vnap.dialogue.ContextualDialogueController;
 import com.vnap.dialogue.DialogueCatalog;
+import com.vnap.item.VillagerNewsItems;
 import com.vnap.network.DialogueAnimationPayload;
+import com.vnap.network.VillagerNewsSettingsNetwork;
+import com.vnap.network.VillagerNewsSettingsPayload;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 
@@ -18,7 +22,12 @@ public class VillagerNewsAddonPort implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		VillagerNewsItems.register();
 		PayloadTypeRegistry.clientboundPlay().register(DialogueAnimationPayload.TYPE, DialogueAnimationPayload.CODEC);
+		PayloadTypeRegistry.clientboundPlay().register(VillagerNewsSettingsPayload.TYPE, VillagerNewsSettingsPayload.CODEC);
+		PayloadTypeRegistry.serverboundPlay().register(VillagerNewsSettingsPayload.TYPE, VillagerNewsSettingsPayload.CODEC);
+		VillagerNewsSettings.load();
+		VillagerNewsSettingsNetwork.register();
 		DialogueCatalog.register();
 		ContextualDialogueController.register();
 		LOGGER.info("Villager News models, textures, and contextual dialogue are ready.");

@@ -10,7 +10,14 @@ const cem = join(resources, "assets", "minecraft", "optifine", "cem");
 const catalog = JSON.parse(readFileSync(join(modAssets, "dialogues.json"), "utf8"));
 const sounds = JSON.parse(readFileSync(join(modAssets, "sounds.json"), "utf8"));
 const animations = JSON.parse(readFileSync(join(modAssets, "dialogue_animations.json"), "utf8"));
+const handbook = JSON.parse(readFileSync(join(modAssets, "handbook.json"), "utf8"));
 const behaviorSource = readFileSync(join(root, "src/main/java/com/vnap/dialogue/ContextualDialogueController.java"), "utf8");
+const itemSource = readFileSync(join(root, "src/main/java/com/vnap/item/VillagerNewsItems.java"), "utf8");
+const handbookSource = readFileSync(join(root, "src/main/java/com/vnap/client/HandbookScreen.java"), "utf8");
+const clientSource = readFileSync(join(root, "src/main/java/com/vnap/client/VillagerNewsAddonPortClient.java"), "utf8");
+const settingsSource = readFileSync(join(root, "src/main/java/com/vnap/config/VillagerNewsSettings.java"), "utf8");
+const villagerDataSource = readFileSync(join(root, "src/main/java/com/vnap/mixin/VillagerDataMixin.java"), "utf8");
+const language = JSON.parse(readFileSync(join(modAssets, "lang", "en_us.json"), "utf8"));
 
 const ffmpeg = [
   process.env.FFMPEG_PATH,
@@ -30,6 +37,7 @@ for (const [id, group] of groups) {
   for (const variant of group.variants) {
     const event = sounds[`dialogue.${id}.${variant.index}`];
     check(event?.sounds?.length === 1, `Dialogue ${id}.${variant.index} must have one exact sound`);
+    check(event.subtitle === "subtitles.villager-news-addon-port.talking", `Dialogue ${id}.${variant.index} has no subtitle`);
     variantCount++;
     const sound = event.sounds[0];
     const name = typeof sound === "string" ? sound : sound.name;
@@ -43,12 +51,54 @@ check(animations.gestures.length === 46, `Expected 46 dialogue gestures, found $
 const referencedGroups = groups.filter(([id, group]) => behaviorSource.includes(`"${id}"`)
   || (group.title && behaviorSource.includes(`"${group.title}"`)));
 const unreferencedGroups = groups.filter((entry) => !referencedGroups.includes(entry));
-check(referencedGroups.length >= 490, `Expected at least 490 server-triggered dialogue groups, found ${referencedGroups.length}`);
-check(unreferencedGroups.every(([, group]) => !group.title
-  || /nose|cosmetic|hat|microphone|moustache|helmet/i.test(group.title)), "An ordinary gameplay dialogue still has no server trigger");
+check(referencedGroups.length === groups.length, `Expected all 523 server-triggered dialogue groups, found ${referencedGroups.length}`);
+check(unreferencedGroups.length === 0, `Found ${unreferencedGroups.length} dialogue groups without Java triggers`);
 check(behaviorSource.includes("EntitySpawnReason.SPAWN_ITEM_USE"), "Spawn-egg dialogue does not use the server spawn reason");
 check(behaviorSource.includes("maintainSpeechTargets"), "Server-side subject facing is missing");
+check(behaviorSource.includes("droppedItems.size() >= 5"), "Dropped-item pile dialogue does not require a real pile");
+check(behaviorSource.includes("ClientboundStopSoundPacket"), "Interrupted dialogue audio is not stopped on clients");
+check((behaviorSource.match(/tickRateManager\(\)\.runsNormally\(\)/g) ?? []).length >= 2
+  && behaviorSource.includes("stopActiveDialogue(server)"), "Dialogue is not paused and stopped by /tick freeze");
+check(behaviorSource.includes("tryCreateNaturalSpecial"), "Natural special-character spawning is missing");
+check(!behaviorSource.includes("InteractionResult.FAIL"), "Dialogue hooks still reject vanilla trading interactions");
 check(existsSync(join(root, "src/main/java/com/vnap/mixin/AbstractVillagerMixin.java")), "Trade completion mixin is missing");
+check(existsSync(join(root, "src/main/java/com/vnap/mixin/VillagerDataMixin.java")), "Villager cosmetic state mixin is missing");
+check(itemSource.includes("FabricCreativeModeTab.builder()"), "Villager News creative tab is missing");
+check(language["itemGroup.villager-news-addon-port.items"] === "Villager News", "Villager News creative tab name is missing");
+check(handbook.categories.length === 12, `Expected 12 handbook trigger categories, found ${handbook.categories.length}`);
+check(handbook.categories.flatMap((category) => category.sections).length === 62, "The handbook section hierarchy is incomplete");
+check(Object.keys(handbook.contexts).length === 491, "The handbook is missing documented add-on contexts");
+check(handbook.overview.length === 12 && handbook.specialVillagers.length === 6
+  && handbook.cosmetics.length === 6 && handbook.generalInformation.length === 8,
+"The handbook guide pages do not match the add-on");
+check(handbook.categories.flatMap((category) => category.sections)
+  .find((section) => section.title === "Real-World Days")?.entries.length === 3,
+"The handbook is missing the original real-world day guide");
+check(handbookSource.includes("Search Triggers") && handbookSource.includes("DialogueCatalog") === false,
+  "The handbook's searchable trigger browser is missing or using a reduced catalog");
+check(clientSource.includes("new HandbookScreen()"), "Using the handbook does not open its client screen");
+check(clientSource.includes("if (!level.isClientSide()) return InteractionResult.PASS;"), "The handbook opener can run on the integrated server thread");
+check(handbookSource.includes("VillagerNewsSettingsState.setChattiness")
+  && handbookSource.includes("VillagerNewsSettingsState.setRareVoicelines")
+  && handbookSource.includes("VillagerNewsSettingsState.setSpawnSpecialVillagers")
+  && handbookSource.includes("showSubtitles().set"), "The handbook settings are not interactive");
+check(settingsSource.includes("scaleCooldown") && settingsSource.includes("rareVoicelines")
+  && settingsSource.includes("spawnSpecialVillagers"), "The Bedrock settings are not persisted on the server");
+check(behaviorSource.includes("VillagerNewsSettings.scaleCooldown")
+  && behaviorSource.includes("VillagerNewsSettings.rareVoicelines")
+  && behaviorSource.includes("VillagerNewsSettings.spawnSpecialVillagers"), "The server behavior does not apply every supported setting");
+check(villagerDataSource.includes("vnap$keepSpecialTradeOpen") && villagerDataSource.includes("isSpecialTrader"),
+  "Special villagers still inherit the vanilla unemployed-villager trade closure");
+const merchantCheck = behaviorSource.indexOf("player.containerMenu instanceof MerchantMenu");
+const openingDialogue = behaviorSource.indexOf("trade_open:");
+check(merchantCheck >= 0 && openingDialogue > merchantCheck, "Trade opening dialogue still runs before the merchant menu opens");
+
+for (const item of ["handbook", "mayor_hat", "microphone", "moustache", "testificate_man_helmet", "villager_nose"]) {
+  check(existsSync(join(modAssets, "items", `${item}.json`)), `Missing client item definition for ${item}`);
+  check(existsSync(join(modAssets, "models", "item", `${item}.json`)), `Missing item model for ${item}`);
+  check(existsSync(join(modAssets, "textures", "item", `${item}.png`)), `Missing item texture for ${item}`);
+}
+check(existsSync(join(resources, "data", "villager-news-addon-port", "recipe", "handbook.json")), "Handbook recipe is missing");
 
 for (const { file, localScale, armsRest } of [
   { file: "villager.jem", localScale: 1, armsRest: "-0.74997+vnap_arms_rx" },
@@ -101,6 +151,14 @@ for (const { file, localScale, armsRest } of [
   check(animationText.includes("_leftleg.rx\":\"sin(limb_swing") && animationText.includes("_rightleg.rx\":\"sin(limb_swing"), `${file} does not walk from the upper-leg pivots`);
   check(!animationText.includes("limb_speed*(1-vnap_speaking)"), `${file} freezes its legs while dialogue is playing`);
   check(!animationText.includes("_jggl_leftleg.rx\":\"sin(limb_swing") && !animationText.includes("_jggl_rightleg.rx\":\"sin(limb_swing"), `${file} still walks from the foot pivots`);
+  if (file !== "wandering_trader.jem") {
+    check(animationText.includes("vnap_has_nose"), `${file} does not respond to synchronized nose state`);
+  }
+  if (file === "villager.jem" || file === "villager_baby.jem") {
+    for (const cosmetic of ["mayor_hat", "helmet", "microphone", "moustache"]) {
+      check(JSON.stringify(model).includes(`vnap_cosmetic_${cosmetic}`), `${file} is missing the ${cosmetic} cosmetic`);
+    }
+  }
 
   const head = base("headjgl2l6");
   const nose = base("fgk6");
@@ -113,6 +171,19 @@ for (const { file, localScale, armsRest } of [
     check(animationText.includes("0.33333*vnap_root_sx"), "Mayor base rig is not scaled to its Bedrock entity size");
     const extraRoot = model.models.find((entry) => entry.id === "mayor_extra_0_root");
     check(JSON.stringify(extraRoot?.animations ?? []).includes("0.33333*vnap_root_sx"), "Mayor hat does not share the base rig scale");
+	  } else if (file === "villager.jem") {
+	    const mayorHat = all.find((entry) => entry.id === "villager_news_extra_0_lghhat");
+	    const mayorMonocle = all.find((entry) => entry.id === "villager_news_extra_0_egfg4d6");
+	    const mayorAnimations = JSON.stringify(model.models.find((entry) => entry.id === "villager_news_extra_0_root")?.animations ?? []);
+	    check(mayorHat?.boxes?.some((box) => box.coordinates?.slice(3).includes(8)), "The villager Mayor hat is using the oversized special-character geometry");
+	    check(mayorAnimations.includes('"this.sx":"vnap_cosmetic_mayor_hat"')
+	      && mayorAnimations.includes('"villager_news_extra_0_lghhat.sx":0.9')
+	      && mayorAnimations.includes('"villager_news_extra_0_lghhat.sz":0.9'),
+	    "The wearable Mayor hat is not reduced around its own pivot");
+	    check(JSON.stringify(mayorHat?.translate) === "[0,7.01998,0]"
+	      && JSON.stringify(mayorHat?.boxes?.map((box) => box.coordinates[1])) === "[4.53002,3.28602]",
+	    "The wearable Mayor hat cubes are not lowered onto the head");
+	    check(JSON.stringify(mayorMonocle?.translate) === "[-3.27,4.805,-3.526]", "The wearable Mayor monocle is floating in front of the face");
   } else if (file === "villager_baby.jem") {
     check(head?.boxes?.some((box) => box.coordinates?.slice(3).includes(24)), "Baby villager is not using the add-on's large-head rig");
     check(animationText.includes("0.33333*vnap_root_sx") && animationText.includes("0.33333*vnap_root_sy")
@@ -138,6 +209,13 @@ for (const event of ["ambient", "hurt", "death", "trade", "no"]) {
   const properties = readFileSync(join(resources, "assets", "minecraft", "esf", "entity", "villager", `${event}.properties`), "utf8");
   check(properties.includes("sounds.1=2") && !properties.includes("baby.1=false"),
     `Baby villagers are not covered by the ${event} vanilla-sound replacement`);
+}
+for (const event of ["ambient", "hurt", "death", "trade", "no", "yes"]) {
+  const eventRoot = join(resources, "assets", "minecraft", "esf", "entity", "wandering_trader");
+  const properties = readFileSync(join(eventRoot, `${event}.properties`), "utf8");
+  const replacement = JSON.parse(readFileSync(join(eventRoot, `${event}2.json`), "utf8"));
+  check(properties.includes("sounds.1=2") && replacement.sounds?.[0]?.name === "villager-news-addon-port:silence",
+    `The Wandering Trader's ${event} vanilla sound is not replaced`);
 }
 for (const event of ["ambient", "hurt", "death"]) {
   const properties = readFileSync(join(resources, "assets", "minecraft", "esf", "entity", "sheep", `${event}.properties`), "utf8");
@@ -271,5 +349,7 @@ console.log(JSON.stringify({
   voiceFiles: readdirSync(join(modAssets, "sounds", "voice")).filter((name) => name.endsWith(".ogg")).length,
   cemModels: readdirSync(cem).filter((name) => name.endsWith(".jem")).length,
   serverTriggeredDialogueGroups: referencedGroups.length,
-  cosmeticOnlyDialogueGroups: unreferencedGroups.length,
+  unreferencedDialogueGroups: unreferencedGroups.length,
+  handbookContexts: Object.keys(handbook.contexts).length,
+  handbookCategories: handbook.categories.length,
 }, null, 2));

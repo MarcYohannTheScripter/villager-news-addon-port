@@ -1344,6 +1344,11 @@
           "mayor_base_fgk6.sz": "vnap_nose_sz"
         },
         {
+          "mayor_base_fgk6.sx": "vnap_nose_sx*vnap_has_nose",
+          "mayor_base_fgk6.sy": "vnap_nose_sy*vnap_has_nose",
+          "mayor_base_fgk6.sz": "vnap_nose_sz*vnap_has_nose"
+        },
+        {
           "mayor_base_d67l_6q6.rx": "vnap_pupil_right_rx",
           "mayor_base_d67l_6q6.tx": "4.5+vnap_pupil_right_tx",
           "mayor_base_d67l_6q6.sx": "vnap_pupil_right_sx",

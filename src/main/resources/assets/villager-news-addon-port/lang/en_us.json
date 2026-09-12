@@ -1,0 +1,14 @@
+{
+  "item.villager-news-addon-port.handbook": "Villager News Handbook",
+  "item.villager-news-addon-port.mayor_hat": "Mayor Hat",
+  "item.villager-news-addon-port.microphone": "Microphone",
+  "item.villager-news-addon-port.moustache": "Moustache",
+  "item.villager-news-addon-port.testificate_man_helmet": "Testificate Man Helmet",
+  "item.villager-news-addon-port.villager_nose": "Villager Nose",
+  "itemGroup.villager-news-addon-port.items": "Villager News",
+  "guide.villager-news-addon-port.header": "Villager News 1.1.0",
+  "guide.villager-news-addon-port.dialogue": "Villagers react to actions, mobs, trading, danger, their surroundings, and each other.",
+  "guide.villager-news-addon-port.cosmetics": "Shear an adult villager for its nose. Interact with a villager to return a nose or give a Mayor Hat, Helmet, Microphone, or Moustache. Shears remove the current cosmetic first.",
+  "guide.villager-news-addon-port.specials": "Name villagers Mayor Villager, Testificate Man, Villager #5, Villager #9, or Villager Unreachable. Name a sheep Wooly The Sheep.",
+  "subtitles.villager-news-addon-port.talking": "Villager News character talks"
+}

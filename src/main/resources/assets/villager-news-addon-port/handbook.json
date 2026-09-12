@@ -1,0 +1,3625 @@
+{
+  "headline": "Breaking News!\n\nVillagers are now judging your every move with over 2,000+ voiced reactions.",
+  "guideIntro": "Explore Villager News, meet special characters and discover hidden reactions.\n\nOnline Guide\norevillestudios.com/villager-news",
+  "overview": [
+    {
+      "title": "Reactive Dialogue",
+      "body": "§7Villagers react to nearby mobs, blocks, player actions, trading, damage and plenty more. Try doing things around them and listen for a response."
+    },
+    {
+      "title": "Animations",
+      "body": "§7Villagers are fully animated with custom movement, expressive voiceline animations and lip sync that brings their dialogue to life."
+    },
+    {
+      "title": "Villager Styles",
+      "body": "§7Choose between Vanilla, Actions & Stuff and Actions & Stuff: Flat Style Villagers in Settings to match the look of your world."
+    },
+    {
+      "title": "Conversations",
+      "body": "§7Villagers don't just react to you. They can interact with each other too, with conversations and unique exchanges between Villagers."
+    },
+    {
+      "title": "Reaction Categories",
+      "body": "§7Reactions cover player actions, mobs, building, trading, Villager life, damage, world events, conversations and plenty more. Browse the Triggers & Reactions Guide to discover them all."
+    },
+    {
+      "title": "Player Reputation",
+      "body": "§7Villagers remember how you treat them. Trading and curing Villagers improve your reputation, while hurting or killing them lowers it. Villagers will even gossip about you with each other, changing how they react to you."
+    },
+    {
+      "title": "Special Villagers",
+      "body": "§7One of each special Villager News character spawns in your world. Explore different Villages to find them and trade for their unique items."
+    },
+    {
+      "title": "Wandering Traders",
+      "body": "§7Wandering Traders have their own dialogue for trading, sold-out stock, successful deals and plenty more."
+    },
+    {
+      "title": "Baby Villagers",
+      "body": "§7Baby Villagers have their own reactions and animations."
+    },
+    {
+      "title": "Rare Lines",
+      "body": "§7Rare Lines are longer, more unusual and over-the-top reactions. Use the Rare Villager Lines setting to disable them or make them more common."
+    },
+    {
+      "title": "Chattiness",
+      "body": "§7Use Villager Chattiness in Settings to control how often Villagers speak, from completely silent to extremely chatty."
+    },
+    {
+      "title": "Subtitles",
+      "body": "§7Enable Show Subtitles in Settings if you want spoken lines displayed on screen."
+    }
+  ],
+  "specialVillagers": [
+    {
+      "title": "Villager #5",
+      "body": "§7The unmistakably moustachioed host of Villager News, delivering the day's most important stories with complete confidence.\n\n§eTrade: §fMoustache"
+    },
+    {
+      "title": "Villager #9",
+      "body": "§7Villager News' field reporter, bravely reporting live from wherever the story takes him.\n\n§eTrade: §fMicrophone"
+    },
+    {
+      "title": "The Mayor",
+      "body": "§7An upstanding member of the community, as long as you don't look too closely at his administration.\n\n§eTrade: §fMayor Hat"
+    },
+    {
+      "title": "Testificate Man",
+      "body": "§7Na na na na... (stopping short to avoid copyright infringement) ...Testificate Man!\n\n§eTrade: §fTestificate Helmet"
+    },
+    {
+      "title": "Untouchable Villager",
+      "body": "§7You can see him. You can follow him. But you can't touch him."
+    },
+    {
+      "title": "Wooly",
+      "body": "§7A Sheep of few words. Mostly \"Baaah.\""
+    }
+  ],
+  "cosmetics": [
+    {
+      "title": "Villager Noses",
+      "body": "§eGet: §7Shear any Villager\n\n§eUse: §7Wear it, or interact with the Villager to put it back"
+    },
+    {
+      "title": "Mayor Hat",
+      "body": "§eGet: §7Trade with The Mayor\n\n§eUse: §7Wear it yourself, or give a Villager some instant authority"
+    },
+    {
+      "title": "Testificate Helmet",
+      "body": "§eGet: §7Trade with Testificate Man\n\n§eUse: §7Wear it yourself, or turn another Villager into a hero"
+    },
+    {
+      "title": "Moustache",
+      "body": "§eGet: §7Trade with Villager #5\n\n§eUse: §7Wear it yourself, or give another Villager the proper news host look"
+    },
+    {
+      "title": "Microphone",
+      "body": "§eGet: §7Trade with Villager #9\n\n§eUse: §7Hold it yourself, or give a Villager the tools to report live"
+    },
+    {
+      "title": "Signs",
+      "body": "§eGive: §7Interact with a Villager while holding a Sign\n\n§eChange: §7Use an axe to cycle through messages"
+    }
+  ],
+  "generalInformation": [
+    {
+      "title": "Triggers & Reactions",
+      "body": "§7Triggers are actions, events or situations Villagers can notice. Reactions are the dialogue and animations they may respond with."
+    },
+    {
+      "title": "Nearby & Visible",
+      "body": "§7Most reactions require a Villager to be nearby or able to see what is happening. Different triggers can have different detection requirements."
+    },
+    {
+      "title": "Cooldowns",
+      "body": "§7Reactions use cooldowns to keep dialogue feeling natural. Repeating the same or similar actions may not trigger another reaction immediately."
+    },
+    {
+      "title": "No Reaction?",
+      "body": "§7Not every trigger will cause a Villager to react every time. Cooldowns, distance, visibility, context and Chattiness can all affect whether a reaction plays."
+    },
+    {
+      "title": "Context Matters",
+      "body": "§7Some reactions depend on additional conditions such as the Villager's profession, age, surroundings, your reputation or what is happening nearby."
+    },
+    {
+      "title": "Reaction Variations",
+      "body": "§7Many triggers have multiple possible reactions, so Villagers won't always respond to the same situation in exactly the same way."
+    },
+    {
+      "title": "Chattiness",
+      "body": "§7Villager Chattiness controls how frequently Villagers speak. Lower settings make reactions less frequent, while higher settings make Villagers more talkative."
+    },
+    {
+      "title": "Rare Lines",
+      "body": "§7Some reactions include longer and more unusual Rare Lines. Their frequency can be adjusted separately using Rare Villager Lines in Settings."
+    }
+  ],
+  "socials": [
+    {
+      "title": "Oreville Studios",
+      "body": "§eWebsite\n§7orevillestudios.com\n\n§eDiscord\n§7orevillestudios.com/discord\n\n§eX\n§7x.com/OrevilleStudios\n\n§eYouTube\n§7youtube.com/OrevilleStudios"
+    },
+    {
+      "title": "Element Animation",
+      "body": "§eWebsite\n§7elementanimation.com\n\n§eDiscord\n§7elementanimation.com/discord\n\n§eX\n§7x.com/Element\n\n§eYouTube\n§7youtube.com/ElementAnimation"
+    }
+  ],
+  "support": "Need help, found a bug or have some feedback? Get in touch with Oreville Studios below.\n\nWebsite\norevillestudios.com\n\nEmail Support\nsupport@orevillestudios.com\n\nCommunity Discord\norevillestudios.com/discord",
+  "settings": [
+    {
+      "title": "Show Subtitles",
+      "body": "Whether subtitles appear when Villagers speak."
+    },
+    {
+      "title": "Villager Chattiness",
+      "body": "How often Villagers speak: Muted, Shy, Chatty, or Super Chatty."
+    },
+    {
+      "title": "Rare Villager Voicelines",
+      "body": "How often Villagers say longer, more unusual lines: Never, Default, or Often."
+    },
+    {
+      "title": "Spawn Special Villagers",
+      "body": "Whether Villager News characters can naturally spawn."
+    },
+    {
+      "title": "Villager Style",
+      "body": "The Java port uses the Villager News style supplied through EMF and ETF."
+    }
+  ],
+  "contexts": {
+    "xfpjxq": {
+      "title": "Approach a Villager",
+      "browseTitle": "Approach a Villager",
+      "body": "§eTrigger\n\n§7Move close enough for a Villager to notice you.\n\n§eReaction\n\n§7General greetings, questions and comments when you're first noticed."
+    },
+    "cavwps": {
+      "title": "Stare at a Villager",
+      "browseTitle": "Stare at a Villager",
+      "body": "§eTrigger\n\n§7Look directly at a Villager for a while.\n\n§eReaction\n\n§7Questions and awkward comments about you staring for too long."
+    },
+    "zsmvzb": {
+      "title": "Stand Completely Still",
+      "browseTitle": "Stand Completely Still",
+      "body": "§eTrigger\n\n§7Stay completely still for a while.\n\n§eReaction\n\n§7Questions about whether you've become a statue."
+    },
+    "cstyvg": {
+      "title": "Stand with Other Players",
+      "browseTitle": "Stand with Other Players",
+      "body": "§eTrigger\n\n§7Stand close to at least one other player.\n\n§eReaction\n\n§7Surprised comments about several players gathering together."
+    },
+    "edrtbe": {
+      "title": "Shear a Sheep",
+      "browseTitle": "Shear a Sheep",
+      "body": "§eTrigger\n\n§7Shear a Sheep.\n\n§eReaction\n\n§7Surprised and disapproving reactions to the Sheep being sheared."
+    },
+    "dfdkli": {
+      "title": "Set Off a Firework",
+      "browseTitle": "Set Off a Firework",
+      "body": "§eTrigger\n\n§7Set off a Firework.\n\n§eReaction\n\n§7Excited and impressed reactions to the Firework."
+    },
+    "qxgbwi": {
+      "title": "Stand on a Villager's Bed",
+      "browseTitle": "Stand on a Villager's Bed",
+      "body": "§eTrigger\n\n§7Stand on an unoccupied Bed claimed by a Villager.\n\n§eReaction\n\n§7Complaints about you standing on their Bed."
+    },
+    "ajexrq": {
+      "title": "Nudge a Villager",
+      "browseTitle": "Nudge a Villager",
+      "body": "§eTrigger\n\n§7Walk into a Villager to push them slightly.\n\n§eReaction\n\n§7Complaints about being pushed or having their personal space invaded."
+    },
+    "pizztd": {
+      "title": "Trample Crops",
+      "browseTitle": "Trample Crops",
+      "body": "§eTrigger\n\n§7Jump on Farmland and trample it back into Dirt.\n\n§eReaction\n\n§7Upset reactions to you trampling Crops."
+    },
+    "akerwb": {
+      "title": "Eat Food",
+      "browseTitle": "Eat Food",
+      "body": "§eTrigger\n\n§7Eat Food.\n\n§eReaction\n\n§7Questions and comments about the Food you're eating."
+    },
+    "tdomqw": {
+      "title": "Harvest Crops",
+      "browseTitle": "Harvest Crops",
+      "body": "§eTrigger\n\n§7Harvest a Crop.\n\n§eReaction\n\n§7Accusations of stealing or taking Crops that aren't yours."
+    },
+    "gytgzn": {
+      "title": "Harvest Crops Near a Farmer",
+      "browseTitle": "Harvest Near a Farmer",
+      "body": "§eTrigger\n\n§7Harvest a Crop near a Farmer Villager.\n\n§eReaction\n\n§7Stronger complaints from Farmers about you harvesting their Crops."
+    },
+    "vgysma": {
+      "title": "Open a Chest",
+      "browseTitle": "Open a Chest",
+      "body": "§eTrigger\n\n§7Open a Chest.\n\n§eReaction\n\n§7Curious comments about what you're looking for in the Chest."
+    },
+    "qfhrlh": {
+      "title": "Open a Chest in a Villager's House",
+      "browseTitle": "Open Chest in Their House",
+      "body": "§eTrigger\n\n§7Open the Chest inside a Villager's house.\n\n§eReaction\n\n§7Angry reactions to you opening their own Chest."
+    },
+    "elexev": {
+      "title": "Use a Lead",
+      "browseTitle": "Use a Lead",
+      "body": "§eTrigger\n\n§7Attach a Lead to an entity.\n\n§eReaction\n\n§7Questions and comments about you attaching a Lead to another entity."
+    },
+    "pfelrr": {
+      "title": "Close a Door in a Villager's Face",
+      "browseTitle": "Close Door in Their Face",
+      "body": "§eTrigger\n\n§7Close a Door directly in front of a Villager while they are trying to pass through.\n\n§eReaction\n\n§7Complaints about having the Door closed in their face."
+    },
+    "ijeqws": {
+      "title": "Crouch-Walk",
+      "browseTitle": "Crouch-Walk",
+      "body": "§eTrigger\n\n§7Crouch and move around.\n\n§eReaction\n\n§7Questions and comments about you sneaking around."
+    },
+    "lqxmlx": {
+      "title": "Fly in Creative Mode",
+      "browseTitle": "Fly in Creative Mode",
+      "body": "§eTrigger\n\n§7Fly in Creative Mode.\n\n§eReaction\n\n§7Confused reactions to you flying in Creative Mode."
+    },
+    "hiuxvo": {
+      "title": "Glide with Elytra",
+      "browseTitle": "Glide with Elytra",
+      "body": "§eTrigger\n\n§7Glide with an Elytra.\n\n§eReaction\n\n§7Surprised and curious reactions to your Elytra flight."
+    },
+    "mewsnd": {
+      "title": "Teleport with an Ender Pearl",
+      "browseTitle": "Teleport with Ender Pearl",
+      "body": "§eTrigger\n\n§7Teleport using an Ender Pearl.\n\n§eReaction\n\n§7Surprised questions about your sudden teleportation."
+    },
+    "nwkgqg": {
+      "title": "Hold a Nearly Broken Item",
+      "browseTitle": "Hold a Nearly Broken Item",
+      "body": "§eTrigger\n\n§7Hold a heavily damaged, low-durability Item.\n\n§eReaction\n\n§7Warnings and comments about your Item being close to breaking."
+    },
+    "xgfebs": {
+      "title": "Wear Armor",
+      "browseTitle": "Wear Armor",
+      "body": "§eTrigger\n\n§7Wear Armor.\n\n§eReaction\n\n§7General comments about the Armor you're wearing."
+    },
+    "smcrvj": {
+      "title": "Wear Full Iron Armor",
+      "browseTitle": "Wear Full Iron Armor",
+      "body": "§eTrigger\n\n§7Wear a full set of Iron Armor.\n\n§eReaction\n\n§7Suggestions that it might be time to upgrade your Iron Armor."
+    },
+    "psgzod": {
+      "title": "Wear Mixed Armor",
+      "browseTitle": "Wear Mixed Armor",
+      "body": "§eTrigger\n\n§7Wear a mismatched set of Armor.\n\n§eReaction\n\n§7Judgemental comments about your mismatched Armor."
+    },
+    "pdiwlk": {
+      "title": "Wear High-Level Armor",
+      "browseTitle": "Wear High-Level Armor",
+      "body": "§eTrigger\n\n§7Wear high-level Armor.\n\n§eReaction\n\n§7Impressed comments about your high-level Armor."
+    },
+    "khepip": {
+      "title": "Speed",
+      "browseTitle": "Speed",
+      "body": "§eTrigger\n\n§7Have Speed active.\n\n§eReaction\n\n§7Comments about how unusually fast you're moving."
+    },
+    "ezoztr": {
+      "title": "Swiftness",
+      "browseTitle": "Swiftness",
+      "body": "§eTrigger\n\n§7Have Swiftness active.\n\n§eReaction\n\n§7Comments about your sudden burst of speed."
+    },
+    "agbxhr": {
+      "title": "Slowness",
+      "browseTitle": "Slowness",
+      "body": "§eTrigger\n\n§7Have Slowness active.\n\n§eReaction\n\n§7Teasing comments about how slowly you're moving."
+    },
+    "puhgbq": {
+      "title": "Strength",
+      "browseTitle": "Strength",
+      "body": "§eTrigger\n\n§7Have Strength active.\n\n§eReaction\n\n§7Questions and comments about your increased Strength."
+    },
+    "iifcei": {
+      "title": "Weakness",
+      "browseTitle": "Weakness",
+      "body": "§eTrigger\n\n§7Have Weakness active.\n\n§eReaction\n\n§7Teasing and concerned comments about how weak you look."
+    },
+    "nxxita": {
+      "title": "Invisibility",
+      "browseTitle": "Invisibility",
+      "body": "§eTrigger\n\n§7Have Invisibility active.\n\n§eReaction\n\n§7Confused reactions to you being invisible."
+    },
+    "gigkln": {
+      "title": "Night Vision",
+      "browseTitle": "Night Vision",
+      "body": "§eTrigger\n\n§7Have Night Vision active.\n\n§eReaction\n\n§7Questions and comments about your ability to see in the dark."
+    },
+    "raozeh": {
+      "title": "Darkness",
+      "browseTitle": "Darkness",
+      "body": "§eTrigger\n\n§7Have Darkness active.\n\n§eReaction\n\n§7Comments about the Darkness effect and your limited vision."
+    },
+    "pswvuu": {
+      "title": "Hunger",
+      "browseTitle": "Hunger",
+      "body": "§eTrigger\n\n§7Have Hunger active.\n\n§eReaction\n\n§7Concerned comments about how hungry you look."
+    },
+    "qfygop": {
+      "title": "Nausea",
+      "browseTitle": "Nausea",
+      "body": "§eTrigger\n\n§7Have Nausea active.\n\n§eReaction\n\n§7Concerned comments about you looking unwell."
+    },
+    "ekdktf": {
+      "title": "Water Breathing",
+      "browseTitle": "Water Breathing",
+      "body": "§eTrigger\n\n§7Have Water Breathing active.\n\n§eReaction\n\n§7Questions about how you're able to breathe underwater."
+    },
+    "xxkdpo": {
+      "title": "Oozing",
+      "browseTitle": "Oozing",
+      "body": "§eTrigger\n\n§7Have Oozing active.\n\n§eReaction\n\n§7Concerned comments about the Oozing effect."
+    },
+    "iqtydx": {
+      "title": "Low Health",
+      "browseTitle": "Low Health",
+      "body": "§eTrigger\n\n§7Let your Health drop low.\n\n§eReaction\n\n§7Warnings and concerned comments about your low Health."
+    },
+    "fqbjfv": {
+      "title": "Multiple Status Effects",
+      "browseTitle": "Multiple Status Effects",
+      "body": "§eTrigger\n\n§7Have several Status Effects active at once.\n\n§eReaction\n\n§7Comments about having lots of Status Effects active at once."
+    },
+    "tfzlsw": {
+      "title": "Low Reputation",
+      "browseTitle": "Low Reputation",
+      "body": "§eTrigger\n\n§7Approach a Villager while you have a low Reputation in that village.\n\n§eReaction\n\n§7Distrustful and unfriendly reactions to your poor Reputation."
+    },
+    "zstdjn": {
+      "title": "Extremely Low Reputation",
+      "browseTitle": "Extremely Low Reputation",
+      "body": "§eTrigger\n\n§7Approach a Villager while you have an extremely low Reputation in that village.\n\n§eReaction\n\n§7Fearful and hostile reactions to your extremely poor Reputation."
+    },
+    "stuirs": {
+      "title": "Extremely Low Reputation with a Sword",
+      "browseTitle": "Low Reputation with Sword",
+      "body": "§eTrigger\n\n§7Have extremely low village Reputation and hold a sword.\n\n§eReaction\n\n§7Alarmed reactions to a badly disliked player carrying a Sword."
+    },
+    "omgcte": {
+      "title": "High Reputation",
+      "browseTitle": "High Reputation",
+      "body": "§eTrigger\n\n§7Approach a Villager while you have a high Reputation in that village.\n\n§eReaction\n\n§7Friendly and appreciative reactions to your good Reputation."
+    },
+    "kcbenk": {
+      "title": "Extremely High Reputation",
+      "browseTitle": "Extremely High Reputation",
+      "body": "§eTrigger\n\n§7Approach a Villager while you have an extremely high Reputation in that village.\n\n§eReaction\n\n§7Excited reactions to your exceptionally good Reputation."
+    },
+    "jlendb": {
+      "title": "Bad Omen",
+      "browseTitle": "Bad Omen",
+      "body": "§eTrigger\n\n§7Approach a Villager while you have Bad Omen.\n\n§eReaction\n\n§7Alarmed and disapproving reactions to the Bad Omen effect."
+    },
+    "gnetsk": {
+      "title": "Hero of the Village",
+      "browseTitle": "Hero of the Village",
+      "body": "§eTrigger\n\n§7Approach a Villager while you have Hero of the Village.\n\n§eReaction\n\n§7Praise and celebratory reactions to Hero of the Village."
+    },
+    "fhhqxg": {
+      "title": "Change Gamemode",
+      "browseTitle": "Change Gamemode",
+      "body": "§eTrigger\n\n§7Change your Game Mode.\n\n§eReaction\n\n§7Confused comments when your Game Mode changes."
+    },
+    "ohtblt": {
+      "title": "Switch to Creative",
+      "browseTitle": "Switch to Creative",
+      "body": "§eTrigger\n\n§7Switch to Creative Mode.\n\n§eReaction\n\n§7Comments about your new Creative Mode abilities, often accusing you of cheating."
+    },
+    "ibcrvx": {
+      "title": "Change World Difficulty",
+      "browseTitle": "Change World Difficulty",
+      "body": "§eTrigger\n\n§7Change the world's Difficulty.\n\n§eReaction\n\n§7Confused reactions when the world's Difficulty changes."
+    },
+    "xuyypm": {
+      "title": "Set Difficulty to Peaceful",
+      "browseTitle": "Set Peaceful Difficulty",
+      "body": "§eTrigger\n\n§7Change the world's Difficulty to Peaceful.\n\n§eReaction\n\n§7Relieved or teasing reactions to switching the world to Peaceful."
+    },
+    "arzojk": {
+      "title": "Set Difficulty to Hard",
+      "browseTitle": "Set Difficulty to Hard",
+      "body": "§eTrigger\n\n§7Change the world's Difficulty to Hard.\n\n§eReaction\n\n§7Alarmed reactions to switching the world to Hard."
+    },
+    "hzjycq": {
+      "title": "Player Dies",
+      "browseTitle": "Player Dies",
+      "body": "§eTrigger\n\n§7Die where a Villager can witness it.\n\n§eReaction\n\n§7Comments and jokes about witnessing your death."
+    },
+    "dxcjqn": {
+      "title": "Player Dies Again",
+      "browseTitle": "Player Dies Again",
+      "body": "§eTrigger\n\n§7Die again within 5 minutes of your previous death.\n\n§eReaction\n\n§7Extra comments about you dying again within a few minutes."
+    },
+    "elcjbb": {
+      "title": "Player Dies in Hardcore",
+      "browseTitle": "Player Dies in Hardcore",
+      "body": "§eTrigger\n\n§7Die in a Hardcore world where a Villager can witness it.\n\n§eReaction\n\n§7Special reactions to seeing you die permanently in Hardcore."
+    },
+    "bipqej": {
+      "title": "Player Wakes Up",
+      "browseTitle": "Player Wakes Up",
+      "body": "§eTrigger\n\n§7Sleep in a Bed, then wake up.\n\n§eReaction\n\n§7Morning-style comments when you wake up."
+    },
+    "hevyeb": {
+      "title": "Wake Up in Armor",
+      "browseTitle": "Wake Up in Armor",
+      "body": "§eTrigger\n\n§7Wake up from a Bed while wearing Armor.\n\n§eReaction\n\n§7Jokes about sleeping in Armor."
+    },
+    "zejman": {
+      "title": "Break a Block",
+      "browseTitle": "Break a Block",
+      "body": "§eTrigger\n\n§7Break a Block.\n\n§eReaction\n\n§7Surprised reactions to you breaking a Block."
+    },
+    "awappv": {
+      "title": "Break Multiple Blocks",
+      "browseTitle": "Break Multiple Blocks",
+      "body": "§eTrigger\n\n§7Break several blocks in quick succession.\n\n§eReaction\n\n§7Questions and comments about you breaking several Blocks in quick succession."
+    },
+    "ejvpis": {
+      "title": "Break Wood",
+      "browseTitle": "Break Wood",
+      "body": "§eTrigger\n\n§7Break Wood.\n\n§eReaction\n\n§7Complaints and jokes about you breaking Wood."
+    },
+    "clzrea": {
+      "title": "Break Stone",
+      "browseTitle": "Break Stone",
+      "body": "§eTrigger\n\n§7Break Stone.\n\n§eReaction\n\n§7Comments about you breaking Stone."
+    },
+    "qimink": {
+      "title": "Break a Door",
+      "browseTitle": "Break a Door",
+      "body": "§eTrigger\n\n§7Break a Door.\n\n§eReaction\n\n§7Complaints about you breaking a Door."
+    },
+    "osbwpz": {
+      "title": "Break a Bed",
+      "browseTitle": "Break a Bed",
+      "body": "§eTrigger\n\n§7Break a Bed.\n\n§eReaction\n\n§7Upset reactions to you breaking a Villager's Bed."
+    },
+    "mabmbl": {
+      "title": "Break a Workstation",
+      "browseTitle": "Break a Workstation",
+      "body": "§eTrigger\n\n§7Break a Workstation.\n\n§eReaction\n\n§7Strong complaints about you breaking a Workstation."
+    },
+    "rptjbd": {
+      "title": "Break a Bell",
+      "browseTitle": "Break a Bell",
+      "body": "§eTrigger\n\n§7Break a Bell.\n\n§eReaction\n\n§7Reactions to you removing the village Bell."
+    },
+    "pclmft": {
+      "title": "Break a Decorative Block",
+      "browseTitle": "Break a Decorative Block",
+      "body": "§eTrigger\n\n§7Break a Decorative Block.\n\n§eReaction\n\n§7Strong complaints about you breaking Decorative Blocks."
+    },
+    "knywuy": {
+      "title": "Place a Block",
+      "browseTitle": "Place a Block",
+      "body": "§eTrigger\n\n§7Place any Block.\n\n§eReaction\n\n§7Questions and comments about a Block being placed."
+    },
+    "ujkoue": {
+      "title": "Place a Workstation",
+      "browseTitle": "Place a Workstation",
+      "body": "§eTrigger\n\n§7Place a Workstation.\n\n§eReaction\n\n§7Reactions to a Workstation being placed."
+    },
+    "kdfaao": {
+      "title": "Place a Bed",
+      "browseTitle": "Place a Bed",
+      "body": "§eTrigger\n\n§7Place a Bed.\n\n§eReaction\n\n§7Observations about a Bed being placed."
+    },
+    "ktkmhn": {
+      "title": "Place a Chest",
+      "browseTitle": "Place a Chest",
+      "body": "§eTrigger\n\n§7Place a Chest.\n\n§eReaction\n\n§7Comments about a Chest being placed."
+    },
+    "jtsycy": {
+      "title": "Place a Trapped Chest",
+      "browseTitle": "Place a Trapped Chest",
+      "body": "§eTrigger\n\n§7Place a Trapped Chest.\n\n§eReaction\n\n§7Questions and comments about a Trapped Chest being placed."
+    },
+    "nxveql": {
+      "title": "Place a Crafting Table",
+      "browseTitle": "Place a Crafting Table",
+      "body": "§eTrigger\n\n§7Place a Crafting Table.\n\n§eReaction\n\n§7Questions and comments about a Crafting Table being placed."
+    },
+    "fpcepp": {
+      "title": "Place a Furnace",
+      "browseTitle": "Place a Furnace",
+      "body": "§eTrigger\n\n§7Place a Furnace.\n\n§eReaction\n\n§7Comments about a Furnace being placed."
+    },
+    "nziize": {
+      "title": "Place a Bookshelf",
+      "browseTitle": "Place a Bookshelf",
+      "body": "§eTrigger\n\n§7Place a Bookshelf.\n\n§eReaction\n\n§7Questions and comments about a Bookshelf being placed."
+    },
+    "dgrgul": {
+      "title": "Place a Jukebox",
+      "browseTitle": "Place a Jukebox",
+      "body": "§eTrigger\n\n§7Place a Jukebox.\n\n§eReaction\n\n§7Observations about a Jukebox being placed."
+    },
+    "ckniqq": {
+      "title": "Place an Armor Stand",
+      "browseTitle": "Place an Armor Stand",
+      "body": "§eTrigger\n\n§7Place an Armor Stand.\n\n§eReaction\n\n§7Comments about an Armor Stand being placed."
+    },
+    "fazcvg": {
+      "title": "Place a Beacon",
+      "browseTitle": "Place a Beacon",
+      "body": "§eTrigger\n\n§7Place a Beacon.\n\n§eReaction\n\n§7Reactions to a Beacon being placed."
+    },
+    "mxmrpn": {
+      "title": "Place Wood",
+      "browseTitle": "Place Wood",
+      "body": "§eTrigger\n\n§7Place Wood.\n\n§eReaction\n\n§7Observations about Wood being placed."
+    },
+    "xezbvo": {
+      "title": "Place Dirt",
+      "browseTitle": "Place Dirt",
+      "body": "§eTrigger\n\n§7Place Dirt.\n\n§eReaction\n\n§7Comments about Dirt being placed."
+    },
+    "vubtsn": {
+      "title": "Place Leaves or Plants",
+      "browseTitle": "Place Leaves or Plants",
+      "body": "§eTrigger\n\n§7Place Leaves or Plants.\n\n§eReaction\n\n§7Reactions to Leaves or Plants being placed."
+    },
+    "fvdzot": {
+      "title": "Place Wool",
+      "browseTitle": "Place Wool",
+      "body": "§eTrigger\n\n§7Place Wool.\n\n§eReaction\n\n§7Questions and comments about Wool being placed."
+    },
+    "sbolpm": {
+      "title": "Place Glass",
+      "browseTitle": "Place Glass",
+      "body": "§eTrigger\n\n§7Place Glass.\n\n§eReaction\n\n§7Surprised reactions to Glass being placed."
+    },
+    "fwiopr": {
+      "title": "Place Bricks",
+      "browseTitle": "Place Bricks",
+      "body": "§eTrigger\n\n§7Place Bricks.\n\n§eReaction\n\n§7Reactions to Bricks being placed."
+    },
+    "zqzrsm": {
+      "title": "Place Concrete",
+      "browseTitle": "Place Concrete",
+      "body": "§eTrigger\n\n§7Place Concrete.\n\n§eReaction\n\n§7Observations about Concrete being placed."
+    },
+    "gxepwi": {
+      "title": "Place Terracotta",
+      "browseTitle": "Place Terracotta",
+      "body": "§eTrigger\n\n§7Place Terracotta.\n\n§eReaction\n\n§7Comments about Terracotta being placed."
+    },
+    "cudgjr": {
+      "title": "Place Glazed Terracotta",
+      "browseTitle": "Place Glazed Terracotta",
+      "body": "§eTrigger\n\n§7Place Glazed Terracotta.\n\n§eReaction\n\n§7Reactions to Glazed Terracotta being placed."
+    },
+    "oimgrg": {
+      "title": "Place a Valuable Block",
+      "browseTitle": "Place a Valuable Block",
+      "body": "§eTrigger\n\n§7Place a valuable mineral Block, such as Iron, Gold, Diamond or Emerald.\n\n§eReaction\n\n§7Observations about a Valuable Block being placed."
+    },
+    "gnbpco": {
+      "title": "Place a Copper Block",
+      "browseTitle": "Place a Copper Block",
+      "body": "§eTrigger\n\n§7Place a Copper Block.\n\n§eReaction\n\n§7Comments about a Copper Block being placed."
+    },
+    "vgufsp": {
+      "title": "Place an Iron Block",
+      "browseTitle": "Place an Iron Block",
+      "body": "§eTrigger\n\n§7Place an Iron Block.\n\n§eReaction\n\n§7Reactions to an Iron Block being placed."
+    },
+    "vxhugl": {
+      "title": "Place a Gold Block",
+      "browseTitle": "Place a Gold Block",
+      "body": "§eTrigger\n\n§7Place a Gold Block.\n\n§eReaction\n\n§7Surprised reactions to a Gold Block being placed."
+    },
+    "clpxov": {
+      "title": "Place a Diamond Block",
+      "browseTitle": "Place a Diamond Block",
+      "body": "§eTrigger\n\n§7Place a Diamond Block.\n\n§eReaction\n\n§7Questions and comments about a Diamond Block being placed."
+    },
+    "afdrdd": {
+      "title": "Place an Emerald Block",
+      "browseTitle": "Place an Emerald Block",
+      "body": "§eTrigger\n\n§7Place an Emerald Block.\n\n§eReaction\n\n§7Questions and comments about an Emerald Block being placed."
+    },
+    "lnhdzn": {
+      "title": "Place a Lapis Block",
+      "browseTitle": "Place a Lapis Block",
+      "body": "§eTrigger\n\n§7Place a Lapis Block.\n\n§eReaction\n\n§7Observations about a Lapis Block being placed."
+    },
+    "gjsote": {
+      "title": "Build an Iron Golem Frame",
+      "browseTitle": "Build an Iron Golem Frame",
+      "body": "§eTrigger\n\n§7Place Iron blocks in the T-shaped frame used to build an Iron Golem.\n\n§eReaction\n\n§7Comments about you building an Iron Golem Frame."
+    },
+    "ydfscf": {
+      "title": "Place a Pumpkin",
+      "browseTitle": "Place a Pumpkin",
+      "body": "§eTrigger\n\n§7Place a Pumpkin.\n\n§eReaction\n\n§7Reactions to a Pumpkin being placed."
+    },
+    "ahabbf": {
+      "title": "Place a Jack o'Lantern",
+      "browseTitle": "Place a Jack o'Lantern",
+      "body": "§eTrigger\n\n§7Place a Jack o'Lantern.\n\n§eReaction\n\n§7Surprised reactions to a Jack o'Lantern being placed."
+    },
+    "veaotb": {
+      "title": "Place a Melon",
+      "browseTitle": "Place a Melon",
+      "body": "§eTrigger\n\n§7Place a Melon.\n\n§eReaction\n\n§7Comments about a Melon being placed."
+    },
+    "gzzzpj": {
+      "title": "Place Ice",
+      "browseTitle": "Place Ice",
+      "body": "§eTrigger\n\n§7Place Ice.\n\n§eReaction\n\n§7Reactions to Ice being placed."
+    },
+    "whbvvh": {
+      "title": "Place Snow",
+      "browseTitle": "Place Snow",
+      "body": "§eTrigger\n\n§7Place Snow.\n\n§eReaction\n\n§7Questions and comments about Snow being placed."
+    },
+    "ehtaer": {
+      "title": "Place Powder Snow",
+      "browseTitle": "Place Powder Snow",
+      "body": "§eTrigger\n\n§7Place Powder Snow.\n\n§eReaction\n\n§7Comments about Powder Snow being placed."
+    },
+    "tqnwzp": {
+      "title": "Place a Gravity-Affected Block",
+      "browseTitle": "Place a Falling Block",
+      "body": "§eTrigger\n\n§7Place a gravity-affected Block, such as Sand or Gravel.\n\n§eReaction\n\n§7Reactions to a Gravity-Affected Block being placed."
+    },
+    "negvfb": {
+      "title": "Place Concrete Powder",
+      "browseTitle": "Place Concrete Powder",
+      "body": "§eTrigger\n\n§7Place Concrete Powder.\n\n§eReaction\n\n§7Questions and comments about Concrete Powder being placed."
+    },
+    "rseoxb": {
+      "title": "Place a Block from the Ocean",
+      "browseTitle": "Place an Ocean Block",
+      "body": "§eTrigger\n\n§7Place an ocean-themed Block.\n\n§eReaction\n\n§7Comments about a Block from the Ocean being placed."
+    },
+    "kodgox": {
+      "title": "Place a Block from the Nether",
+      "browseTitle": "Place a Nether Block",
+      "body": "§eTrigger\n\n§7Place a Block from the Nether.\n\n§eReaction\n\n§7Questions and comments about a Block from the Nether being placed."
+    },
+    "qyvelv": {
+      "title": "Place a Block from the End",
+      "browseTitle": "Place an End Block",
+      "body": "§eTrigger\n\n§7Place a Block from the End.\n\n§eReaction\n\n§7Observations about a Block from the End being placed."
+    },
+    "nocwsk": {
+      "title": "Place End Stone",
+      "browseTitle": "Place End Stone",
+      "body": "§eTrigger\n\n§7Place End Stone.\n\n§eReaction\n\n§7Questions and comments about End Stone being placed."
+    },
+    "ejbqqc": {
+      "title": "Place Purpur",
+      "browseTitle": "Place Purpur",
+      "body": "§eTrigger\n\n§7Place Purpur.\n\n§eReaction\n\n§7Reactions to Purpur being placed."
+    },
+    "rtmqmc": {
+      "title": "Place a Button",
+      "browseTitle": "Place a Button",
+      "body": "§eTrigger\n\n§7Place a Button.\n\n§eReaction\n\n§7Observations about a Button being placed."
+    },
+    "piupkf": {
+      "title": "Place a Lever",
+      "browseTitle": "Place a Lever",
+      "body": "§eTrigger\n\n§7Place a Lever.\n\n§eReaction\n\n§7Surprised reactions to a Lever being placed."
+    },
+    "fdqdok": {
+      "title": "Place a Creative-Only Block",
+      "browseTitle": "Place Creative-Only Block",
+      "body": "§eTrigger\n\n§7Place a Block that is normally only available through Creative Mode or commands.\n\n§eReaction\n\n§7Questions and comments about a Creative-Only Block being placed."
+    },
+    "yckvyp": {
+      "title": "Place a Light Block",
+      "browseTitle": "Place a Light Block",
+      "body": "§eTrigger\n\n§7Place a Light Block.\n\n§eReaction\n\n§7Surprised reactions to a Light Block being placed."
+    },
+    "pgwqkg": {
+      "title": "Use a Crafting Table",
+      "browseTitle": "Use a Crafting Table",
+      "body": "§eTrigger\n\n§7Use a Crafting Table.\n\n§eReaction\n\n§7Questions and comments about you using a Crafting Table."
+    },
+    "gzhbtb": {
+      "title": "Use a Furnace",
+      "browseTitle": "Use a Furnace",
+      "body": "§eTrigger\n\n§7Use a Furnace.\n\n§eReaction\n\n§7Questions and comments about you using a Furnace."
+    },
+    "xwcoip": {
+      "title": "Use an Anvil",
+      "browseTitle": "Use an Anvil",
+      "body": "§eTrigger\n\n§7Use an Anvil.\n\n§eReaction\n\n§7Questions and comments about you using an Anvil."
+    },
+    "crvciv": {
+      "title": "Use an Enchanting Table",
+      "browseTitle": "Use an Enchanting Table",
+      "body": "§eTrigger\n\n§7Use an Enchanting Table.\n\n§eReaction\n\n§7Surprised reactions to you using an Enchanting Table."
+    },
+    "myylcq": {
+      "title": "Use a Brewing Stand",
+      "browseTitle": "Use a Brewing Stand",
+      "body": "§eTrigger\n\n§7Use a Brewing Stand.\n\n§eReaction\n\n§7Reactions to you using a Brewing Stand."
+    },
+    "tgggsl": {
+      "title": "Use a Grindstone",
+      "browseTitle": "Use a Grindstone",
+      "body": "§eTrigger\n\n§7Use a Grindstone.\n\n§eReaction\n\n§7Observations and questions about you using a Grindstone."
+    },
+    "ididel": {
+      "title": "Use a Smithing Table",
+      "browseTitle": "Use a Smithing Table",
+      "body": "§eTrigger\n\n§7Use a Smithing Table.\n\n§eReaction\n\n§7Questions and comments about you using a Smithing Table."
+    },
+    "knjvae": {
+      "title": "Use a Stonecutter",
+      "browseTitle": "Use a Stonecutter",
+      "body": "§eTrigger\n\n§7Use a Stonecutter.\n\n§eReaction\n\n§7Reactions to you using a Stonecutter."
+    },
+    "bpgyfa": {
+      "title": "Use a Loom",
+      "browseTitle": "Use a Loom",
+      "body": "§eTrigger\n\n§7Use a Loom.\n\n§eReaction\n\n§7Observations and questions about you using a Loom."
+    },
+    "rykqwl": {
+      "title": "Use a Cartography Table",
+      "browseTitle": "Use a Cartography Table",
+      "body": "§eTrigger\n\n§7Use a Cartography Table.\n\n§eReaction\n\n§7Comments about you using a Cartography Table."
+    },
+    "mfsmim": {
+      "title": "Use a Composter",
+      "browseTitle": "Use a Composter",
+      "body": "§eTrigger\n\n§7Use a Composter.\n\n§eReaction\n\n§7Reactions to you using a Composter."
+    },
+    "xzpfwa": {
+      "title": "Use a Beacon",
+      "browseTitle": "Use a Beacon",
+      "body": "§eTrigger\n\n§7Use a Beacon.\n\n§eReaction\n\n§7Observations and questions about you using a Beacon."
+    },
+    "gtqcjn": {
+      "title": "Use a Cauldron",
+      "browseTitle": "Use a Cauldron",
+      "body": "§eTrigger\n\n§7Use a Cauldron.\n\n§eReaction\n\n§7Questions and comments about you using a Cauldron."
+    },
+    "dyvwqv": {
+      "title": "Use a Jukebox",
+      "browseTitle": "Use a Jukebox",
+      "body": "§eTrigger\n\n§7Use a Jukebox.\n\n§eReaction\n\n§7Reactions to you using a Jukebox."
+    },
+    "iqvgzk": {
+      "title": "Use a Chiseled Bookshelf",
+      "browseTitle": "Use a Chiseled Bookshelf",
+      "body": "§eTrigger\n\n§7Use a Chiseled Bookshelf.\n\n§eReaction\n\n§7Observations and questions about you using a Chiseled Bookshelf."
+    },
+    "hojlbk": {
+      "title": "Use Shelves",
+      "browseTitle": "Use Shelves",
+      "body": "§eTrigger\n\n§7Use Shelves.\n\n§eReaction\n\n§7Comments about you using Shelves."
+    },
+    "ykycil": {
+      "title": "Use an Ender Chest",
+      "browseTitle": "Use an Ender Chest",
+      "body": "§eTrigger\n\n§7Use an Ender Chest.\n\n§eReaction\n\n§7Reactions to you using an Ender Chest."
+    },
+    "lifrrj": {
+      "title": "Use a Shulker Box",
+      "browseTitle": "Use a Shulker Box",
+      "body": "§eTrigger\n\n§7Use a Shulker Box.\n\n§eReaction\n\n§7Questions and comments about you using a Shulker Box."
+    },
+    "mjmgwj": {
+      "title": "Use a Crafter",
+      "browseTitle": "Use a Crafter",
+      "body": "§eTrigger\n\n§7Use a Crafter.\n\n§eReaction\n\n§7Questions and comments about you using a Crafter."
+    },
+    "lnlwnl": {
+      "title": "Use a Dispenser",
+      "browseTitle": "Use a Dispenser",
+      "body": "§eTrigger\n\n§7Use a Dispenser.\n\n§eReaction\n\n§7Reactions to you using a Dispenser."
+    },
+    "thmfsh": {
+      "title": "Use a Dropper",
+      "browseTitle": "Use a Dropper",
+      "body": "§eTrigger\n\n§7Use a Dropper.\n\n§eReaction\n\n§7Observations and questions about you using a Dropper."
+    },
+    "jexbze": {
+      "title": "Use a Door",
+      "browseTitle": "Use a Door",
+      "body": "§eTrigger\n\n§7Use a Door.\n\n§eReaction\n\n§7Comments about you using a Door."
+    },
+    "wykqdb": {
+      "title": "Open a Fence Gate",
+      "browseTitle": "Open a Fence Gate",
+      "body": "§eTrigger\n\n§7Open a Fence Gate.\n\n§eReaction\n\n§7Reactions to you opening a Fence Gate."
+    },
+    "pvwkxp": {
+      "title": "Close a Fence Gate",
+      "browseTitle": "Close a Fence Gate",
+      "body": "§eTrigger\n\n§7Close a Fence Gate.\n\n§eReaction\n\n§7Observations and questions about you closing a Fence Gate."
+    },
+    "ktzfvk": {
+      "title": "Press a Button",
+      "browseTitle": "Press a Button",
+      "body": "§eTrigger\n\n§7Press a Button.\n\n§eReaction\n\n§7Surprised reactions to you pressing a Button."
+    },
+    "yiwncn": {
+      "title": "Flip a Lever",
+      "browseTitle": "Flip a Lever",
+      "body": "§eTrigger\n\n§7Flip a Lever.\n\n§eReaction\n\n§7Questions and comments about you flipping a Lever."
+    },
+    "kljgyu": {
+      "title": "Hear a Bell Ring",
+      "browseTitle": "Hear a Bell Ring",
+      "body": "§eTrigger\n\n§7Ring a Bell close enough for a Villager to hear it.\n\n§eReaction\n\n§7Observations and questions about a bell ring."
+    },
+    "xemdbt": {
+      "title": "Carve a Pumpkin",
+      "browseTitle": "Carve a Pumpkin",
+      "body": "§eTrigger\n\n§7Carve a Pumpkin.\n\n§eReaction\n\n§7Comments about you carving a Pumpkin."
+    },
+    "hqmkpb": {
+      "title": "Place a Redstone Component",
+      "browseTitle": "Place Redstone Component",
+      "body": "§eTrigger\n\n§7Place a Redstone Component.\n\n§eReaction\n\n§7Reactions to a Redstone Component being placed."
+    },
+    "qbuuop": {
+      "title": "Place Redstone Dust",
+      "browseTitle": "Place Redstone Dust",
+      "body": "§eTrigger\n\n§7Place Redstone Dust.\n\n§eReaction\n\n§7Questions and comments about Redstone Dust being placed."
+    },
+    "bimuve": {
+      "title": "Place a Redstone Torch",
+      "browseTitle": "Place a Redstone Torch",
+      "body": "§eTrigger\n\n§7Place a Redstone Torch.\n\n§eReaction\n\n§7Comments about a Redstone Torch being placed."
+    },
+    "cdltxm": {
+      "title": "Place a Redstone Repeater",
+      "browseTitle": "Place a Redstone Repeater",
+      "body": "§eTrigger\n\n§7Place a Redstone Repeater.\n\n§eReaction\n\n§7Reactions to a Redstone Repeater being placed."
+    },
+    "hlxzen": {
+      "title": "Place a Redstone Lamp",
+      "browseTitle": "Place a Redstone Lamp",
+      "body": "§eTrigger\n\n§7Place a Redstone Lamp.\n\n§eReaction\n\n§7Questions and comments about a Redstone Lamp being placed."
+    },
+    "nwiopk": {
+      "title": "Place an Observer",
+      "browseTitle": "Place an Observer",
+      "body": "§eTrigger\n\n§7Place an Observer.\n\n§eReaction\n\n§7Questions and comments about an Observer being placed."
+    },
+    "jggged": {
+      "title": "Place a Pressure Plate",
+      "browseTitle": "Place a Pressure Plate",
+      "body": "§eTrigger\n\n§7Place a Pressure Plate.\n\n§eReaction\n\n§7Reactions to a Pressure Plate being placed."
+    },
+    "adtdit": {
+      "title": "Place a Daylight Detector",
+      "browseTitle": "Place a Daylight Detector",
+      "body": "§eTrigger\n\n§7Place a Daylight Detector.\n\n§eReaction\n\n§7Observations about a Daylight Detector being placed."
+    },
+    "wsjvjd": {
+      "title": "Place a Sculk Sensor",
+      "browseTitle": "Place a Sculk Sensor",
+      "body": "§eTrigger\n\n§7Place a Sculk Sensor.\n\n§eReaction\n\n§7Comments about a Sculk Sensor being placed."
+    },
+    "wwmhos": {
+      "title": "Place a Tripwire Hook",
+      "browseTitle": "Place a Tripwire Hook",
+      "body": "§eTrigger\n\n§7Place a Tripwire Hook.\n\n§eReaction\n\n§7Reactions to a Tripwire Hook being placed."
+    },
+    "edjqet": {
+      "title": "Place a Detector Rail",
+      "browseTitle": "Place a Detector Rail",
+      "body": "§eTrigger\n\n§7Place a Detector Rail.\n\n§eReaction\n\n§7Observations about a Detector Rail being placed."
+    },
+    "ntnicx": {
+      "title": "Place a Lightning Rod",
+      "browseTitle": "Place a Lightning Rod",
+      "body": "§eTrigger\n\n§7Place a Lightning Rod.\n\n§eReaction\n\n§7Comments about a Lightning Rod being placed."
+    },
+    "oqjzko": {
+      "title": "See a Campfire",
+      "browseTitle": "See a Campfire",
+      "body": "§eTrigger\n\n§7Have a Campfire nearby.\n\n§eReaction\n\n§7Comments and observations about a nearby Campfire."
+    },
+    "tavxec": {
+      "title": "Light a Campfire",
+      "browseTitle": "Light a Campfire",
+      "body": "§eTrigger\n\n§7Light a Campfire.\n\n§eReaction\n\n§7Reactions to you lighting a Campfire."
+    },
+    "xbttae": {
+      "title": "Use a Campfire",
+      "browseTitle": "Use a Campfire",
+      "body": "§eTrigger\n\n§7Interact with a Campfire.\n\n§eReaction\n\n§7Comments about you interacting with a Campfire."
+    },
+    "nrzcxn": {
+      "title": "Cook Food on a Campfire",
+      "browseTitle": "Cook Food on a Campfire",
+      "body": "§eTrigger\n\n§7Place Food onto a Campfire to cook.\n\n§eReaction\n\n§7Comments about you cooking Food on a Campfire."
+    },
+    "uvgkny": {
+      "title": "Extinguish a Campfire",
+      "browseTitle": "Extinguish a Campfire",
+      "body": "§eTrigger\n\n§7Extinguish a Campfire.\n\n§eReaction\n\n§7Reactions to you extinguishing a Campfire."
+    },
+    "lfwbvu": {
+      "title": "Light a Candle",
+      "browseTitle": "Light a Candle",
+      "body": "§eTrigger\n\n§7Light a Candle.\n\n§eReaction\n\n§7Comments about you lighting a Candle."
+    },
+    "repalq": {
+      "title": "Extinguish a Candle",
+      "browseTitle": "Extinguish a Candle",
+      "body": "§eTrigger\n\n§7Extinguish a Candle.\n\n§eReaction\n\n§7Comments about you extinguishing a Candle."
+    },
+    "oziqss": {
+      "title": "Light TNT",
+      "browseTitle": "Light TNT",
+      "body": "§eTrigger\n\n§7Ignite TNT.\n\n§eReaction\n\n§7Alarmed reactions to you lighting TNT."
+    },
+    "dortcb": {
+      "title": "Zombie",
+      "browseTitle": "Zombie",
+      "body": "§eTrigger\n\n§7Bring a Zombie nearby.\n\n§eReaction\n\n§7Alarmed comments and jokes about the nearby Zombie."
+    },
+    "xtooxu": {
+      "title": "Zombie Villager",
+      "browseTitle": "Zombie Villager",
+      "body": "§eTrigger\n\n§7Bring a Zombie Villager nearby.\n\n§eReaction\n\n§7Concerned reactions to seeing a Zombie Villager."
+    },
+    "wboncy": {
+      "title": "Zombie Piglin",
+      "browseTitle": "Zombie Piglin",
+      "body": "§eTrigger\n\n§7Bring a Zombie Piglin nearby.\n\n§eReaction\n\n§7Wary comments about the nearby Zombie Piglin."
+    },
+    "gcoysc": {
+      "title": "Husk",
+      "browseTitle": "Husk",
+      "body": "§eTrigger\n\n§7Bring a Husk nearby.\n\n§eReaction\n\n§7Jokes and confused comments about the desert Zombie."
+    },
+    "atwycp": {
+      "title": "Drowned",
+      "browseTitle": "Drowned",
+      "body": "§eTrigger\n\n§7Bring a Drowned nearby.\n\n§eReaction\n\n§7Alarmed reactions to the Drowned."
+    },
+    "lqzdqk": {
+      "title": "Skeleton",
+      "browseTitle": "Skeleton",
+      "body": "§eTrigger\n\n§7Bring a Skeleton nearby.\n\n§eReaction\n\n§7Nervous jokes and questions about the Skeleton."
+    },
+    "bxbibd": {
+      "title": "Stray",
+      "browseTitle": "Stray",
+      "body": "§eTrigger\n\n§7Bring a Stray nearby.\n\n§eReaction\n\n§7Wary reactions to the Stray."
+    },
+    "nsosix": {
+      "title": "Bogged",
+      "browseTitle": "Bogged",
+      "body": "§eTrigger\n\n§7Bring a Bogged nearby.\n\n§eReaction\n\n§7Confused comments about the Bogged."
+    },
+    "gtmfpl": {
+      "title": "Spider",
+      "browseTitle": "Spider",
+      "body": "§eTrigger\n\n§7Bring a Spider nearby.\n\n§eReaction\n\n§7Nervous questions about the Spider."
+    },
+    "rzvitn": {
+      "title": "Slime",
+      "browseTitle": "Slime",
+      "body": "§eTrigger\n\n§7Bring a Slime nearby.\n\n§eReaction\n\n§7Curious and wary reactions to the Slime."
+    },
+    "odwhzm": {
+      "title": "Creeper",
+      "browseTitle": "Creeper",
+      "body": "§eTrigger\n\n§7Bring a Creeper nearby.\n\n§eReaction\n\n§7Alarmed reactions to the Creeper."
+    },
+    "lwcrnt": {
+      "title": "Witch",
+      "browseTitle": "Witch",
+      "body": "§eTrigger\n\n§7Bring a Witch nearby.\n\n§eReaction\n\n§7Suspicious and alarmed comments about the Witch."
+    },
+    "yeqxvm": {
+      "title": "Enderman",
+      "browseTitle": "Enderman",
+      "body": "§eTrigger\n\n§7Bring an Enderman nearby.\n\n§eReaction\n\n§7Nervous questions about the Enderman."
+    },
+    "nwzvkb": {
+      "title": "Phantom",
+      "browseTitle": "Phantom",
+      "body": "§eTrigger\n\n§7Bring a Phantom nearby.\n\n§eReaction\n\n§7Alarmed reactions to the Phantom."
+    },
+    "dxeaal": {
+      "title": "Jockey",
+      "browseTitle": "Jockey",
+      "body": "§eTrigger\n\n§7Bring a Jockey nearby.\n\n§eReaction\n\n§7Confused reactions to the unusual Jockey."
+    },
+    "nwlcij": {
+      "title": "Creaking",
+      "browseTitle": "Creaking",
+      "body": "§eTrigger\n\n§7Bring a Creaking nearby.\n\n§eReaction\n\n§7Uneasy comments and questions about the Creaking."
+    },
+    "jicosq": {
+      "title": "Warden",
+      "browseTitle": "Warden",
+      "body": "§eTrigger\n\n§7Bring a Warden nearby.\n\n§eReaction\n\n§7Fearful reactions to the Warden."
+    },
+    "satsrf": {
+      "title": "Wither",
+      "browseTitle": "Wither",
+      "body": "§eTrigger\n\n§7Bring a Wither nearby.\n\n§eReaction\n\n§7Alarmed reactions to the Wither."
+    },
+    "xxjkmo": {
+      "title": "Ender Dragon",
+      "browseTitle": "Ender Dragon",
+      "body": "§eTrigger\n\n§7Bring an Ender Dragon nearby.\n\n§eReaction\n\n§7Amazed and alarmed reactions to the Ender Dragon."
+    },
+    "lvzfcv": {
+      "title": "Cow",
+      "browseTitle": "Cow",
+      "body": "§eTrigger\n\n§7Bring a Cow nearby.\n\n§eReaction\n\n§7Observations and jokes about the nearby Cow."
+    },
+    "jqdeef": {
+      "title": "Pig",
+      "browseTitle": "Pig",
+      "body": "§eTrigger\n\n§7Bring a Pig nearby.\n\n§eReaction\n\n§7Observations and jokes about the nearby Pig."
+    },
+    "vxycol": {
+      "title": "Sheep",
+      "browseTitle": "Sheep",
+      "body": "§eTrigger\n\n§7Bring a Sheep nearby.\n\n§eReaction\n\n§7Questions and curious comments about the nearby Sheep."
+    },
+    "afxbav": {
+      "title": "Sheared Sheep",
+      "browseTitle": "Sheared Sheep",
+      "body": "§eTrigger\n\n§7Bring a Sheared Sheep nearby.\n\n§eReaction\n\n§7Observations and jokes about the nearby Sheared Sheep."
+    },
+    "hggexx": {
+      "title": "Chicken",
+      "browseTitle": "Chicken",
+      "body": "§eTrigger\n\n§7Bring a Chicken nearby.\n\n§eReaction\n\n§7Observations and jokes about the nearby Chicken."
+    },
+    "ynxhfb": {
+      "title": "Cat",
+      "browseTitle": "Cat",
+      "body": "§eTrigger\n\n§7Bring a Cat nearby.\n\n§eReaction\n\n§7Questions and curious comments about the nearby Cat."
+    },
+    "vvntcf": {
+      "title": "Wolf",
+      "browseTitle": "Wolf",
+      "body": "§eTrigger\n\n§7Bring a Wolf nearby.\n\n§eReaction\n\n§7Questions and curious comments about the nearby Wolf."
+    },
+    "aqxgxh": {
+      "title": "Tamed Wolf",
+      "browseTitle": "Tamed Wolf",
+      "body": "§eTrigger\n\n§7Bring a Tamed Wolf nearby.\n\n§eReaction\n\n§7Friendly comments about the nearby Tamed Wolf."
+    },
+    "rbkjsr": {
+      "title": "Bee",
+      "browseTitle": "Bee",
+      "body": "§eTrigger\n\n§7Bring a Bee nearby.\n\n§eReaction\n\n§7Questions and curious comments about the nearby Bee."
+    },
+    "bmimxe": {
+      "title": "Angry Bee",
+      "browseTitle": "Angry Bee",
+      "body": "§eTrigger\n\n§7Bring an Angry Bee nearby.\n\n§eReaction\n\n§7Wary and alarmed reactions to the nearby Angry Bee."
+    },
+    "yazvzs": {
+      "title": "Horse",
+      "browseTitle": "Horse",
+      "body": "§eTrigger\n\n§7Bring a Horse nearby.\n\n§eReaction\n\n§7Observations and jokes about the nearby Horse."
+    },
+    "ysbfqu": {
+      "title": "Llama",
+      "browseTitle": "Llama",
+      "body": "§eTrigger\n\n§7Bring a Llama nearby.\n\n§eReaction\n\n§7Observations and jokes about the nearby Llama."
+    },
+    "spfefr": {
+      "title": "Rabbit",
+      "browseTitle": "Rabbit",
+      "body": "§eTrigger\n\n§7Bring a Rabbit nearby.\n\n§eReaction\n\n§7Curious and amused reactions to the nearby Rabbit."
+    },
+    "pguaqp": {
+      "title": "Frog",
+      "browseTitle": "Frog",
+      "body": "§eTrigger\n\n§7Bring a Frog nearby.\n\n§eReaction\n\n§7Questions and curious comments about the nearby Frog."
+    },
+    "trkugw": {
+      "title": "Fish",
+      "browseTitle": "Fish",
+      "body": "§eTrigger\n\n§7Bring a Fish nearby.\n\n§eReaction\n\n§7Observations and jokes about the nearby Fish."
+    },
+    "aqtshb": {
+      "title": "Dolphin",
+      "browseTitle": "Dolphin",
+      "body": "§eTrigger\n\n§7Bring a Dolphin nearby.\n\n§eReaction\n\n§7Observations and jokes about the nearby Dolphin."
+    },
+    "neoxpu": {
+      "title": "Turtle",
+      "browseTitle": "Turtle",
+      "body": "§eTrigger\n\n§7Bring a Turtle nearby.\n\n§eReaction\n\n§7Observations and jokes about the nearby Turtle."
+    },
+    "swewsr": {
+      "title": "Panda",
+      "browseTitle": "Panda",
+      "body": "§eTrigger\n\n§7Bring a Panda nearby.\n\n§eReaction\n\n§7Questions and curious comments about the nearby Panda."
+    },
+    "toolzx": {
+      "title": "Polar Bear",
+      "browseTitle": "Polar Bear",
+      "body": "§eTrigger\n\n§7Bring a Polar Bear nearby.\n\n§eReaction\n\n§7Observations and jokes about the nearby Polar Bear."
+    },
+    "vapupl": {
+      "title": "Parrot",
+      "browseTitle": "Parrot",
+      "body": "§eTrigger\n\n§7Bring a Parrot nearby.\n\n§eReaction\n\n§7Questions and curious comments about the nearby Parrot."
+    },
+    "turlrl": {
+      "title": "Camel",
+      "browseTitle": "Camel",
+      "body": "§eTrigger\n\n§7Bring a Camel nearby.\n\n§eReaction\n\n§7Observations and jokes about the nearby Camel."
+    },
+    "ozmthf": {
+      "title": "Bat",
+      "browseTitle": "Bat",
+      "body": "§eTrigger\n\n§7Bring a Bat nearby.\n\n§eReaction\n\n§7Questions and curious comments about the nearby Bat."
+    },
+    "tqishj": {
+      "title": "Sniffer",
+      "browseTitle": "Sniffer",
+      "body": "§eTrigger\n\n§7Bring a Sniffer nearby.\n\n§eReaction\n\n§7Observations and jokes about the nearby Sniffer."
+    },
+    "hzahog": {
+      "title": "Baby Cow",
+      "browseTitle": "Baby Cow",
+      "body": "§eTrigger\n\n§7Bring a Baby Cow nearby.\n\n§eReaction\n\n§7Curious and amused reactions to the nearby Baby Cow."
+    },
+    "htibul": {
+      "title": "Baby Pig",
+      "browseTitle": "Baby Pig",
+      "body": "§eTrigger\n\n§7Bring a Baby Pig nearby.\n\n§eReaction\n\n§7Curious and amused reactions to the nearby Baby Pig."
+    },
+    "eccdga": {
+      "title": "Baby Sheep",
+      "browseTitle": "Baby Sheep",
+      "body": "§eTrigger\n\n§7Bring a Baby Sheep nearby.\n\n§eReaction\n\n§7Playful comments about the nearby Baby Sheep."
+    },
+    "pjcwec": {
+      "title": "Baby Chicken",
+      "browseTitle": "Baby Chicken",
+      "body": "§eTrigger\n\n§7Bring a Baby Chicken nearby.\n\n§eReaction\n\n§7Playful comments about the nearby Baby Chicken."
+    },
+    "knjdbi": {
+      "title": "Baby Cat",
+      "browseTitle": "Baby Cat",
+      "body": "§eTrigger\n\n§7Bring a Baby Cat nearby.\n\n§eReaction\n\n§7Playful comments about the nearby Baby Cat."
+    },
+    "hyzwpr": {
+      "title": "Baby Wolf",
+      "browseTitle": "Baby Wolf",
+      "body": "§eTrigger\n\n§7Bring a Baby Wolf nearby.\n\n§eReaction\n\n§7Curious and amused reactions to the nearby Baby Wolf."
+    },
+    "sxikgq": {
+      "title": "Tamed Baby Wolf",
+      "browseTitle": "Tamed Baby Wolf",
+      "body": "§eTrigger\n\n§7Bring a Tamed Baby Wolf nearby.\n\n§eReaction\n\n§7Friendly comments about the nearby Tamed Baby Wolf."
+    },
+    "ualabt": {
+      "title": "Baby Horse",
+      "browseTitle": "Baby Horse",
+      "body": "§eTrigger\n\n§7Bring a Baby Horse nearby.\n\n§eReaction\n\n§7Questions and curious comments about the nearby Baby Horse."
+    },
+    "gggzar": {
+      "title": "Baby Panda",
+      "browseTitle": "Baby Panda",
+      "body": "§eTrigger\n\n§7Bring a Baby Panda nearby.\n\n§eReaction\n\n§7Curious and amused reactions to the nearby Baby Panda."
+    },
+    "qqtnlm": {
+      "title": "Baby Bee",
+      "browseTitle": "Baby Bee",
+      "body": "§eTrigger\n\n§7Bring a Baby Bee nearby.\n\n§eReaction\n\n§7Playful comments about the nearby Baby Bee."
+    },
+    "zvwapr": {
+      "title": "Baby Zombie",
+      "browseTitle": "Baby Zombie",
+      "body": "§eTrigger\n\n§7Bring a Baby Zombie nearby.\n\n§eReaction\n\n§7Alarmed and surprised reactions to the nearby Baby Zombie."
+    },
+    "nstwos": {
+      "title": "Baby Zombie Villager",
+      "browseTitle": "Baby Zombie Villager",
+      "body": "§eTrigger\n\n§7Bring a Baby Zombie Villager nearby.\n\n§eReaction\n\n§7Alarmed and surprised reactions to the nearby Baby Zombie Villager."
+    },
+    "qltnkz": {
+      "title": "Baby Zombie Piglin",
+      "browseTitle": "Baby Zombie Piglin",
+      "body": "§eTrigger\n\n§7Bring a Baby Zombie Piglin nearby.\n\n§eReaction\n\n§7Alarmed and surprised reactions to the nearby Baby Zombie Piglin."
+    },
+    "hwltxk": {
+      "title": "Baby Husk",
+      "browseTitle": "Baby Husk",
+      "body": "§eTrigger\n\n§7Bring a Baby Husk nearby.\n\n§eReaction\n\n§7Alarmed and surprised reactions to the nearby Baby Husk."
+    },
+    "vakwgb": {
+      "title": "Baby Drowned",
+      "browseTitle": "Baby Drowned",
+      "body": "§eTrigger\n\n§7Bring a Baby Drowned nearby.\n\n§eReaction\n\n§7Alarmed and surprised reactions to the nearby Baby Drowned."
+    },
+    "cuchwi": {
+      "title": "Iron Golem",
+      "browseTitle": "Iron Golem",
+      "body": "§eTrigger\n\n§7Bring an Iron Golem nearby.\n\n§eReaction\n\n§7Reassuring and impressed comments about the Iron Golem."
+    },
+    "qffeco": {
+      "title": "Iron Golem Targets the Player",
+      "browseTitle": "Golem Targets the Player",
+      "body": "§eTrigger\n\n§7Have an Iron Golem target you.\n\n§eReaction\n\n§7Concerned reactions when the village Iron Golem targets you."
+    },
+    "kxjegd": {
+      "title": "Snow Golem",
+      "browseTitle": "Snow Golem",
+      "body": "§eTrigger\n\n§7Bring a Snow Golem nearby.\n\n§eReaction\n\n§7Comments and jokes about the Snow Golem."
+    },
+    "ktdshy": {
+      "title": "Copper Golem",
+      "browseTitle": "Copper Golem",
+      "body": "§eTrigger\n\n§7Bring a Copper Golem nearby.\n\n§eReaction\n\n§7Curious reactions to the Copper Golem."
+    },
+    "rnlher": {
+      "title": "Allay",
+      "browseTitle": "Allay",
+      "body": "§eTrigger\n\n§7Bring an Allay nearby.\n\n§eReaction\n\n§7Curious and friendly comments about the Allay."
+    },
+    "lxvofx": {
+      "title": "Happy Ghast",
+      "browseTitle": "Happy Ghast",
+      "body": "§eTrigger\n\n§7Bring a Happy Ghast nearby.\n\n§eReaction\n\n§7Surprised reactions to the Happy Ghast."
+    },
+    "dmcjmd": {
+      "title": "Sulfur Cube",
+      "browseTitle": "Sulfur Cube",
+      "body": "§eTrigger\n\n§7Bring a Sulfur Cube nearby.\n\n§eReaction\n\n§7Confused and curious reactions to the Sulfur Cube."
+    },
+    "gjtuqd": {
+      "title": "See an Unknown Mob",
+      "browseTitle": "See an Unknown Mob",
+      "body": "§eTrigger\n\n§7Bring an entity that falls into the add-on's unknown-mob fallback nearby.\n\n§eReaction\n\n§7Generic confused reactions to an unrecognized Mob."
+    },
+    "lvigit": {
+      "title": "Villager Wandering",
+      "browseTitle": "Villager Wandering",
+      "body": "§eTrigger\n\n§7Let a Villager wander around during their normal schedule.\n\n§eReaction\n\n§7General idle chatter while wandering around."
+    },
+    "gbxzxv": {
+      "title": "Unemployed Villager Wandering",
+      "browseTitle": "Unemployed Villager",
+      "body": "§eTrigger\n\n§7Let an unemployed Villager wander around without a profession.\n\n§eReaction\n\n§7Idle comments about being unemployed and having no Workstation."
+    },
+    "uookqp": {
+      "title": "Nitwit Wandering",
+      "browseTitle": "Nitwit Wandering",
+      "body": "§eTrigger\n\n§7Let a Nitwit Villager wander around.\n\n§eReaction\n\n§7Nitwit-specific wandering chatter."
+    },
+    "zndzjx": {
+      "title": "Get a Job",
+      "browseTitle": "Get a Job",
+      "body": "§eTrigger\n\n§7Place an unclaimed job-site Block near an unemployed adult Villager so it can claim a profession.\n\n§eReaction\n\n§7Reactions to gaining a new profession."
+    },
+    "qawras": {
+      "title": "Start Work",
+      "browseTitle": "Start Work",
+      "body": "§eTrigger\n\n§7Let an employed Villager reach their job-site Block when their work period begins.\n\n§eReaction\n\n§7Workday chatter about starting work and restocking Trades."
+    },
+    "sdhkke": {
+      "title": "Stand Near a Workstation",
+      "browseTitle": "Stand Near a Workstation",
+      "body": "§eTrigger\n\n§7Let an employed Villager work beside their claimed job-site Block.\n\n§eReaction\n\n§7General comments while standing near a Workstation."
+    },
+    "umdvtb": {
+      "title": "Farmer at Work",
+      "browseTitle": "Farmer at Work",
+      "body": "§eTrigger\n\n§7Let a Farmer Villager work beside their Composter.\n\n§eReaction\n\n§7Farmer-specific work chatter at their Workstation."
+    },
+    "tgggoh": {
+      "title": "Fisherman at Work",
+      "browseTitle": "Fisherman at Work",
+      "body": "§eTrigger\n\n§7Let a Fisherman Villager work beside their Barrel.\n\n§eReaction\n\n§7Fisherman-specific work chatter at their Workstation."
+    },
+    "fezzjw": {
+      "title": "Librarian at Work",
+      "browseTitle": "Librarian at Work",
+      "body": "§eTrigger\n\n§7Let a Librarian Villager work beside their Lectern.\n\n§eReaction\n\n§7Librarian-specific work chatter at their Workstation."
+    },
+    "opxfuo": {
+      "title": "Shepherd at Work",
+      "browseTitle": "Shepherd at Work",
+      "body": "§eTrigger\n\n§7Let a Shepherd Villager work beside their Loom.\n\n§eReaction\n\n§7Shepherd-specific work chatter at their Workstation."
+    },
+    "fzjope": {
+      "title": "Fletcher at Work",
+      "browseTitle": "Fletcher at Work",
+      "body": "§eTrigger\n\n§7Let a Fletcher Villager work beside their Fletching Table.\n\n§eReaction\n\n§7Fletcher-specific work chatter at their Workstation."
+    },
+    "djpksc": {
+      "title": "Armorer at Work",
+      "browseTitle": "Armorer at Work",
+      "body": "§eTrigger\n\n§7Let an Armorer Villager work beside their Blast Furnace.\n\n§eReaction\n\n§7Armorer-specific work chatter at their Workstation."
+    },
+    "ueczyh": {
+      "title": "Butcher at Work",
+      "browseTitle": "Butcher at Work",
+      "body": "§eTrigger\n\n§7Let a Butcher Villager work beside their Smoker.\n\n§eReaction\n\n§7Butcher-specific work chatter at their Workstation."
+    },
+    "wuoloh": {
+      "title": "Cartographer at Work",
+      "browseTitle": "Cartographer at Work",
+      "body": "§eTrigger\n\n§7Let a Cartographer Villager work beside their Cartography Table.\n\n§eReaction\n\n§7Cartographer-specific work chatter at their Workstation."
+    },
+    "hkowex": {
+      "title": "Cleric at Work",
+      "browseTitle": "Cleric at Work",
+      "body": "§eTrigger\n\n§7Let a Cleric Villager work beside their Brewing Stand.\n\n§eReaction\n\n§7Cleric-specific work chatter at their Workstation."
+    },
+    "ljewqf": {
+      "title": "Leatherworker at Work",
+      "browseTitle": "Leatherworker at Work",
+      "body": "§eTrigger\n\n§7Let a Leatherworker Villager work beside their Cauldron.\n\n§eReaction\n\n§7Leatherworker-specific work chatter at their Workstation."
+    },
+    "yldlzt": {
+      "title": "Mason at Work",
+      "browseTitle": "Mason at Work",
+      "body": "§eTrigger\n\n§7Let a Mason Villager work beside their Stonecutter.\n\n§eReaction\n\n§7Mason-specific work chatter at their Workstation."
+    },
+    "ivktls": {
+      "title": "Toolsmith at Work",
+      "browseTitle": "Toolsmith at Work",
+      "body": "§eTrigger\n\n§7Let a Toolsmith Villager work beside their Smithing Table.\n\n§eReaction\n\n§7Toolsmith-specific work chatter at their Workstation."
+    },
+    "ccpvqj": {
+      "title": "Weaponsmith at Work",
+      "browseTitle": "Weaponsmith at Work",
+      "body": "§eTrigger\n\n§7Let a Weaponsmith Villager work beside their Grindstone.\n\n§eReaction\n\n§7Weaponsmith-specific work chatter at their Workstation."
+    },
+    "aobqjt": {
+      "title": "Farming",
+      "browseTitle": "Farming",
+      "body": "§eTrigger\n\n§7Let a Farmer Villager tend, harvest or Plant Crops during their normal work routine.\n\n§eReaction\n\n§7Farmer-specific chatter while working with Crops."
+    },
+    "tdvtmn": {
+      "title": "Inspect Bookshelves",
+      "browseTitle": "Inspect Bookshelves",
+      "body": "§eTrigger\n\n§7Let a Librarian Villager inspect nearby Bookshelves during their normal work behaviour.\n\n§eReaction\n\n§7Librarian comments while inspecting Bookshelves."
+    },
+    "ywzhwz": {
+      "title": "Cannot Reach Workstation",
+      "browseTitle": "Cannot Reach Workstation",
+      "body": "§eTrigger\n\n§7Give an employed Villager a claimed job-site Block that it cannot pathfind to.\n\n§eReaction\n\n§7Frustrated comments when a Villager cannot reach their Workstation."
+    },
+    "fltegg": {
+      "title": "Level Up",
+      "browseTitle": "Level Up",
+      "body": "§eTrigger\n\n§7Complete enough Trades with a Villager for their Trading level to increase.\n\n§eReaction\n\n§7Celebratory comments when a Villager levels up."
+    },
+    "pnvkfy": {
+      "title": "Reach Master Level",
+      "browseTitle": "Reach Master Level",
+      "body": "§eTrigger\n\n§7Keep Trading with a Villager until it reaches Master level.\n\n§eReaction\n\n§7Celebratory dialogue for reaching Master Trading level."
+    },
+    "wkfbuv": {
+      "title": "Return Home",
+      "browseTitle": "Return Home",
+      "body": "§eTrigger\n\n§7Wait until Villagers begin returning to their homes before night.\n\n§eReaction\n\n§7End-of-day comments while heading back home."
+    },
+    "uqguqj": {
+      "title": "Return Home Without a Bed",
+      "browseTitle": "Return Home Without a Bed",
+      "body": "§eTrigger\n\n§7Have a Villager try to return home without a valid Bed to return to.\n\n§eReaction\n\n§7Comments about trying to return home without having a Bed."
+    },
+    "ioxtmt": {
+      "title": "Go to Bed",
+      "browseTitle": "Go to Bed",
+      "body": "§eTrigger\n\n§7Let a Villager reach their Bed and begin going to sleep.\n\n§eReaction\n\n§7Bedtime comments while preparing to sleep."
+    },
+    "asqzby": {
+      "title": "Sleeping",
+      "browseTitle": "Sleeping",
+      "body": "§eTrigger\n\n§7Wait until a Villager is sleeping.\n\n§eReaction\n\n§7Occasional comments while sleeping."
+    },
+    "ctptjt": {
+      "title": "Wake Up Naturally",
+      "browseTitle": "Wake Up Naturally",
+      "body": "§eTrigger\n\n§7Let a sleeping Villager wake up naturally.\n\n§eReaction\n\n§7Comments after waking up naturally."
+    },
+    "viwaal": {
+      "title": "Wake a Sleeping Villager",
+      "browseTitle": "Wake a Sleeping Villager",
+      "body": "§eTrigger\n\n§7Wake a Villager while they are sleeping.\n\n§eReaction\n\n§7Complaints and confused reactions to being woken up."
+    },
+    "dxmmiu": {
+      "title": "Pick Up an Item",
+      "browseTitle": "Pick Up an Item",
+      "body": "§eTrigger\n\n§7Drop an Item that a Villager can pick up.\n\n§eReaction\n\n§7Comments when picking up an Item."
+    },
+    "vkhrme": {
+      "title": "Pick Up an Item Dropped by a Player",
+      "browseTitle": "Pick Up Player's Item",
+      "body": "§eTrigger\n\n§7Drop an Item yourself and let a Villager pick it up.\n\n§eReaction\n\n§7Different comments when the Item was dropped by a player."
+    },
+    "ujyxfg": {
+      "title": "Pick Up an Item Dropped by a Villager",
+      "browseTitle": "Pick Up Villager's Item",
+      "body": "§eTrigger\n\n§7Have one Villager drop an Item that another Villager picks up.\n\n§eReaction\n\n§7Different comments when the Item was dropped by another Villager."
+    },
+    "zywcju": {
+      "title": "See a Pile of Dropped Items",
+      "browseTitle": "See Dropped Item Pile",
+      "body": "§eTrigger\n\n§7Leave a large pile of dropped items on the ground.\n\n§eReaction\n\n§7Reactions to seeing a large pile of dropped Items."
+    },
+    "zjwpzi": {
+      "title": "Pick Up Armor",
+      "browseTitle": "Pick Up Armor",
+      "body": "§eTrigger\n\n§7Let a Villager pick up a piece of Armor.\n\n§eReaction\n\n§7Comments when picking up Armor."
+    },
+    "habfnx": {
+      "title": "Pick Up Enchanted Armor",
+      "browseTitle": "Pick Up Enchanted Armor",
+      "body": "§eTrigger\n\n§7Let a Villager pick up an enchanted piece of Armor.\n\n§eReaction\n\n§7Extra reactions to picking up Enchanted Armor."
+    },
+    "ebyrtk": {
+      "title": "Receive Food",
+      "browseTitle": "Receive Food",
+      "body": "§eTrigger\n\n§7Give a Villager Food.\n\n§eReaction\n\n§7Reactions to receiving Food."
+    },
+    "rlfjux": {
+      "title": "Receive Beetroot",
+      "browseTitle": "Receive Beetroot",
+      "body": "§eTrigger\n\n§7Give a Villager Beetroot.\n\n§eReaction\n\n§7Reactions to receiving Beetroot."
+    },
+    "bbjsik": {
+      "title": "Receive Bread",
+      "browseTitle": "Receive Bread",
+      "body": "§eTrigger\n\n§7Give a Villager Bread.\n\n§eReaction\n\n§7Reactions to receiving Bread."
+    },
+    "nqktml": {
+      "title": "Receive Carrot",
+      "browseTitle": "Receive Carrot",
+      "body": "§eTrigger\n\n§7Give a Villager Carrot.\n\n§eReaction\n\n§7Reactions to receiving a Carrot."
+    },
+    "ytydjc": {
+      "title": "Receive Potatoes",
+      "browseTitle": "Receive Potatoes",
+      "body": "§eTrigger\n\n§7Give a Villager Potatoes.\n\n§eReaction\n\n§7Reactions to receiving Potatoes."
+    },
+    "locuih": {
+      "title": "Share Food with Another Villager",
+      "browseTitle": "Share Food",
+      "body": "§eTrigger\n\n§7Let one Villager throw Food to another Villager.\n\n§eReaction\n\n§7Dialogue between Villagers while sharing Food."
+    },
+    "cvltyw": {
+      "title": "See XP Orbs",
+      "browseTitle": "See XP Orbs",
+      "body": "§eTrigger\n\n§7Have XP Orbs floating nearby.\n\n§eReaction\n\n§7Curious comments about nearby XP Orbs."
+    },
+    "fbuabj": {
+      "title": "Have a Baby",
+      "browseTitle": "Have a Baby",
+      "body": "§eTrigger\n\n§7Breed two adult Villagers. Give them enough Food and make sure the village has a spare valid Bed, then wait for them to create a baby.\n\n§eReaction\n\n§7Reactions to having a Baby Villager, with comments about Food and the new arrival."
+    },
+    "pbmrxx": {
+      "title": "See a Baby Villager",
+      "browseTitle": "See a Baby Villager",
+      "body": "§eTrigger\n\n§7Bring a Baby Villager near an adult Villager.\n\n§eReaction\n\n§7Comments about seeing a nearby Baby Villager."
+    },
+    "kzemrz": {
+      "title": "Crowd Too Many Villagers Together",
+      "browseTitle": "Overcrowd Villagers",
+      "body": "§eTrigger\n\n§7Pack several Villagers tightly into a small space.\n\n§eReaction\n\n§7Complaints about being crowded together with too many Villagers."
+    },
+    "spfsrr": {
+      "title": "Name a Villager",
+      "browseTitle": "Name a Villager",
+      "body": "§eTrigger\n\n§7Use a Name Tag to give a Villager a name.\n\n§eReaction\n\n§7Reactions to being given a name with a Name Tag."
+    },
+    "qmpcxi": {
+      "title": "Name a Villager \"Dinnerbone\"",
+      "browseTitle": "Name Dinnerbone",
+      "body": "§eTrigger\n\n§7Use a Name Tag to name a Villager \"Dinnerbone\".\n\n§eReaction\n\n§7A special reaction to being named \"Dinnerbone\"."
+    },
+    "armupg": {
+      "title": "Name a Villager \"Jeb\"",
+      "browseTitle": "Name a Villager \"Jeb\"",
+      "body": "§eTrigger\n\n§7Use a Name Tag to name a Villager \"Jeb\".\n\n§eReaction\n\n§7A special reaction to being named \"Jeb\"."
+    },
+    "vskjkl": {
+      "title": "Spawn a Villager with a Spawn Egg",
+      "browseTitle": "Spawn Villager with Egg",
+      "body": "§eTrigger\n\n§7Spawn a Villager using a Villager Spawn Egg.\n\n§eReaction\n\n§7Comments about being spawned with a Spawn Egg."
+    },
+    "ivumgm": {
+      "title": "Cure a Zombie Villager",
+      "browseTitle": "Cure a Zombie Villager",
+      "body": "§eTrigger\n\n§7Cure a Zombie Villager by applying Weakness and then using a Golden Apple on it. Wait for the conversion to finish.\n\n§eReaction\n\n§7Relieved and confused reactions after being cured from a Zombie Villager."
+    },
+    "lgjtnf": {
+      "title": "Baby Villager Is Born",
+      "browseTitle": "Baby Villager Is Born",
+      "body": "§eTrigger\n\n§7Breed two adult Villagers and wait for the Baby Villager to be born.\n\n§eReaction\n\n§7Excited reactions to a new Baby Villager being born."
+    },
+    "smvnbj": {
+      "title": "Grow Up",
+      "browseTitle": "Grow Up",
+      "body": "§eTrigger\n\n§7Wait for a Baby Villager to grow into an adult.\n\n§eReaction\n\n§7Comments about suddenly growing into an adult and needing a job."
+    },
+    "rfnirh": {
+      "title": "Play Chase",
+      "browseTitle": "Play Chase",
+      "body": "§eTrigger\n\n§7Let two Baby Villagers play and chase each other.\n\n§eReaction\n\n§7Playful chatter while chasing another Baby Villager."
+    },
+    "vhwksn": {
+      "title": "Baby Villager Sprints",
+      "browseTitle": "Baby Villager Sprints",
+      "body": "§eTrigger\n\n§7Watch a Baby Villager while they are sprinting.\n\n§eReaction\n\n§7Excited comments while sprinting around."
+    },
+    "vbclem": {
+      "title": "Baby Sprints on the Weekend",
+      "browseTitle": "Weekend Baby Sprint",
+      "body": "§eTrigger\n\n§7Have a Baby Villager sprint on Saturday or Sunday.\n\n§eReaction\n\n§7Extra weekend-specific comments while sprinting."
+    },
+    "ecslqo": {
+      "title": "Baby Villager Gets Hurt",
+      "browseTitle": "Baby Villager Gets Hurt",
+      "body": "§eTrigger\n\n§7Cause a Baby Villager to take damage.\n\n§eReaction\n\n§7Baby Villager hurt reactions."
+    },
+    "wsxfok": {
+      "title": "Calm Down After a Scare",
+      "browseTitle": "Calm Down After a Scare",
+      "body": "§eTrigger\n\n§7Wait near a Baby Villager after it has been frightened or hurt and allow it to calm down.\n\n§eReaction\n\n§7Relieved comments after calming down from a scare."
+    },
+    "ggitzq": {
+      "title": "Cure a Baby Zombie Villager",
+      "browseTitle": "Cure Baby Zombie Villager",
+      "body": "§eTrigger\n\n§7Cure a Baby Zombie Villager by applying Weakness and then using a Golden Apple on it. Wait for the conversion to finish.\n\n§eReaction\n\n§7Relieved and surprised reactions after being cured from a Baby Zombie Villager."
+    },
+    "abfwiv": {
+      "title": "Spawn a Baby with a Spawn Egg",
+      "browseTitle": "Spawn Baby with Egg",
+      "body": "§eTrigger\n\n§7Spawn a Baby Villager using a Spawn Egg.\n\n§eReaction\n\n§7Confused comments about suddenly appearing from a Spawn Egg."
+    },
+    "durjjd": {
+      "title": "Skip Time",
+      "browseTitle": "Skip Time",
+      "body": "§eTrigger\n\n§7Skip time forward while a Baby Villager is active.\n\n§eReaction\n\n§7Confused reactions to time suddenly skipping forward."
+    },
+    "wkwcrf": {
+      "title": "Suddenly Turn to Day",
+      "browseTitle": "Suddenly Turn to Day",
+      "body": "§eTrigger\n\n§7Change the world from night to day suddenly while a Baby Villager is active.\n\n§eReaction\n\n§7Comments about the world suddenly becoming day."
+    },
+    "msemoe": {
+      "title": "Suddenly Turn to Night",
+      "browseTitle": "Suddenly Turn to Night",
+      "body": "§eTrigger\n\n§7Change the world from day to night suddenly while a Baby Villager is active.\n\n§eReaction\n\n§7Comments about the world suddenly becoming night."
+    },
+    "wtuguc": {
+      "title": "Meet a Player",
+      "browseTitle": "Meet a Player",
+      "body": "§eTrigger\n\n§7Move close enough for a Baby Villager to notice you.\n\n§eReaction\n\n§7Baby Villager greetings and comments when meeting a player."
+    },
+    "aezdiy": {
+      "title": "Try to Trade with a Baby Villager",
+      "browseTitle": "Try Trading with a Baby",
+      "body": "§eTrigger\n\n§7Try to interact with a Baby Villager as if you were opening a Trade.\n\n§eReaction\n\n§7Responses explaining why Baby Villagers cannot Trade."
+    },
+    "jfuftm": {
+      "title": "See a Player with a Bad Reputation",
+      "browseTitle": "Bad-Reputation Player",
+      "body": "§eTrigger\n\n§7Approach a Baby Villager while you have a bad Reputation in the village.\n\n§eReaction\n\n§7Wary reactions to a player with a bad Reputation."
+    },
+    "fzyrfm": {
+      "title": "See the Hero of the Village",
+      "browseTitle": "See Hero of the Village",
+      "body": "§eTrigger\n\n§7Approach a Baby Villager while you have Hero of the Village.\n\n§eReaction\n\n§7Excited reactions to seeing the Hero of the Village."
+    },
+    "ahcvzd": {
+      "title": "Player Hurts a Baby Villager",
+      "browseTitle": "Player Hurts Baby",
+      "body": "§eTrigger\n\n§7Directly attack a Baby Villager.\n\n§eReaction\n\n§7Stronger hurt reactions when the player is responsible."
+    },
+    "rlkdqd": {
+      "title": "Give a Baby Villager #5's Moustache",
+      "browseTitle": "#5's Moustache",
+      "body": "§eTrigger\n\n§7Interact with a Baby Villager while holding the Villager #5's Moustache to give it the cosmetic.\n\n§eReaction\n\n§7Villager #5-style lines after receiving the Moustache."
+    },
+    "riezum": {
+      "title": "Give a Baby Villager #9's Microphone",
+      "browseTitle": "#9's Microphone",
+      "body": "§eTrigger\n\n§7Interact with a Baby Villager while holding the Villager #9's Microphone to give it the cosmetic.\n\n§eReaction\n\n§7Reporter-style lines after receiving Villager #9's Microphone."
+    },
+    "cxeziv": {
+      "title": "Give a Baby Testificate Man's Helmet",
+      "browseTitle": "Testificate Helmet",
+      "body": "§eTrigger\n\n§7Interact with a Baby Villager while holding the Testificate Man's Helmet to give it the cosmetic.\n\n§eReaction\n\n§7Superhero-style lines after receiving Testificate Man's Helmet."
+    },
+    "svdjdk": {
+      "title": "Give a Baby the Mayor Hat",
+      "browseTitle": "Give a Baby the Mayor Hat",
+      "body": "§eTrigger\n\n§7Give a Baby Villager the Mayor Hat.\n\n§eReaction\n\n§7Mayor-style lines after receiving the Mayor Hat."
+    },
+    "hbalps": {
+      "title": "Give a Baby Bread",
+      "browseTitle": "Give a Baby Bread",
+      "body": "§eTrigger\n\n§7Give a Baby Villager Bread.\n\n§eReaction\n\n§7Happy comments about being given Bread."
+    },
+    "hcdvqm": {
+      "title": "Give a Baby Carrots",
+      "browseTitle": "Give a Baby Carrots",
+      "body": "§eTrigger\n\n§7Give a Baby Villager carrots.\n\n§eReaction\n\n§7Happy comments about being given Carrots."
+    },
+    "gotjxf": {
+      "title": "Give a Baby Potatoes",
+      "browseTitle": "Give a Baby Potatoes",
+      "body": "§eTrigger\n\n§7Give a Baby Villager Potatoes.\n\n§eReaction\n\n§7Comments about being given Potatoes."
+    },
+    "qrdzmt": {
+      "title": "Give a Baby Beetroot",
+      "browseTitle": "Give a Baby Beetroot",
+      "body": "§eTrigger\n\n§7Give a Baby Villager Beetroot.\n\n§eReaction\n\n§7Comments about being given Beetroot."
+    },
+    "saxuwk": {
+      "title": "Receive Food from Another Villager",
+      "browseTitle": "Receive Shared Food",
+      "body": "§eTrigger\n\n§7Let an adult Villager throw Food to a Baby Villager.\n\n§eReaction\n\n§7Comments about receiving Food from another Villager."
+    },
+    "gzsztp": {
+      "title": "Name a Baby Villager",
+      "browseTitle": "Name a Baby Villager",
+      "body": "§eTrigger\n\n§7Use a Name Tag to give a Baby Villager a name.\n\n§eReaction\n\n§7Questions and comments about being given a new name."
+    },
+    "cmrqhw": {
+      "title": "Name a Baby \"Dragon\"",
+      "browseTitle": "Name a Baby \"Dragon\"",
+      "body": "§eTrigger\n\n§7Use a Name Tag to name a Baby Villager \"Dragon\".\n\n§eReaction\n\n§7Excited reactions to being named \"Dragon\"."
+    },
+    "zeykfp": {
+      "title": "See a Firework",
+      "browseTitle": "See a Firework",
+      "body": "§eTrigger\n\n§7Set off a Firework near a Baby Villager.\n\n§eReaction\n\n§7Excited reactions to seeing a Firework."
+    },
+    "mqnapy": {
+      "title": "See an Iron Golem",
+      "browseTitle": "See an Iron Golem",
+      "body": "§eTrigger\n\n§7Bring an Iron Golem near a Baby Villager.\n\n§eReaction\n\n§7Curious and excited reactions to seeing an Iron Golem."
+    },
+    "nxalcz": {
+      "title": "Ring a Bell Near a Baby",
+      "browseTitle": "Ring a Bell Near a Baby",
+      "body": "§eTrigger\n\n§7Ring a Bell close enough for a Baby Villager to hear it.\n\n§eReaction\n\n§7Reactions to hearing the village Bell ring nearby."
+    },
+    "vevdkl": {
+      "title": "Attacked by the Player",
+      "browseTitle": "Attacked by the Player",
+      "body": "§eTrigger\n\n§7Directly attack a Villager.\n\n§eReaction\n\n§7Angry and alarmed reactions to being attacked by the player."
+    },
+    "lpuocy": {
+      "title": "Attacked Inside Their Home",
+      "browseTitle": "Attacked at Home",
+      "body": "§eTrigger\n\n§7Directly attack a Villager while they are inside their home.\n\n§eReaction\n\n§7Stronger reactions when attacked inside their own home."
+    },
+    "slbqfwswxeva": {
+      "title": "Attack a Villager at Home with Witnesses",
+      "browseTitle": "Attack at Home, Witnessed",
+      "body": "§eTrigger\n\n§7Attack a Villager inside their home while other Villagers are inside to witness the attack.\n\n§eReaction\n\n§7A multi-Villager exchange when someone is attacked at home in front of witnesses."
+    },
+    "rueszy": {
+      "title": "Attacked with a Sword",
+      "browseTitle": "Attacked with a Sword",
+      "body": "§eTrigger\n\n§7Directly damage a Villager using a sword.\n\n§eReaction\n\n§7Painful reactions to being hit with a Sword."
+    },
+    "yjctyw": {
+      "title": "Attacked with an Axe",
+      "browseTitle": "Attacked with an Axe",
+      "body": "§eTrigger\n\n§7Directly damage a Villager using an axe.\n\n§eReaction\n\n§7Alarmed reactions to an Axe attack."
+    },
+    "huhcbd": {
+      "title": "Attacked with an Arrow",
+      "browseTitle": "Attacked with an Arrow",
+      "body": "§eTrigger\n\n§7Directly damage a Villager using an arrow.\n\n§eReaction\n\n§7Painful comments after being shot with an Arrow."
+    },
+    "hmadgp": {
+      "title": "Attacked with a Splash Potion",
+      "browseTitle": "Splash Potion Attack",
+      "body": "§eTrigger\n\n§7Directly damage a Villager using a splash potion.\n\n§eReaction\n\n§7Confused and painful reactions to being hit with a Splash Potion."
+    },
+    "gesjov": {
+      "title": "Attacked with a Firework",
+      "browseTitle": "Attacked with a Firework",
+      "body": "§eTrigger\n\n§7Directly damage a Villager using a Firework.\n\n§eReaction\n\n§7Painful reactions to Firework damage."
+    },
+    "qqyjjg": {
+      "title": "Attacked with a Hoe",
+      "browseTitle": "Attacked with a Hoe",
+      "body": "§eTrigger\n\n§7Directly damage a Villager using a hoe.\n\n§eReaction\n\n§7Comments and pain reactions after being hit with a Hoe."
+    },
+    "hpnsfu": {
+      "title": "Attacked with a Shovel",
+      "browseTitle": "Attacked with a Shovel",
+      "body": "§eTrigger\n\n§7Directly damage a Villager using a shovel.\n\n§eReaction\n\n§7Complaints and pain reactions after being hit with a Shovel."
+    },
+    "mytmrk": {
+      "title": "Zombie",
+      "browseTitle": "Zombie",
+      "body": "§eTrigger\n\n§7Have a Villager take damage from a Zombie.\n\n§eReaction\n\n§7Fearful reactions to a Zombie attack, including concern about becoming one."
+    },
+    "qhpyaw": {
+      "title": "Pillager",
+      "browseTitle": "Pillager",
+      "body": "§eTrigger\n\n§7Have a Villager take damage from a Pillager.\n\n§eReaction\n\n§7Painful complaints about being shot by a Pillager."
+    },
+    "swomdw": {
+      "title": "Vindicator",
+      "browseTitle": "Vindicator",
+      "body": "§eTrigger\n\n§7Have a Villager take damage from a Vindicator.\n\n§eReaction\n\n§7Alarmed reactions to the Vindicator's Axe attacks."
+    },
+    "nkcoqb": {
+      "title": "Evoker",
+      "browseTitle": "Evoker",
+      "body": "§eTrigger\n\n§7Have a Villager take damage from an Evoker.\n\n§eReaction\n\n§7Panicked comments about Evoker magic and summoned fangs."
+    },
+    "rtikom": {
+      "title": "Witch",
+      "browseTitle": "Witch",
+      "body": "§eTrigger\n\n§7Have a Villager take damage from a Witch.\n\n§eReaction\n\n§7Complaints about being splashed and attacked by a Witch."
+    },
+    "uveohs": {
+      "title": "Ravager",
+      "browseTitle": "Ravager",
+      "body": "§eTrigger\n\n§7Have a Villager take damage from a Ravager.\n\n§eReaction\n\n§7Panicked and confused reactions to a Ravager attack."
+    },
+    "caykki": {
+      "title": "Vex",
+      "browseTitle": "Vex",
+      "body": "§eTrigger\n\n§7Have a Villager take damage from a Vex.\n\n§eReaction\n\n§7Fearful reactions to being attacked by a flying Vex."
+    },
+    "hfmwvf": {
+      "title": "Zoglin",
+      "browseTitle": "Zoglin",
+      "body": "§eTrigger\n\n§7Have a Villager take damage from a Zoglin.\n\n§eReaction\n\n§7Panicked jokes about being attacked by a Zoglin."
+    },
+    "cifbit": {
+      "title": "Falling",
+      "browseTitle": "Falling",
+      "body": "§eTrigger\n\n§7Make a Villager fall far enough to take fall damage.\n\n§eReaction\n\n§7Comments and pain reactions after taking fall damage."
+    },
+    "etkxko": {
+      "title": "Burning",
+      "browseTitle": "Burning",
+      "body": "§eTrigger\n\n§7Set a Villager on fire and let it take burning damage.\n\n§eReaction\n\n§7Panicked reactions to being on fire."
+    },
+    "elryje": {
+      "title": "Lava",
+      "browseTitle": "Lava",
+      "body": "§eTrigger\n\n§7Have a Villager take damage from lava.\n\n§eReaction\n\n§7Panicked reactions to taking Lava damage."
+    },
+    "igebly": {
+      "title": "Freezing",
+      "browseTitle": "Freezing",
+      "body": "§eTrigger\n\n§7Keep a Villager in Powder Snow long enough for it to take freezing damage.\n\n§eReaction\n\n§7Comments and pain reactions while Freezing."
+    },
+    "rogpvp": {
+      "title": "Cactus",
+      "browseTitle": "Cactus",
+      "body": "§eTrigger\n\n§7Have a Villager take damage from a cactus.\n\n§eReaction\n\n§7Painful reactions to Cactus damage."
+    },
+    "nsxmkr": {
+      "title": "Pointed Dripstone",
+      "browseTitle": "Pointed Dripstone",
+      "body": "§eTrigger\n\n§7Have a Villager take damage from Pointed Dripstone.\n\n§eReaction\n\n§7Painful reactions to Pointed Dripstone."
+    },
+    "yzqpvi": {
+      "title": "Falling Anvil",
+      "browseTitle": "Falling Anvil",
+      "body": "§eTrigger\n\n§7Have a Villager take damage from an anvil.\n\n§eReaction\n\n§7Reactions to being hit by a Falling Anvil."
+    },
+    "vnaodx": {
+      "title": "Suffocation",
+      "browseTitle": "Suffocation",
+      "body": "§eTrigger\n\n§7Trap a Villager inside solid blocks long enough for it to take suffocation damage.\n\n§eReaction\n\n§7Panicked reactions to suffocation."
+    },
+    "fcbygh": {
+      "title": "TNT",
+      "browseTitle": "TNT",
+      "body": "§eTrigger\n\n§7Have a Villager take damage from a TNT explosion.\n\n§eReaction\n\n§7Reactions to taking TNT explosion damage."
+    },
+    "dlrxes": {
+      "title": "Snowball",
+      "browseTitle": "Snowball",
+      "body": "§eTrigger\n\n§7Hit a Villager with a snowball.\n\n§eReaction\n\n§7Cold and annoyed reactions to being hit by a Snowball."
+    },
+    "gacgtq": {
+      "title": "Harming Potion",
+      "browseTitle": "Harming Potion",
+      "body": "§eTrigger\n\n§7Hit a Villager with a splash potion that applies Harming.\n\n§eReaction\n\n§7Painful reactions to a Potion of Harming."
+    },
+    "onindz": {
+      "title": "Poison Potion",
+      "browseTitle": "Poison Potion",
+      "body": "§eTrigger\n\n§7Hit a Villager with a splash potion that applies Poison.\n\n§eReaction\n\n§7Comments and complaints after being poisoned."
+    },
+    "xemyaj": {
+      "title": "Slowness Potion",
+      "browseTitle": "Slowness Potion",
+      "body": "§eTrigger\n\n§7Hit a Villager with a splash potion that applies Slowness.\n\n§eReaction\n\n§7Comments about being slowed by a Potion of Slowness."
+    },
+    "yebifs": {
+      "title": "Weakness Potion",
+      "browseTitle": "Weakness Potion",
+      "body": "§eTrigger\n\n§7Hit a Villager with a splash potion that applies Weakness.\n\n§eReaction\n\n§7Comments about being weakened by a Potion of Weakness."
+    },
+    "ydigbg": {
+      "title": "Stand Near Fire",
+      "browseTitle": "Stand Near Fire",
+      "body": "§eTrigger\n\n§7Have a Villager stand close to fire.\n\n§eReaction\n\n§7Concerned comments about standing dangerously close to Fire."
+    },
+    "wancdi": {
+      "title": "Stand on Magma",
+      "browseTitle": "Stand on Magma",
+      "body": "§eTrigger\n\n§7Have a Villager stand on a Magma Block.\n\n§eReaction\n\n§7Painful and confused reactions to standing on Magma."
+    },
+    "pmaqgq": {
+      "title": "See TNT",
+      "browseTitle": "See TNT",
+      "body": "§eTrigger\n\n§7Place TNT nearby.\n\n§eReaction\n\n§7Alarmed reactions to nearby TNT."
+    },
+    "bodvsv": {
+      "title": "See a Falling Block",
+      "browseTitle": "See a Falling Block",
+      "body": "§eTrigger\n\n§7Make a gravity-affected Block fall.\n\n§eReaction\n\n§7Surprised reactions to seeing a falling Block."
+    },
+    "fxbysi": {
+      "title": "Free a Suffocating Villager",
+      "browseTitle": "Free Suffocating Villager",
+      "body": "§eTrigger\n\n§7Free a Villager after it has become trapped and started suffocating inside blocks.\n\n§eReaction\n\n§7Relieved comments after escaping suffocation."
+    },
+    "wyvzhk": {
+      "title": "Villager Gets Hurt",
+      "browseTitle": "Villager Gets Hurt",
+      "body": "§eTrigger\n\n§7Have a Villager take damage from any source.\n\n§eReaction\n\n§7General hurt sounds and short reactions from any damage source."
+    },
+    "uzdxum": {
+      "title": "Villager Panics",
+      "browseTitle": "Villager Panics",
+      "body": "§eTrigger\n\n§7Wait for a Villager to start panicking because of nearby danger.\n\n§eReaction\n\n§7Panicked dialogue while fleeing nearby danger."
+    },
+    "wbbxpo": {
+      "title": "Calm Down After Danger",
+      "browseTitle": "Calm Down After Danger",
+      "body": "§eTrigger\n\n§7Wait for a Villager to calm down after nearby danger has passed.\n\n§eReaction\n\n§7Relieved comments after the danger has passed."
+    },
+    "hivgme": {
+      "title": "Villager Dies",
+      "browseTitle": "Villager Dies",
+      "body": "§eTrigger\n\n§7Have a Villager die nearby.\n\n§eReaction\n\n§7Final reactions when a Villager dies."
+    },
+    "pkvhpv": {
+      "title": "See Another Entity Get Hurt",
+      "browseTitle": "See Another Entity Hurt",
+      "body": "§eTrigger\n\n§7Have another entity take damage.\n\n§eReaction\n\n§7Comments when another nearby entity gets hurt."
+    },
+    "pmqrpb": {
+      "title": "See Another Villager Die",
+      "browseTitle": "See Another Villager Die",
+      "body": "§eTrigger\n\n§7Have another Villager die.\n\n§eReaction\n\n§7Stronger reactions to witnessing another Villager die."
+    },
+    "xmkwxd": {
+      "title": "Complete a Trade",
+      "browseTitle": "Complete a Trade",
+      "body": "§eTrigger\n\n§7Complete a Trade with a Villager while the Trading window is still open.\n\n§eReaction\n\n§7Immediate comments about the deal while the Trading window is still open."
+    },
+    "czvvwy": {
+      "title": "Close Trading After Buying",
+      "browseTitle": "Close After Buying",
+      "body": "§eTrigger\n\n§7Complete at least one Trade, then close the Villager's Trading window.\n\n§eReaction\n\n§7Successful-Trade farewells after closing the Trading window."
+    },
+    "lilimm": {
+      "title": "Close Trading Without Buying",
+      "browseTitle": "Leave Without Trading",
+      "body": "§eTrigger\n\n§7Open a Villager's Trading window, buy nothing, then close it.\n\n§eReaction\n\n§7Disappointed or sarcastic comments after leaving without buying anything."
+    },
+    "laztau": {
+      "title": "Close the Trading Window",
+      "browseTitle": "Close the Trading Window",
+      "body": "§eTrigger\n\n§7Close a Villager's Trading window.\n\n§eReaction\n\n§7General farewells when the Trading window closes."
+    },
+    "nlbhku": {
+      "title": "Try to Trade with an Unemployed Villager",
+      "browseTitle": "Trade with Unemployed",
+      "body": "§eTrigger\n\n§7Try to Trade with an unemployed Villager that does not have a profession.\n\n§eReaction\n\n§7Explanations and excuses about having no Trades to offer."
+    },
+    "nukxsf": {
+      "title": "Try to Trade with a Nitwit",
+      "browseTitle": "Trade with a Nitwit",
+      "body": "§eTrigger\n\n§7Try to Trade with a Nitwit Villager.\n\n§eReaction\n\n§7Nitwit-specific responses when you try to Trade."
+    },
+    "lhdgsy": {
+      "title": "Refuses a Low-Reputation Player",
+      "browseTitle": "Low Reputation Refusal",
+      "body": "§eTrigger\n\n§7Try to Trade when your Reputation with the Villager is too low for it to accept.\n\n§eReaction\n\n§7Hostile refusals caused by your low Reputation."
+    },
+    "klabhl": {
+      "title": "Refuses to Trade During a Raid",
+      "browseTitle": "Refuses During a Raid",
+      "body": "§eTrigger\n\n§7Try to Trade while the Villager is reacting to an active raid or nearby raiders.\n\n§eReaction\n\n§7Refusals to Trade while the Villager is reacting to a Raid."
+    },
+    "zalmof": {
+      "title": "Cannot Trade",
+      "browseTitle": "Cannot Trade",
+      "body": "§eTrigger\n\n§7Try to Trade in a situation where the Villager is unable to offer a compatible Trade.\n\n§eReaction\n\n§7General responses when a Trade cannot be completed."
+    },
+    "clbjww": {
+      "title": "Start Trading with Neutral Reputation",
+      "browseTitle": "Neutral Reputation",
+      "body": "§eTrigger\n\n§7Open a Villager's Trading window while your village Reputation is neutral.\n\n§eReaction\n\n§7Neutral opening Trade dialogue."
+    },
+    "qmdvft": {
+      "title": "Start Trading with Low Reputation",
+      "browseTitle": "Low Reputation",
+      "body": "§eTrigger\n\n§7Open a Villager's Trading window while your village Reputation is low.\n\n§eReaction\n\n§7Unfriendly opening Trade dialogue for low Reputation."
+    },
+    "xduuwm": {
+      "title": "Start Trading with Extremely Low Reputation",
+      "browseTitle": "Very Low Reputation",
+      "body": "§eTrigger\n\n§7Open a Villager's Trading window while your village Reputation is extremely low.\n\n§eReaction\n\n§7Strongly hostile opening Trade dialogue for extremely low Reputation."
+    },
+    "kuhvdv": {
+      "title": "Start Trading with High Reputation",
+      "browseTitle": "High Reputation",
+      "body": "§eTrigger\n\n§7Open a Villager's Trading window while your village Reputation is high.\n\n§eReaction\n\n§7Friendly opening Trade dialogue for high Reputation."
+    },
+    "vlrsrn": {
+      "title": "Start Trading with Extremely High Reputation",
+      "browseTitle": "Very High Reputation",
+      "body": "§eTrigger\n\n§7Open a Villager's Trading window while your village Reputation is extremely high.\n\n§eReaction\n\n§7Highly enthusiastic opening Trade dialogue for extremely high Reputation."
+    },
+    "hxlyuc": {
+      "title": "Sees the Player",
+      "browseTitle": "Sees the Player",
+      "body": "§eTrigger\n\n§7Move close enough for a Wandering Trader to notice you.\n\n§eReaction\n\n§7Wandering Trader greetings and sales pitches."
+    },
+    "stqafd": {
+      "title": "Wandering",
+      "browseTitle": "Wandering",
+      "body": "§eTrigger\n\n§7Stay near a Wandering Trader while it is wandering around.\n\n§eReaction\n\n§7Travel, Trading and Llama-related idle chatter."
+    },
+    "yubpbb": {
+      "title": "Open Trade Window",
+      "browseTitle": "Open Trade Window",
+      "body": "§eTrigger\n\n§7Open a Wandering Trader's Trading window.\n\n§eReaction\n\n§7Sales pitches when the Wandering Trader's Trade window opens."
+    },
+    "bvrbhy": {
+      "title": "Complete a Trade",
+      "browseTitle": "Complete a Trade",
+      "body": "§eTrigger\n\n§7Complete a Trade with a Wandering Trader.\n\n§eReaction\n\n§7Satisfied comments immediately after a successful Trade."
+    },
+    "uzdvsi": {
+      "title": "Close Trades After Buying",
+      "browseTitle": "Close Trades After Buying",
+      "body": "§eTrigger\n\n§7Complete at least one Trade with a Wandering Trader, then close the Trading window.\n\n§eReaction\n\n§7Friendly farewells after closing the window following a Trade."
+    },
+    "erbcfn": {
+      "title": "Leave Without Trading",
+      "browseTitle": "Leave Without Trading",
+      "body": "§eTrigger\n\n§7Open a Wandering Trader's Trading window, buy nothing, then close it.\n\n§eReaction\n\n§7Disappointed or sarcastic comments after leaving without Trading."
+    },
+    "kxoqky": {
+      "title": "Caught in the Rain",
+      "browseTitle": "Caught in the Rain",
+      "body": "§eTrigger\n\n§7Keep a Wandering Trader outside while it is raining.\n\n§eReaction\n\n§7Rain-related complaints and jokes."
+    },
+    "vggdrt": {
+      "title": "Uses an Invisibility Potion",
+      "browseTitle": "Use Invisibility Potion",
+      "body": "§eTrigger\n\n§7Wait for a Wandering Trader to use its Invisibility potion.\n\n§eReaction\n\n§7Comments when the Wandering Trader uses an Invisibility Potion."
+    },
+    "jkeahu": {
+      "title": "Uses a Potion with One Llama",
+      "browseTitle": "Potion with One Llama",
+      "body": "§eTrigger\n\n§7Wait for a Wandering Trader with one Llama to use its Invisibility potion.\n\n§eReaction\n\n§7Extra comments when using a Potion with one Llama."
+    },
+    "myajyt": {
+      "title": "Uses a Potion with Two Llamas",
+      "browseTitle": "Potion with Two Llamas",
+      "body": "§eTrigger\n\n§7Wait for a Wandering Trader with two llamas to use its Invisibility potion.\n\n§eReaction\n\n§7Extra comments when using a Potion with two Llamas."
+    },
+    "dbzjqi": {
+      "title": "Invisible Wandering Trader",
+      "browseTitle": "Invisible Trader",
+      "body": "§eTrigger\n\n§7Stay near a Wandering Trader while it is invisible.\n\n§eReaction\n\n§7Jokes and comments while the Wandering Trader is invisible."
+    },
+    "jktrnd": {
+      "title": "Shear Off a Villager's Nose",
+      "browseTitle": "Shear Off Their Nose",
+      "body": "§eTrigger\n\n§7Use shears on a Villager to remove their Nose.\n\n§eReaction\n\n§7Angry and surprised reactions to having their Nose sheared off."
+    },
+    "dcvgnm": {
+      "title": "No-Nose Villager Wandering",
+      "browseTitle": "No-Nose Villager",
+      "body": "§eTrigger\n\n§7Let a Villager wander around after their Nose has been removed.\n\n§eReaction\n\n§7No-Nose wandering comments and complaints."
+    },
+    "kxrhxt": {
+      "title": "Give a Villager a Nose",
+      "browseTitle": "Give a Villager a Nose",
+      "body": "§eTrigger\n\n§7Interact with a Villager while holding a Villager Nose to put the nose back.\n\n§eReaction\n\n§7Reactions to having a Nose returned."
+    },
+    "akfekx": {
+      "title": "Try to Give a Second Nose",
+      "browseTitle": "Try to Give a Second Nose",
+      "body": "§eTrigger\n\n§7Try to give a Villager Nose to a Villager that already has one.\n\n§eReaction\n\n§7Comments when you try to give a Nose to a Villager who already has one."
+    },
+    "kejscw": {
+      "title": "Wear a Villager Nose",
+      "browseTitle": "Wear a Villager Nose",
+      "body": "§eTrigger\n\n§7Wear a Villager Nose.\n\n§eReaction\n\n§7Comments about seeing the player wearing a Villager Nose."
+    },
+    "orogba": {
+      "title": "Give a Villager a Cosmetic",
+      "browseTitle": "Give a Cosmetic",
+      "body": "§eTrigger\n\n§7Give a Villager one of the supported Villager News cosmetics.\n\n§eReaction\n\n§7Reactions to receiving one of the supported Villager News Cosmetics."
+    },
+    "wurmgu": {
+      "title": "Give a Villager Testificate Man's Helmet",
+      "browseTitle": "Give Testificate Helmet",
+      "body": "§eTrigger\n\n§7Give a Villager Testificate Man's Helmet.\n\n§eReaction\n\n§7Comments about being given Testificate Man's Helmet."
+    },
+    "ozxzla": {
+      "title": "Give a Villager a Moustache",
+      "browseTitle": "Give a Moustache",
+      "body": "§eTrigger\n\n§7Give a Villager Villager #5's Moustache.\n\n§eReaction\n\n§7Comments about being given Villager #5's Moustache."
+    },
+    "inirxg": {
+      "title": "Give a Villager a Microphone",
+      "browseTitle": "Give a Microphone",
+      "body": "§eTrigger\n\n§7Give a Villager Villager #9's Microphone.\n\n§eReaction\n\n§7Comments about being given Villager #9's Microphone."
+    },
+    "ckjbyd": {
+      "title": "Remove a Cosmetic",
+      "browseTitle": "Remove a Cosmetic",
+      "body": "§eTrigger\n\n§7Remove a Villager News cosmetic from a Villager.\n\n§eReaction\n\n§7Reactions to having a Cosmetic removed."
+    },
+    "anrhns": {
+      "title": "See a Villager Wearing a Cosmetic",
+      "browseTitle": "Villager Wears Cosmetic",
+      "body": "§eTrigger\n\n§7Have a Villager wear a Villager News Cosmetic near another Villager.\n\n§eReaction\n\n§7Comments about another Villager wearing a Cosmetic."
+    },
+    "vqlrqf": {
+      "title": "Give a Villager a Sign",
+      "browseTitle": "Give a Villager a Sign",
+      "body": "§eTrigger\n\n§7Interact with a Villager while holding a Sign to give it one.\n\n§eReaction\n\n§7Comments about receiving and holding a Sign."
+    },
+    "ocerok": {
+      "title": "Sit in a Boat",
+      "browseTitle": "Sit in a Boat",
+      "body": "§eTrigger\n\n§7Put a Villager in a boat.\n\n§eReaction\n\n§7General Boat chatter, from rowing jokes to questions about where they're going."
+    },
+    "ybwgyt": {
+      "title": "Boat on Land",
+      "browseTitle": "Boat on Land",
+      "body": "§eTrigger\n\n§7Put a Villager in a boat that is sitting on land.\n\n§eReaction\n\n§7Comments about being stuck in a Boat on land."
+    },
+    "tjkgmv": {
+      "title": "Boat on Water",
+      "browseTitle": "Boat on Water",
+      "body": "§eTrigger\n\n§7Put a Villager in a boat floating on water.\n\n§eReaction\n\n§7Comments about riding in a Boat on Water."
+    },
+    "zvbnea": {
+      "title": "Nudge a Villager in a Boat",
+      "browseTitle": "Nudge Villager in Boat",
+      "body": "§eTrigger\n\n§7Push or bump a boat while a Villager is sitting in it.\n\n§eReaction\n\n§7Complaints when the player nudges their Boat."
+    },
+    "zqfvby": {
+      "title": "Two Villagers in One Boat",
+      "browseTitle": "Two Villagers in One Boat",
+      "body": "§eTrigger\n\n§7Put two Villagers in the same boat.\n\n§eReaction\n\n§7Comments and conversations when two Villagers share one Boat."
+    },
+    "igyvcw": {
+      "title": "Sit in a Minecart",
+      "browseTitle": "Sit in a Minecart",
+      "body": "§eTrigger\n\n§7Put a Villager in a minecart.\n\n§eReaction\n\n§7General Minecart chatter and questions about where they're going."
+    },
+    "ifppja": {
+      "title": "Ride in a Moving Minecart",
+      "browseTitle": "Ride in a Moving Minecart",
+      "body": "§eTrigger\n\n§7Move a minecart while a Villager is riding in it.\n\n§eReaction\n\n§7Extra reactions while the Minecart is moving."
+    },
+    "zkoewx": {
+      "title": "Morning",
+      "browseTitle": "Morning",
+      "body": "§eTrigger\n\n§7Approach a Villager during the in-game morning.\n\n§eReaction\n\n§7Morning greetings and comments."
+    },
+    "kopthx": {
+      "title": "Afternoon",
+      "browseTitle": "Afternoon",
+      "body": "§eTrigger\n\n§7Approach a Villager during the in-game afternoon.\n\n§eReaction\n\n§7Afternoon greetings and comments."
+    },
+    "qknpqr": {
+      "title": "Evening",
+      "browseTitle": "Evening",
+      "body": "§eTrigger\n\n§7Approach a Villager during the in-game evening.\n\n§eReaction\n\n§7Evening greetings and comments."
+    },
+    "sotbtt": {
+      "title": "Night",
+      "browseTitle": "Night",
+      "body": "§eTrigger\n\n§7Approach a Villager during the in-game night.\n\n§eReaction\n\n§7Night-time greetings and comments."
+    },
+    "jqgkhy": {
+      "title": "Top of the Hour",
+      "browseTitle": "Top of the Hour",
+      "body": "§eTrigger\n\n§7Wait until the real-world clock reaches the top of an hour.\n\n§eReaction\n\n§7Comments about the real-world clock reaching a new hour."
+    },
+    "mgmzeh": {
+      "title": "Suddenly Turns to Day",
+      "browseTitle": "Suddenly Turns to Day",
+      "body": "§eTrigger\n\n§7Change the world from night to day suddenly while a Villager is active.\n\n§eReaction\n\n§7Confused reactions to the world suddenly becoming day."
+    },
+    "ohdwnz": {
+      "title": "Suddenly Turns to Night",
+      "browseTitle": "Suddenly Turns to Night",
+      "body": "§eTrigger\n\n§7Change the world from day to night suddenly while a Villager is active.\n\n§eReaction\n\n§7Confused reactions to the world suddenly becoming night."
+    },
+    "uqwdqn": {
+      "title": "Time Skips",
+      "browseTitle": "Time Skips",
+      "body": "§eTrigger\n\n§7Skip time forward while a Villager is active.\n\n§eReaction\n\n§7Comments about the sudden jump in the day-night cycle."
+    },
+    "scbmka": {
+      "title": "Caught in the Rain",
+      "browseTitle": "Caught in the Rain",
+      "body": "§eTrigger\n\n§7Keep a Villager outside while it is raining.\n\n§eReaction\n\n§7Rain-related complaints, especially about getting their Nose wet."
+    },
+    "ikrwzy": {
+      "title": "See Lightning",
+      "browseTitle": "See Lightning",
+      "body": "§eTrigger\n\n§7Have lightning strike nearby.\n\n§eReaction\n\n§7Startled reactions to nearby Lightning."
+    },
+    "felign": {
+      "title": "Wander Somewhere Hot",
+      "browseTitle": "Wander Somewhere Hot",
+      "body": "§eTrigger\n\n§7Bring a Villager into a hot environment and let it wander around.\n\n§eReaction\n\n§7Comments about wandering through unusually hot environments."
+    },
+    "tftmbe": {
+      "title": "Wander Somewhere Cold",
+      "browseTitle": "Wander Somewhere Cold",
+      "body": "§eTrigger\n\n§7Bring a Villager into a cold environment and let it wander around.\n\n§eReaction\n\n§7Comments about wandering through unusually cold environments."
+    },
+    "rweawq": {
+      "title": "Stand in Shallow Water",
+      "browseTitle": "Stand in Shallow Water",
+      "body": "§eTrigger\n\n§7Have a Villager stand or walk in shallow water.\n\n§eReaction\n\n§7Comments about standing in shallow Water."
+    },
+    "zpcnhu": {
+      "title": "Stand on Ice",
+      "browseTitle": "Stand on Ice",
+      "body": "§eTrigger\n\n§7Have a Villager stand on Ice.\n\n§eReaction\n\n§7Comments about standing on Ice."
+    },
+    "ehjhvi": {
+      "title": "Stand on Snow",
+      "browseTitle": "Stand on Snow",
+      "body": "§eTrigger\n\n§7Have a Villager stand on Snow.\n\n§eReaction\n\n§7Comments about standing on Snow."
+    },
+    "ycynep": {
+      "title": "Wander in Another Dimension",
+      "browseTitle": "Wander: Other Dimension",
+      "body": "§eTrigger\n\n§7Bring a Villager into another dimension and let it wander around.\n\n§eReaction\n\n§7Comments about wandering somewhere outside the Overworld."
+    },
+    "zpjrtq": {
+      "title": "Wander in the Nether",
+      "browseTitle": "Wander in the Nether",
+      "body": "§eTrigger\n\n§7Bring a Villager into the Nether and let it wander around.\n\n§eReaction\n\n§7Nether-specific wandering comments."
+    },
+    "wwcbib": {
+      "title": "Wander in the End",
+      "browseTitle": "Wander in the End",
+      "body": "§eTrigger\n\n§7Bring a Villager into the End and let it wander around.\n\n§eReaction\n\n§7End-specific wandering comments."
+    },
+    "uhbigm": {
+      "title": "Return Home in Another Dimension",
+      "browseTitle": "Home in Another Dimension",
+      "body": "§eTrigger\n\n§7Keep a Villager in another dimension until it reaches the point in its schedule where it would normally return home.\n\n§eReaction\n\n§7Comments about trying to return home from another dimension."
+    },
+    "bvtmmz": {
+      "title": "Try to Return Home in the Nether",
+      "browseTitle": "Return Home: Nether",
+      "body": "§eTrigger\n\n§7Keep a Villager in the Nether until it reaches the point in its schedule where it would normally return home.\n\n§eReaction\n\n§7Nether-specific comments when their schedule tells them to return home."
+    },
+    "iubjul": {
+      "title": "Try to Return Home in the End",
+      "browseTitle": "Return Home: End",
+      "body": "§eTrigger\n\n§7Keep a Villager in the End until it reaches the point in its schedule where it would normally return home.\n\n§eReaction\n\n§7End-specific comments when their schedule tells them to return home."
+    },
+    "mgiaiw": {
+      "title": "Wander Deep Underground",
+      "browseTitle": "Wander Deep Underground",
+      "body": "§eTrigger\n\n§7Bring a Villager deep underground and let it wander around.\n\n§eReaction\n\n§7Comments about being deep underground."
+    },
+    "qarzxp": {
+      "title": "Wander High Above the Ground",
+      "browseTitle": "Wander High Above Ground",
+      "body": "§eTrigger\n\n§7Bring a Villager high above the ground and let it wander around.\n\n§eReaction\n\n§7Comments and questions about being extremely high above the ground."
+    },
+    "jpucos": {
+      "title": "Monday",
+      "browseTitle": "Monday",
+      "body": "§eTrigger\n\n§7Play on Monday in the real world.\n\n§eReaction\n\n§7Monday-specific comments based on the real-world calendar."
+    },
+    "gkvlqc": {
+      "title": "Wander on a Monday",
+      "browseTitle": "Wander on a Monday",
+      "body": "§eTrigger\n\n§7Let a Villager wander around on Monday in the real world.\n\n§eReaction\n\n§7Extra wandering chatter on real-world Mondays."
+    },
+    "lgeeem": {
+      "title": "Tuesday",
+      "browseTitle": "Tuesday",
+      "body": "§eTrigger\n\n§7Play on Tuesday in the real world.\n\n§eReaction\n\n§7Tuesday-specific comments based on the real-world calendar."
+    },
+    "dkpihl": {
+      "title": "Wander on a Tuesday",
+      "browseTitle": "Wander on a Tuesday",
+      "body": "§eTrigger\n\n§7Let a Villager wander around on Tuesday in the real world.\n\n§eReaction\n\n§7Extra wandering chatter on real-world Tuesdays."
+    },
+    "qiqiez": {
+      "title": "Wednesday",
+      "browseTitle": "Wednesday",
+      "body": "§eTrigger\n\n§7Play on Wednesday in the real world.\n\n§eReaction\n\n§7Wednesday-specific comments based on the real-world calendar."
+    },
+    "gwakiz": {
+      "title": "Wander on a Wednesday",
+      "browseTitle": "Wander on a Wednesday",
+      "body": "§eTrigger\n\n§7Let a Villager wander around on Wednesday in the real world.\n\n§eReaction\n\n§7Extra wandering chatter on real-world Wednesdays."
+    },
+    "caiyte": {
+      "title": "Thursday",
+      "browseTitle": "Thursday",
+      "body": "§eTrigger\n\n§7Play on Thursday in the real world.\n\n§eReaction\n\n§7Thursday-specific comments based on the real-world calendar."
+    },
+    "zglkgp": {
+      "title": "Wander on a Thursday",
+      "browseTitle": "Wander on a Thursday",
+      "body": "§eTrigger\n\n§7Let a Villager wander around on Thursday in the real world.\n\n§eReaction\n\n§7Extra wandering chatter on real-world Thursdays."
+    },
+    "cxtvsx": {
+      "title": "Friday",
+      "browseTitle": "Friday",
+      "body": "§eTrigger\n\n§7Play on Friday in the real world.\n\n§eReaction\n\n§7Friday-specific comments based on the real-world calendar."
+    },
+    "ypyumu": {
+      "title": "Wander on a Friday",
+      "browseTitle": "Wander on a Friday",
+      "body": "§eTrigger\n\n§7Let a Villager wander around on Friday in the real world.\n\n§eReaction\n\n§7Extra wandering chatter on real-world Fridays."
+    },
+    "lfhnxz": {
+      "title": "Saturday",
+      "browseTitle": "Saturday",
+      "body": "§eTrigger\n\n§7Play on Saturday in the real world.\n\n§eReaction\n\n§7Saturday-specific comments based on the real-world calendar."
+    },
+    "ildosa": {
+      "title": "Wander on a Saturday",
+      "browseTitle": "Wander on a Saturday",
+      "body": "§eTrigger\n\n§7Let a Villager wander around on Saturday in the real world.\n\n§eReaction\n\n§7Extra wandering chatter on real-world Saturdays."
+    },
+    "zckxrc": {
+      "title": "Sunday",
+      "browseTitle": "Sunday",
+      "body": "§eTrigger\n\n§7Play on Sunday in the real world.\n\n§eReaction\n\n§7Sunday-specific comments based on the real-world calendar."
+    },
+    "uzvatl": {
+      "title": "Wander on a Sunday",
+      "browseTitle": "Wander on a Sunday",
+      "body": "§eTrigger\n\n§7Let a Villager wander around on Sunday in the real world.\n\n§eReaction\n\n§7Extra wandering chatter on real-world Sundays."
+    },
+    "ckngck": {
+      "title": "Weekend",
+      "browseTitle": "Weekend",
+      "body": "§eTrigger\n\n§7Play on Saturday or Sunday in the real world.\n\n§eReaction\n\n§7Weekend-specific comments based on the real-world calendar."
+    },
+    "bkyidl": {
+      "title": "Wander on the Weekend",
+      "browseTitle": "Wander on the Weekend",
+      "body": "§eTrigger\n\n§7Let a Villager wander around on Saturday or Sunday in the real world.\n\n§eReaction\n\n§7Extra wandering chatter during the real-world weekend."
+    },
+    "uyqiwv": {
+      "title": "New Year's Day",
+      "browseTitle": "New Year's Day",
+      "body": "§eTrigger\n\n§7Play on January 1st in the real world.\n\n§eReaction\n\n§7New Year's Day greetings and comments."
+    },
+    "xljknt": {
+      "title": "Wander on New Year's Eve",
+      "browseTitle": "Wander on New Year's Eve",
+      "body": "§eTrigger\n\n§7Let a Villager wander around on December 31st in the real world.\n\n§eReaction\n\n§7New Year's Eve wandering comments and anticipation for the new year."
+    },
+    "fabiyx": {
+      "title": "Valentine's Day",
+      "browseTitle": "Valentine's Day",
+      "body": "§eTrigger\n\n§7Play on February 14th in the real world.\n\n§eReaction\n\n§7Valentine's Day comments based on the real-world date."
+    },
+    "obitls": {
+      "title": "Wander on April Fools' Day",
+      "browseTitle": "Wander on April Fools'",
+      "body": "§eTrigger\n\n§7Let a Villager wander around on April 1st in the real world.\n\n§eReaction\n\n§7April Fools' Day wandering jokes and comments."
+    },
+    "iriuqa": {
+      "title": "Minecraft's Birthday",
+      "browseTitle": "Minecraft's Birthday",
+      "body": "§eTrigger\n\n§7Play on May 17th, Minecraft's birthday.\n\n§eReaction\n\n§7Celebratory comments for Minecraft's birthday."
+    },
+    "qfcwvz": {
+      "title": "Friday the 13th",
+      "browseTitle": "Friday the 13th",
+      "body": "§eTrigger\n\n§7Play on a real-world Friday the 13th.\n\n§eReaction\n\n§7Friday the 13th jokes and uneasy comments."
+    },
+    "mltyge": {
+      "title": "Wander in October",
+      "browseTitle": "Wander in October",
+      "body": "§eTrigger\n\n§7Let a Villager wander around during October.\n\n§eReaction\n\n§7Seasonal wandering comments during October."
+    },
+    "adhxce": {
+      "title": "Halloween",
+      "browseTitle": "Halloween",
+      "body": "§eTrigger\n\n§7Play on October 31st in the real world.\n\n§eReaction\n\n§7Halloween-specific jokes and comments."
+    },
+    "tkkegl": {
+      "title": "Wander in December",
+      "browseTitle": "Wander in December",
+      "body": "§eTrigger\n\n§7Let a Villager wander around during December.\n\n§eReaction\n\n§7Seasonal wandering comments during December."
+    },
+    "zoqxvy": {
+      "title": "Christmas Eve",
+      "browseTitle": "Christmas Eve",
+      "body": "§eTrigger\n\n§7Play on December 24th in the real world.\n\n§eReaction\n\n§7Christmas Eve comments and festive anticipation."
+    },
+    "rclyrl": {
+      "title": "Christmas Day",
+      "browseTitle": "Christmas Day",
+      "body": "§eTrigger\n\n§7Play on December 25th in the real world.\n\n§eReaction\n\n§7Christmas Day greetings and festive comments."
+    },
+    "ebfifz": {
+      "title": "Villager Gathering",
+      "browseTitle": "Villager Gathering",
+      "body": "§eTrigger\n\n§7Wait until late in the day when adult Villagers gather around the village Bell.\n\n§eReaction\n\n§7General chatter while adult Villagers gather around the village Bell."
+    },
+    "wrjbdd": {
+      "title": "Villagers Gossip",
+      "browseTitle": "Villagers Gossip",
+      "body": "§eTrigger\n\n§7Let Villagers meet and gossip with each other during their gathering time.\n\n§eReaction\n\n§7Gossip-style exchanges between Villagers during gathering time."
+    },
+    "trphsn": {
+      "title": "Cannot Find the Bell",
+      "browseTitle": "Cannot Find the Bell",
+      "body": "§eTrigger\n\n§7Have a Villager reach gathering time while they are unable to find a nearby village Bell.\n\n§eReaction\n\n§7Confused or frustrated comments when gathering time arrives but the Bell cannot be found."
+    },
+    "gmrypkswxeva": {
+      "title": "Two Villagers Wander Together",
+      "browseTitle": "Two Villagers Wandering",
+      "body": "§eTrigger\n\n§7Let two Villagers wander close together long enough to start one of their conversations.\n\n§eReaction\n\n§7Longer multi-part conversations between two Villagers wandering together."
+    },
+    "bygaxwswxeva": {
+      "title": "One Villager Is Missing a Nose",
+      "browseTitle": "One Missing a Nose",
+      "body": "§eTrigger\n\n§7Let two Villagers wander together while one of them is missing their Nose.\n\n§eReaction\n\n§7Different wandering conversations when one Villager is missing their Nose."
+    },
+    "loicswswxeva": {
+      "title": "Two Villagers Without Noses",
+      "browseTitle": "Two Villagers, No Noses",
+      "body": "§eTrigger\n\n§7Let two Villagers wander together while both of them are missing their noses.\n\n§eReaction\n\n§7Different wandering conversations when both Villagers are missing their Noses."
+    },
+    "wrswgiswxeva": {
+      "title": "Two Villagers at a Campfire",
+      "browseTitle": "Two at a Campfire",
+      "body": "§eTrigger\n\n§7Have two Villagers together near a Campfire long enough for a Campfire conversation to begin.\n\n§eReaction\n\n§7Longer multi-part conversations between two Villagers gathered around a Campfire."
+    },
+    "dpwhhs": {
+      "title": "Sees the Player",
+      "browseTitle": "Sees the Player",
+      "body": "§eTrigger\n\n§7Move close enough for The Mayor to notice you.\n\n§eReaction\n\n§7Suspicious greetings and evasive comments when The Mayor notices you."
+    },
+    "xxehbq": {
+      "title": "Wandering",
+      "browseTitle": "Wandering",
+      "body": "§eTrigger\n\n§7Stay near The Mayor while they are wandering.\n\n§eReaction\n\n§7Mayor-specific idle chatter while wandering."
+    },
+    "njyapy": {
+      "title": "Open Trade Window",
+      "browseTitle": "Open Trade Window",
+      "body": "§eTrigger\n\n§7Open The Mayor's Trading window.\n\n§eReaction\n\n§7Mayor-specific comments when the Trade window opens."
+    },
+    "bgzmea": {
+      "title": "Leave Without Trading",
+      "browseTitle": "Leave Without Trading",
+      "body": "§eTrigger\n\n§7Open The Mayor's Trading window, buy nothing, then close it.\n\n§eReaction\n\n§7Disappointed comments when you leave without Trading."
+    },
+    "shrrya": {
+      "title": "Close Trades After Buying",
+      "browseTitle": "Close Trades After Buying",
+      "body": "§eTrigger\n\n§7Complete a Trade with The Mayor, then close the Trading window.\n\n§eReaction\n\n§7Satisfied farewells after a successful Trade."
+    },
+    "cmkesu": {
+      "title": "Player Wears the Mayor Hat",
+      "browseTitle": "Player Wears Mayor Hat",
+      "body": "§eTrigger\n\n§7Wear the Mayor Hat near The Mayor.\n\n§eReaction\n\n§7Reactions to seeing you wear the Mayor Hat."
+    },
+    "ssbhiv": {
+      "title": "Takes Damage",
+      "browseTitle": "Takes Damage",
+      "body": "§eTrigger\n\n§7Have The Mayor take damage from any source.\n\n§eReaction\n\n§7General Mayor reactions to taking damage."
+    },
+    "ltdnvy": {
+      "title": "Attacked by the Player",
+      "browseTitle": "Attacked by the Player",
+      "body": "§eTrigger\n\n§7Directly attack The Mayor.\n\n§eReaction\n\n§7Stronger Mayor reactions when the player is responsible for the damage."
+    },
+    "xccwah": {
+      "title": "Sees the Player",
+      "browseTitle": "Sees the Player",
+      "body": "§eTrigger\n\n§7Move close enough for Villager #5 to notice you.\n\n§eReaction\n\n§7Villager #5 greetings, celebrity comments and News-style introductions."
+    },
+    "legnsy": {
+      "title": "Wandering",
+      "browseTitle": "Wandering",
+      "body": "§eTrigger\n\n§7Stay near Villager #5 while they are wandering.\n\n§eReaction\n\n§7News-themed idle chatter while Villager #5 wanders."
+    },
+    "sclaoa": {
+      "title": "Open Trade Window",
+      "browseTitle": "Open Trade Window",
+      "body": "§eTrigger\n\n§7Open Villager #5's Trading window.\n\n§eReaction\n\n§7Villager #5 comments when the Trade window opens."
+    },
+    "nfdery": {
+      "title": "Close Trade Window",
+      "browseTitle": "Close Trade Window",
+      "body": "§eTrigger\n\n§7Close Villager #5's Trading window.\n\n§eReaction\n\n§7Villager #5 farewells when the Trade window closes."
+    },
+    "msofrj": {
+      "title": "Close Trades After Buying",
+      "browseTitle": "Close Trades After Buying",
+      "body": "§eTrigger\n\n§7Complete a Trade with Villager #5, then close the Trading window.\n\n§eReaction\n\n§7Successful-Trade farewells from Villager #5."
+    },
+    "mjyhgw": {
+      "title": "Player Wears Villager #5's Moustache",
+      "browseTitle": "Player Wears Moustache",
+      "body": "§eTrigger\n\n§7Wear Villager #5's Moustache near Villager #5.\n\n§eReaction\n\n§7Comments about seeing you wear Villager #5's Moustache."
+    },
+    "behifz": {
+      "title": "Takes Damage",
+      "browseTitle": "Takes Damage",
+      "body": "§eTrigger\n\n§7Have Villager #5 take damage from any source.\n\n§eReaction\n\n§7Villager #5 reactions to taking damage."
+    },
+    "kzogzi": {
+      "title": "Sees the Player",
+      "browseTitle": "Sees the Player",
+      "body": "§eTrigger\n\n§7Move close enough for Villager #9 to notice you.\n\n§eReaction\n\n§7Reporter-style greetings, questions and interview attempts from Villager #9."
+    },
+    "ezgbfw": {
+      "title": "Wandering",
+      "browseTitle": "Wandering",
+      "body": "§eTrigger\n\n§7Stay near Villager #9 while they are wandering.\n\n§eReaction\n\n§7Reporter-style idle chatter while Villager #9 wanders."
+    },
+    "snnkrl": {
+      "title": "Open Trade Window",
+      "browseTitle": "Open Trade Window",
+      "body": "§eTrigger\n\n§7Open Villager #9's Trading window.\n\n§eReaction\n\n§7Villager #9 comments when the Trade window opens."
+    },
+    "hvjfnk": {
+      "title": "Close Trade Window",
+      "browseTitle": "Close Trade Window",
+      "body": "§eTrigger\n\n§7Close Villager #9's Trading window.\n\n§eReaction\n\n§7Villager #9 farewells when the Trade window closes."
+    },
+    "adhvqz": {
+      "title": "Holding the Microphone",
+      "browseTitle": "Holding the Microphone",
+      "body": "§eTrigger\n\n§7Stay near Villager #9 while he is holding his microphone.\n\n§eReaction\n\n§7Extra reporter-style dialogue while Villager #9 holds the Microphone."
+    },
+    "wrbvvp": {
+      "title": "Takes Damage",
+      "browseTitle": "Takes Damage",
+      "body": "§eTrigger\n\n§7Have Villager #9 take damage from any source.\n\n§eReaction\n\n§7Villager #9 reactions to taking damage."
+    },
+    "asuufu": {
+      "title": "Attacked by the Player",
+      "browseTitle": "Attacked by the Player",
+      "body": "§eTrigger\n\n§7Directly attack Villager #9.\n\n§eReaction\n\n§7Stronger Villager #9 reactions when the player is responsible for the damage."
+    },
+    "nmwmrz": {
+      "title": "Sees the Player",
+      "browseTitle": "Sees the Player",
+      "body": "§eTrigger\n\n§7Move close enough for Testificate Man to notice you.\n\n§eReaction\n\n§7Heroic greetings and Trade offers from Testificate Man."
+    },
+    "luoibc": {
+      "title": "Wandering",
+      "browseTitle": "Wandering",
+      "body": "§eTrigger\n\n§7Stay near Testificate Man while they are wandering.\n\n§eReaction\n\n§7Superhero-themed idle chatter while Testificate Man wanders."
+    },
+    "mpbnsm": {
+      "title": "Open Trade Window",
+      "browseTitle": "Open Trade Window",
+      "body": "§eTrigger\n\n§7Open Testificate Man's Trading window.\n\n§eReaction\n\n§7Testificate Man comments when the Trade window opens."
+    },
+    "ctzfzj": {
+      "title": "Close Trade Window",
+      "browseTitle": "Close Trade Window",
+      "body": "§eTrigger\n\n§7Close Testificate Man's Trading window.\n\n§eReaction\n\n§7Testificate Man farewells when the Trade window closes."
+    },
+    "rdugrl": {
+      "title": "Leave Without Trading",
+      "browseTitle": "Leave Without Trading",
+      "body": "§eTrigger\n\n§7Open Testificate Man's Trading window, buy nothing, then close it.\n\n§eReaction\n\n§7Disappointed Testificate Man comments when you leave without Trading."
+    },
+    "xcjort": {
+      "title": "Close Trades After Buying",
+      "browseTitle": "Close Trades After Buying",
+      "body": "§eTrigger\n\n§7Complete a Trade with Testificate Man, then close the Trading window.\n\n§eReaction\n\n§7Successful-Trade farewells from Testificate Man."
+    },
+    "rooiup": {
+      "title": "Player Wears Testificate Man's Helmet",
+      "browseTitle": "Player Wears the Helmet",
+      "body": "§eTrigger\n\n§7Wear Testificate Man's Helmet near Testificate Man.\n\n§eReaction\n\n§7Comments about seeing you wear Testificate Man's Helmet."
+    },
+    "pbbywc": {
+      "title": "Villager Wears Testificate Man's Helmet",
+      "browseTitle": "Villager Wears the Helmet",
+      "body": "§eTrigger\n\n§7Have another Villager wear Testificate Man's Helmet near Testificate Man.\n\n§eReaction\n\n§7Comments when Testificate Man sees another Villager wearing his Helmet."
+    },
+    "fzoqwd": {
+      "title": "Takes Damage",
+      "browseTitle": "Takes Damage",
+      "body": "§eTrigger\n\n§7Have Testificate Man take damage from any source.\n\n§eReaction\n\n§7Testificate Man reactions to taking damage."
+    },
+    "uvtocs": {
+      "title": "Sees the Player",
+      "browseTitle": "Sees the Player",
+      "body": "§eTrigger\n\n§7Move close enough for Wooly to notice you.\n\n§eReaction\n\n§7Wooly's typically unenthusiastic greeting when they notice you."
+    },
+    "vmohcm": {
+      "title": "Wandering",
+      "browseTitle": "Wandering",
+      "body": "§eTrigger\n\n§7Stay near Wooly while they are wandering.\n\n§eReaction\n\n§7Deadpan Wooly idle chatter while wandering."
+    },
+    "fskcce": {
+      "title": "Interact with Wooly",
+      "browseTitle": "Interact with Wooly",
+      "body": "§eTrigger\n\n§7Interact directly with Wooly.\n\n§eReaction\n\n§7Deadpan responses when you interact with Wooly."
+    },
+    "jqaekk": {
+      "title": "Shear Wooly",
+      "browseTitle": "Shear Wooly",
+      "body": "§eTrigger\n\n§7Use shears on Wooly.\n\n§eReaction\n\n§7Wooly's reaction to being sheared."
+    },
+    "eyiraw": {
+      "title": "Takes Damage",
+      "browseTitle": "Takes Damage",
+      "body": "§eTrigger\n\n§7Have Wooly take damage from any source.\n\n§eReaction\n\n§7Wooly's general reactions to taking damage."
+    },
+    "ncyeaw": {
+      "title": "Attacked by the Player",
+      "browseTitle": "Attacked by the Player",
+      "body": "§eTrigger\n\n§7Directly attack Wooly.\n\n§eReaction\n\n§7Stronger Wooly reactions when the player is responsible for the damage."
+    },
+    "eltxge": {
+      "title": "Try to Reach the Untouchable Villager",
+      "browseTitle": "Reach Untouchable",
+      "body": "§eTrigger\n\n§7Try to walk close to the Untouchable Villager.\n\n§eReaction\n\n§7Taunting comments while the Untouchable Villager keeps moving out of reach."
+    },
+    "lyatyf": {
+      "title": "Meet the Mayor",
+      "browseTitle": "Meet the Mayor",
+      "body": "§eTrigger\n\n§7Bring the Mayor near a regular Villager.\n\n§eReaction\n\n§7Regular Villager comments about meeting The Mayor."
+    },
+    "kmvqxe": {
+      "title": "Meet Villager #5",
+      "browseTitle": "Meet Villager #5",
+      "body": "§eTrigger\n\n§7Bring Villager #5 near a regular Villager.\n\n§eReaction\n\n§7Regular Villager comments about meeting Villager #5."
+    },
+    "sifqsj": {
+      "title": "Meet Villager #9",
+      "browseTitle": "Meet Villager #9",
+      "body": "§eTrigger\n\n§7Bring Villager #9 near a regular Villager.\n\n§eReaction\n\n§7Regular Villager comments about meeting Villager #9."
+    },
+    "zvamyb": {
+      "title": "Meet Testificate Man",
+      "browseTitle": "Meet Testificate Man",
+      "body": "§eTrigger\n\n§7Bring Testificate Man near a regular Villager.\n\n§eReaction\n\n§7Regular Villager comments about meeting Testificate Man."
+    }
+  },
+  "categories": [
+    {
+      "id": "jwkmmk",
+      "title": "Player Actions",
+      "sections": [
+        {
+          "id": "fmmwfh",
+          "title": "Everyday Actions",
+          "groups": [
+            "edrtbe",
+            "dfdkli",
+            "qxgbwi",
+            "ajexrq",
+            "pizztd",
+            "akerwb",
+            "tdomqw",
+            "gytgzn",
+            "vgysma",
+            "qfhrlh",
+            "elexev",
+            "pfelrr"
+          ],
+          "entries": []
+        },
+        {
+          "id": "syddfj",
+          "title": "Presence & Behaviour",
+          "groups": [
+            "xfpjxq",
+            "cavwps",
+            "zsmvzb",
+            "cstyvg"
+          ],
+          "entries": []
+        },
+        {
+          "id": "rvwcgc",
+          "title": "Movement",
+          "groups": [
+            "ijeqws",
+            "lqxmlx",
+            "hiuxvo",
+            "mewsnd"
+          ],
+          "entries": []
+        },
+        {
+          "id": "cncpfq",
+          "title": "Equipment & Armor",
+          "groups": [
+            "nwkgqg",
+            "xgfebs",
+            "smcrvj",
+            "psgzod",
+            "pdiwlk"
+          ],
+          "entries": []
+        },
+        {
+          "id": "ebputm",
+          "title": "Status Effects",
+          "groups": [
+            "khepip",
+            "ezoztr",
+            "agbxhr",
+            "puhgbq",
+            "iifcei",
+            "nxxita",
+            "gigkln",
+            "raozeh",
+            "pswvuu",
+            "qfygop",
+            "ekdktf",
+            "xxkdpo",
+            "iqtydx",
+            "fqbjfv"
+          ],
+          "entries": []
+        },
+        {
+          "id": "dyzrue",
+          "title": "Reputation & Village Status",
+          "groups": [
+            "tfzlsw",
+            "zstdjn",
+            "stuirs",
+            "omgcte",
+            "kcbenk",
+            "jlendb",
+            "gnetsk"
+          ],
+          "entries": []
+        },
+        {
+          "id": "sxcjlw",
+          "title": "Game Changes",
+          "groups": [
+            "fhhqxg",
+            "ohtblt",
+            "ibcrvx",
+            "xuyypm",
+            "arzojk"
+          ],
+          "entries": []
+        },
+        {
+          "id": "snekoy",
+          "title": "Death & Sleeping",
+          "groups": [
+            "hzjycq",
+            "dxcjqn",
+            "elcjbb",
+            "bipqej",
+            "hevyeb"
+          ],
+          "entries": []
+        }
+      ]
+    },
+    {
+      "id": "mysyyb",
+      "title": "Blocks & Building",
+      "sections": [
+        {
+          "id": "wdfshv",
+          "title": "Breaking Blocks",
+          "groups": [
+            "zejman",
+            "awappv",
+            "ejvpis",
+            "clzrea",
+            "qimink",
+            "osbwpz",
+            "mabmbl",
+            "rptjbd",
+            "pclmft"
+          ],
+          "entries": []
+        },
+        {
+          "id": "wixwgh",
+          "title": "Placing Blocks",
+          "groups": [
+            "knywuy",
+            "ujkoue",
+            "kdfaao",
+            "ktkmhn",
+            "jtsycy",
+            "nxveql",
+            "fpcepp",
+            "nziize",
+            "dgrgul",
+            "ckniqq",
+            "fazcvg",
+            "mxmrpn",
+            "xezbvo",
+            "vubtsn",
+            "fvdzot",
+            "sbolpm",
+            "fwiopr",
+            "zqzrsm",
+            "gxepwi",
+            "cudgjr",
+            "oimgrg",
+            "gnbpco",
+            "vgufsp",
+            "vxhugl",
+            "clpxov",
+            "afdrdd",
+            "lnhdzn",
+            "gjsote",
+            "ydfscf",
+            "ahabbf",
+            "veaotb",
+            "gzzzpj",
+            "whbvvh",
+            "ehtaer",
+            "tqnwzp",
+            "negvfb",
+            "rseoxb",
+            "kodgox",
+            "qyvelv",
+            "nocwsk",
+            "ejbqqc",
+            "rtmqmc",
+            "piupkf",
+            "fdqdok",
+            "yckvyp"
+          ],
+          "entries": []
+        },
+        {
+          "id": "ruorol",
+          "title": "Using Blocks",
+          "groups": [
+            "pgwqkg",
+            "gzhbtb",
+            "xwcoip",
+            "crvciv",
+            "myylcq",
+            "tgggsl",
+            "ididel",
+            "knjvae",
+            "bpgyfa",
+            "rykqwl",
+            "mfsmim",
+            "xzpfwa",
+            "gtqcjn",
+            "dyvwqv",
+            "iqvgzk",
+            "hojlbk",
+            "ykycil",
+            "lifrrj",
+            "mjmgwj",
+            "lnlwnl",
+            "thmfsh",
+            "jexbze",
+            "wykqdb",
+            "pvwkxp",
+            "ktzfvk",
+            "yiwncn",
+            "kljgyu",
+            "xemdbt"
+          ],
+          "entries": []
+        },
+        {
+          "id": "mlrdle",
+          "title": "Redstone & Technical",
+          "groups": [
+            "hqmkpb",
+            "qbuuop",
+            "bimuve",
+            "cdltxm",
+            "hlxzen",
+            "nwiopk",
+            "jggged",
+            "adtdit",
+            "wsjvjd",
+            "wwmhos",
+            "edjqet",
+            "ntnicx"
+          ],
+          "entries": []
+        },
+        {
+          "id": "picfsx",
+          "title": "Fire & Explosives",
+          "groups": [
+            "oqjzko",
+            "tavxec",
+            "xbttae",
+            "nrzcxn",
+            "uvgkny",
+            "lfwbvu",
+            "repalq",
+            "oziqss"
+          ],
+          "entries": []
+        }
+      ]
+    },
+    {
+      "id": "gncape",
+      "title": "Mobs & Creatures",
+      "sections": [
+        {
+          "id": "fdurvf",
+          "title": "Hostile & Dangerous",
+          "groups": [
+            "dortcb",
+            "xtooxu",
+            "wboncy",
+            "gcoysc",
+            "atwycp",
+            "lqzdqk",
+            "bxbibd",
+            "nsosix",
+            "gtmfpl",
+            "rzvitn",
+            "odwhzm",
+            "lwcrnt",
+            "yeqxvm",
+            "nwzvkb",
+            "dxeaal",
+            "nwlcij",
+            "jicosq",
+            "satsrf",
+            "xxjkmo"
+          ],
+          "entries": []
+        },
+        {
+          "id": "mwmobw",
+          "title": "Animals",
+          "groups": [
+            "lvzfcv",
+            "jqdeef",
+            "vxycol",
+            "afxbav",
+            "hggexx",
+            "ynxhfb",
+            "vvntcf",
+            "aqxgxh",
+            "rbkjsr",
+            "bmimxe",
+            "yazvzs",
+            "ysbfqu",
+            "spfefr",
+            "pguaqp",
+            "trkugw",
+            "aqtshb",
+            "neoxpu",
+            "swewsr",
+            "toolzx",
+            "vapupl",
+            "turlrl",
+            "ozmthf",
+            "tqishj"
+          ],
+          "entries": []
+        },
+        {
+          "id": "mntsar",
+          "title": "Baby Mobs",
+          "groups": [
+            "hzahog",
+            "htibul",
+            "eccdga",
+            "pjcwec",
+            "knjdbi",
+            "hyzwpr",
+            "sxikgq",
+            "ualabt",
+            "gggzar",
+            "qqtnlm",
+            "zvwapr",
+            "nstwos",
+            "qltnkz",
+            "hwltxk",
+            "vakwgb"
+          ],
+          "entries": []
+        },
+        {
+          "id": "pshrzg",
+          "title": "Friendly & Helpful",
+          "groups": [
+            "cuchwi",
+            "qffeco",
+            "kxjegd",
+            "ktdshy",
+            "rnlher",
+            "lxvofx"
+          ],
+          "entries": []
+        },
+        {
+          "id": "tutviv",
+          "title": "Unusual & Special",
+          "groups": [
+            "dmcjmd",
+            "gjtuqd"
+          ],
+          "entries": []
+        }
+      ]
+    },
+    {
+      "id": "ztqyzw",
+      "title": "Villager Life",
+      "sections": [
+        {
+          "id": "hxgflj",
+          "title": "Wandering & Idle",
+          "groups": [
+            "lvigit",
+            "gbxzxv",
+            "uookqp"
+          ],
+          "entries": []
+        },
+        {
+          "id": "wbqtnp",
+          "title": "Work & Professions",
+          "groups": [
+            "zndzjx",
+            "qawras",
+            "sdhkke",
+            "umdvtb",
+            "tgggoh",
+            "fezzjw",
+            "opxfuo",
+            "fzjope",
+            "djpksc",
+            "ueczyh",
+            "wuoloh",
+            "hkowex",
+            "ljewqf",
+            "yldlzt",
+            "ivktls",
+            "ccpvqj",
+            "aobqjt",
+            "tdvtmn",
+            "ywzhwz",
+            "fltegg",
+            "pnvkfy"
+          ],
+          "entries": []
+        },
+        {
+          "id": "jobsep",
+          "title": "Home & Sleep",
+          "groups": [
+            "wkfbuv",
+            "uqguqj",
+            "ioxtmt",
+            "asqzby",
+            "ctptjt",
+            "viwaal"
+          ],
+          "entries": []
+        },
+        {
+          "id": "tjrcsi",
+          "title": "Food & Items",
+          "groups": [
+            "dxmmiu",
+            "vkhrme",
+            "ujyxfg",
+            "zywcju",
+            "zjwpzi",
+            "habfnx",
+            "ebyrtk",
+            "rlfjux",
+            "bbjsik",
+            "nqktml",
+            "ytydjc",
+            "locuih",
+            "cvltyw"
+          ],
+          "entries": []
+        },
+        {
+          "id": "kibxgf",
+          "title": "Family & Community",
+          "groups": [
+            "fbuabj",
+            "pbmrxx",
+            "kzemrz"
+          ],
+          "entries": []
+        },
+        {
+          "id": "exyyah",
+          "title": "Names, Spawning & Curing",
+          "groups": [
+            "spfsrr",
+            "qmpcxi",
+            "armupg",
+            "vskjkl",
+            "ivumgm"
+          ],
+          "entries": []
+        }
+      ]
+    },
+    {
+      "id": "zywahr",
+      "title": "Baby Villagers",
+      "sections": [
+        {
+          "id": "cagcyt",
+          "title": "Life & Movement",
+          "groups": [
+            "lgjtnf",
+            "smvnbj",
+            "rfnirh",
+            "vhwksn",
+            "vbclem",
+            "ecslqo",
+            "wsxfok",
+            "ggitzq",
+            "abfwiv",
+            "durjjd",
+            "wkwcrf",
+            "msemoe"
+          ],
+          "entries": []
+        },
+        {
+          "id": "litbop",
+          "title": "Player Interactions",
+          "groups": [
+            "wtuguc",
+            "aezdiy",
+            "jfuftm",
+            "fzyrfm",
+            "ahcvzd"
+          ],
+          "entries": []
+        },
+        {
+          "id": "hknwez",
+          "title": "Cosmetics",
+          "groups": [
+            "rlkdqd",
+            "riezum",
+            "cxeziv",
+            "svdjdk"
+          ],
+          "entries": []
+        },
+        {
+          "id": "dvbbyn",
+          "title": "Food",
+          "groups": [
+            "hbalps",
+            "hcdvqm",
+            "gotjxf",
+            "qrdzmt",
+            "saxuwk"
+          ],
+          "entries": []
+        },
+        {
+          "id": "utjeiz",
+          "title": "Names",
+          "groups": [
+            "gzsztp",
+            "cmrqhw"
+          ],
+          "entries": []
+        },
+        {
+          "id": "akvybj",
+          "title": "World Reactions",
+          "groups": [
+            "zeykfp",
+            "mqnapy",
+            "nxalcz"
+          ],
+          "entries": []
+        }
+      ]
+    },
+    {
+      "id": "iqqsdi",
+      "title": "Damage & Danger",
+      "sections": [
+        {
+          "id": "yrtbti",
+          "title": "Attacked by Player",
+          "groups": [
+            "vevdkl",
+            "lpuocy",
+            "slbqfwswxeva",
+            "rueszy",
+            "yjctyw",
+            "huhcbd",
+            "hmadgp",
+            "gesjov",
+            "qqyjjg",
+            "hpnsfu"
+          ],
+          "entries": []
+        },
+        {
+          "id": "jbside",
+          "title": "Mob Attacks",
+          "groups": [
+            "mytmrk",
+            "qhpyaw",
+            "swomdw",
+            "nkcoqb",
+            "rtikom",
+            "uveohs",
+            "caykki",
+            "hfmwvf"
+          ],
+          "entries": []
+        },
+        {
+          "id": "beglxx",
+          "title": "Environmental Damage",
+          "groups": [
+            "cifbit",
+            "etkxko",
+            "elryje",
+            "igebly",
+            "rogpvp",
+            "nsxmkr",
+            "yzqpvi",
+            "vnaodx",
+            "fcbygh"
+          ],
+          "entries": []
+        },
+        {
+          "id": "ubsicq",
+          "title": "Potions & Projectiles",
+          "groups": [
+            "dlrxes",
+            "gacgtq",
+            "onindz",
+            "xemyaj",
+            "yebifs"
+          ],
+          "entries": []
+        },
+        {
+          "id": "xjielm",
+          "title": "Environmental Hazards",
+          "groups": [
+            "ydigbg",
+            "wancdi",
+            "pmaqgq",
+            "bodvsv",
+            "fxbysi"
+          ],
+          "entries": []
+        },
+        {
+          "id": "bxfxht",
+          "title": "Panic & General Damage",
+          "groups": [
+            "wyvzhk",
+            "uzdxum",
+            "wbbxpo",
+            "hivgme"
+          ],
+          "entries": []
+        },
+        {
+          "id": "mbiwhn",
+          "title": "Witnessing Danger",
+          "groups": [
+            "pkvhpv",
+            "pmqrpb"
+          ],
+          "entries": []
+        }
+      ]
+    },
+    {
+      "id": "kxzcru",
+      "title": "Trading",
+      "sections": [
+        {
+          "id": "usqfbv",
+          "title": "Trading",
+          "groups": [
+            "xmkwxd",
+            "czvvwy",
+            "lilimm",
+            "laztau"
+          ],
+          "entries": []
+        },
+        {
+          "id": "yzufuy",
+          "title": "Trade Refusals",
+          "groups": [
+            "nlbhku",
+            "nukxsf",
+            "lhdgsy",
+            "klabhl",
+            "zalmof"
+          ],
+          "entries": []
+        },
+        {
+          "id": "qnngyt",
+          "title": "Reputation",
+          "groups": [
+            "clbjww",
+            "qmdvft",
+            "xduuwm",
+            "kuhvdv",
+            "vlrsrn"
+          ],
+          "entries": []
+        },
+        {
+          "id": "yltnpm",
+          "title": "Wandering Trader",
+          "groups": [
+            "hxlyuc",
+            "stqafd",
+            "yubpbb",
+            "bvrbhy",
+            "uzdvsi",
+            "erbcfn",
+            "kxoqky",
+            "vggdrt",
+            "jkeahu",
+            "myajyt",
+            "dbzjqi"
+          ],
+          "entries": []
+        }
+      ]
+    },
+    {
+      "id": "uffgvt",
+      "title": "Cosmetics & Noses",
+      "sections": [
+        {
+          "id": "kkiswe",
+          "title": "Villager Noses",
+          "groups": [
+            "jktrnd",
+            "dcvgnm",
+            "kxrhxt",
+            "akfekx",
+            "kejscw"
+          ],
+          "entries": []
+        },
+        {
+          "id": "eeicbd",
+          "title": "Cosmetics",
+          "groups": [
+            "orogba",
+            "wurmgu",
+            "ozxzla",
+            "inirxg",
+            "ckjbyd",
+            "anrhns"
+          ],
+          "entries": []
+        },
+        {
+          "id": "bvdruy",
+          "title": "Signs",
+          "groups": [
+            "vqlrqf"
+          ],
+          "entries": []
+        }
+      ]
+    },
+    {
+      "id": "gsyder",
+      "title": "Travel & Vehicles",
+      "sections": [
+        {
+          "id": "yxypfw",
+          "title": "Boats",
+          "groups": [
+            "ocerok",
+            "ybwgyt",
+            "tjkgmv",
+            "zvbnea",
+            "zqfvby"
+          ],
+          "entries": []
+        },
+        {
+          "id": "mkzchy",
+          "title": "Minecarts",
+          "groups": [
+            "igyvcw",
+            "ifppja"
+          ],
+          "entries": []
+        }
+      ]
+    },
+    {
+      "id": "mzubfd",
+      "title": "World & Time",
+      "sections": [
+        {
+          "id": "yasqas",
+          "title": "Time of Day",
+          "groups": [
+            "zkoewx",
+            "kopthx",
+            "qknpqr",
+            "sotbtt",
+            "jqgkhy",
+            "mgmzeh",
+            "ohdwnz",
+            "uqwdqn"
+          ],
+          "entries": []
+        },
+        {
+          "id": "fldbnl",
+          "title": "Weather & Environment",
+          "groups": [
+            "scbmka",
+            "ikrwzy",
+            "felign",
+            "tftmbe",
+            "rweawq",
+            "zpcnhu",
+            "ehjhvi"
+          ],
+          "entries": []
+        },
+        {
+          "id": "fexqvd",
+          "title": "Dimensions",
+          "groups": [
+            "ycynep",
+            "zpjrtq",
+            "wwcbib",
+            "uhbigm",
+            "bvtmmz",
+            "iubjul"
+          ],
+          "entries": []
+        },
+        {
+          "id": "lymlaz",
+          "title": "Locations",
+          "groups": [
+            "mgiaiw",
+            "qarzxp"
+          ],
+          "entries": []
+        },
+        {
+          "id": "whrsem",
+          "title": "Real-World Days",
+          "groups": [],
+          "entries": [
+            {
+              "title": "Weekday",
+              "body": "§eTrigger\n\n§7Play on Monday-Friday in the real world.\n\n§eReaction\n\n§7Monday-Friday-specific comments based on the real-world calendar."
+            },
+            {
+              "title": "Wandering on a Weekday",
+              "body": "§eTrigger\n\n§7Let a Villager wander around on Monday-Friday in the real world.\n\n§eReaction\n\n§7Extra wandering chatter on real-world Monday-Fridays."
+            },
+            {
+              "title": "Weekend",
+              "body": "§eTrigger\n\n§7Play on Saturday or Sunday in the real world.\n\n§eReaction\n\n§7Weekend-specific comments based on the real-world calendar."
+            }
+          ]
+        },
+        {
+          "id": "ibxcwo",
+          "title": "Special Dates & Seasons",
+          "groups": [
+            "uyqiwv",
+            "xljknt",
+            "fabiyx",
+            "obitls",
+            "iriuqa",
+            "qfcwvz",
+            "mltyge",
+            "adhxce",
+            "tkkegl",
+            "zoqxvy",
+            "rclyrl"
+          ],
+          "entries": []
+        }
+      ]
+    },
+    {
+      "id": "hnjglc",
+      "title": "Conversations",
+      "sections": [
+        {
+          "id": "xxikmp",
+          "title": "Gatherings & Gossip",
+          "groups": [
+            "ebfifz",
+            "wrjbdd",
+            "trphsn"
+          ],
+          "entries": []
+        },
+        {
+          "id": "whnimq",
+          "title": "Wandering Together",
+          "groups": [
+            "gmrypkswxeva",
+            "bygaxwswxeva",
+            "loicswswxeva"
+          ],
+          "entries": []
+        },
+        {
+          "id": "nfndkx",
+          "title": "Campfire Conversations",
+          "groups": [
+            "wrswgiswxeva"
+          ],
+          "entries": []
+        }
+      ]
+    },
+    {
+      "id": "ctbedw",
+      "title": "Special Characters",
+      "sections": [
+        {
+          "id": "cidopc",
+          "title": "The Mayor",
+          "groups": [
+            "dpwhhs",
+            "xxehbq",
+            "njyapy",
+            "bgzmea",
+            "shrrya",
+            "cmkesu",
+            "ssbhiv",
+            "ltdnvy"
+          ],
+          "entries": []
+        },
+        {
+          "id": "rdvfey",
+          "title": "Villager #5",
+          "groups": [
+            "xccwah",
+            "legnsy",
+            "sclaoa",
+            "nfdery",
+            "msofrj",
+            "mjyhgw",
+            "behifz"
+          ],
+          "entries": []
+        },
+        {
+          "id": "tmluqf",
+          "title": "Villager #9",
+          "groups": [
+            "kzogzi",
+            "ezgbfw",
+            "snnkrl",
+            "hvjfnk",
+            "adhvqz",
+            "wrbvvp",
+            "asuufu"
+          ],
+          "entries": []
+        },
+        {
+          "id": "sglsun",
+          "title": "Testificate Man",
+          "groups": [
+            "nmwmrz",
+            "luoibc",
+            "mpbnsm",
+            "ctzfzj",
+            "rdugrl",
+            "xcjort",
+            "rooiup",
+            "pbbywc",
+            "fzoqwd"
+          ],
+          "entries": []
+        },
+        {
+          "id": "tnsnxq",
+          "title": "Wooly",
+          "groups": [
+            "uvtocs",
+            "vmohcm",
+            "fskcce",
+            "jqaekk",
+            "eyiraw",
+            "ncyeaw"
+          ],
+          "entries": []
+        },
+        {
+          "id": "odewxa",
+          "title": "Untouchable Villager",
+          "groups": [
+            "eltxge"
+          ],
+          "entries": []
+        },
+        {
+          "id": "cplyrv",
+          "title": "Other Villagers React",
+          "groups": [
+            "lyatyf",
+            "kmvqxe",
+            "sifqsj",
+            "zvamyb"
+          ],
+          "entries": []
+        }
+      ]
+    }
+  ]
+}

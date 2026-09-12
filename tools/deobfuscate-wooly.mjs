@@ -101,8 +101,6 @@ const symbols = {
   bvyrue: "variant_geometry",
 };
 
-// `body` is also part of Molang query names such as q.body_y_rotation, so
-// exact bone names are handled separately below instead of globally.
 const expressionBoneNames = Object.fromEntries(Object.entries(boneNames)
   .filter(([name]) => name !== "root" && name !== "body"));
 const replacements = Object.entries({ ...symbols, ...expressionBoneNames })

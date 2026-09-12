@@ -5,6 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.vnap.network.DialogueAnimationPayload;
+import com.vnap.entity.VillagerNewsData;
+import net.minecraft.world.entity.npc.villager.Villager;
 import traben.entity_model_features.EMFAnimationApi;
 import traben.entity_model_features.utils.EMFEntity;
 
@@ -83,6 +85,10 @@ final class DialogueAnimationState {
 	}
 
 	static void start(DialogueAnimationPayload payload) {
+		if (payload.groupId().isEmpty()) {
+			ACTIVE.remove(payload.entityId());
+			return;
+		}
 		List<VariantTimeline> variants = TIMELINES.get(payload.groupId());
 		if (variants == null || payload.variantIndex() < 0 || payload.variantIndex() >= variants.size()) return;
 		long now = System.nanoTime();
@@ -117,6 +123,16 @@ final class DialogueAnimationState {
 		return frame == null ? 1.0F : frame.closed();
 	}
 
+	static float hasNose() {
+		EMFEntity entity = EMFAnimationApi.getCurrentEntity();
+		return entity instanceof Villager villager && ((VillagerNewsData) villager).vnap$hasNose() ? 1.0F : 0.0F;
+	}
+
+	static float cosmetic(int cosmetic) {
+		EMFEntity entity = EMFAnimationApi.getCurrentEntity();
+		return entity instanceof Villager villager && ((VillagerNewsData) villager).vnap$cosmetic() == cosmetic ? 1.0F : 0.0F;
+	}
+
 	static float transform(String variableName) {
 		ActiveDialogue active = active();
 		boolean scale = variableName.endsWith("_sx") || variableName.endsWith("_sy") || variableName.endsWith("_sz");
@@ -140,10 +156,6 @@ final class DialogueAnimationState {
 		UUID id = entity.etf$getUuid();
 		ActiveDialogue value = ACTIVE.get(id);
 		if (value == null) return null;
-		// Villager skin, biome, profession, and badge textures are separate render
-		// passes. Freeze their suppliers to one time sample for this entity frame;
-		// otherwise fast poses put each texture layer on a slightly different bone
-		// transform and expose the skin between the clothes.
 		value.beginFrame(entity.emf$age(), System.nanoTime());
 		if (value.frameNanos() > value.endNanos()) {
 			ACTIVE.remove(id, value);

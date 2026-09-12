@@ -106,12 +106,27 @@ public final class DialogueCatalog {
 		}
 
 		public DialogueVariant chooseVariant() {
+			return chooseVariant(1);
+		}
+
+		public DialogueVariant chooseVariant(int rareVoicelines) {
 			if (variants.isEmpty()) return null;
-			int totalWeight = variants.stream().mapToInt(DialogueVariant::weight).sum();
+			int minimum = variants.stream().mapToInt(DialogueVariant::weight).min().orElse(1);
+			int maximum = variants.stream().mapToInt(DialogueVariant::weight).max().orElse(1);
+			int[] weights = new int[variants.size()];
+			int totalWeight = 0;
+			for (int index = 0; index < variants.size(); index++) {
+				int weight = variants.get(index).weight();
+				if (rareVoicelines == 0 && weight < maximum * 0.8) weight = 0;
+				else if (rareVoicelines == 2) weight = maximum + minimum - weight;
+				weights[index] = Math.max(0, weight);
+				totalWeight += weights[index];
+			}
+			if (totalWeight <= 0) return variants.getFirst();
 			int choice = ThreadLocalRandom.current().nextInt(Math.max(1, totalWeight));
-			for (DialogueVariant variant : variants) {
-				choice -= variant.weight();
-				if (choice < 0) return variant;
+			for (int index = 0; index < variants.size(); index++) {
+				choice -= weights[index];
+				if (choice < 0) return variants.get(index);
 			}
 			return variants.getLast();
 		}

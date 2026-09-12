@@ -1343,6 +1343,11 @@
           "villager_news_baby_base_fgk6.sz": "vnap_nose_sz"
         },
         {
+          "villager_news_baby_base_fgk6.sx": "vnap_nose_sx*vnap_has_nose",
+          "villager_news_baby_base_fgk6.sy": "vnap_nose_sy*vnap_has_nose",
+          "villager_news_baby_base_fgk6.sz": "vnap_nose_sz*vnap_has_nose"
+        },
+        {
           "villager_news_baby_base_d67l_6q6.rx": "vnap_pupil_right_rx",
           "villager_news_baby_base_d67l_6q6.tx": "4.5+vnap_pupil_right_tx",
           "villager_news_baby_base_d67l_6q6.sx": "vnap_pupil_right_sx",
@@ -1496,6 +1501,1301 @@
           "villager_news_baby_base_rightleg.rz": "vnap_right_leg_rz",
           "villager_news_baby_base_rightleg.tz": "vnap_right_leg_tz",
           "villager_news_baby_base_rightleg.sz": "vnap_right_leg_sz"
+        }
+      ]
+    },
+    {
+      "id": "villager_news_baby_extra_0_root",
+      "invertAxis": "xy",
+      "translate": [
+        0,
+        -24,
+        0
+      ],
+      "submodels": [
+        {
+          "id": "villager_news_baby_extra_0_waist",
+          "invertAxis": "xy",
+          "translate": [
+            0,
+            9,
+            0
+          ],
+          "submodels": [
+            {
+              "id": "villager_news_baby_extra_0_body",
+              "invertAxis": "xy",
+              "translate": [
+                0,
+                15,
+                0
+              ],
+              "submodels": [
+                {
+                  "id": "villager_news_baby_extra_0_head",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "submodels": [
+                    {
+                      "id": "villager_news_baby_extra_0_headjgl2l6",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "submodels": [
+                        {
+                          "id": "villager_news_baby_extra_0_egfg4d6",
+                          "invertAxis": "xy",
+                          "translate": [
+                            -6,
+                            7.5,
+                            -10.8
+                          ],
+                          "boxes": [
+                            {
+                              "coordinates": [
+                                2.99,
+                                -2.5,
+                                -0.3,
+                                3,
+                                6,
+                                0.6
+                              ],
+                              "uvNorth": [
+                                21,
+                                1,
+                                22,
+                                3
+                              ],
+                              "uvSouth": [
+                                22,
+                                1,
+                                21,
+                                3
+                              ],
+                              "uvEast": [
+                                21,
+                                1,
+                                22,
+                                3
+                              ],
+                              "uvWest": [
+                                21,
+                                1,
+                                22,
+                                3
+                              ],
+                              "uvUp": [
+                                21,
+                                2,
+                                22,
+                                1
+                              ],
+                              "uvDown": [
+                                21,
+                                3,
+                                22,
+                                2
+                              ]
+                            },
+                            {
+                              "coordinates": [
+                                -6,
+                                -2.5,
+                                -0.3,
+                                3,
+                                6,
+                                0.6
+                              ],
+                              "uvNorth": [
+                                24,
+                                1,
+                                25,
+                                3
+                              ],
+                              "uvSouth": [
+                                25,
+                                1,
+                                24,
+                                3
+                              ],
+                              "uvEast": [
+                                24,
+                                1,
+                                25,
+                                3
+                              ],
+                              "uvWest": [
+                                24,
+                                1,
+                                25,
+                                3
+                              ],
+                              "uvUp": [
+                                24,
+                                2,
+                                25,
+                                1
+                              ],
+                              "uvDown": [
+                                24,
+                                3,
+                                25,
+                                2
+                              ]
+                            },
+                            {
+                              "coordinates": [
+                                -3,
+                                3.5,
+                                -0.3,
+                                6,
+                                3,
+                                0.6
+                              ],
+                              "uvNorth": [
+                                22,
+                                0,
+                                24,
+                                1
+                              ],
+                              "uvSouth": [
+                                24,
+                                0,
+                                22,
+                                1
+                              ],
+                              "uvEast": [
+                                22,
+                                0,
+                                23,
+                                1
+                              ],
+                              "uvWest": [
+                                23,
+                                0,
+                                24,
+                                1
+                              ],
+                              "uvUp": [
+                                22,
+                                1,
+                                24,
+                                0
+                              ],
+                              "uvDown": [
+                                22,
+                                1,
+                                24,
+                                0
+                              ]
+                            },
+                            {
+                              "coordinates": [
+                                -3,
+                                -5.5,
+                                -0.3,
+                                6,
+                                3,
+                                0.6
+                              ],
+                              "uvNorth": [
+                                22,
+                                3,
+                                24,
+                                4
+                              ],
+                              "uvSouth": [
+                                24,
+                                3,
+                                22,
+                                4
+                              ],
+                              "uvEast": [
+                                22,
+                                3,
+                                23,
+                                4
+                              ],
+                              "uvWest": [
+                                23,
+                                3,
+                                24,
+                                4
+                              ],
+                              "uvUp": [
+                                22,
+                                4,
+                                24,
+                                3
+                              ],
+                              "uvDown": [
+                                22,
+                                4,
+                                24,
+                                3
+                              ]
+                            }
+                          ],
+                          "submodels": [
+                            {
+                              "id": "villager_news_baby_extra_0_egfg4d6_cube_3",
+                              "invertAxis": "xy",
+                              "translate": [
+                                5,
+                                -38.5,
+                                -2.2
+                              ],
+                              "boxes": [
+                                {
+                                  "coordinates": [
+                                    -8,
+                                    33,
+                                    -11.6,
+                                    6,
+                                    3,
+                                    0.6
+                                  ],
+                                  "uvNorth": [
+                                    25,
+                                    3,
+                                    27,
+                                    4
+                                  ],
+                                  "uvSouth": [
+                                    27,
+                                    3,
+                                    25,
+                                    4
+                                  ],
+                                  "uvEast": [
+                                    25,
+                                    3,
+                                    26,
+                                    4
+                                  ],
+                                  "uvWest": [
+                                    26,
+                                    3,
+                                    27,
+                                    4
+                                  ],
+                                  "uvUp": [
+                                    25,
+                                    4,
+                                    27,
+                                    3
+                                  ],
+                                  "uvDown": [
+                                    25,
+                                    4,
+                                    27,
+                                    3
+                                  ]
+                                }
+                              ],
+                              "rotate": [
+                                0,
+                                90,
+                                0
+                              ]
+                            },
+                            {
+                              "id": "villager_news_baby_extra_0_egfg4d6_cube_4",
+                              "invertAxis": "xy",
+                              "translate": [
+                                5,
+                                -35.5,
+                                0.8
+                              ],
+                              "boxes": [
+                                {
+                                  "coordinates": [
+                                    -8,
+                                    33,
+                                    -11.6,
+                                    3,
+                                    3,
+                                    0.6
+                                  ],
+                                  "uvNorth": [
+                                    27,
+                                    2,
+                                    28,
+                                    3
+                                  ],
+                                  "uvSouth": [
+                                    28,
+                                    2,
+                                    27,
+                                    3
+                                  ],
+                                  "uvEast": [
+                                    27,
+                                    2,
+                                    28,
+                                    3
+                                  ],
+                                  "uvWest": [
+                                    27,
+                                    2,
+                                    28,
+                                    3
+                                  ],
+                                  "uvUp": [
+                                    27,
+                                    3,
+                                    28,
+                                    2
+                                  ],
+                                  "uvDown": [
+                                    27,
+                                    3,
+                                    28,
+                                    2
+                                  ]
+                                }
+                              ],
+                              "rotate": [
+                                0,
+                                90,
+                                0
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "villager_news_baby_extra_0_lghhat",
+                          "invertAxis": "xy",
+                          "translate": [
+                            0,
+                            23.24997,
+                            0
+                          ],
+                          "boxes": [
+                            {
+                              "coordinates": [
+                                -7.5,
+                                2.75003,
+                                -7.5,
+                                15,
+                                10,
+                                15
+                              ],
+                              "uvNorth": [
+                                13,
+                                10,
+                                20,
+                                16
+                              ],
+                              "uvSouth": [
+                                13,
+                                10,
+                                20,
+                                16
+                              ],
+                              "uvEast": [
+                                13,
+                                18,
+                                20,
+                                24
+                              ],
+                              "uvWest": [
+                                13,
+                                18,
+                                20,
+                                24
+                              ],
+                              "uvUp": [
+                                20,
+                                8,
+                                13,
+                                1
+                              ]
+                            },
+                            {
+                              "coordinates": [
+                                -9,
+                                0.75003,
+                                -9,
+                                18,
+                                2,
+                                18
+                              ],
+                              "uvNorth": [
+                                0,
+                                12,
+                                12,
+                                13
+                              ],
+                              "uvSouth": [
+                                0,
+                                12,
+                                12,
+                                13
+                              ],
+                              "uvEast": [
+                                0,
+                                12,
+                                12,
+                                13
+                              ],
+                              "uvWest": [
+                                0,
+                                12,
+                                12,
+                                13
+                              ],
+                              "uvUp": [
+                                12,
+                                12,
+                                0,
+                                0
+                              ],
+                              "uvDown": [
+                                12,
+                                25,
+                                0,
+                                13
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "part": "root",
+      "attach": true,
+      "textureSize": [
+        32,
+        32
+      ],
+      "texture": "villager-news-addon-port:textures/entity/dtd.png",
+      "animations": [
+        {
+          "this.rx": "vnap_root_rx",
+          "this.tx": "vnap_root_tx",
+          "this.sx": "0.33333*vnap_root_sx",
+          "this.ry": "vnap_root_ry",
+          "this.ty": "24+vnap_root_ty",
+          "this.sy": "0.33333*vnap_root_sy",
+          "this.rz": "vnap_root_rz",
+          "this.tz": "vnap_root_tz",
+          "this.sz": "0.33333*vnap_root_sz"
+        },
+        {
+          "this.sx": "0.33333*vnap_cosmetic_mayor_hat",
+          "this.sy": "0.33333*vnap_cosmetic_mayor_hat",
+          "this.sz": "0.33333*vnap_cosmetic_mayor_hat"
+        },
+        {
+          "villager_news_baby_extra_0_waist.rx": "vnap_waist_rx",
+          "villager_news_baby_extra_0_waist.tx": "vnap_waist_tx",
+          "villager_news_baby_extra_0_waist.sx": "vnap_waist_sx",
+          "villager_news_baby_extra_0_waist.ry": "vnap_waist_ry",
+          "villager_news_baby_extra_0_waist.ty": "-9+vnap_waist_ty",
+          "villager_news_baby_extra_0_waist.sy": "vnap_waist_sy",
+          "villager_news_baby_extra_0_waist.rz": "vnap_waist_rz",
+          "villager_news_baby_extra_0_waist.tz": "vnap_waist_tz",
+          "villager_news_baby_extra_0_waist.sz": "vnap_waist_sz"
+        },
+        {
+          "villager_news_baby_extra_0_body.rx": "vnap_body_rx",
+          "villager_news_baby_extra_0_body.tx": "vnap_body_tx",
+          "villager_news_baby_extra_0_body.sx": "vnap_body_sx",
+          "villager_news_baby_extra_0_body.ry": "vnap_body_ry",
+          "villager_news_baby_extra_0_body.ty": "-15+vnap_body_ty",
+          "villager_news_baby_extra_0_body.sy": "vnap_body_sy",
+          "villager_news_baby_extra_0_body.rz": "vnap_body_rz",
+          "villager_news_baby_extra_0_body.tz": "vnap_body_tz",
+          "villager_news_baby_extra_0_body.sz": "vnap_body_sz"
+        },
+        {
+          "villager_news_baby_extra_0_head.rx": "torad(head_pitch)+vnap_head_rx",
+          "villager_news_baby_extra_0_head.tx": "vnap_head_tx",
+          "villager_news_baby_extra_0_head.sx": "vnap_head_sx",
+          "villager_news_baby_extra_0_head.ry": "torad(head_yaw)+vnap_head_ry",
+          "villager_news_baby_extra_0_head.ty": "vnap_head_ty",
+          "villager_news_baby_extra_0_head.sy": "vnap_head_sy",
+          "villager_news_baby_extra_0_head.rz": "vnap_head_rz",
+          "villager_news_baby_extra_0_head.tz": "vnap_head_tz",
+          "villager_news_baby_extra_0_head.sz": "vnap_head_sz"
+        },
+        {
+          "villager_news_baby_extra_0_headjgl2l6.rx": "vnap_head_inner_rx",
+          "villager_news_baby_extra_0_headjgl2l6.tx": "vnap_head_inner_tx",
+          "villager_news_baby_extra_0_headjgl2l6.sx": "vnap_head_inner_sx",
+          "villager_news_baby_extra_0_headjgl2l6.ry": "vnap_head_inner_ry",
+          "villager_news_baby_extra_0_headjgl2l6.ty": "vnap_head_inner_ty",
+          "villager_news_baby_extra_0_headjgl2l6.sy": "vnap_head_inner_sy",
+          "villager_news_baby_extra_0_headjgl2l6.rz": "vnap_head_inner_rz",
+          "villager_news_baby_extra_0_headjgl2l6.tz": "vnap_head_inner_tz",
+          "villager_news_baby_extra_0_headjgl2l6.sz": "vnap_head_inner_sz"
+        }
+      ]
+    },
+    {
+      "id": "villager_news_baby_extra_1_root",
+      "invertAxis": "xy",
+      "translate": [
+        0,
+        -24,
+        0
+      ],
+      "submodels": [
+        {
+          "id": "villager_news_baby_extra_1_waist",
+          "invertAxis": "xy",
+          "translate": [
+            0,
+            12,
+            0
+          ],
+          "submodels": [
+            {
+              "id": "villager_news_baby_extra_1_body",
+              "invertAxis": "xy",
+              "translate": [
+                0,
+                12,
+                0
+              ],
+              "submodels": [
+                {
+                  "id": "villager_news_baby_extra_1_head",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "submodels": [
+                    {
+                      "id": "villager_news_baby_extra_1_headjgl2l6",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "submodels": [
+                        {
+                          "id": "villager_news_baby_extra_1_l6kla7a42l6helmet",
+                          "invertAxis": "xy",
+                          "translate": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "boxes": [
+                            {
+                              "coordinates": [
+                                -4,
+                                0,
+                                -4,
+                                8,
+                                11,
+                                8
+                              ],
+                              "sizeAdd": 0.5,
+                              "uvNorth": [
+                                8,
+                                0,
+                                16,
+                                11
+                              ],
+                              "uvSouth": [
+                                24,
+                                0,
+                                32,
+                                11
+                              ],
+                              "uvEast": [
+                                0,
+                                0,
+                                8,
+                                11
+                              ],
+                              "uvWest": [
+                                16,
+                                0,
+                                24,
+                                11
+                              ],
+                              "uvUp": [
+                                0,
+                                11,
+                                8,
+                                19
+                              ]
+                            }
+                          ],
+                          "submodels": [
+                            {
+                              "id": "villager_news_baby_extra_1_oaf83",
+                              "invertAxis": "xy",
+                              "translate": [
+                                -4.5,
+                                8.66161,
+                                0.70983
+                              ],
+                              "rotate": [
+                                45,
+                                0,
+                                0
+                              ],
+                              "boxes": [
+                                {
+                                  "coordinates": [
+                                    -0.1137,
+                                    0.94878,
+                                    -1.94696,
+                                    1,
+                                    6,
+                                    4
+                                  ],
+                                  "uvNorth": [
+                                    26,
+                                    24,
+                                    27,
+                                    30
+                                  ],
+                                  "uvSouth": [
+                                    29,
+                                    24,
+                                    30,
+                                    30
+                                  ],
+                                  "uvEast": [
+                                    22,
+                                    24,
+                                    26,
+                                    30
+                                  ],
+                                  "uvWest": [
+                                    26,
+                                    24,
+                                    30,
+                                    30
+                                  ],
+                                  "uvUp": [
+                                    30,
+                                    24,
+                                    26,
+                                    25
+                                  ],
+                                  "uvDown": [
+                                    26,
+                                    29,
+                                    30,
+                                    30
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": "villager_news_baby_extra_1_oaf84",
+                              "invertAxis": "xy",
+                              "translate": [
+                                4.5,
+                                8.66161,
+                                0.70983
+                              ],
+                              "rotate": [
+                                45,
+                                0,
+                                0
+                              ],
+                              "boxes": [
+                                {
+                                  "coordinates": [
+                                    -0.8663,
+                                    0.94878,
+                                    -1.94696,
+                                    1,
+                                    6,
+                                    4
+                                  ],
+                                  "uvNorth": [
+                                    27,
+                                    24,
+                                    26,
+                                    30
+                                  ],
+                                  "uvSouth": [
+                                    30,
+                                    24,
+                                    29,
+                                    30
+                                  ],
+                                  "uvEast": [
+                                    30,
+                                    24,
+                                    26,
+                                    30
+                                  ],
+                                  "uvWest": [
+                                    26,
+                                    24,
+                                    22,
+                                    30
+                                  ],
+                                  "uvUp": [
+                                    30,
+                                    25,
+                                    26,
+                                    24
+                                  ],
+                                  "uvDown": [
+                                    26,
+                                    29,
+                                    30,
+                                    30
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "villager_news_baby_extra_1_l6kla7a42l636dl",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    -12,
+                    0
+                  ],
+                  "boxes": [
+                    {
+                      "coordinates": [
+                        -4.5,
+                        -2,
+                        -3.5,
+                        9,
+                        4,
+                        7
+                      ],
+                      "uvNorth": [
+                        8,
+                        19,
+                        17,
+                        23
+                      ],
+                      "uvSouth": [
+                        27,
+                        19,
+                        36,
+                        23
+                      ],
+                      "uvEast": [
+                        1,
+                        19,
+                        8,
+                        23
+                      ],
+                      "uvWest": [
+                        18,
+                        19,
+                        25,
+                        23
+                      ],
+                      "uvUp": [
+                        9,
+                        12,
+                        18,
+                        19
+                      ],
+                      "uvDown": [
+                        18,
+                        19,
+                        27,
+                        12
+                      ]
+                    },
+                    {
+                      "coordinates": [
+                        -3,
+                        1,
+                        -4,
+                        6,
+                        2,
+                        1
+                      ],
+                      "textureOffset": [
+                        0,
+                        24
+                      ]
+                    },
+                    {
+                      "coordinates": [
+                        -1,
+                        -4,
+                        -4,
+                        2,
+                        5,
+                        1
+                      ],
+                      "textureOffset": [
+                        15,
+                        24
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "villager_news_baby_extra_1_l6kla7a42l6cape",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    0.5,
+                    4
+                  ],
+                  "rotate": [
+                    -5,
+                    0,
+                    0
+                  ],
+                  "boxes": [
+                    {
+                      "coordinates": [
+                        -5,
+                        -16,
+                        -0.5,
+                        10,
+                        16,
+                        1
+                      ],
+                      "uvNorth": [
+                        43,
+                        1,
+                        33,
+                        17
+                      ],
+                      "uvSouth": [
+                        33,
+                        1,
+                        43,
+                        17
+                      ],
+                      "uvEast": [
+                        43,
+                        1,
+                        44,
+                        17
+                      ],
+                      "uvWest": [
+                        32,
+                        1,
+                        33,
+                        17
+                      ],
+                      "uvUp": [
+                        43,
+                        1,
+                        33,
+                        0
+                      ],
+                      "uvDown": [
+                        43,
+                        18,
+                        33,
+                        17
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "part": "root",
+      "attach": true,
+      "textureSize": [
+        48,
+        48
+      ],
+      "texture": "villager-news-addon-port:textures/entity/djn.png",
+      "animations": [
+        {
+          "this.rx": "vnap_root_rx",
+          "this.tx": "vnap_root_tx",
+          "this.sx": "0.33333*vnap_root_sx",
+          "this.ry": "vnap_root_ry",
+          "this.ty": "24+vnap_root_ty",
+          "this.sy": "0.33333*vnap_root_sy",
+          "this.rz": "vnap_root_rz",
+          "this.tz": "vnap_root_tz",
+          "this.sz": "0.33333*vnap_root_sz"
+        },
+        {
+          "this.sx": "0.33333*vnap_cosmetic_helmet",
+          "this.sy": "0.33333*vnap_cosmetic_helmet",
+          "this.sz": "0.33333*vnap_cosmetic_helmet"
+        },
+        {
+          "villager_news_baby_extra_1_waist.rx": "vnap_waist_rx",
+          "villager_news_baby_extra_1_waist.tx": "vnap_waist_tx",
+          "villager_news_baby_extra_1_waist.sx": "vnap_waist_sx",
+          "villager_news_baby_extra_1_waist.ry": "vnap_waist_ry",
+          "villager_news_baby_extra_1_waist.ty": "-12+vnap_waist_ty",
+          "villager_news_baby_extra_1_waist.sy": "vnap_waist_sy",
+          "villager_news_baby_extra_1_waist.rz": "vnap_waist_rz",
+          "villager_news_baby_extra_1_waist.tz": "vnap_waist_tz",
+          "villager_news_baby_extra_1_waist.sz": "vnap_waist_sz"
+        },
+        {
+          "villager_news_baby_extra_1_body.rx": "vnap_body_rx",
+          "villager_news_baby_extra_1_body.tx": "vnap_body_tx",
+          "villager_news_baby_extra_1_body.sx": "vnap_body_sx",
+          "villager_news_baby_extra_1_body.ry": "vnap_body_ry",
+          "villager_news_baby_extra_1_body.ty": "-12+vnap_body_ty",
+          "villager_news_baby_extra_1_body.sy": "vnap_body_sy",
+          "villager_news_baby_extra_1_body.rz": "vnap_body_rz",
+          "villager_news_baby_extra_1_body.tz": "vnap_body_tz",
+          "villager_news_baby_extra_1_body.sz": "vnap_body_sz"
+        },
+        {
+          "villager_news_baby_extra_1_head.rx": "torad(head_pitch)+vnap_head_rx",
+          "villager_news_baby_extra_1_head.tx": "vnap_head_tx",
+          "villager_news_baby_extra_1_head.sx": "vnap_head_sx",
+          "villager_news_baby_extra_1_head.ry": "torad(head_yaw)+vnap_head_ry",
+          "villager_news_baby_extra_1_head.ty": "vnap_head_ty",
+          "villager_news_baby_extra_1_head.sy": "vnap_head_sy",
+          "villager_news_baby_extra_1_head.rz": "vnap_head_rz",
+          "villager_news_baby_extra_1_head.tz": "vnap_head_tz",
+          "villager_news_baby_extra_1_head.sz": "vnap_head_sz"
+        },
+        {
+          "villager_news_baby_extra_1_headjgl2l6.rx": "vnap_head_inner_rx",
+          "villager_news_baby_extra_1_headjgl2l6.tx": "vnap_head_inner_tx",
+          "villager_news_baby_extra_1_headjgl2l6.sx": "vnap_head_inner_sx",
+          "villager_news_baby_extra_1_headjgl2l6.ry": "vnap_head_inner_ry",
+          "villager_news_baby_extra_1_headjgl2l6.ty": "vnap_head_inner_ty",
+          "villager_news_baby_extra_1_headjgl2l6.sy": "vnap_head_inner_sy",
+          "villager_news_baby_extra_1_headjgl2l6.rz": "vnap_head_inner_rz",
+          "villager_news_baby_extra_1_headjgl2l6.tz": "vnap_head_inner_tz",
+          "villager_news_baby_extra_1_headjgl2l6.sz": "vnap_head_inner_sz"
+        }
+      ]
+    },
+    {
+      "id": "villager_news_baby_extra_2_root",
+      "invertAxis": "xy",
+      "translate": [
+        0,
+        -24,
+        0
+      ],
+      "submodels": [
+        {
+          "id": "villager_news_baby_extra_2_waist",
+          "invertAxis": "xy",
+          "translate": [
+            0,
+            12,
+            0
+          ],
+          "submodels": [
+            {
+              "id": "villager_news_baby_extra_2_body",
+              "invertAxis": "xy",
+              "translate": [
+                0,
+                12,
+                0
+              ],
+              "submodels": [
+                {
+                  "id": "villager_news_baby_extra_2_2jek",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    -3,
+                    -1
+                  ],
+                  "rotate": [
+                    42.97,
+                    0,
+                    0
+                  ],
+                  "submodels": [
+                    {
+                      "id": "villager_news_baby_extra_2_ea4jgh9gf6",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0,
+                        -4,
+                        3
+                      ],
+                      "rotate": [
+                        -90,
+                        0,
+                        0
+                      ],
+                      "boxes": [
+                        {
+                          "coordinates": [
+                            -1,
+                            2,
+                            -1,
+                            2,
+                            6,
+                            2
+                          ],
+                          "sizeAdd": -0.4,
+                          "textureOffset": [
+                            0,
+                            8
+                          ]
+                        },
+                        {
+                          "coordinates": [
+                            -2,
+                            5.5,
+                            -2,
+                            4,
+                            4,
+                            4
+                          ],
+                          "sizeAdd": -0.8,
+                          "textureOffset": [
+                            0,
+                            0
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "part": "root",
+      "attach": true,
+      "textureSize": [
+        16,
+        16
+      ],
+      "texture": "villager-news-addon-port:textures/entity/dta.png",
+      "animations": [
+        {
+          "this.rx": "vnap_root_rx",
+          "this.tx": "vnap_root_tx",
+          "this.sx": "0.33333*vnap_root_sx",
+          "this.ry": "vnap_root_ry",
+          "this.ty": "24+vnap_root_ty",
+          "this.sy": "0.33333*vnap_root_sy",
+          "this.rz": "vnap_root_rz",
+          "this.tz": "vnap_root_tz",
+          "this.sz": "0.33333*vnap_root_sz"
+        },
+        {
+          "this.sx": "0.33333*vnap_cosmetic_microphone",
+          "this.sy": "0.33333*vnap_cosmetic_microphone",
+          "this.sz": "0.33333*vnap_cosmetic_microphone"
+        },
+        {
+          "villager_news_baby_extra_2_waist.rx": "vnap_waist_rx",
+          "villager_news_baby_extra_2_waist.tx": "vnap_waist_tx",
+          "villager_news_baby_extra_2_waist.sx": "vnap_waist_sx",
+          "villager_news_baby_extra_2_waist.ry": "vnap_waist_ry",
+          "villager_news_baby_extra_2_waist.ty": "-12+vnap_waist_ty",
+          "villager_news_baby_extra_2_waist.sy": "vnap_waist_sy",
+          "villager_news_baby_extra_2_waist.rz": "vnap_waist_rz",
+          "villager_news_baby_extra_2_waist.tz": "vnap_waist_tz",
+          "villager_news_baby_extra_2_waist.sz": "vnap_waist_sz"
+        },
+        {
+          "villager_news_baby_extra_2_body.rx": "vnap_body_rx",
+          "villager_news_baby_extra_2_body.tx": "vnap_body_tx",
+          "villager_news_baby_extra_2_body.sx": "vnap_body_sx",
+          "villager_news_baby_extra_2_body.ry": "vnap_body_ry",
+          "villager_news_baby_extra_2_body.ty": "-12+vnap_body_ty",
+          "villager_news_baby_extra_2_body.sy": "vnap_body_sy",
+          "villager_news_baby_extra_2_body.rz": "vnap_body_rz",
+          "villager_news_baby_extra_2_body.tz": "vnap_body_tz",
+          "villager_news_baby_extra_2_body.sz": "vnap_body_sz"
+        },
+        {
+          "villager_news_baby_extra_2_2jek.rx": "-0.74997+vnap_arms_rx",
+          "villager_news_baby_extra_2_2jek.tx": "vnap_arms_tx",
+          "villager_news_baby_extra_2_2jek.sx": "vnap_arms_sx",
+          "villager_news_baby_extra_2_2jek.ry": "vnap_arms_ry",
+          "villager_news_baby_extra_2_2jek.ty": "3+vnap_arms_ty",
+          "villager_news_baby_extra_2_2jek.sy": "vnap_arms_sy",
+          "villager_news_baby_extra_2_2jek.rz": "vnap_arms_rz",
+          "villager_news_baby_extra_2_2jek.tz": "-1+vnap_arms_tz",
+          "villager_news_baby_extra_2_2jek.sz": "vnap_arms_sz"
+        }
+      ]
+    },
+    {
+      "id": "villager_news_baby_extra_3_root",
+      "invertAxis": "xy",
+      "translate": [
+        0,
+        -24,
+        0
+      ],
+      "submodels": [
+        {
+          "id": "villager_news_baby_extra_3_waist",
+          "invertAxis": "xy",
+          "translate": [
+            0,
+            12,
+            0
+          ],
+          "submodels": [
+            {
+              "id": "villager_news_baby_extra_3_body",
+              "invertAxis": "xy",
+              "translate": [
+                0,
+                12,
+                0
+              ],
+              "submodels": [
+                {
+                  "id": "villager_news_baby_extra_3_head",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "submodels": [
+                    {
+                      "id": "villager_news_baby_extra_3_headjgl2l6",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "submodels": [
+                        {
+                          "id": "villager_news_baby_extra_3_egmkl2496",
+                          "invertAxis": "xy",
+                          "translate": [
+                            -1,
+                            2.975,
+                            -4
+                          ],
+                          "boxes": [
+                            {
+                              "coordinates": [
+                                -0.75,
+                                -1.225,
+                                -0.1,
+                                3.5,
+                                1,
+                                0
+                              ],
+                              "uvNorth": [
+                                0,
+                                0,
+                                1,
+                                1
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "part": "root",
+      "attach": true,
+      "textureSize": [
+        1,
+        1
+      ],
+      "texture": "villager-news-addon-port:textures/entity/djh.png",
+      "animations": [
+        {
+          "this.rx": "vnap_root_rx",
+          "this.tx": "vnap_root_tx",
+          "this.sx": "0.33333*vnap_root_sx",
+          "this.ry": "vnap_root_ry",
+          "this.ty": "24+vnap_root_ty",
+          "this.sy": "0.33333*vnap_root_sy",
+          "this.rz": "vnap_root_rz",
+          "this.tz": "vnap_root_tz",
+          "this.sz": "0.33333*vnap_root_sz"
+        },
+        {
+          "this.sx": "0.33333*vnap_cosmetic_moustache",
+          "this.sy": "0.33333*vnap_cosmetic_moustache",
+          "this.sz": "0.33333*vnap_cosmetic_moustache"
+        },
+        {
+          "villager_news_baby_extra_3_waist.rx": "vnap_waist_rx",
+          "villager_news_baby_extra_3_waist.tx": "vnap_waist_tx",
+          "villager_news_baby_extra_3_waist.sx": "vnap_waist_sx",
+          "villager_news_baby_extra_3_waist.ry": "vnap_waist_ry",
+          "villager_news_baby_extra_3_waist.ty": "-12+vnap_waist_ty",
+          "villager_news_baby_extra_3_waist.sy": "vnap_waist_sy",
+          "villager_news_baby_extra_3_waist.rz": "vnap_waist_rz",
+          "villager_news_baby_extra_3_waist.tz": "vnap_waist_tz",
+          "villager_news_baby_extra_3_waist.sz": "vnap_waist_sz"
+        },
+        {
+          "villager_news_baby_extra_3_body.rx": "vnap_body_rx",
+          "villager_news_baby_extra_3_body.tx": "vnap_body_tx",
+          "villager_news_baby_extra_3_body.sx": "vnap_body_sx",
+          "villager_news_baby_extra_3_body.ry": "vnap_body_ry",
+          "villager_news_baby_extra_3_body.ty": "-12+vnap_body_ty",
+          "villager_news_baby_extra_3_body.sy": "vnap_body_sy",
+          "villager_news_baby_extra_3_body.rz": "vnap_body_rz",
+          "villager_news_baby_extra_3_body.tz": "vnap_body_tz",
+          "villager_news_baby_extra_3_body.sz": "vnap_body_sz"
+        },
+        {
+          "villager_news_baby_extra_3_head.rx": "torad(head_pitch)+vnap_head_rx",
+          "villager_news_baby_extra_3_head.tx": "vnap_head_tx",
+          "villager_news_baby_extra_3_head.sx": "vnap_head_sx",
+          "villager_news_baby_extra_3_head.ry": "torad(head_yaw)+vnap_head_ry",
+          "villager_news_baby_extra_3_head.ty": "vnap_head_ty",
+          "villager_news_baby_extra_3_head.sy": "vnap_head_sy",
+          "villager_news_baby_extra_3_head.rz": "vnap_head_rz",
+          "villager_news_baby_extra_3_head.tz": "vnap_head_tz",
+          "villager_news_baby_extra_3_head.sz": "vnap_head_sz"
+        },
+        {
+          "villager_news_baby_extra_3_headjgl2l6.rx": "vnap_head_inner_rx",
+          "villager_news_baby_extra_3_headjgl2l6.tx": "vnap_head_inner_tx",
+          "villager_news_baby_extra_3_headjgl2l6.sx": "vnap_head_inner_sx",
+          "villager_news_baby_extra_3_headjgl2l6.ry": "vnap_head_inner_ry",
+          "villager_news_baby_extra_3_headjgl2l6.ty": "vnap_head_inner_ty",
+          "villager_news_baby_extra_3_headjgl2l6.sy": "vnap_head_inner_sy",
+          "villager_news_baby_extra_3_headjgl2l6.rz": "vnap_head_inner_rz",
+          "villager_news_baby_extra_3_headjgl2l6.tz": "vnap_head_inner_tz",
+          "villager_news_baby_extra_3_headjgl2l6.sz": "vnap_head_inner_sz"
         }
       ]
     },

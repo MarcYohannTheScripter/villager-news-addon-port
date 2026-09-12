@@ -1,0 +1,9 @@
+{
+  "sounds": [
+    {
+      "name": "villager-news-addon-port:silence",
+      "volume": 0.01,
+      "weight": 1
+    }
+  ]
+}

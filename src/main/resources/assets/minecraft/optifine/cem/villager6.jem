@@ -1100,6 +1100,11 @@
           "unreachable_base_fgk6.sz": "vnap_nose_sz"
         },
         {
+          "unreachable_base_fgk6.sx": "vnap_nose_sx*vnap_has_nose",
+          "unreachable_base_fgk6.sy": "vnap_nose_sy*vnap_has_nose",
+          "unreachable_base_fgk6.sz": "vnap_nose_sz*vnap_has_nose"
+        },
+        {
           "unreachable_base_d67l_6q6.rx": "vnap_pupil_right_rx",
           "unreachable_base_d67l_6q6.tx": "1.5+vnap_pupil_right_tx",
           "unreachable_base_d67l_6q6.sx": "vnap_pupil_right_sx",

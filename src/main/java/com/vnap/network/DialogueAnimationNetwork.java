@@ -20,4 +20,8 @@ public final class DialogueAnimationNetwork {
 			}
 		}
 	}
+
+	public static void stop(ServerLevel level, LivingEntity speaker) {
+		send(level, speaker, "", 0, 0);
+	}
 }

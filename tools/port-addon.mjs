@@ -65,6 +65,9 @@ function cleanGeneratedDirectory(directory) {
   mkdirSync(resolved, { recursive: true });
 }
 
+const preservedSilence = existsSync(join(modAssets, "sounds", "silence.ogg"))
+  ? readFileSync(join(modAssets, "sounds", "silence.ogg")) : undefined;
+
 for (const generated of [
   join(modAssets, "textures", "entity"),
   join(modAssets, "sounds"),
@@ -146,10 +149,6 @@ function convertUv(cube, box) {
   for (const [face, emfName] of Object.entries(faceNames)) {
     const sourceFace = cube.uv?.[face];
     if (sourceFace?.uv && sourceFace?.uv_size) {
-      // Bedrock stores per-face UVs as [u, v] + [width, height], while
-      // EMF/OptiFine expects the two corners [u1, v1, u2, v2].  Passing the
-      // size through as the second corner collapses or reverses most of the
-      // villager's face planes.
       const [u, v] = sourceFace.uv;
       const [width, height] = sourceFace.uv_size;
       box[emfName] = vector([u, v, u + width, v + height]);
@@ -168,12 +167,6 @@ function makeBox(cube, localOrigin, boneName) {
 
 function convertBone(bone, bonesByParent, prefix, parentOrigin, inheritedMirror = false, depth = 0) {
   const origin = importedPivot(bone.pivot);
-  // Every nested CEM model is relative to its immediate parent.  Keeping
-  // first-level children in Bedrock world space put the facial planes about
-  // 24 pixels below the head once the model was attached to Java's head part.
-  // A native CEM part uses absolute model-space coordinates. Its immediate
-  // Bedrock children must keep that same space; deeper children are relative
-  // to their actual parent, as normal ModelPart children are.
   const translate = depth <= 1 ? origin : importedChildOffset(origin, parentOrigin);
   const model = {
     id: `${prefix}_${safeId(bone.name)}`,
@@ -204,9 +197,6 @@ function convertBone(bone, bonesByParent, prefix, parentOrigin, inheritedMirror 
       if (cubeMirror) cubeModel.mirrorTexture = "u";
       (model.submodels ??= []).push(cubeModel);
     } else {
-      // A box is local to its bone's absolute Bedrock pivot.  `translate` is
-      // relative to the parent for nested CEM models and cannot be used here;
-      // doing so reapplies the parent's (usually 24px head) offset to the box.
       const boxOrigin = subtract(cubeFrom, origin);
       (model.boxes ??= []).push(makeBox(cube, boxOrigin, bone.name));
     }
@@ -410,9 +400,6 @@ function numberExpression(base, variable) {
   return `${cleanNumber(base)}+${variable}`;
 }
 
-// EMF applies `invertAxis: "xy"` while loading the JEM. Animation expressions
-// write directly to the prepared ModelPart, so their rest-pose constants must
-// use the post-inversion values rather than the source JSON values.
 function preparedTranslate(translate = [0, 0, 0]) {
   return vector([-translate[0], -translate[1], translate[2]]);
 }
@@ -435,11 +422,6 @@ function animateAnchor(model, target, inheritedTargets = []) {
     const rotationAnimation = animationExpression(target, inheritedTargets, "r", suffix);
     const translationAnimation = animationExpression(target, inheritedTargets, "t", suffix);
     const scaleAnimation = animationExpression(target, inheritedTargets, "s", suffix);
-    // A top-level CEM model is inserted as a child of its vanilla part. The
-    // parent already supplies head look, leg swing, the crossed-arm tilt and
-    // the -90 degree hat-brim rotation. Reusing part.r* (or the imported
-    // static rotation) on this child applies those rotations a second time.
-    // Keep the child at a zero rest rotation and add only the Bedrock gesture.
     expressions[`this.r${suffix}`] = rotationAnimation;
     expressions[`this.t${suffix}`] = numberExpression(translate[axis], translationAnimation);
     expressions[`this.s${suffix}`] = scaleAnimation;
@@ -468,9 +450,6 @@ function animateNestedBone(models, prefix, boneName, target) {
 }
 
 function addVillagerAnimations(models, prefix) {
-  // Bedrock places the head, hat and crossed arms below waist/body. Java's
-  // villager model exposes those as separate CEM anchors, so explicitly add
-  // the parent motion to every detached anchor to keep a dramatic pose intact.
   for (const [part, target, inheritedTargets] of [
     ["head", "head", ["body"]],
     ["nose", "nose", ["body", "head"]],
@@ -514,9 +493,6 @@ function addVillagerAnimations(models, prefix) {
     });
   }
 
-  // The Bedrock blink controller targets a generated parent name that is not
-  // present in the exported geometry.  Closing the two eye planes produces the
-  // same visible blink while retaining gesture-driven eye movement.
   const blink = "if(fmod(time+id*0.37,95+fmod(id,37))>90,0.08,1)";
   for (const boneName of ["6q6da5kmhh6jja89l", "6q6da5kmhh6jd67l", "ja89l_6q6", "d67l_6q6"]) {
     const eye = findModelById(models, `${prefix}_${boneName}`);
@@ -559,9 +535,6 @@ function commonVillagerModels(prefix, texture) {
   return models;
 }
 
-// Dialogue gestures were authored against this exact Bedrock hierarchy.  A
-// single EMF root replacement preserves each parent pivot, so root/waist/body
-// rotations carry the head, face, hat and arms exactly as they do in Bedrock.
 const villagerRigTargets = {
   root: ["root"],
   waist: ["waist"],
@@ -622,9 +595,6 @@ function addRootVillagerAnimations(models, prefix, rigScale = 1) {
     "this.sy": "(1+vnap_mouth_open*1.5)*vnap_speaking+(1-vnap_speaking)",
     "this.sz": "1",
   });
-  // EMF does not consistently propagate animated scale from the empty l66l9
-  // controller to its rendered children. Drive both visible tooth strips
-  // directly. Their Y directions are inverted from Bedrock by invertAxis.
   const toothTravel = rigScale === 1 ? 0.75 : 1.5;
   for (const [boneName, direction] of [["l66l9lgh", -1], ["l66l93gllge", 1]]) {
     const lip = findModelById(models, `${prefix}_${boneName}`);
@@ -638,9 +608,6 @@ function addRootVillagerAnimations(models, prefix, rigScale = 1) {
     });
   }
 
-  // The Bedrock blink animation scales its shared eyelid group to 2.02 for
-  // 0.15 seconds. The export split that group into upper and lower halves, so
-  // drive both halves together and let them meet over the static eye texture.
   const blinkTime = "fmod(time+id*0.37,1.25+fmod(id,3)*0.5)";
   const blink = `if(${blinkTime}<0.08,1+12.75*${blinkTime},if(${blinkTime}<0.18,2.02,if(${blinkTime}<0.26,2.02-12.75*(${blinkTime}-0.18),1)))`;
   for (const [boneName, target] of [
@@ -659,9 +626,6 @@ function villagerLayer(geometry, prefix, texture, attach, rigScale = 1) {
     attach,
     includeVanillaAnimations: false,
   });
-  // Bedrock's model root is at the feet. Java's entity-model origin is 24
-  // pixels higher, so one root offset keeps the complete authored hierarchy
-  // in the same neutral position while preserving every nested pivot.
   for (const model of models) model.translate = [0, -24, 0];
   addRootVillagerAnimations(models, prefix, rigScale);
   return models;
@@ -697,11 +661,44 @@ function rootVillagerModels(prefix, texture, extras = [], {
 } = {}) {
   const models = [...villagerLayer(baseGeometry, `${prefix}_base`, texture, false, rigScale)];
   for (const [index, extra] of extras.entries()) {
-    models.push(...villagerLayer(extra.geometry, `${prefix}_extra_${index}`, extra.texture, true, rigScale));
+    const layer = villagerLayer(extra.geometry, `${prefix}_extra_${index}`, extra.texture, true, rigScale);
+    if (extra.visibility) {
+      const scale = rigScale === 1 ? extra.visibility : `${cleanNumber(rigScale)}*${extra.visibility}`;
+      for (const model of layer) appendAnimation(model, {
+        "this.sx": scale,
+        "this.sy": scale,
+        "this.sz": scale,
+      });
+    }
+    if (extra.scaleXZ !== undefined) {
+      const scaledBone = findModelById(layer, `${prefix}_extra_${index}_lghhat`);
+      if (!scaledBone) throw new Error(`${prefix} cosmetic hat bone is missing`);
+      if (extra.drop !== undefined) {
+        for (const box of scaledBone.boxes ?? []) {
+          box.coordinates[1] = cleanNumber(box.coordinates[1] - extra.drop);
+        }
+      }
+      appendAnimation(scaledBone, {
+        "this.sx": cleanNumber(extra.scaleXZ),
+        "this.sz": cleanNumber(extra.scaleXZ),
+      });
+    }
+    if (extra.monocleInset !== undefined) {
+      const monocle = findModelById(layer, `${prefix}_extra_${index}_egfg4d6`);
+      if (!monocle) throw new Error(`${prefix} cosmetic monocle bone is missing`);
+      monocle.translate = vector(monocle.translate);
+      monocle.translate[2] = cleanNumber(monocle.translate[2] + extra.monocleInset);
+    }
+    models.push(...layer);
   }
-  // A root attachment does not automatically clear the cubes on every
-  // vanilla child. Keep the hierarchy as an attached controller and replace
-  // each visible vanilla part with an empty model to prevent a clipping copy.
+  if (prefix !== "wandering_trader_news") {
+    const nose = findModelById(models, `${prefix}_base_fgk6`);
+    if (nose) appendAnimation(nose, {
+      "this.sx": "vnap_nose_sx*vnap_has_nose",
+      "this.sy": "vnap_nose_sy*vnap_has_nose",
+      "this.sz": "vnap_nose_sz*vnap_has_nose",
+    });
+  }
   for (const model of models) {
     model.attach = true;
     hoistNestedAnimations(model);
@@ -730,8 +727,6 @@ function addWoolyAnimations(models, prefix) {
   const bodyMeshRotation = preparedRotation(bodyMesh.rotate).map((degrees) => degrees * Math.PI / 180);
   const phase = "limb_swing*0.6662";
 
-  // The Bedrock walking animation rotates d680-d683 at their hip pivots.
-  // Rotating root_d680-root_d683 instead makes each leg swing from the sole.
   for (const [bone, phaseOffset] of [
     ["d680", ""], ["d681", "+pi"], ["d682", "+pi"], ["d683", ""],
   ]) {
@@ -742,9 +737,6 @@ function addWoolyAnimations(models, prefix) {
     });
   }
 
-  // Retain the source's small head/body bob while walking without moving any
-  // pivot away from its authored bone. EMF's time variable is measured in raw
-  // game ticks, so the Bedrock idle curves would otherwise shake rapidly.
   appendAnimation(root, {
     [target("46fljga5", "rx")]: `${cleanNumber(bodyMeshRotation[0])}+torad(cos(${phase})*6.2)*limb_speed`,
     [target("46fljga5", "ty")]: `${cleanNumber(bodyMeshRest[1])}+(1.5-sin(${phase})*1.125)*limb_speed`,
@@ -753,8 +745,6 @@ function addWoolyAnimations(models, prefix) {
     [target("k966h_head", "ty")]: `${cleanNumber(headRest[1])}+(1.5+cos(${phase}+torad(30))*1.125)*limb_speed`,
   });
 
-  // Bedrock hides 3dafc except for the short closed-eye frame. Keeping its
-  // default scale at one leaves Wooly permanently squinting.
   const blink = "if(fmod(time+id*3.46,36.6666)>33.334,1,0)";
   appendAnimation(root, {
     [target("3dafc", "sx")]: blink,
@@ -762,16 +752,12 @@ function addWoolyAnimations(models, prefix) {
     [target("3dafc", "sz")]: blink,
   });
 
-  // Bedrock keeps the skin rig visible and hides only the oggd* fleece bones
-  // after shearing. Wooly's fleece is part of the custom model, so mirror that
-  // rule from the Java sheep's synchronized Sheared NBT flag.
   const showFleece = "!nbt(Sheared,1)";
   for (const bone of ["oggd_46fljga5", "oggd_head", "oggd_d680", "oggd_d681", "oggd_d682", "oggd_d683"]) {
     if (!find(bone)) throw new Error(`Wooly's ${bone} fleece bone is missing`);
     appendAnimation(root, { [target(bone, "visible")]: showFleece });
   }
 
-  // Reuse the synchronized dialogue mouth values for Wooly's own face rig.
   const openMouth = find("egml9");
   const closedMouth = find("l66l9");
   const upperLip = find("l66l9lgh");
@@ -779,18 +765,11 @@ function addWoolyAnimations(models, prefix) {
   if (!openMouth || !closedMouth || !upperLip || !lowerLip) {
     throw new Error("Wooly's mouth bones are missing");
   }
-  // The source relies on three nearly coplanar Bedrock layers: neutral face,
-  // pink mouth, then the two thin white mouth strips. Give them a stable front
-  // to back order for EMF so the resting mouth remains visible and speaking
-  // frames cannot fight with the face or each other.
   openMouth.translate = vector(openMouth.translate);
   openMouth.translate[2] = cleanNumber(openMouth.translate[2] - 0.075);
   closedMouth.translate = vector(closedMouth.translate);
   closedMouth.translate[2] = cleanNumber(closedMouth.translate[2] - 0.1);
 
-  // Bedrock samples the single texel centered at (12.5, 10.5) when uv_size is
-  // [0, 0]. EMF collapses those UV rectangles and renders no strips. Expand
-  // the point sample to its containing texel without changing its color.
   const mouthStripUv = [12, 10, 13, 11];
   for (const lip of [upperLip, lowerLip]) {
     for (const box of lip.boxes ?? []) {
@@ -822,8 +801,6 @@ function rootSheepModels(prefix, texture, sheared = false) {
     includeVanillaAnimations: false,
   });
   for (const model of models) {
-    // Bedrock roots are authored at the feet; Java's entity-model root is 24
-    // pixels above them. Match the offset used by the working villager rigs.
     model.translate = [0, -24, 0];
     model.attach = true;
   }
@@ -833,17 +810,11 @@ function rootSheepModels(prefix, texture, sheared = false) {
   const face = findModelById(models, `${woolyPrefix}_7246gn6jd2q`);
   const headBox = head?.boxes?.[0];
   if (!headBox || !face) throw new Error("Wooly's head or face geometry is missing");
-  // The source leaves the head's front face empty and draws the expression as
-  // zero-depth planes. Give it a neutral backing and move the expression plane
-  // slightly forward so Java does not discard it through depth fighting.
   headBox.uvNorth = [8, 8, 14, 14];
   face.translate = preparedTranslate(face.translate);
   face.translate[2] -= 0.025;
   for (const box of face.boxes ?? []) {
     if (box.coordinates?.[5] === 0) {
-      // EMF can cull zero-depth Bedrock planes. Turn each expression plane
-      // into a paper-thin prism extending toward the camera while preserving
-      // its authored pivot and front-face UV.
       box.coordinates[2] = cleanNumber(box.coordinates[2] - 0.025);
       box.coordinates[5] = 0.05;
     }
@@ -851,10 +822,6 @@ function rootSheepModels(prefix, texture, sheared = false) {
 
   addWoolyAnimations(models, woolyPrefix);
   if (sheared) {
-    // Keep Wooly's complete hierarchy and animation targets in the sheared
-    // model, but remove the six fleece cubes hidden by Bedrock's oggd* rule.
-    // Selecting a separate CEM variant is more reliable than changing cube
-    // visibility from synchronized NBT inside an animation expression.
     const clearFleeceCubes = (entries) => {
       for (const entry of entries) {
         if (entry.id?.startsWith(`${woolyPrefix}_oggd`)) delete entry.boxes;
@@ -867,20 +834,24 @@ function rootSheepModels(prefix, texture, sheared = false) {
 }
 
 const modelDefinitions = {
-  "villager.jem": { models: rootVillagerModels("villager_news") },
-  // Minecraft 26.2 renders babies through a distinct villager_baby model
-  // layer. The original render controller selects this large-head rig at 1/3
-  // scale and pairs it with dkn, its dedicated baby UV layout.
-  "villager_baby.jem": { models: rootVillagerModels("villager_news_baby", undefined, [], {
+  "villager.jem": { models: rootVillagerModels("villager_news", undefined, [
+    { geometry: "geometry.oreville_vn.131968402", texture: "dtd", visibility: "vnap_cosmetic_mayor_hat", scaleXZ: 0.9, drop: 1.7, monocleInset: 1.75 },
+    { geometry: "geometry.oreville_vn.1221980082", texture: "djn", visibility: "vnap_cosmetic_helmet" },
+    { geometry: "geometry.oreville_vn.1878756082", texture: "dta", visibility: "vnap_cosmetic_microphone" },
+    { geometry: "geometry.oreville_vn.208670578", texture: "djh", visibility: "vnap_cosmetic_moustache" },
+  ]) },
+  "villager_baby.jem": { models: rootVillagerModels("villager_news_baby", undefined, [
+    { geometry: "geometry.oreville_vn.292718674", texture: "dtd", visibility: "vnap_cosmetic_mayor_hat" },
+    { geometry: "geometry.oreville_vn.1221980082", texture: "djn", visibility: "vnap_cosmetic_helmet" },
+    { geometry: "geometry.oreville_vn.1878756082", texture: "dta", visibility: "vnap_cosmetic_microphone" },
+    { geometry: "geometry.oreville_vn.208670578", texture: "djh", visibility: "vnap_cosmetic_moustache" },
+  ], {
     baseGeometry: "geometry.oreville_vn.-1769484142",
     rigScale: 1 / 3,
   }) },
   "villager2.jem": { models: rootVillagerModels("mayor", "mayor", [
     { geometry: "geometry.oreville_vn.292718674", texture: "dtd" },
   ], {
-    // Mayor Villager is a baby in the behavior pack. Bedrock selects the
-    // matching three-times-large rig and combines 0.5 entity scale with
-    // 0.6666 client scale, so both the body and hat must be scaled together.
     baseGeometry: "geometry.oreville_vn.-1769484142",
     rigScale: 1 / 3,
   }) },
@@ -897,9 +868,6 @@ const modelDefinitions = {
   "wandering_trader.jem": { models: rootVillagerModels("wandering_trader_news", "dix") },
   "sheep2.jem": { models: rootSheepModels("wooly", "diw") },
   "sheep3.jem": { models: rootSheepModels("wooly", "diw", true) },
-  // Java 26.2 renders both an undercoat and a wool layer. Empty variants stop
-  // either layer from drawing Wooly's complete base rig again with a white
-  // fleece texture over its face and hooves.
   "sheep_wool_undercoat2.jem": { models: vanillaSheepSuppressors("wooly_undercoat") },
   "sheep_wool2.jem": { models: vanillaSheepSuppressors("wooly_wool") },
 };
@@ -910,7 +878,6 @@ for (const [file, model] of Object.entries(modelDefinitions)) {
 }
 
 writeText(join(cemRoot, "villager.properties"), [
-  "# Rename a villager with a name tag to select a Villager News cast model.",
   "models.1=2",
   "name.1=iregex:(Mayor|Mayor Villager|The Mayor)",
   "models.2=3",
@@ -925,7 +892,6 @@ writeText(join(cemRoot, "villager.properties"), [
 ].join("\n"));
 
 writeText(join(cemRoot, "sheep.properties"), [
-  // Test the specific sheared state before the name-only fallback.
   "models.1=3",
   "name.1=iregex:(Wooly|Wooly The Sheep)",
   "nbt.1.Sheared=1",
@@ -981,9 +947,6 @@ function normalizeBinaryAlpha(name) {
   const destination = join(modAssets, "textures", "entity", `${name}.png`);
   const temporary = join(modAssets, "textures", "entity", `${name}.opaque.png`);
   try {
-    // Bedrock's sheep material reads low alpha values as a dye/material mask.
-    // Java reads the same channel as transparency, which made Wooly's skin,
-    // face, and hooves (alpha 3) effectively invisible while wool remained.
     execFileSync(ffmpeg, [
       "-y", "-hide_banner", "-loglevel", "error", "-i", destination,
       "-vf", "lut=a='if(eq(val,0),0,255)'", "-frames:v", "1", temporary,
@@ -1079,7 +1042,12 @@ function property(object, name) {
 }
 
 function literalText(node) {
-  return ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node) ? node.text : undefined;
+	if (!node) return undefined;
+  if (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) return node.text;
+  if (ts.isPropertyAccessExpression(node) && node.expression.getText(sourceFile) === "lkryzq") {
+    return literalAliasMap("lkryzq").get(node.name.text);
+  }
+  return undefined;
 }
 
 function literalNumber(node, fallback = 0) {
@@ -1102,6 +1070,7 @@ function scanMetadata(node) {
     const id = node.name.expression.name.text;
     metadataById.set(id, {
       title: literalText(property(node.initializer, "title")) ?? "",
+      browseTitle: literalText(property(node.initializer, "bkltkm")) ?? literalText(property(node.initializer, "title")) ?? "",
       body: literalText(property(node.initializer, "body")) ?? "",
     });
   }
@@ -1145,6 +1114,119 @@ function scanDialogue(node) {
 
 scanMetadata(sourceFile);
 scanDialogue(sourceFile);
+
+function variableInitializer(name) {
+  let result;
+  function visit(node) {
+    if (result) return;
+    if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.name.text === name) {
+      result = node.initializer;
+      return;
+    }
+    ts.forEachChild(node, visit);
+  }
+  visit(sourceFile);
+  return result;
+}
+
+function literalAliasMap(name) {
+  const object = variableInitializer(name);
+  const result = new Map();
+  if (!ts.isObjectLiteralExpression(object)) return result;
+  for (const entry of object.properties) {
+    if (!ts.isPropertyAssignment(entry) || !ts.isIdentifier(entry.name)) continue;
+    const value = literalText(entry.initializer);
+    if (value !== undefined) result.set(entry.name.text, value);
+  }
+  return result;
+}
+
+function referenceAlias(node, owner) {
+  return ts.isPropertyAccessExpression(node) && node.expression.getText(sourceFile) === owner
+    ? node.name.text : undefined;
+}
+
+function referenceArray(name, owner, aliases) {
+  const array = variableInitializer(name);
+  if (!ts.isArrayLiteralExpression(array)) return [];
+  return array.elements.map((entry) => aliases.get(referenceAlias(entry, owner))).filter(Boolean);
+}
+
+function computedLabels(name, owner, aliases) {
+  const object = variableInitializer(name);
+  const result = new Map();
+  if (!ts.isObjectLiteralExpression(object)) return result;
+  for (const entry of object.properties) {
+    if (!ts.isPropertyAssignment(entry) || !ts.isComputedPropertyName(entry.name)) continue;
+    const key = aliases.get(referenceAlias(entry.name.expression, owner));
+    const value = literalText(entry.initializer);
+    if (key && value !== undefined) result.set(key, value);
+  }
+  return result;
+}
+
+function computedArrays(name, keyOwner, keyAliases, valueOwner, valueAliases) {
+  const object = variableInitializer(name);
+  const result = new Map();
+  if (!ts.isObjectLiteralExpression(object)) return result;
+  for (const entry of object.properties) {
+    if (!ts.isPropertyAssignment(entry) || !ts.isComputedPropertyName(entry.name)
+      || !ts.isArrayLiteralExpression(entry.initializer)) continue;
+    const key = keyAliases.get(referenceAlias(entry.name.expression, keyOwner));
+    if (!key) continue;
+    result.set(key, entry.initializer.elements
+      .map((value) => valueAliases.get(referenceAlias(value, valueOwner)))
+      .filter(Boolean));
+  }
+  return result;
+}
+
+function handbookEntries(name) {
+  const array = variableInitializer(name);
+  if (!ts.isArrayLiteralExpression(array)) return [];
+  return array.elements.filter(ts.isObjectLiteralExpression).map((entry) => ({
+    title: literalText(property(entry, "header")) ?? "",
+    body: literalText(property(entry, "body")) ?? "",
+  }));
+}
+
+const categoryAliases = literalAliasMap("juuyxy");
+const sectionAliases = literalAliasMap("hbkffr");
+const groupAliases = literalAliasMap("uxyuyr");
+const groupReferences = new Map([...groupAliases.keys()].map((key) => [key, key]));
+const categoryLabels = computedLabels("pyveoi", "juuyxy", categoryAliases);
+const sectionLabels = computedLabels("eawipt", "hbkffr", sectionAliases);
+const categories = referenceArray("hgphbc", "juuyxy", categoryAliases);
+const sectionsByCategory = computedArrays("negxgt", "juuyxy", categoryAliases, "hbkffr", sectionAliases);
+const groupsBySection = computedArrays("qoimcn", "hbkffr", sectionAliases, "uxyuyr", groupReferences);
+const handbook = {
+  headline: "Breaking News!\n\nVillagers are now judging your every move with over 2,000+ voiced reactions.",
+  guideIntro: "Explore Villager News, meet special characters and discover hidden reactions.\n\nOnline Guide\norevillestudios.com/villager-news",
+  overview: handbookEntries("cphxgl"),
+  specialVillagers: handbookEntries("gucqpi"),
+  cosmetics: handbookEntries("vxivvu"),
+  generalInformation: handbookEntries("vhbeyx"),
+  socials: handbookEntries("oshzpy"),
+  support: "Need help, found a bug or have some feedback? Get in touch with Oreville Studios below.\n\nWebsite\norevillestudios.com\n\nEmail Support\nsupport@orevillestudios.com\n\nCommunity Discord\norevillestudios.com/discord",
+  settings: [
+    { title: "Show Subtitles", body: "Whether subtitles appear when Villagers speak." },
+    { title: "Villager Chattiness", body: "How often Villagers speak: Muted, Shy, Chatty, or Super Chatty." },
+    { title: "Rare Villager Voicelines", body: "How often Villagers say longer, more unusual lines: Never, Default, or Often." },
+    { title: "Spawn Special Villagers", body: "Whether Villager News characters can naturally spawn." },
+    { title: "Villager Style", body: "The Java port uses the Villager News style supplied through EMF and ETF." },
+  ],
+  contexts: Object.fromEntries(metadataById),
+  categories: categories.map((category) => ({
+    id: category,
+    title: categoryLabels.get(category) ?? category,
+    sections: (sectionsByCategory.get(category) ?? []).map((section) => ({
+      id: section,
+      title: sectionLabels.get(section) ?? section,
+      groups: groupsBySection.get(section) ?? [],
+      entries: section === sectionAliases.get("qllzox") ? handbookEntries("mqptgt") : [],
+    })),
+  })),
+};
 
 const knownSpeakers = new Map();
 for (const [speaker, ids] of Object.entries({
@@ -1192,6 +1274,7 @@ for (const [id, group] of dialogueGroups) {
   if (metadata.title) catalog.titles[metadata.title] = id;
   for (const [index, sound] of group.sounds.entries()) {
     javaSounds[`dialogue.${id}.${index}`] = {
+      subtitle: "subtitles.villager-news-addon-port.talking",
       sounds: [{
       name: `${modNamespace}:voice/${sound.name}`,
       stream: sound.duration >= 8,
@@ -1200,11 +1283,9 @@ for (const [id, group] of dialogueGroups) {
   }
 }
 writeJson(join(modAssets, "dialogues.json"), catalog);
+writeJson(join(modAssets, "handbook.json"), handbook);
 writeJson(join(modAssets, "sounds.json"), javaSounds);
 
-// Bedrock couples every recorded line to a phoneme timeline and one or more
-// expressive body animations.  Sound variants are now selected on the server,
-// so the client can play the matching animation instead of an unrelated pose.
 const commonClientDescription = walkFiles(join(resourceRoot, "entity"))
   .filter((path) => path.endsWith(".json"))
   .map((path) => readJson(path)["minecraft:client_entity"]?.description)
@@ -1368,8 +1449,6 @@ function sampleTarget(animation, sourceBones, kind, time, defaults) {
     sampled[1] = sampled[1] * Math.PI / 180;
     sampled[2] = sampled[2] * Math.PI / 180;
   } else if (kind === "position") {
-    // Animation values are written after EMF prepares the JEM. Bedrock and
-    // Java use the same X/Z direction here; only model-space Y is inverted.
     sampled[1] = -sampled[1];
   }
   return sampled.map(cleanNumber);
@@ -1377,9 +1456,6 @@ function sampleTarget(animation, sourceBones, kind, time, defaults) {
 
 const gestureNames = [...usedGestureNames].sort();
 const gestureIndexes = new Map(gestureNames.map((name, index) => [name, index]));
-// These seven controller states play a second animation at the same time as
-// the named gesture. Omitting them loses much of the authored head, arm, nose,
-// and waist motion.
 const gestureCompanions = {
   phmycx: ["clnzxd"],
   qcjrlv: ["xmtqdi"],
@@ -1393,8 +1469,6 @@ const bakedGestures = gestureNames.map((gestureName) => {
   const layerNames = [gestureName, ...(gestureCompanions[gestureName] ?? [])];
   const sourceAnimations = layerNames.map((name) => animationById.get(commonAnimationAliases[name]) ?? {});
   const layerDurations = sourceAnimations.map((animation) => Number(animation.animation_length ?? 0)).filter((value) => value > 0);
-  // The controller leaves a state when any simultaneously playing animation
-  // finishes, so a paired state uses its shortest layer duration.
   const duration = layerDurations.length ? Math.min(...layerDurations) : 0;
   const frameCount = Math.max(1, Math.ceil(duration * bakedFramesPerSecond) + 1);
   const tracks = {};
@@ -1435,16 +1509,18 @@ writeJson(join(modAssets, "dialogue_animations.json"), {
   gestures: bakedGestures,
 });
 
-if (!ffmpeg) throw new Error("FFmpeg is required to generate the ESF silence clip.");
 const silenceFile = join(modAssets, "sounds", "silence.ogg");
-execFileSync(ffmpeg, [
-  "-y", "-hide_banner", "-loglevel", "error",
-  "-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono",
-  "-t", "0.1", "-c:a", "libvorbis", silenceFile,
-]);
+if (preservedSilence) {
+  writeFileSync(silenceFile, preservedSilence);
+} else {
+  if (!ffmpeg) throw new Error("FFmpeg is required to generate the ESF silence clip.");
+  execFileSync(ffmpeg, [
+    "-y", "-hide_banner", "-loglevel", "error",
+    "-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono",
+    "-t", "0.1", "-c:a", "libvorbis", silenceFile,
+  ]);
+}
 
-// Stock villager grunts are muted for both ages. Contextual adult and baby
-// speech is selected by the Java controller.
 for (const event of ["ambient", "hurt", "death", "trade", "no"]) {
   const eventRoot = join(minecraftAssets, "esf", "entity", "villager");
   writeJson(join(eventRoot, `${event}2.json`), {
@@ -1456,8 +1532,17 @@ for (const event of ["ambient", "hurt", "death", "trade", "no"]) {
   ].join("\n"));
 }
 
-// Wooly keeps the add-on's contextual dialogue without also producing the
-// vanilla sheep vocals. The name rule leaves ordinary sheep unchanged.
+for (const event of ["ambient", "hurt", "death", "trade", "no", "yes"]) {
+  const eventRoot = join(minecraftAssets, "esf", "entity", "wandering_trader");
+  writeJson(join(eventRoot, `${event}2.json`), {
+    sounds: [{ name: `${modNamespace}:silence`, volume: 0.01, weight: 1 }],
+  });
+  writeText(join(eventRoot, `${event}.properties`), [
+    "sounds.1=2",
+    "",
+  ].join("\n"));
+}
+
 for (const event of ["ambient", "hurt", "death"]) {
   const eventRoot = join(minecraftAssets, "esf", "entity", "sheep");
   writeJson(join(eventRoot, `${event}2.json`), {

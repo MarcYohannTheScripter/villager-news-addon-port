@@ -1,6 +1,6 @@
 # Villager News Addon Port
 
-A Fabric port of **Villager News 1.0.4** for Minecraft Java Edition 26.2.
+A Fabric port of the **Villager News Add-On** for Minecraft Java Edition 26.2.
 It brings the original Villager News characters, models, animations, textures,
 voice acting, and contextual dialogue to Java Edition while retaining normal
 Minecraft villager gameplay.
@@ -21,6 +21,13 @@ Minecraft villager gameplay.
   villager behavior
 - Speakers look toward the player, entity, block, or villager they are talking
   about
+- Removable villager noses, character cosmetics, cosmetic reactions, and
+  missing-nose conversations
+- Character trades for the Mayor Hat, Testificate Man Helmet, Moustache, and
+  Microphone
+- Persistent natural spawning for one of each special character in distant
+  villages
+- A craftable Villager News Handbook
 
 ## Requirements
 
@@ -62,6 +69,24 @@ Name a sheep `Wooly` or `Wooly The Sheep` to use Wooly's model, animations,
 and sounds. Ordinary villagers and wandering traders receive their Villager
 News appearance and dialogue automatically.
 
+Special characters can also appear naturally as new distant villages are
+generated. Each character appears once at a time and becomes eligible to spawn
+again after being killed.
+
+## Items
+
+All custom items are available in the **Villager News** creative-mode tab.
+
+Craft the Villager News Handbook from three pieces of paper. It includes the
+add-on's overview, special-character and cosmetic guides, settings reference,
+social and support pages, and the complete searchable Triggers & Reactions
+guide.
+
+Shear an adult villager to remove its nose. Interact with that villager while
+holding the nose to return it. The Mayor, Testificate Man, Villager #5, and
+Villager #9 sell their matching cosmetics. Cosmetics can be given to ordinary
+villagers and removed again with shears.
+
 ## Dialogue
 
 Villagers react to what happens around them. They can comment when a player
@@ -98,14 +123,23 @@ node tools/verify-port.mjs
 ```
 
 After extracting the original Bedrock packs into `build/bedrock-source`, create
-a readable Wooly source copy and symbol map with:
+a formatted copy of the complete add-on, a dialogue symbol map, a feature
+inventory, and a Java dialogue coverage report with:
+
+```powershell
+node tools/deobfuscate-addon.mjs
+```
+
+The output is written to `build/deobfuscated-bedrock-source/full-addon`.
+Wooly's smaller focused source map can also be generated with:
 
 ```powershell
 node tools/deobfuscate-wooly.mjs
 ```
 
-The output is written to `build/deobfuscated-bedrock-source/wooly`. The known
-source symbols are documented in [`docs/bedrock-deobfuscation/wooly.md`](docs/bedrock-deobfuscation/wooly.md).
+The focused output is written to `build/deobfuscated-bedrock-source/wooly`. The
+known source symbols are documented in
+[`docs/bedrock-deobfuscation/wooly.md`](docs/bedrock-deobfuscation/wooly.md).
 
 ## Credits
 

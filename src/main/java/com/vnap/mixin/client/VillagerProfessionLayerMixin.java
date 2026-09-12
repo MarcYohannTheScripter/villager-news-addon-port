@@ -6,12 +6,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-/**
- * Java creates a separate vanilla no-hat villager model for some clothing
- * passes. That model does not contain the EMF replacement hierarchy, so its
- * torso, arms, and legs intersect the imported Villager News model. Reusing
- * the renderer's main model keeps every texture pass on the same geometry.
- */
 @Mixin(VillagerProfessionLayer.class)
 abstract class VillagerProfessionLayerMixin {
 	@SuppressWarnings("rawtypes")
