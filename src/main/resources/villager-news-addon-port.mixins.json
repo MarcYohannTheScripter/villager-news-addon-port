@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.vnap.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "AbstractVillagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

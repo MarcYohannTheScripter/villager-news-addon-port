@@ -1,0 +1,51 @@
+# Gradle and compiled output
+.gradle/
+build/
+out/
+classes/
+bin/
+
+# Minecraft development runtime
+run/
+logs/
+saves/
+downloads/
+resourcepacks/
+eula.txt
+usercache.json
+command_history.txt
+debug-profile.json
+options.txt
+
+# IntelliJ IDEA, Eclipse, and VS Code
+.idea/
+.settings/
+.vscode/
+*.iml
+*.ipr
+*.iws
+*.launch
+.classpath
+.project
+
+# Local Codex files
+.agents/
+.codex/
+
+# Local environment and temporary files
+.env
+.env.*
+*.log
+*.tmp
+*.bak
+hs_err_*.log
+replay_*.log
+*.hprof
+*.jfr
+
+# Source add-on archives and operating-system metadata
+*.mcaddon
+*.mcpack
+.DS_Store
+Thumbs.db
+Desktop.ini

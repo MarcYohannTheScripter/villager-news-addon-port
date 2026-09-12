@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.vnap.mixin.client",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "VillagerProfessionLayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

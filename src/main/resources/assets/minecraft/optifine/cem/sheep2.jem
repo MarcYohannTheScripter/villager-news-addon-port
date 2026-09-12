@@ -1,0 +1,860 @@
+{
+  "textureSize": [
+    64,
+    64
+  ],
+  "models": [
+    {
+      "id": "wooly_0_root",
+      "invertAxis": "xy",
+      "translate": [
+        0,
+        0,
+        0
+      ],
+      "submodels": [
+        {
+          "id": "wooly_0_body",
+          "invertAxis": "xy",
+          "translate": [
+            0,
+            14.25,
+            0
+          ],
+          "submodels": [
+            {
+              "id": "wooly_0_46fljga5",
+              "invertAxis": "xy",
+              "translate": [
+                0,
+                0,
+                0
+              ],
+              "rotate": [
+                -90,
+                0,
+                0
+              ],
+              "boxes": [
+                {
+                  "coordinates": [
+                    -4,
+                    -7,
+                    -3,
+                    8,
+                    16,
+                    6
+                  ],
+                  "textureOffset": [
+                    28,
+                    8
+                  ]
+                }
+              ],
+              "submodels": [
+                {
+                  "id": "wooly_0_oggd_46fljga5",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0.55,
+                    0,
+                    0
+                  ],
+                  "boxes": [
+                    {
+                      "coordinates": [
+                        -4.55,
+                        -7.25,
+                        -3.4,
+                        8,
+                        16,
+                        6
+                      ],
+                      "sizeAdd": 1.1,
+                      "textureOffset": [
+                        28,
+                        40
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "wooly_0_k966h_head",
+              "invertAxis": "xy",
+              "translate": [
+                0,
+                3.75,
+                -8
+              ],
+              "boxes": [
+                {
+                  "coordinates": [
+                    -3,
+                    -3,
+                    -6.75,
+                    6,
+                    6,
+                    8
+                  ],
+                  "uvSouth": [
+                    22,
+                    8,
+                    28,
+                    14
+                  ],
+                  "uvEast": [
+                    0,
+                    8,
+                    8,
+                    14
+                  ],
+                  "uvWest": [
+                    14,
+                    8,
+                    22,
+                    14
+                  ],
+                  "uvUp": [
+                    8,
+                    0,
+                    14,
+                    8
+                  ],
+                  "uvDown": [
+                    14,
+                    8,
+                    20,
+                    0
+                  ]
+                }
+              ],
+              "submodels": [
+                {
+                  "id": "wooly_0_oggd_head",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "boxes": [
+                    {
+                      "coordinates": [
+                        -3,
+                        -3,
+                        -4.75,
+                        6,
+                        6,
+                        6
+                      ],
+                      "sizeAdd": 0.6,
+                      "textureOffset": [
+                        0,
+                        32
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "wooly_0_3dafc",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    2,
+                    -6.725
+                  ],
+                  "boxes": [
+                    {
+                      "coordinates": [
+                        -3,
+                        -2,
+                        -0.015,
+                        2,
+                        1,
+                        1
+                      ],
+                      "sizeAdd": 0.015,
+                      "uvNorth": [
+                        14,
+                        9,
+                        12,
+                        10
+                      ]
+                    },
+                    {
+                      "coordinates": [
+                        0.985,
+                        -2,
+                        -0.015,
+                        2,
+                        1,
+                        1
+                      ],
+                      "sizeAdd": 0.015,
+                      "uvNorth": [
+                        8,
+                        9,
+                        10,
+                        10
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "wooly_0_7246gn6jd2q",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "boxes": [
+                    {
+                      "coordinates": [
+                        -3,
+                        -1,
+                        -6.75,
+                        6,
+                        4,
+                        0
+                      ],
+                      "uvNorth": [
+                        8,
+                        8,
+                        14,
+                        12
+                      ]
+                    },
+                    {
+                      "coordinates": [
+                        -3,
+                        -3,
+                        -6.75,
+                        2,
+                        2,
+                        0
+                      ],
+                      "uvNorth": [
+                        12,
+                        12,
+                        14,
+                        14
+                      ]
+                    },
+                    {
+                      "coordinates": [
+                        1,
+                        -3,
+                        -6.75,
+                        2,
+                        2,
+                        0
+                      ],
+                      "uvNorth": [
+                        8,
+                        12,
+                        10,
+                        14
+                      ]
+                    },
+                    {
+                      "coordinates": [
+                        0,
+                        -3,
+                        -6.75,
+                        1,
+                        2,
+                        0
+                      ],
+                      "uvNorth": [
+                        9.5,
+                        12.5,
+                        9.5,
+                        13.5
+                      ]
+                    },
+                    {
+                      "coordinates": [
+                        -1,
+                        -3,
+                        -6.75,
+                        1,
+                        2,
+                        0
+                      ],
+                      "uvNorth": [
+                        12.5,
+                        12.5,
+                        12.5,
+                        13.5
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "wooly_0_l66l9",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    -1,
+                    -6.775
+                  ],
+                  "submodels": [
+                    {
+                      "id": "wooly_0_l66l9lgh",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0,
+                        -0.525,
+                        0
+                      ],
+                      "boxes": [
+                        {
+                          "coordinates": [
+                            -1.3583,
+                            -0.15625,
+                            -0.025,
+                            2.7166,
+                            0.3125,
+                            0.05
+                          ],
+                          "uvNorth": [
+                            12.5,
+                            10.5,
+                            12.5,
+                            10.5
+                          ],
+                          "uvSouth": [
+                            12.5,
+                            10.5,
+                            12.5,
+                            10.5
+                          ],
+                          "uvEast": [
+                            12.5,
+                            10.5,
+                            12.5,
+                            10.5
+                          ],
+                          "uvWest": [
+                            12.5,
+                            10.5,
+                            12.5,
+                            10.5
+                          ],
+                          "uvUp": [
+                            12.5,
+                            10.5,
+                            12.5,
+                            10.5
+                          ],
+                          "uvDown": [
+                            12.5,
+                            10.5,
+                            12.5,
+                            10.5
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "wooly_0_l66l93gllge",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0,
+                        -0.86875,
+                        0
+                      ],
+                      "boxes": [
+                        {
+                          "coordinates": [
+                            -1.3583,
+                            -0.15625,
+                            -0.025,
+                            2.7166,
+                            0.3125,
+                            0.05
+                          ],
+                          "uvNorth": [
+                            12.5,
+                            10.5,
+                            12.5,
+                            10.5
+                          ],
+                          "uvSouth": [
+                            12.5,
+                            10.5,
+                            12.5,
+                            10.5
+                          ],
+                          "uvEast": [
+                            12.5,
+                            10.5,
+                            12.5,
+                            10.5
+                          ],
+                          "uvWest": [
+                            12.5,
+                            10.5,
+                            12.5,
+                            10.5
+                          ],
+                          "uvUp": [
+                            12.5,
+                            10.5,
+                            12.5,
+                            10.5
+                          ],
+                          "uvDown": [
+                            12.5,
+                            10.5,
+                            12.5,
+                            10.5
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "wooly_0_egml9",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    -1.7,
+                    -6.275
+                  ],
+                  "boxes": [
+                    {
+                      "coordinates": [
+                        -1.3333,
+                        -0.3,
+                        -0.5,
+                        2.6666,
+                        0.6,
+                        1
+                      ],
+                      "uvNorth": [
+                        10,
+                        12,
+                        12,
+                        13
+                      ],
+                      "uvSouth": [
+                        10,
+                        12,
+                        12,
+                        13
+                      ],
+                      "uvEast": [
+                        10,
+                        12,
+                        10.5,
+                        13
+                      ],
+                      "uvWest": [
+                        12,
+                        12,
+                        11.5,
+                        13
+                      ],
+                      "uvUp": [
+                        10,
+                        12.5,
+                        12,
+                        12
+                      ],
+                      "uvDown": [
+                        10,
+                        12.5,
+                        12,
+                        13.025
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "wooly_0_root_d680",
+          "invertAxis": "xy",
+          "translate": [
+            0,
+            0,
+            0
+          ],
+          "submodels": [
+            {
+              "id": "wooly_0_d0_7dggj",
+              "invertAxis": "xy",
+              "translate": [
+                2.75,
+                0,
+                5.5
+              ],
+              "submodels": [
+                {
+                  "id": "wooly_0_d680",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    11.5,
+                    0
+                  ],
+                  "boxes": [
+                    {
+                      "coordinates": [
+                        -2.05,
+                        -11.7,
+                        -1.99,
+                        4,
+                        12,
+                        4
+                      ],
+                      "sizeAdd": -0.2,
+                      "textureOffset": [
+                        0,
+                        16
+                      ]
+                    }
+                  ],
+                  "submodels": [
+                    {
+                      "id": "wooly_0_oggd_d680",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "boxes": [
+                        {
+                          "coordinates": [
+                            -2.05,
+                            -5.86,
+                            -1.99,
+                            4,
+                            6,
+                            4
+                          ],
+                          "sizeAdd": 0.35,
+                          "textureOffset": [
+                            0,
+                            48
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "wooly_0_root_d681",
+          "invertAxis": "xy",
+          "translate": [
+            0,
+            0,
+            0
+          ],
+          "submodels": [
+            {
+              "id": "wooly_0_d1_7dggj",
+              "invertAxis": "xy",
+              "translate": [
+                -2.75,
+                0,
+                5.5
+              ],
+              "submodels": [
+                {
+                  "id": "wooly_0_d681",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    11.5,
+                    0
+                  ],
+                  "submodels": [
+                    {
+                      "id": "wooly_0_d681_cube_0",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "boxes": [
+                        {
+                          "coordinates": [
+                            -1.95,
+                            -11.7,
+                            -1.99,
+                            4,
+                            12,
+                            4
+                          ],
+                          "sizeAdd": -0.2,
+                          "textureOffset": [
+                            0,
+                            16
+                          ]
+                        }
+                      ],
+                      "mirrorTexture": "u"
+                    },
+                    {
+                      "id": "wooly_0_oggd_d681",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "submodels": [
+                        {
+                          "id": "wooly_0_oggd_d681_cube_0",
+                          "invertAxis": "xy",
+                          "translate": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "boxes": [
+                            {
+                              "coordinates": [
+                                -1.95,
+                                -5.86,
+                                -1.99,
+                                4,
+                                6,
+                                4
+                              ],
+                              "sizeAdd": 0.35,
+                              "textureOffset": [
+                                0,
+                                48
+                              ]
+                            }
+                          ],
+                          "mirrorTexture": "u"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "wooly_0_root_d682",
+          "invertAxis": "xy",
+          "translate": [
+            0,
+            0,
+            0
+          ],
+          "submodels": [
+            {
+              "id": "wooly_0_d2_7dggj",
+              "invertAxis": "xy",
+              "translate": [
+                2.75,
+                0,
+                -5.5
+              ],
+              "submodels": [
+                {
+                  "id": "wooly_0_d682",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    11.5,
+                    0
+                  ],
+                  "boxes": [
+                    {
+                      "coordinates": [
+                        -2.05,
+                        -11.7,
+                        -2.02,
+                        4,
+                        12,
+                        4
+                      ],
+                      "sizeAdd": -0.2,
+                      "textureOffset": [
+                        0,
+                        16
+                      ]
+                    }
+                  ],
+                  "submodels": [
+                    {
+                      "id": "wooly_0_oggd_d682",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "boxes": [
+                        {
+                          "coordinates": [
+                            -2.05,
+                            -5.86,
+                            -2.02,
+                            4,
+                            6,
+                            4
+                          ],
+                          "sizeAdd": 0.35,
+                          "textureOffset": [
+                            0,
+                            48
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "wooly_0_root_d683",
+          "invertAxis": "xy",
+          "translate": [
+            0,
+            0,
+            0
+          ],
+          "submodels": [
+            {
+              "id": "wooly_0_d3_7dggj",
+              "invertAxis": "xy",
+              "translate": [
+                -2.75,
+                0,
+                -5.5
+              ],
+              "submodels": [
+                {
+                  "id": "wooly_0_d683",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    11.5,
+                    0
+                  ],
+                  "submodels": [
+                    {
+                      "id": "wooly_0_d683_cube_0",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "boxes": [
+                        {
+                          "coordinates": [
+                            -1.95,
+                            -11.7,
+                            -2.02,
+                            4,
+                            12,
+                            4
+                          ],
+                          "sizeAdd": -0.2,
+                          "textureOffset": [
+                            0,
+                            16
+                          ]
+                        }
+                      ],
+                      "mirrorTexture": "u"
+                    },
+                    {
+                      "id": "wooly_0_oggd_d683",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "submodels": [
+                        {
+                          "id": "wooly_0_oggd_d683_cube_0",
+                          "invertAxis": "xy",
+                          "translate": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "boxes": [
+                            {
+                              "coordinates": [
+                                -1.95,
+                                -5.86,
+                                -2.02,
+                                4,
+                                6,
+                                4
+                              ],
+                              "sizeAdd": 0.35,
+                              "textureOffset": [
+                                0,
+                                48
+                              ]
+                            }
+                          ],
+                          "mirrorTexture": "u"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "part": "root",
+      "attach": false,
+      "textureSize": [
+        64,
+        64
+      ],
+      "texture": "villager-news-addon-port:textures/entity/diw.png",
+      "animations": [
+        {
+          "wooly_0_k966h_head.rx": "torad(head_pitch)"
+        },
+        {
+          "wooly_0_k966h_head.ry": "torad(head_yaw)"
+        },
+        {
+          "wooly_0_root_d680.rx": "sin(limb_swing * 0.6662) * 1.4 * limb_speed"
+        },
+        {
+          "wooly_0_root_d681.rx": "sin(limb_swing * 0.6662 + pi) * 1.4 * limb_speed"
+        },
+        {
+          "wooly_0_root_d682.rx": "sin(limb_swing * 0.6662 + pi) * 1.4 * limb_speed"
+        },
+        {
+          "wooly_0_root_d683.rx": "sin(limb_swing * 0.6662) * 1.4 * limb_speed"
+        }
+      ]
+    }
+  ]
+}

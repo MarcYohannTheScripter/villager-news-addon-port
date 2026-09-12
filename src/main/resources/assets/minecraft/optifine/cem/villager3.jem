@@ -1,0 +1,1748 @@
+{
+  "textureSize": [
+    64,
+    64
+  ],
+  "models": [
+    {
+      "id": "testificate_base_root",
+      "invertAxis": "xy",
+      "translate": [
+        0,
+        -24,
+        0
+      ],
+      "submodels": [
+        {
+          "id": "testificate_base_waist",
+          "invertAxis": "xy",
+          "translate": [
+            0,
+            12,
+            0
+          ],
+          "submodels": [
+            {
+              "id": "testificate_base_body",
+              "invertAxis": "xy",
+              "translate": [
+                0,
+                12,
+                0
+              ],
+              "boxes": [
+                {
+                  "coordinates": [
+                    -4,
+                    -12,
+                    -3,
+                    8,
+                    12,
+                    6
+                  ],
+                  "textureOffset": [
+                    16,
+                    20
+                  ]
+                }
+              ],
+              "submodels": [
+                {
+                  "id": "testificate_base_jg36",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    -24,
+                    0
+                  ],
+                  "boxes": [
+                    {
+                      "coordinates": [
+                        -4,
+                        4,
+                        -3,
+                        8,
+                        20,
+                        6
+                      ],
+                      "sizeAdd": 0.5,
+                      "textureOffset": [
+                        0,
+                        38
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "testificate_base_head",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "submodels": [
+                    {
+                      "id": "testificate_base_headjgl2l6",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "boxes": [
+                        {
+                          "coordinates": [
+                            -4,
+                            0,
+                            -4,
+                            8,
+                            10,
+                            8
+                          ],
+                          "uvSouth": [
+                            24,
+                            8,
+                            32,
+                            18
+                          ],
+                          "uvEast": [
+                            0,
+                            8,
+                            8,
+                            18
+                          ],
+                          "uvWest": [
+                            16,
+                            8,
+                            24,
+                            18
+                          ],
+                          "uvUp": [
+                            8,
+                            0,
+                            16,
+                            8
+                          ],
+                          "uvDown": [
+                            16,
+                            8,
+                            24,
+                            0
+                          ]
+                        },
+                        {
+                          "coordinates": [
+                            -4,
+                            5,
+                            -4,
+                            8,
+                            5,
+                            0
+                          ],
+                          "uvNorth": [
+                            8,
+                            8,
+                            16,
+                            13
+                          ]
+                        },
+                        {
+                          "coordinates": [
+                            3,
+                            2,
+                            -4,
+                            1,
+                            3,
+                            0
+                          ],
+                          "uvNorth": [
+                            8,
+                            13,
+                            9,
+                            16
+                          ]
+                        },
+                        {
+                          "coordinates": [
+                            2,
+                            0,
+                            -4,
+                            2,
+                            2,
+                            0
+                          ],
+                          "uvNorth": [
+                            8,
+                            16,
+                            10,
+                            18
+                          ]
+                        },
+                        {
+                          "coordinates": [
+                            -2,
+                            0,
+                            -4,
+                            4,
+                            1,
+                            0
+                          ],
+                          "uvNorth": [
+                            10,
+                            17,
+                            14,
+                            18
+                          ]
+                        },
+                        {
+                          "coordinates": [
+                            -2,
+                            1,
+                            -4,
+                            4,
+                            1,
+                            0
+                          ],
+                          "uvNorth": [
+                            10,
+                            15,
+                            14,
+                            16
+                          ]
+                        },
+                        {
+                          "coordinates": [
+                            -4,
+                            0,
+                            -4,
+                            2,
+                            2,
+                            0
+                          ],
+                          "uvNorth": [
+                            14,
+                            16,
+                            16,
+                            18
+                          ]
+                        },
+                        {
+                          "coordinates": [
+                            -1,
+                            2,
+                            -4,
+                            2,
+                            2,
+                            0
+                          ],
+                          "uvNorth": [
+                            11,
+                            14,
+                            13,
+                            16
+                          ]
+                        },
+                        {
+                          "coordinates": [
+                            -1,
+                            4,
+                            -4,
+                            2,
+                            1,
+                            0
+                          ],
+                          "uvNorth": [
+                            11,
+                            14,
+                            13,
+                            15
+                          ]
+                        },
+                        {
+                          "coordinates": [
+                            -4,
+                            2,
+                            -4,
+                            1,
+                            3,
+                            0
+                          ],
+                          "uvNorth": [
+                            15,
+                            13,
+                            16,
+                            16
+                          ]
+                        },
+                        {
+                          "coordinates": [
+                            0.75,
+                            2.75,
+                            -3.85,
+                            3,
+                            2.5,
+                            0
+                          ],
+                          "uvNorth": [
+                            9,
+                            14,
+                            10,
+                            15
+                          ]
+                        },
+                        {
+                          "coordinates": [
+                            -3.75,
+                            2.75,
+                            -3.85,
+                            3,
+                            2.5,
+                            0
+                          ],
+                          "uvNorth": [
+                            14,
+                            14,
+                            15,
+                            15
+                          ]
+                        }
+                      ],
+                      "submodels": [
+                        {
+                          "id": "testificate_base_fgk6",
+                          "invertAxis": "xy",
+                          "translate": [
+                            0,
+                            2.5,
+                            -4
+                          ],
+                          "boxes": [
+                            {
+                              "coordinates": [
+                                -1,
+                                -3.5,
+                                -2,
+                                2,
+                                4,
+                                2
+                              ],
+                              "textureOffset": [
+                                24,
+                                0
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "testificate_base_d67l_6q6",
+                          "invertAxis": "xy",
+                          "translate": [
+                            -1.5,
+                            3.5,
+                            -3.975
+                          ],
+                          "boxes": [
+                            {
+                              "coordinates": [
+                                -0.525,
+                                -0.525,
+                                0,
+                                1.05,
+                                1.05,
+                                0
+                              ],
+                              "uvNorth": [
+                                13,
+                                14,
+                                14,
+                                15
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "testificate_base_ja89l_6q6",
+                          "invertAxis": "xy",
+                          "translate": [
+                            1.5,
+                            3.5,
+                            -3.975
+                          ],
+                          "boxes": [
+                            {
+                              "coordinates": [
+                                -0.525,
+                                -0.525,
+                                0,
+                                1.05,
+                                1.05,
+                                0
+                              ],
+                              "uvNorth": [
+                                10,
+                                14,
+                                11,
+                                15
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "testificate_base_6q6da5kmhh6j",
+                          "invertAxis": "xy",
+                          "translate": [
+                            0,
+                            5,
+                            -4
+                          ],
+                          "submodels": [
+                            {
+                              "id": "testificate_base_6q6da5kmhh6jd67l",
+                              "invertAxis": "xy",
+                              "translate": [
+                                -2,
+                                0,
+                                0
+                              ],
+                              "boxes": [
+                                {
+                                  "coordinates": [
+                                    -1.0375,
+                                    -1,
+                                    0,
+                                    2.05,
+                                    1.025,
+                                    0
+                                  ],
+                                  "uvNorth": [
+                                    11,
+                                    14,
+                                    13,
+                                    15
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": "testificate_base_6q6da5kmhh6jja89l",
+                              "invertAxis": "xy",
+                              "translate": [
+                                2,
+                                0,
+                                0
+                              ],
+                              "boxes": [
+                                {
+                                  "coordinates": [
+                                    -1.0125,
+                                    -1,
+                                    0,
+                                    2.05,
+                                    1.025,
+                                    0
+                                  ],
+                                  "uvNorth": [
+                                    11,
+                                    14,
+                                    13,
+                                    15
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "testificate_base_6q6da5kdgo6j",
+                          "invertAxis": "xy",
+                          "translate": [
+                            0,
+                            2,
+                            -4
+                          ],
+                          "submodels": [
+                            {
+                              "id": "testificate_base_6q6da5kdgo6jd67l",
+                              "invertAxis": "xy",
+                              "translate": [
+                                -2,
+                                0,
+                                0
+                              ],
+                              "boxes": [
+                                {
+                                  "coordinates": [
+                                    -1.0375,
+                                    -0.025,
+                                    0,
+                                    2.05,
+                                    1.025,
+                                    0
+                                  ],
+                                  "uvNorth": [
+                                    13,
+                                    16,
+                                    15,
+                                    15
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": "testificate_base_6q6da5kdgo6jja89l",
+                              "invertAxis": "xy",
+                              "translate": [
+                                2,
+                                0,
+                                0
+                              ],
+                              "boxes": [
+                                {
+                                  "coordinates": [
+                                    -1.0125,
+                                    -0.025,
+                                    0,
+                                    2.05,
+                                    1.025,
+                                    0
+                                  ],
+                                  "uvNorth": [
+                                    9,
+                                    16,
+                                    11,
+                                    15
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "testificate_base_egfg3jgo",
+                          "invertAxis": "xy",
+                          "translate": [
+                            0,
+                            4,
+                            -4.15
+                          ],
+                          "boxes": [
+                            {
+                              "coordinates": [
+                                -3.05,
+                                0,
+                                0,
+                                6.1,
+                                1,
+                                1
+                              ],
+                              "uvNorth": [
+                                9,
+                                13,
+                                15,
+                                14
+                              ],
+                              "uvSouth": [
+                                9,
+                                13,
+                                15,
+                                14
+                              ],
+                              "uvEast": [
+                                9,
+                                13,
+                                9.5,
+                                14
+                              ],
+                              "uvWest": [
+                                14.5,
+                                13,
+                                15,
+                                14
+                              ],
+                              "uvUp": [
+                                9,
+                                13,
+                                15,
+                                13.5
+                              ],
+                              "uvDown": [
+                                9,
+                                14,
+                                15,
+                                13.5
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "testificate_base_hat",
+                          "invertAxis": "xy",
+                          "translate": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "boxes": [
+                            {
+                              "coordinates": [
+                                -4,
+                                0,
+                                -4,
+                                8,
+                                10,
+                                8
+                              ],
+                              "sizeAdd": 0.5,
+                              "textureOffset": [
+                                32,
+                                0
+                              ]
+                            }
+                          ],
+                          "submodels": [
+                            {
+                              "id": "testificate_base_hat_cube_1",
+                              "invertAxis": "xy",
+                              "translate": [
+                                0,
+                                0,
+                                0
+                              ],
+                              "boxes": [
+                                {
+                                  "coordinates": [
+                                    -8,
+                                    -8,
+                                    -6,
+                                    16,
+                                    16,
+                                    1
+                                  ],
+                                  "sizeAdd": 0.1,
+                                  "textureOffset": [
+                                    30,
+                                    47
+                                  ]
+                                }
+                              ],
+                              "rotate": [
+                                90,
+                                0,
+                                0
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "testificate_base_egml9",
+                          "invertAxis": "xy",
+                          "translate": [
+                            0,
+                            1.5,
+                            -4.0125
+                          ],
+                          "boxes": [
+                            {
+                              "coordinates": [
+                                -2,
+                                -0.5,
+                                -0.0125,
+                                4,
+                                1,
+                                0.025
+                              ],
+                              "uvNorth": [
+                                10,
+                                16,
+                                14,
+                                17
+                              ],
+                              "uvSouth": [
+                                10,
+                                16,
+                                14,
+                                17
+                              ],
+                              "uvEast": [
+                                10,
+                                16,
+                                10.5,
+                                17
+                              ],
+                              "uvWest": [
+                                14,
+                                16,
+                                13.5,
+                                17
+                              ],
+                              "uvUp": [
+                                10,
+                                16.5,
+                                14,
+                                16
+                              ],
+                              "uvDown": [
+                                10,
+                                16.5,
+                                14,
+                                17
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "testificate_base_l66l9",
+                          "invertAxis": "xy",
+                          "translate": [
+                            0,
+                            1.5,
+                            -4.0125
+                          ],
+                          "submodels": [
+                            {
+                              "id": "testificate_base_l66l9lgh",
+                              "invertAxis": "xy",
+                              "translate": [
+                                0,
+                                0.2625,
+                                -0.0125
+                              ],
+                              "boxes": [
+                                {
+                                  "coordinates": [
+                                    -2.025,
+                                    -0.2375,
+                                    -0.025,
+                                    4.05,
+                                    0.5,
+                                    0.05
+                                  ],
+                                  "uvNorth": [
+                                    9,
+                                    14,
+                                    10,
+                                    15
+                                  ],
+                                  "uvSouth": [
+                                    9,
+                                    14,
+                                    10,
+                                    15
+                                  ],
+                                  "uvEast": [
+                                    9,
+                                    14,
+                                    10,
+                                    15
+                                  ],
+                                  "uvWest": [
+                                    9,
+                                    14,
+                                    10,
+                                    15
+                                  ],
+                                  "uvUp": [
+                                    10,
+                                    15,
+                                    9,
+                                    14
+                                  ],
+                                  "uvDown": [
+                                    10,
+                                    15,
+                                    9,
+                                    14
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": "testificate_base_l66l93gllge",
+                              "invertAxis": "xy",
+                              "translate": [
+                                0,
+                                -0.2625,
+                                -0.0125
+                              ],
+                              "boxes": [
+                                {
+                                  "coordinates": [
+                                    -2.025,
+                                    -0.2625,
+                                    -0.025,
+                                    4.05,
+                                    0.5,
+                                    0.05
+                                  ],
+                                  "uvNorth": [
+                                    9,
+                                    14,
+                                    10,
+                                    15
+                                  ],
+                                  "uvSouth": [
+                                    9,
+                                    14,
+                                    10,
+                                    15
+                                  ],
+                                  "uvEast": [
+                                    9,
+                                    14,
+                                    10,
+                                    15
+                                  ],
+                                  "uvWest": [
+                                    9,
+                                    14,
+                                    10,
+                                    15
+                                  ],
+                                  "uvUp": [
+                                    10,
+                                    15,
+                                    9,
+                                    14
+                                  ],
+                                  "uvDown": [
+                                    10,
+                                    15,
+                                    9,
+                                    14
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "testificate_base_2jek",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    -3,
+                    -1
+                  ],
+                  "rotate": [
+                    42.97,
+                    0,
+                    0
+                  ],
+                  "boxes": [
+                    {
+                      "coordinates": [
+                        -4,
+                        -6,
+                        -2,
+                        8,
+                        4,
+                        4
+                      ],
+                      "textureOffset": [
+                        40,
+                        38
+                      ]
+                    },
+                    {
+                      "coordinates": [
+                        4,
+                        -6,
+                        -2,
+                        4,
+                        8,
+                        4
+                      ],
+                      "textureOffset": [
+                        44,
+                        22
+                      ]
+                    }
+                  ],
+                  "submodels": [
+                    {
+                      "id": "testificate_base_2jek_cube_2",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "boxes": [
+                        {
+                          "coordinates": [
+                            -8,
+                            -6,
+                            -2,
+                            4,
+                            8,
+                            4
+                          ],
+                          "textureOffset": [
+                            44,
+                            22
+                          ]
+                        }
+                      ],
+                      "mirrorTexture": "u"
+                    },
+                    {
+                      "id": "testificate_base_held_item",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0,
+                        -22,
+                        0
+                      ]
+                    },
+                    {
+                      "id": "testificate_base_rightitem",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0.5,
+                        -4,
+                        0
+                      ],
+                      "rotate": [
+                        30,
+                        0,
+                        0
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "testificate_base_jggl_leftleg",
+          "invertAxis": "xy",
+          "translate": [
+            0,
+            0,
+            0
+          ],
+          "submodels": [
+            {
+              "id": "testificate_base_leftleg",
+              "invertAxis": "xy",
+              "translate": [
+                -2,
+                11,
+                0
+              ],
+              "submodels": [
+                {
+                  "id": "testificate_base_leftleg_cube_0",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "boxes": [
+                    {
+                      "coordinates": [
+                        -2,
+                        -12,
+                        -2,
+                        4,
+                        12,
+                        4
+                      ],
+                      "textureOffset": [
+                        0,
+                        22
+                      ]
+                    }
+                  ],
+                  "rotate": [
+                    0,
+                    5,
+                    -1
+                  ],
+                  "mirrorTexture": "u"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "testificate_base_jggl_rightleg",
+          "invertAxis": "xy",
+          "translate": [
+            0,
+            0,
+            0
+          ],
+          "submodels": [
+            {
+              "id": "testificate_base_rightleg",
+              "invertAxis": "xy",
+              "translate": [
+                2,
+                11,
+                0.5
+              ],
+              "submodels": [
+                {
+                  "id": "testificate_base_rightleg_cube_0",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    1,
+                    -0.5
+                  ],
+                  "boxes": [
+                    {
+                      "coordinates": [
+                        -2,
+                        -12,
+                        -2,
+                        4,
+                        12,
+                        4
+                      ],
+                      "textureOffset": [
+                        0,
+                        22
+                      ]
+                    }
+                  ],
+                  "rotate": [
+                    0,
+                    -5,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "part": "root",
+      "attach": true,
+      "textureSize": [
+        64,
+        64
+      ],
+      "texture": "villager-news-addon-port:textures/entity/testificate_man.png",
+      "animations": [
+        {
+          "this.rx": "vnap_root_rx",
+          "this.tx": "vnap_root_tx",
+          "this.sx": "vnap_root_sx",
+          "this.ry": "vnap_root_ry",
+          "this.ty": "24+vnap_root_ty",
+          "this.sy": "vnap_root_sy",
+          "this.rz": "vnap_root_rz",
+          "this.tz": "vnap_root_tz",
+          "this.sz": "vnap_root_sz"
+        },
+        {
+          "testificate_base_waist.rx": "vnap_waist_rx",
+          "testificate_base_waist.tx": "vnap_waist_tx",
+          "testificate_base_waist.sx": "vnap_waist_sx",
+          "testificate_base_waist.ry": "vnap_waist_ry",
+          "testificate_base_waist.ty": "-12+vnap_waist_ty",
+          "testificate_base_waist.sy": "vnap_waist_sy",
+          "testificate_base_waist.rz": "vnap_waist_rz",
+          "testificate_base_waist.tz": "vnap_waist_tz",
+          "testificate_base_waist.sz": "vnap_waist_sz"
+        },
+        {
+          "testificate_base_body.rx": "vnap_body_rx",
+          "testificate_base_body.tx": "vnap_body_tx",
+          "testificate_base_body.sx": "vnap_body_sx",
+          "testificate_base_body.ry": "vnap_body_ry",
+          "testificate_base_body.ty": "-12+vnap_body_ty",
+          "testificate_base_body.sy": "vnap_body_sy",
+          "testificate_base_body.rz": "vnap_body_rz",
+          "testificate_base_body.tz": "vnap_body_tz",
+          "testificate_base_body.sz": "vnap_body_sz"
+        },
+        {
+          "testificate_base_head.rx": "torad(head_pitch)+vnap_head_rx",
+          "testificate_base_head.tx": "vnap_head_tx",
+          "testificate_base_head.sx": "vnap_head_sx",
+          "testificate_base_head.ry": "torad(head_yaw)+vnap_head_ry",
+          "testificate_base_head.ty": "vnap_head_ty",
+          "testificate_base_head.sy": "vnap_head_sy",
+          "testificate_base_head.rz": "vnap_head_rz",
+          "testificate_base_head.tz": "vnap_head_tz",
+          "testificate_base_head.sz": "vnap_head_sz"
+        },
+        {
+          "testificate_base_headjgl2l6.rx": "vnap_head_inner_rx",
+          "testificate_base_headjgl2l6.tx": "vnap_head_inner_tx",
+          "testificate_base_headjgl2l6.sx": "vnap_head_inner_sx",
+          "testificate_base_headjgl2l6.ry": "vnap_head_inner_ry",
+          "testificate_base_headjgl2l6.ty": "vnap_head_inner_ty",
+          "testificate_base_headjgl2l6.sy": "vnap_head_inner_sy",
+          "testificate_base_headjgl2l6.rz": "vnap_head_inner_rz",
+          "testificate_base_headjgl2l6.tz": "vnap_head_inner_tz",
+          "testificate_base_headjgl2l6.sz": "vnap_head_inner_sz"
+        },
+        {
+          "testificate_base_fgk6.rx": "vnap_nose_rx",
+          "testificate_base_fgk6.tx": "vnap_nose_tx",
+          "testificate_base_fgk6.sx": "vnap_nose_sx",
+          "testificate_base_fgk6.ry": "vnap_nose_ry",
+          "testificate_base_fgk6.ty": "-2.5+vnap_nose_ty",
+          "testificate_base_fgk6.sy": "vnap_nose_sy",
+          "testificate_base_fgk6.rz": "vnap_nose_rz",
+          "testificate_base_fgk6.tz": "-4+vnap_nose_tz",
+          "testificate_base_fgk6.sz": "vnap_nose_sz"
+        },
+        {
+          "testificate_base_d67l_6q6.rx": "vnap_pupil_right_rx",
+          "testificate_base_d67l_6q6.tx": "1.5+vnap_pupil_right_tx",
+          "testificate_base_d67l_6q6.sx": "vnap_pupil_right_sx",
+          "testificate_base_d67l_6q6.ry": "vnap_pupil_right_ry",
+          "testificate_base_d67l_6q6.ty": "-3.5+vnap_pupil_right_ty",
+          "testificate_base_d67l_6q6.sy": "vnap_pupil_right_sy",
+          "testificate_base_d67l_6q6.rz": "vnap_pupil_right_rz",
+          "testificate_base_d67l_6q6.tz": "-3.975+vnap_pupil_right_tz",
+          "testificate_base_d67l_6q6.sz": "vnap_pupil_right_sz"
+        },
+        {
+          "testificate_base_ja89l_6q6.rx": "vnap_pupil_left_rx",
+          "testificate_base_ja89l_6q6.tx": "-1.5+vnap_pupil_left_tx",
+          "testificate_base_ja89l_6q6.sx": "vnap_pupil_left_sx",
+          "testificate_base_ja89l_6q6.ry": "vnap_pupil_left_ry",
+          "testificate_base_ja89l_6q6.ty": "-3.5+vnap_pupil_left_ty",
+          "testificate_base_ja89l_6q6.sy": "vnap_pupil_left_sy",
+          "testificate_base_ja89l_6q6.rz": "vnap_pupil_left_rz",
+          "testificate_base_ja89l_6q6.tz": "-3.975+vnap_pupil_left_tz",
+          "testificate_base_ja89l_6q6.sz": "vnap_pupil_left_sz"
+        },
+        {
+          "testificate_base_6q6da5kmhh6j.rx": "vnap_eye_group_rx",
+          "testificate_base_6q6da5kmhh6j.tx": "vnap_eye_group_tx",
+          "testificate_base_6q6da5kmhh6j.sx": "vnap_eye_group_sx",
+          "testificate_base_6q6da5kmhh6j.ry": "vnap_eye_group_ry",
+          "testificate_base_6q6da5kmhh6j.ty": "-5+vnap_eye_group_ty",
+          "testificate_base_6q6da5kmhh6j.sy": "vnap_eye_group_sy",
+          "testificate_base_6q6da5kmhh6j.rz": "vnap_eye_group_rz",
+          "testificate_base_6q6da5kmhh6j.tz": "-4+vnap_eye_group_tz",
+          "testificate_base_6q6da5kmhh6j.sz": "vnap_eye_group_sz"
+        },
+        {
+          "testificate_base_6q6da5kmhh6j.sy": "if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.08,1+12.75*fmod(time+id*0.37,1.25+fmod(id,3)*0.5),if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.18,2.02,if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.26,2.02-12.75*(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)-0.18),1)))*vnap_eye_group_sy"
+        },
+        {
+          "testificate_base_6q6da5kmhh6jd67l.rx": "vnap_eye_right_rx",
+          "testificate_base_6q6da5kmhh6jd67l.tx": "2+vnap_eye_right_tx",
+          "testificate_base_6q6da5kmhh6jd67l.sx": "vnap_eye_right_sx",
+          "testificate_base_6q6da5kmhh6jd67l.ry": "vnap_eye_right_ry",
+          "testificate_base_6q6da5kmhh6jd67l.ty": "vnap_eye_right_ty",
+          "testificate_base_6q6da5kmhh6jd67l.sy": "vnap_eye_right_sy",
+          "testificate_base_6q6da5kmhh6jd67l.rz": "vnap_eye_right_rz",
+          "testificate_base_6q6da5kmhh6jd67l.tz": "vnap_eye_right_tz",
+          "testificate_base_6q6da5kmhh6jd67l.sz": "vnap_eye_right_sz"
+        },
+        {
+          "testificate_base_6q6da5kmhh6jja89l.rx": "vnap_eye_left_rx",
+          "testificate_base_6q6da5kmhh6jja89l.tx": "-2+vnap_eye_left_tx",
+          "testificate_base_6q6da5kmhh6jja89l.sx": "vnap_eye_left_sx",
+          "testificate_base_6q6da5kmhh6jja89l.ry": "vnap_eye_left_ry",
+          "testificate_base_6q6da5kmhh6jja89l.ty": "vnap_eye_left_ty",
+          "testificate_base_6q6da5kmhh6jja89l.sy": "vnap_eye_left_sy",
+          "testificate_base_6q6da5kmhh6jja89l.rz": "vnap_eye_left_rz",
+          "testificate_base_6q6da5kmhh6jja89l.tz": "vnap_eye_left_tz",
+          "testificate_base_6q6da5kmhh6jja89l.sz": "vnap_eye_left_sz"
+        },
+        {
+          "testificate_base_6q6da5kdgo6j.rx": "vnap_lower_face_rx",
+          "testificate_base_6q6da5kdgo6j.tx": "vnap_lower_face_tx",
+          "testificate_base_6q6da5kdgo6j.sx": "vnap_lower_face_sx",
+          "testificate_base_6q6da5kdgo6j.ry": "vnap_lower_face_ry",
+          "testificate_base_6q6da5kdgo6j.ty": "-2+vnap_lower_face_ty",
+          "testificate_base_6q6da5kdgo6j.sy": "vnap_lower_face_sy",
+          "testificate_base_6q6da5kdgo6j.rz": "vnap_lower_face_rz",
+          "testificate_base_6q6da5kdgo6j.tz": "-4+vnap_lower_face_tz",
+          "testificate_base_6q6da5kdgo6j.sz": "vnap_lower_face_sz"
+        },
+        {
+          "testificate_base_6q6da5kdgo6j.sy": "if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.08,1+12.75*fmod(time+id*0.37,1.25+fmod(id,3)*0.5),if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.18,2.02,if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.26,2.02-12.75*(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)-0.18),1)))*vnap_lower_face_sy"
+        },
+        {
+          "testificate_base_egfg3jgo.rx": "vnap_brow_rx",
+          "testificate_base_egfg3jgo.tx": "vnap_brow_tx",
+          "testificate_base_egfg3jgo.sx": "vnap_brow_sx",
+          "testificate_base_egfg3jgo.ry": "vnap_brow_ry",
+          "testificate_base_egfg3jgo.ty": "-4+vnap_brow_ty",
+          "testificate_base_egfg3jgo.sy": "vnap_brow_sy",
+          "testificate_base_egfg3jgo.rz": "vnap_brow_rz",
+          "testificate_base_egfg3jgo.tz": "-4.15+vnap_brow_tz",
+          "testificate_base_egfg3jgo.sz": "vnap_brow_sz"
+        },
+        {
+          "testificate_base_egml9.sx": "(0.75+vnap_mouth_width*0.25)*vnap_speaking+(1-vnap_speaking)",
+          "testificate_base_egml9.sy": "(1+vnap_mouth_open*1.5)*vnap_speaking+(1-vnap_speaking)",
+          "testificate_base_egml9.sz": "1"
+        },
+        {
+          "testificate_base_l66l9.sx": "(0.75+vnap_mouth_width*0.25-vnap_mouth_closed)*vnap_speaking",
+          "testificate_base_l66l9.sy": "(1-vnap_mouth_closed)*vnap_speaking",
+          "testificate_base_l66l9.sz": "(1-vnap_mouth_closed)*vnap_speaking"
+        },
+        {
+          "testificate_base_l66l9lgh.ty": "-0.2625+vnap_speaking*vnap_mouth_open*0.75"
+        },
+        {
+          "testificate_base_l66l93gllge.ty": "0.2625+vnap_speaking*vnap_mouth_open*-0.75"
+        },
+        {
+          "testificate_base_2jek.rx": "-0.74997+vnap_arms_rx",
+          "testificate_base_2jek.tx": "vnap_arms_tx",
+          "testificate_base_2jek.sx": "vnap_arms_sx",
+          "testificate_base_2jek.ry": "vnap_arms_ry",
+          "testificate_base_2jek.ty": "3+vnap_arms_ty",
+          "testificate_base_2jek.sy": "vnap_arms_sy",
+          "testificate_base_2jek.rz": "vnap_arms_rz",
+          "testificate_base_2jek.tz": "-1+vnap_arms_tz",
+          "testificate_base_2jek.sz": "vnap_arms_sz"
+        },
+        {
+          "testificate_base_jggl_leftleg.rx": "vnap_left_leg_root_rx",
+          "testificate_base_jggl_leftleg.tx": "vnap_left_leg_root_tx",
+          "testificate_base_jggl_leftleg.sx": "vnap_left_leg_root_sx",
+          "testificate_base_jggl_leftleg.ry": "vnap_left_leg_root_ry",
+          "testificate_base_jggl_leftleg.ty": "vnap_left_leg_root_ty",
+          "testificate_base_jggl_leftleg.sy": "vnap_left_leg_root_sy",
+          "testificate_base_jggl_leftleg.rz": "vnap_left_leg_root_rz",
+          "testificate_base_jggl_leftleg.tz": "vnap_left_leg_root_tz",
+          "testificate_base_jggl_leftleg.sz": "vnap_left_leg_root_sz"
+        },
+        {
+          "testificate_base_leftleg.rx": "sin(limb_swing*0.6662)*1.4*limb_speed+vnap_left_leg_rx",
+          "testificate_base_leftleg.tx": "2+vnap_left_leg_tx",
+          "testificate_base_leftleg.sx": "vnap_left_leg_sx",
+          "testificate_base_leftleg.ry": "vnap_left_leg_ry",
+          "testificate_base_leftleg.ty": "-11+vnap_left_leg_ty",
+          "testificate_base_leftleg.sy": "vnap_left_leg_sy",
+          "testificate_base_leftleg.rz": "vnap_left_leg_rz",
+          "testificate_base_leftleg.tz": "vnap_left_leg_tz",
+          "testificate_base_leftleg.sz": "vnap_left_leg_sz"
+        },
+        {
+          "testificate_base_jggl_rightleg.rx": "vnap_right_leg_root_rx",
+          "testificate_base_jggl_rightleg.tx": "vnap_right_leg_root_tx",
+          "testificate_base_jggl_rightleg.sx": "vnap_right_leg_root_sx",
+          "testificate_base_jggl_rightleg.ry": "vnap_right_leg_root_ry",
+          "testificate_base_jggl_rightleg.ty": "vnap_right_leg_root_ty",
+          "testificate_base_jggl_rightleg.sy": "vnap_right_leg_root_sy",
+          "testificate_base_jggl_rightleg.rz": "vnap_right_leg_root_rz",
+          "testificate_base_jggl_rightleg.tz": "vnap_right_leg_root_tz",
+          "testificate_base_jggl_rightleg.sz": "vnap_right_leg_root_sz"
+        },
+        {
+          "testificate_base_rightleg.rx": "sin(limb_swing*0.6662+pi)*1.4*limb_speed+vnap_right_leg_rx",
+          "testificate_base_rightleg.tx": "-2+vnap_right_leg_tx",
+          "testificate_base_rightleg.sx": "vnap_right_leg_sx",
+          "testificate_base_rightleg.ry": "vnap_right_leg_ry",
+          "testificate_base_rightleg.ty": "-11+vnap_right_leg_ty",
+          "testificate_base_rightleg.sy": "vnap_right_leg_sy",
+          "testificate_base_rightleg.rz": "vnap_right_leg_rz",
+          "testificate_base_rightleg.tz": "0.5+vnap_right_leg_tz",
+          "testificate_base_rightleg.sz": "vnap_right_leg_sz"
+        }
+      ]
+    },
+    {
+      "id": "testificate_extra_0_root",
+      "invertAxis": "xy",
+      "translate": [
+        0,
+        -24,
+        0
+      ],
+      "submodels": [
+        {
+          "id": "testificate_extra_0_waist",
+          "invertAxis": "xy",
+          "translate": [
+            0,
+            12,
+            0
+          ],
+          "submodels": [
+            {
+              "id": "testificate_extra_0_body",
+              "invertAxis": "xy",
+              "translate": [
+                0,
+                12,
+                0
+              ],
+              "submodels": [
+                {
+                  "id": "testificate_extra_0_head",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "submodels": [
+                    {
+                      "id": "testificate_extra_0_headjgl2l6",
+                      "invertAxis": "xy",
+                      "translate": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "submodels": [
+                        {
+                          "id": "testificate_extra_0_l6kla7a42l6helmet",
+                          "invertAxis": "xy",
+                          "translate": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "boxes": [
+                            {
+                              "coordinates": [
+                                -4,
+                                0,
+                                -4,
+                                8,
+                                11,
+                                8
+                              ],
+                              "sizeAdd": 0.5,
+                              "uvNorth": [
+                                8,
+                                0,
+                                16,
+                                11
+                              ],
+                              "uvSouth": [
+                                24,
+                                0,
+                                32,
+                                11
+                              ],
+                              "uvEast": [
+                                0,
+                                0,
+                                8,
+                                11
+                              ],
+                              "uvWest": [
+                                16,
+                                0,
+                                24,
+                                11
+                              ],
+                              "uvUp": [
+                                0,
+                                11,
+                                8,
+                                19
+                              ]
+                            }
+                          ],
+                          "submodels": [
+                            {
+                              "id": "testificate_extra_0_oaf83",
+                              "invertAxis": "xy",
+                              "translate": [
+                                -4.5,
+                                8.66161,
+                                0.70983
+                              ],
+                              "rotate": [
+                                45,
+                                0,
+                                0
+                              ],
+                              "boxes": [
+                                {
+                                  "coordinates": [
+                                    -0.1137,
+                                    0.94878,
+                                    -1.94696,
+                                    1,
+                                    6,
+                                    4
+                                  ],
+                                  "uvNorth": [
+                                    26,
+                                    24,
+                                    27,
+                                    30
+                                  ],
+                                  "uvSouth": [
+                                    29,
+                                    24,
+                                    30,
+                                    30
+                                  ],
+                                  "uvEast": [
+                                    22,
+                                    24,
+                                    26,
+                                    30
+                                  ],
+                                  "uvWest": [
+                                    26,
+                                    24,
+                                    30,
+                                    30
+                                  ],
+                                  "uvUp": [
+                                    30,
+                                    24,
+                                    26,
+                                    25
+                                  ],
+                                  "uvDown": [
+                                    26,
+                                    29,
+                                    30,
+                                    30
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": "testificate_extra_0_oaf84",
+                              "invertAxis": "xy",
+                              "translate": [
+                                4.5,
+                                8.66161,
+                                0.70983
+                              ],
+                              "rotate": [
+                                45,
+                                0,
+                                0
+                              ],
+                              "boxes": [
+                                {
+                                  "coordinates": [
+                                    -0.8663,
+                                    0.94878,
+                                    -1.94696,
+                                    1,
+                                    6,
+                                    4
+                                  ],
+                                  "uvNorth": [
+                                    27,
+                                    24,
+                                    26,
+                                    30
+                                  ],
+                                  "uvSouth": [
+                                    30,
+                                    24,
+                                    29,
+                                    30
+                                  ],
+                                  "uvEast": [
+                                    30,
+                                    24,
+                                    26,
+                                    30
+                                  ],
+                                  "uvWest": [
+                                    26,
+                                    24,
+                                    22,
+                                    30
+                                  ],
+                                  "uvUp": [
+                                    30,
+                                    25,
+                                    26,
+                                    24
+                                  ],
+                                  "uvDown": [
+                                    26,
+                                    29,
+                                    30,
+                                    30
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "testificate_extra_0_l6kla7a42l636dl",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    -12,
+                    0
+                  ],
+                  "boxes": [
+                    {
+                      "coordinates": [
+                        -4.5,
+                        -2,
+                        -3.5,
+                        9,
+                        4,
+                        7
+                      ],
+                      "uvNorth": [
+                        8,
+                        19,
+                        17,
+                        23
+                      ],
+                      "uvSouth": [
+                        27,
+                        19,
+                        36,
+                        23
+                      ],
+                      "uvEast": [
+                        1,
+                        19,
+                        8,
+                        23
+                      ],
+                      "uvWest": [
+                        18,
+                        19,
+                        25,
+                        23
+                      ],
+                      "uvUp": [
+                        9,
+                        12,
+                        18,
+                        19
+                      ],
+                      "uvDown": [
+                        18,
+                        19,
+                        27,
+                        12
+                      ]
+                    },
+                    {
+                      "coordinates": [
+                        -3,
+                        1,
+                        -4,
+                        6,
+                        2,
+                        1
+                      ],
+                      "textureOffset": [
+                        0,
+                        24
+                      ]
+                    },
+                    {
+                      "coordinates": [
+                        -1,
+                        -4,
+                        -4,
+                        2,
+                        5,
+                        1
+                      ],
+                      "textureOffset": [
+                        15,
+                        24
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "testificate_extra_0_l6kla7a42l6cape",
+                  "invertAxis": "xy",
+                  "translate": [
+                    0,
+                    0.5,
+                    4
+                  ],
+                  "rotate": [
+                    -5,
+                    0,
+                    0
+                  ],
+                  "boxes": [
+                    {
+                      "coordinates": [
+                        -5,
+                        -16,
+                        -0.5,
+                        10,
+                        16,
+                        1
+                      ],
+                      "uvNorth": [
+                        43,
+                        1,
+                        33,
+                        17
+                      ],
+                      "uvSouth": [
+                        33,
+                        1,
+                        43,
+                        17
+                      ],
+                      "uvEast": [
+                        43,
+                        1,
+                        44,
+                        17
+                      ],
+                      "uvWest": [
+                        32,
+                        1,
+                        33,
+                        17
+                      ],
+                      "uvUp": [
+                        43,
+                        1,
+                        33,
+                        0
+                      ],
+                      "uvDown": [
+                        43,
+                        18,
+                        33,
+                        17
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "part": "root",
+      "attach": true,
+      "textureSize": [
+        48,
+        48
+      ],
+      "texture": "villager-news-addon-port:textures/entity/djn.png",
+      "animations": [
+        {
+          "this.rx": "vnap_root_rx",
+          "this.tx": "vnap_root_tx",
+          "this.sx": "vnap_root_sx",
+          "this.ry": "vnap_root_ry",
+          "this.ty": "24+vnap_root_ty",
+          "this.sy": "vnap_root_sy",
+          "this.rz": "vnap_root_rz",
+          "this.tz": "vnap_root_tz",
+          "this.sz": "vnap_root_sz"
+        },
+        {
+          "testificate_extra_0_waist.rx": "vnap_waist_rx",
+          "testificate_extra_0_waist.tx": "vnap_waist_tx",
+          "testificate_extra_0_waist.sx": "vnap_waist_sx",
+          "testificate_extra_0_waist.ry": "vnap_waist_ry",
+          "testificate_extra_0_waist.ty": "-12+vnap_waist_ty",
+          "testificate_extra_0_waist.sy": "vnap_waist_sy",
+          "testificate_extra_0_waist.rz": "vnap_waist_rz",
+          "testificate_extra_0_waist.tz": "vnap_waist_tz",
+          "testificate_extra_0_waist.sz": "vnap_waist_sz"
+        },
+        {
+          "testificate_extra_0_body.rx": "vnap_body_rx",
+          "testificate_extra_0_body.tx": "vnap_body_tx",
+          "testificate_extra_0_body.sx": "vnap_body_sx",
+          "testificate_extra_0_body.ry": "vnap_body_ry",
+          "testificate_extra_0_body.ty": "-12+vnap_body_ty",
+          "testificate_extra_0_body.sy": "vnap_body_sy",
+          "testificate_extra_0_body.rz": "vnap_body_rz",
+          "testificate_extra_0_body.tz": "vnap_body_tz",
+          "testificate_extra_0_body.sz": "vnap_body_sz"
+        },
+        {
+          "testificate_extra_0_head.rx": "torad(head_pitch)+vnap_head_rx",
+          "testificate_extra_0_head.tx": "vnap_head_tx",
+          "testificate_extra_0_head.sx": "vnap_head_sx",
+          "testificate_extra_0_head.ry": "torad(head_yaw)+vnap_head_ry",
+          "testificate_extra_0_head.ty": "vnap_head_ty",
+          "testificate_extra_0_head.sy": "vnap_head_sy",
+          "testificate_extra_0_head.rz": "vnap_head_rz",
+          "testificate_extra_0_head.tz": "vnap_head_tz",
+          "testificate_extra_0_head.sz": "vnap_head_sz"
+        },
+        {
+          "testificate_extra_0_headjgl2l6.rx": "vnap_head_inner_rx",
+          "testificate_extra_0_headjgl2l6.tx": "vnap_head_inner_tx",
+          "testificate_extra_0_headjgl2l6.sx": "vnap_head_inner_sx",
+          "testificate_extra_0_headjgl2l6.ry": "vnap_head_inner_ry",
+          "testificate_extra_0_headjgl2l6.ty": "vnap_head_inner_ty",
+          "testificate_extra_0_headjgl2l6.sy": "vnap_head_inner_sy",
+          "testificate_extra_0_headjgl2l6.rz": "vnap_head_inner_rz",
+          "testificate_extra_0_headjgl2l6.tz": "vnap_head_inner_tz",
+          "testificate_extra_0_headjgl2l6.sz": "vnap_head_inner_sz"
+        }
+      ]
+    },
+    {
+      "part": "head",
+      "id": "testificate_hide_head",
+      "attach": false
+    },
+    {
+      "part": "nose",
+      "id": "testificate_hide_nose",
+      "attach": false
+    },
+    {
+      "part": "headwear",
+      "id": "testificate_hide_headwear",
+      "attach": false
+    },
+    {
+      "part": "headwear2",
+      "id": "testificate_hide_headwear2",
+      "attach": false
+    },
+    {
+      "part": "body",
+      "id": "testificate_hide_body",
+      "attach": false
+    },
+    {
+      "part": "bodywear",
+      "id": "testificate_hide_bodywear",
+      "attach": false
+    },
+    {
+      "part": "arms",
+      "id": "testificate_hide_arms",
+      "attach": false
+    },
+    {
+      "part": "right_leg",
+      "id": "testificate_hide_right_leg",
+      "attach": false
+    },
+    {
+      "part": "left_leg",
+      "id": "testificate_hide_left_leg",
+      "attach": false
+    }
+  ]
+}
