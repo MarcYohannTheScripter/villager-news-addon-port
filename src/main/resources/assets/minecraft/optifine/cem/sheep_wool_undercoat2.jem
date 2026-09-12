@@ -1,0 +1,38 @@
+{
+  "textureSize": [
+    64,
+    64
+  ],
+  "models": [
+    {
+      "part": "head",
+      "id": "wooly_undercoat_hide_head",
+      "attach": false
+    },
+    {
+      "part": "body",
+      "id": "wooly_undercoat_hide_body",
+      "attach": false
+    },
+    {
+      "part": "leg1",
+      "id": "wooly_undercoat_hide_leg1",
+      "attach": false
+    },
+    {
+      "part": "leg2",
+      "id": "wooly_undercoat_hide_leg2",
+      "attach": false
+    },
+    {
+      "part": "leg3",
+      "id": "wooly_undercoat_hide_leg3",
+      "attach": false
+    },
+    {
+      "part": "leg4",
+      "id": "wooly_undercoat_hide_leg4",
+      "attach": false
+    }
+  ]
+}
