@@ -3,6 +3,7 @@
   "package": "com.vnap.mixin.client",
   "compatibilityLevel": "JAVA_25",
   "client": [
+	"EMFModelPartMixin",
     "VillagerProfessionLayerMixin",
     "VillagerRendererMixin",
     "VillagerRenderStateMixin"

@@ -181,6 +181,8 @@ final class DialogueAnimationState {
 
 	static float hasNose() {
 		EMFEntity entity = EMFAnimationApi.getCurrentEntity();
+		boolean rainbow = entity instanceof Villager villager && "jeb_".equals(villager.getName().getString());
+		RainbowNoseRenderState.update(rainbow, entity == null ? 0.0F : animationTick(entity), entity == null ? null : entity.etf$getUuid());
 		return entity instanceof Villager villager && ((VillagerNewsData) villager).vnap$hasNose() ? 1.0F : 0.0F;
 	}
 
