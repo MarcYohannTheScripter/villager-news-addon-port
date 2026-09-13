@@ -40,6 +40,7 @@ public final class VillagerNewsAddonPortClient implements ClientModInitializer {
 
 		ClientPlayNetworking.registerGlobalReceiver(DialogueAnimationPayload.TYPE, (payload, context) ->
 			context.client().execute(() -> {
+				DialogueSoundState.start(payload);
 				DialogueAnimationState.start(payload);
 				DialogueSubtitleState.start(payload);
 			})
@@ -53,7 +54,12 @@ public final class VillagerNewsAddonPortClient implements ClientModInitializer {
 			Minecraft.getInstance().setScreenAndShow(new HandbookScreen());
 			return InteractionResult.SUCCESS;
 		});
-		ClientTickEvents.END_CLIENT_TICK.register(DialogueSubtitleState::tick);
+		DialogueSubtitleState.register();
+		ClientTickEvents.END_CLIENT_TICK.register(client -> {
+			DialogueSoundState.tick(client);
+			DialogueAnimationState.tick(client);
+			DialogueSubtitleState.tick(client);
+		});
 		VillagerNewsAddonPort.LOGGER.info("Registered synchronized EMF facial and dialogue animations");
 	}
 

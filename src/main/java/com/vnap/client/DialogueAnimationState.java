@@ -6,7 +6,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.vnap.network.DialogueAnimationPayload;
 import com.vnap.entity.VillagerNewsData;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.npc.villager.Villager;
+import net.minecraft.world.entity.npc.wanderingtrader.WanderingTrader;
 import traben.entity_model_features.EMFAnimationApi;
 import traben.entity_model_features.utils.EMFEntity;
 
@@ -20,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 final class DialogueAnimationState {
 	private static final String DATA_PATH = "/assets/villager-news-addon-port/dialogue_animations.json";
@@ -31,9 +35,12 @@ final class DialogueAnimationState {
 	private static final String[] COMPONENTS = {"rx", "ry", "rz", "tx", "ty", "tz", "sx", "sy", "sz"};
 	private static final Map<String, List<VariantTimeline>> TIMELINES = new HashMap<>();
 	private static final List<Gesture> GESTURES = new ArrayList<>();
+	private static final List<Gesture> IDLES = new ArrayList<>();
 	private static final Map<UUID, ActiveDialogue> ACTIVE = new ConcurrentHashMap<>();
+	private static final Map<UUID, IdleState> IDLE_STATES = new ConcurrentHashMap<>();
 	private static final float BLEND_SECONDS = 0.3F;
 	private static final float MOUTH_BLEND_SECONDS = 0.15F;
+	private static Gesture locomotion = new Gesture(0.0F, Map.of());
 	private static float framesPerSecond = 24.0F;
 
 	private DialogueAnimationState() {
@@ -45,16 +52,10 @@ final class DialogueAnimationState {
 			JsonObject root = JsonParser.parseReader(new InputStreamReader(stream, StandardCharsets.UTF_8)).getAsJsonObject();
 			framesPerSecond = root.get("framesPerSecond").getAsFloat();
 			for (JsonElement gestureElement : root.getAsJsonArray("gestures")) {
-				JsonObject value = gestureElement.getAsJsonObject();
-				Map<String, float[]> tracks = new HashMap<>();
-				for (Map.Entry<String, JsonElement> track : value.getAsJsonObject("tracks").entrySet()) {
-					JsonArray samples = track.getValue().getAsJsonArray();
-					float[] values = new float[samples.size()];
-					for (int index = 0; index < values.length; index++) values[index] = samples.get(index).getAsFloat();
-					tracks.put(track.getKey(), values);
-				}
-				GESTURES.add(new Gesture(value.get("duration").getAsFloat(), Map.copyOf(tracks)));
+				GESTURES.add(readGesture(gestureElement.getAsJsonObject()));
 			}
+			locomotion = readGesture(root.getAsJsonObject("locomotion"));
+			for (JsonElement idleElement : root.getAsJsonArray("idles")) IDLES.add(readGesture(idleElement.getAsJsonObject()));
 			for (Map.Entry<String, JsonElement> group : root.getAsJsonObject("groups").entrySet()) {
 				List<VariantTimeline> variants = new ArrayList<>();
 				for (JsonElement variantElement : group.getValue().getAsJsonArray()) {
@@ -76,12 +77,34 @@ final class DialogueAnimationState {
 		}
 	}
 
+	private static Gesture readGesture(JsonObject value) {
+		Map<String, float[]> tracks = new HashMap<>();
+		for (Map.Entry<String, JsonElement> track : value.getAsJsonObject("tracks").entrySet()) {
+			JsonArray samples = track.getValue().getAsJsonArray();
+			float[] values = new float[samples.size()];
+			for (int index = 0; index < values.length; index++) values[index] = samples.get(index).getAsFloat();
+			tracks.put(track.getKey(), values);
+		}
+		return new Gesture(value.get("duration").getAsFloat(), Map.copyOf(tracks));
+	}
+
 	static List<String> animationVariables() {
 		List<String> variables = new ArrayList<>(TARGETS.length * COMPONENTS.length);
 		for (String target : TARGETS) {
 			for (String component : COMPONENTS) variables.add("vnap_" + target + "_" + component);
 		}
 		return variables;
+	}
+
+	static void tick(Minecraft minecraft) {
+		if (minecraft.level == null || minecraft.player == null) {
+			ACTIVE.clear();
+			IDLE_STATES.clear();
+			return;
+		}
+		long now = System.nanoTime();
+		ACTIVE.entrySet().removeIf(entry -> now > entry.getValue().endNanos());
+		IDLE_STATES.keySet().removeIf(id -> minecraft.level.getEntity(id) == null);
 	}
 
 	static void start(DialogueAnimationPayload payload) {
@@ -137,10 +160,36 @@ final class DialogueAnimationState {
 		ActiveDialogue active = active();
 		boolean scale = variableName.endsWith("_sx") || variableName.endsWith("_sy") || variableName.endsWith("_sz");
 		float fallback = scale ? 1.0F : 0.0F;
-		if (active == null) return fallback;
-		return active.timeline().transformAt(
-			active.elapsedSeconds(), variableName.substring("vnap_".length()), fallback
-		);
+		String trackName = variableName.substring("vnap_".length());
+		float base = baseTransform(trackName, fallback, active != null);
+		float dialogue = active == null ? fallback : active.timeline().transformAt(active.elapsedSeconds(), trackName, fallback);
+		return scale ? base * dialogue : base + dialogue;
+	}
+
+	private static float baseTransform(String trackName, float fallback, boolean dialogueActive) {
+		EMFEntity emfEntity = EMFAnimationApi.getCurrentEntity();
+		if (!(emfEntity instanceof LivingEntity entity)
+				|| !(entity instanceof Villager) && !(entity instanceof WanderingTrader)) return fallback;
+		UUID id = entity.getUUID();
+		float age = emfEntity.emf$age();
+		float partialTick = age - (float) Math.floor(age);
+		float speed = entity.walkAnimation.speed(partialTick);
+		IdleState idle = IDLE_STATES.computeIfAbsent(id, ignored -> new IdleState());
+		boolean moving = speed > 0.01F && entity.getDeltaMovement().horizontalDistanceSqr() > 0.0001;
+		if (!entity.isSleeping() && entity.onGround() && moving && locomotion.duration() > 0.0F) {
+			idle.block();
+			float phase = entity.walkAnimation.position(partialTick) * 0.6662F / ((float) Math.PI * 2.0F);
+			float cycle = phase - (float) Math.floor(phase);
+			float value = locomotion.valueAt(cycle * locomotion.duration(), trackName, fallback);
+			float weight = Math.min(1.0F, speed * 0.9F);
+			return fallback + (value - fallback) * weight;
+		}
+		if (dialogueActive || entity.isSleeping() || !entity.onGround() || IDLES.isEmpty()) {
+			idle.block();
+			return fallback;
+		}
+		idle.unblock((int) age);
+		return idle.valueAt(age, trackName, fallback);
 	}
 
 	private static MouthFrame mouthFrame() {
@@ -240,6 +289,48 @@ final class DialogueAnimationState {
 	}
 
 	private record Gesture(float duration, Map<String, float[]> tracks) {
+		float valueAt(float time, String trackName, float fallback) {
+			return VariantTimeline.sample(this, trackName, Math.max(0.0F, Math.min(time, duration)), fallback);
+		}
+	}
+
+	private static final class IdleState {
+		private boolean blocked = true;
+		private int activeIndex = -1;
+		private int previousIndex = -1;
+		private int startTick;
+
+		void block() {
+			if (blocked) return;
+			blocked = true;
+			activeIndex = -1;
+		}
+
+		void unblock(int tick) {
+			if (!blocked) return;
+			blocked = false;
+			startNext(tick);
+		}
+
+		float valueAt(float tick, String trackName, float fallback) {
+			if (activeIndex < 0) startNext((int) tick);
+			Gesture active = IDLES.get(activeIndex);
+			float elapsed = (tick - startTick) / 20.0F;
+			if (elapsed > active.duration()) {
+				startNext((int) tick);
+				active = IDLES.get(activeIndex);
+				elapsed = 0.0F;
+			}
+			return active.valueAt(elapsed, trackName, fallback);
+		}
+
+		private void startNext(int tick) {
+			int next = ThreadLocalRandom.current().nextInt(IDLES.size());
+			if (IDLES.size() > 1 && next == previousIndex) next = (next + 1) % IDLES.size();
+			activeIndex = next;
+			previousIndex = next;
+			startTick = tick;
+		}
 	}
 
 	private static final class ActiveDialogue {

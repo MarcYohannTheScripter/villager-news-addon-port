@@ -1045,10 +1045,10 @@
           "this.sz": "vnap_root_sz"
         },
         {
-          "number_five_base_waist.rx": "vnap_waist_rx",
+          "number_five_base_waist.rx": "torad(head_pitch*0.17)+vnap_waist_rx",
           "number_five_base_waist.tx": "vnap_waist_tx",
           "number_five_base_waist.sx": "vnap_waist_sx",
-          "number_five_base_waist.ry": "vnap_waist_ry",
+          "number_five_base_waist.ry": "torad(head_yaw*0.3)+vnap_waist_ry",
           "number_five_base_waist.ty": "-12+vnap_waist_ty",
           "number_five_base_waist.sy": "vnap_waist_sy",
           "number_five_base_waist.rz": "vnap_waist_rz",
@@ -1067,10 +1067,10 @@
           "number_five_base_body.sz": "vnap_body_sz"
         },
         {
-          "number_five_base_head.rx": "torad(head_pitch)+vnap_head_rx",
+          "number_five_base_head.rx": "torad(head_pitch*0.5)+vnap_head_rx",
           "number_five_base_head.tx": "vnap_head_tx",
           "number_five_base_head.sx": "vnap_head_sx",
-          "number_five_base_head.ry": "torad(head_yaw)+vnap_head_ry",
+          "number_five_base_head.ry": "torad(head_yaw*0.77)+vnap_head_ry",
           "number_five_base_head.ty": "vnap_head_ty",
           "number_five_base_head.sy": "vnap_head_sy",
           "number_five_base_head.rz": "vnap_head_rz",
@@ -1106,10 +1106,10 @@
         },
         {
           "number_five_base_d67l_6q6.rx": "vnap_pupil_right_rx",
-          "number_five_base_d67l_6q6.tx": "1.5+vnap_pupil_right_tx",
+          "number_five_base_d67l_6q6.tx": "1.5+vnap_pupil_right_tx+if(head_yaw<-30,1,0)",
           "number_five_base_d67l_6q6.sx": "vnap_pupil_right_sx",
           "number_five_base_d67l_6q6.ry": "vnap_pupil_right_ry",
-          "number_five_base_d67l_6q6.ty": "-3.5+vnap_pupil_right_ty",
+          "number_five_base_d67l_6q6.ty": "-3.5+vnap_pupil_right_ty+if(head_pitch<-30,-1,0)",
           "number_five_base_d67l_6q6.sy": "vnap_pupil_right_sy",
           "number_five_base_d67l_6q6.rz": "vnap_pupil_right_rz",
           "number_five_base_d67l_6q6.tz": "-3.975+vnap_pupil_right_tz",
@@ -1117,10 +1117,10 @@
         },
         {
           "number_five_base_ja89l_6q6.rx": "vnap_pupil_left_rx",
-          "number_five_base_ja89l_6q6.tx": "-1.5+vnap_pupil_left_tx",
+          "number_five_base_ja89l_6q6.tx": "-1.5+vnap_pupil_left_tx+if(head_yaw>30,-1,0)",
           "number_five_base_ja89l_6q6.sx": "vnap_pupil_left_sx",
           "number_five_base_ja89l_6q6.ry": "vnap_pupil_left_ry",
-          "number_five_base_ja89l_6q6.ty": "-3.5+vnap_pupil_left_ty",
+          "number_five_base_ja89l_6q6.ty": "-3.5+vnap_pupil_left_ty+if(head_pitch<-30,-1,0)",
           "number_five_base_ja89l_6q6.sy": "vnap_pupil_left_sy",
           "number_five_base_ja89l_6q6.rz": "vnap_pupil_left_rz",
           "number_five_base_ja89l_6q6.tz": "-3.975+vnap_pupil_left_tz",
@@ -1138,7 +1138,7 @@
           "number_five_base_6q6da5kmhh6j.sz": "vnap_eye_group_sz"
         },
         {
-          "number_five_base_6q6da5kmhh6j.sy": "if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.08,1+12.75*fmod(time+id*0.37,1.25+fmod(id,3)*0.5),if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.18,2.02,if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.26,2.02-12.75*(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)-0.18),1)))*vnap_eye_group_sy"
+          "number_five_base_6q6da5kmhh6j.sy": "if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.08,1+12.75*fmod(time+id*0.37,1.25+fmod(id,3)*0.5),if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.18,2.02,if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.26,2.02-12.75*(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)-0.18),1)))*if(head_pitch<-30,0,if(head_yaw>30,0.75,if(head_yaw<-30,0.75,1)))*vnap_eye_group_sy"
         },
         {
           "number_five_base_6q6da5kmhh6jd67l.rx": "vnap_eye_right_rx",
@@ -1181,7 +1181,7 @@
           "number_five_base_egfg3jgo.tx": "vnap_brow_tx",
           "number_five_base_egfg3jgo.sx": "vnap_brow_sx",
           "number_five_base_egfg3jgo.ry": "vnap_brow_ry",
-          "number_five_base_egfg3jgo.ty": "-4+vnap_brow_ty",
+          "number_five_base_egfg3jgo.ty": "-4+vnap_brow_ty+if(head_pitch<-30,-1,if(head_pitch>30,0,if(head_yaw>30,-0.25,if(head_yaw<-30,-0.25,0))))",
           "number_five_base_egfg3jgo.sy": "vnap_brow_sy",
           "number_five_base_egfg3jgo.rz": "vnap_brow_rz",
           "number_five_base_egfg3jgo.tz": "-4.15+vnap_brow_tz",
@@ -1227,7 +1227,7 @@
           "number_five_base_jggl_leftleg.sz": "vnap_left_leg_root_sz"
         },
         {
-          "number_five_base_leftleg.rx": "sin(limb_swing*0.6662)*1.4*limb_speed+vnap_left_leg_rx",
+          "number_five_base_leftleg.rx": "vnap_left_leg_rx",
           "number_five_base_leftleg.tx": "2+vnap_left_leg_tx",
           "number_five_base_leftleg.sx": "vnap_left_leg_sx",
           "number_five_base_leftleg.ry": "vnap_left_leg_ry",
@@ -1249,7 +1249,7 @@
           "number_five_base_jggl_rightleg.sz": "vnap_right_leg_root_sz"
         },
         {
-          "number_five_base_rightleg.rx": "sin(limb_swing*0.6662+pi)*1.4*limb_speed+vnap_right_leg_rx",
+          "number_five_base_rightleg.rx": "vnap_right_leg_rx",
           "number_five_base_rightleg.tx": "-2+vnap_right_leg_tx",
           "number_five_base_rightleg.sx": "vnap_right_leg_sx",
           "number_five_base_rightleg.ry": "vnap_right_leg_ry",
@@ -1362,10 +1362,10 @@
           "this.sz": "vnap_root_sz"
         },
         {
-          "number_five_extra_0_waist.rx": "vnap_waist_rx",
+          "number_five_extra_0_waist.rx": "torad(head_pitch*0.17)+vnap_waist_rx",
           "number_five_extra_0_waist.tx": "vnap_waist_tx",
           "number_five_extra_0_waist.sx": "vnap_waist_sx",
-          "number_five_extra_0_waist.ry": "vnap_waist_ry",
+          "number_five_extra_0_waist.ry": "torad(head_yaw*0.3)+vnap_waist_ry",
           "number_five_extra_0_waist.ty": "-12+vnap_waist_ty",
           "number_five_extra_0_waist.sy": "vnap_waist_sy",
           "number_five_extra_0_waist.rz": "vnap_waist_rz",
@@ -1384,10 +1384,10 @@
           "number_five_extra_0_body.sz": "vnap_body_sz"
         },
         {
-          "number_five_extra_0_head.rx": "torad(head_pitch)+vnap_head_rx",
+          "number_five_extra_0_head.rx": "torad(head_pitch*0.5)+vnap_head_rx",
           "number_five_extra_0_head.tx": "vnap_head_tx",
           "number_five_extra_0_head.sx": "vnap_head_sx",
-          "number_five_extra_0_head.ry": "torad(head_yaw)+vnap_head_ry",
+          "number_five_extra_0_head.ry": "torad(head_yaw*0.77)+vnap_head_ry",
           "number_five_extra_0_head.ty": "vnap_head_ty",
           "number_five_extra_0_head.sy": "vnap_head_sy",
           "number_five_extra_0_head.rz": "vnap_head_rz",

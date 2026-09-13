@@ -42,8 +42,43 @@ function writeJson(file, value) {
 }
 
 function writeText(file, value) {
-  mkdirSync(dirname(file), { recursive: true });
-  writeFileSync(file, value);
+	mkdirSync(dirname(file), { recursive: true });
+	writeFileSync(file, value);
+}
+
+const oggCrcTable = Array.from({ length: 256 }, (_, value) => {
+  let remainder = value << 24;
+  for (let bit = 0; bit < 8; bit++) {
+    remainder = remainder & 0x80000000 ? (remainder << 1) ^ 0x04c11db7 : remainder << 1;
+  }
+  return remainder >>> 0;
+});
+
+function repairOggGranules(file) {
+  const data = readFileSync(file);
+  let offset = 0;
+  let changed = false;
+  while (offset + 27 <= data.length && data.toString("ascii", offset, offset + 4) === "OggS") {
+    const segments = data[offset + 26];
+    const headerSize = 27 + segments;
+    let bodySize = 0;
+    for (let index = 0; index < segments; index++) bodySize += data[offset + 27 + index];
+    const pageSize = headerSize + bodySize;
+    if (offset + pageSize > data.length) throw new Error(`Malformed OGG page in ${file}`);
+    const granule = data.readBigUInt64LE(offset + 6);
+    if (granule > 0xffffffffn && granule < 0x200000000n) {
+      data.writeBigUInt64LE(granule & 0xffffffffn, offset + 6);
+      data.writeUInt32LE(0, offset + 22);
+      let crc = 0;
+      for (let index = offset; index < offset + pageSize; index++) {
+        crc = ((crc << 8) ^ oggCrcTable[((crc >>> 24) ^ data[index]) & 0xff]) >>> 0;
+      }
+      data.writeUInt32LE(crc, offset + 22);
+      changed = true;
+    }
+    offset += pageSize;
+  }
+  if (changed) writeFileSync(file, data);
 }
 
 function readLang(file) {
@@ -580,17 +615,18 @@ function addRigBoneAnimation(models, prefix, boneName, target, rigScale = 1) {
   for (let axis = 0; axis < 3; axis++) {
     const suffix = axes[axis];
     const rotationTerms = [];
-    if (boneName === "head" && axis === 0) rotationTerms.push("torad(head_pitch)");
-    if (boneName === "head" && axis === 1) rotationTerms.push("torad(head_yaw)");
-    if (boneName === "leftleg" && axis === 0) {
-      rotationTerms.push("sin(limb_swing*0.6662)*1.4*limb_speed");
-    }
-    if (boneName === "rightleg" && axis === 0) {
-      rotationTerms.push("sin(limb_swing*0.6662+pi)*1.4*limb_speed");
-    }
-    rotationTerms.push(`vnap_${target}_r${suffix}`);
+		const translationTerms = [`vnap_${target}_t${suffix}`];
+		if (boneName === "head" && axis === 0) rotationTerms.push("torad(head_pitch*0.5)");
+		if (boneName === "head" && axis === 1) rotationTerms.push("torad(head_yaw*0.77)");
+		if (boneName === "waist" && axis === 0) rotationTerms.push("torad(head_pitch*0.17)");
+		if (boneName === "waist" && axis === 1) rotationTerms.push("torad(head_yaw*0.3)");
+		if (target === "pupil_left" && axis === 0) translationTerms.push("if(head_yaw>30,-1,0)");
+		if (target === "pupil_right" && axis === 0) translationTerms.push("if(head_yaw<-30,1,0)");
+		if ((target === "pupil_left" || target === "pupil_right") && axis === 1) translationTerms.push("if(head_pitch<-30,-1,0)");
+		if (target === "brow" && axis === 1) translationTerms.push("if(head_pitch<-30,-1,if(head_pitch>30,0,if(head_yaw>30,-0.25,if(head_yaw<-30,-0.25,0))))");
+		rotationTerms.push(`vnap_${target}_r${suffix}`);
     expressions[`this.r${suffix}`] = numberExpression(rotate[axis], rotationTerms.join("+"));
-    expressions[`this.t${suffix}`] = numberExpression(translate[axis], `vnap_${target}_t${suffix}`);
+		expressions[`this.t${suffix}`] = numberExpression(translate[axis], translationTerms.join("+"));
     const scaleExpression = `vnap_${target}_s${suffix}`;
     expressions[`this.s${suffix}`] = boneName === "root" && rigScale !== 1
       ? `${cleanNumber(rigScale)}*${scaleExpression}`
@@ -624,13 +660,14 @@ function addRootVillagerAnimations(models, prefix, rigScale = 1) {
   }
 
   const blinkTime = "fmod(time+id*0.37,1.25+fmod(id,3)*0.5)";
-  const blink = `if(${blinkTime}<0.08,1+12.75*${blinkTime},if(${blinkTime}<0.18,2.02,if(${blinkTime}<0.26,2.02-12.75*(${blinkTime}-0.18),1)))`;
+	const blink = `if(${blinkTime}<0.08,1+12.75*${blinkTime},if(${blinkTime}<0.18,2.02,if(${blinkTime}<0.26,2.02-12.75*(${blinkTime}-0.18),1)))`;
+	const lookEyeScale = "if(head_pitch<-30,0,if(head_yaw>30,0.75,if(head_yaw<-30,0.75,1)))";
   for (const [boneName, target] of [
     ["6q6da5kmhh6j", "eye_group"],
     ["6q6da5kdgo6j", "lower_face"],
   ]) {
-    const eye = findModelById(models, `${prefix}_${boneName}`);
-    if (eye) appendAnimation(eye, { "this.sy": `${blink}*vnap_${target}_sy` });
+		const eye = findModelById(models, `${prefix}_${boneName}`);
+		if (eye) appendAnimation(eye, { "this.sy": `${blink}*${target === "eye_group" ? `${lookEyeScale}*` : ""}vnap_${target}_sy` });
   }
 }
 
@@ -961,6 +998,17 @@ function copyTexture(name, destination) {
   } else throw new Error(`Missing texture ${name}`);
 }
 
+for (const [item, texture] of Object.entries({
+  mayor_villager_spawn_egg: "eas",
+  testificate_man_spawn_egg: "eat",
+  villager_5_spawn_egg: "eau",
+  villager_9_spawn_egg: "eav",
+  untouchable_villager_spawn_egg: "eaw",
+  wooly_spawn_egg: "eax",
+})) {
+  copyTexture(texture, join(modAssets, "textures", "item", `${item}.png`));
+}
+
 const wearableItems = {
   mayor_hat: { geometry: "geometry.oreville_vn.1064568764", texture: "eba", textureSize: [32, 32] },
   moustache: { geometry: "geometry.oreville_vn.1940352316", texture: "ebc", textureSize: [16, 16] },
@@ -1271,16 +1319,18 @@ function scanDialogue(node) {
       const animationName = literalText(property(variant, "animationName"));
       const source = soundDefinitions[soundId]?.sounds?.[0]?.name;
       if (!source) continue;
-      const outputName = source.split("/").at(-1);
+		const outputName = source.split("/").at(-1);
       const duration = literalNumber(property(variant, "duration"));
       const weight = Math.max(1, Math.round(literalNumber(property(variant, "weight"), 1) * 100));
       const subtitles = subtitleTimeline(variant);
       if (!subtitles.length) throw new Error(`Missing subtitle for dialogue ${id}.${sounds.length}`);
       maximumDuration = Math.max(maximumDuration, duration);
       sounds.push({ name: outputName, weight, duration, animationName: animationName ?? "", subtitles });
-      if (!seenSounds.has(outputName)) {
-        copyFileSync(join(resourceRoot, `${source}.ogg`), join(modAssets, "sounds", "voice", `${outputName}.ogg`));
-        seenSounds.add(outputName);
+		if (!seenSounds.has(outputName)) {
+			const outputFile = join(modAssets, "sounds", "voice", `${outputName}.ogg`);
+			copyFileSync(join(resourceRoot, `${source}.ogg`), outputFile);
+			repairOggGranules(outputFile);
+			seenSounds.add(outputName);
       }
     }
     dialogueGroups.set(id, { sounds, maximumDuration });
@@ -1464,7 +1514,7 @@ for (const [id, group] of dialogueGroups) {
     javaSounds[`dialogue.${id}.${index}`] = {
       sounds: [{
       name: `${modNamespace}:voice/${sound.name}`,
-      stream: sound.duration >= 8,
+      stream: true,
       }],
     };
   }
@@ -1542,10 +1592,11 @@ function evaluateMolang(value, time, fallback) {
   if (typeof value === "number") return Number.isFinite(value) ? value : fallback;
   if (typeof value !== "string") return fallback;
   try {
-    const expression = value
-      .replaceAll("q.anim_time", "t")
-      .replaceAll("q.life_time", "t")
-      .replaceAll("Math.", "M.");
+	const expression = value
+	  .replaceAll("q.anim_time", "t")
+	  .replaceAll("q.life_time", "t")
+	  .replaceAll("v.aaziza", "1")
+	  .replaceAll("Math.", "M.");
     const result = Function("M", "t", `return (${expression});`)(degreeMath, time);
     return Number.isFinite(result) ? result : fallback;
   } catch {
@@ -1642,8 +1693,6 @@ function sampleTarget(animation, sourceBones, kind, time, defaults) {
   return sampled.map(cleanNumber);
 }
 
-const gestureNames = [...usedGestureNames].sort();
-const gestureIndexes = new Map(gestureNames.map((name, index) => [name, index]));
 const gestureCompanions = {
   phmycx: ["clnzxd"],
   qcjrlv: ["xmtqdi"],
@@ -1653,9 +1702,8 @@ const gestureCompanions = {
   hmnopd: ["qswzxh"],
   ypxycs: ["kkagqa"],
 };
-const bakedGestures = gestureNames.map((gestureName) => {
-  const layerNames = [gestureName, ...(gestureCompanions[gestureName] ?? [])];
-  const sourceAnimations = layerNames.map((name) => animationById.get(commonAnimationAliases[name]) ?? {});
+function bakeAnimationLayers(layerNames) {
+	const sourceAnimations = layerNames.map((name) => animationById.get(commonAnimationAliases[name]) ?? {});
   const layerDurations = sourceAnimations.map((animation) => Number(animation.animation_length ?? 0)).filter((value) => value > 0);
   const duration = layerDurations.length ? Math.min(...layerDurations) : 0;
   const frameCount = Math.max(1, Math.ceil(duration * bakedFramesPerSecond) + 1);
@@ -1683,8 +1731,18 @@ const bakedGestures = gestureNames.map((gestureName) => {
       }
     }
   }
-  return { name: gestureName, layers: layerNames, duration: cleanNumber(duration), tracks };
-});
+	return { layers: layerNames, duration: cleanNumber(duration), tracks };
+}
+
+const gestureNames = [...usedGestureNames].sort();
+const gestureIndexes = new Map(gestureNames.map((name, index) => [name, index]));
+const bakedGestures = gestureNames.map((gestureName) => ({
+	name: gestureName,
+	...bakeAnimationLayers([gestureName, ...(gestureCompanions[gestureName] ?? [])]),
+}));
+const locomotionAnimation = bakeAnimationLayers(["move"]);
+const idleAnimations = ["unjyad", "supuhq", "qvpghh", "edhave", "kvjhyc", "igrbri"]
+	.map((name) => ({ name, ...bakeAnimationLayers([name]) }));
 
 for (const variants of Object.values(dialogueAnimationData)) {
   for (const animation of variants) {
@@ -1692,9 +1750,13 @@ for (const variants of Object.values(dialogueAnimationData)) {
   }
 }
 writeJson(join(modAssets, "dialogue_animations.json"), {
-  framesPerSecond: bakedFramesPerSecond,
-  groups: dialogueAnimationData,
-  gestures: bakedGestures,
+	framesPerSecond: bakedFramesPerSecond,
+	continuousIdle: commonAnimationAliases.uchrur,
+	targetLook: commonAnimationAliases.target,
+	groups: dialogueAnimationData,
+	gestures: bakedGestures,
+	locomotion: locomotionAnimation,
+	idles: idleAnimations,
 });
 
 const silenceFile = join(modAssets, "sounds", "silence.ogg");

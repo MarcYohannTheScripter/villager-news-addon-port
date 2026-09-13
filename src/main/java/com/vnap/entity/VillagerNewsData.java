@@ -8,4 +8,8 @@ public interface VillagerNewsData {
 	int vnap$cosmetic();
 
 	void vnap$setCosmetic(int value);
+
+	int vnap$signMessage();
+
+	void vnap$setSignMessage(int value);
 }

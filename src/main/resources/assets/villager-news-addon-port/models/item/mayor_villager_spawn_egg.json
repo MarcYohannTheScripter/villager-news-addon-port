@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "villager-news-addon-port:item/mayor_villager_spawn_egg"
+  }
+}

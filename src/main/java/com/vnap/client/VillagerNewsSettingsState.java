@@ -2,6 +2,7 @@ package com.vnap.client;
 
 import com.vnap.network.VillagerNewsSettingsPayload;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.Minecraft;
 
 public final class VillagerNewsSettingsState {
 	private static int chattiness = 2;
@@ -45,7 +46,7 @@ public final class VillagerNewsSettingsState {
 	}
 
 	private static void send() {
-		if (ClientPlayNetworking.canSend(VillagerNewsSettingsPayload.TYPE)) {
+		if (Minecraft.getInstance().getConnection() != null && ClientPlayNetworking.canSend(VillagerNewsSettingsPayload.TYPE)) {
 			ClientPlayNetworking.send(new VillagerNewsSettingsPayload(chattiness, rareVoicelines, spawnSpecialVillagers));
 		}
 	}

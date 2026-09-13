@@ -21,23 +21,28 @@ public abstract class VillagerDataMixin implements VillagerNewsData {
 	private static final EntityDataAccessor<Boolean> VNAP_HAS_NOSE = SynchedEntityData.defineId(Villager.class, EntityDataSerializers.BOOLEAN);
 	@Unique
 	private static final EntityDataAccessor<Integer> VNAP_COSMETIC = SynchedEntityData.defineId(Villager.class, EntityDataSerializers.INT);
+	@Unique
+	private static final EntityDataAccessor<Integer> VNAP_SIGN_MESSAGE = SynchedEntityData.defineId(Villager.class, EntityDataSerializers.INT);
 
 	@Inject(method = "defineSynchedData", at = @At("TAIL"))
 	private void vnap$defineData(SynchedEntityData.Builder builder, CallbackInfo ci) {
 		builder.define(VNAP_HAS_NOSE, true);
 		builder.define(VNAP_COSMETIC, 0);
+		builder.define(VNAP_SIGN_MESSAGE, -1);
 	}
 
 	@Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
 	private void vnap$saveData(ValueOutput output, CallbackInfo ci) {
 		output.putBoolean("VillagerNewsHasNose", vnap$hasNose());
 		output.putInt("VillagerNewsCosmetic", vnap$cosmetic());
+		output.putInt("VillagerNewsSignMessage", vnap$signMessage());
 	}
 
 	@Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
 	private void vnap$loadData(ValueInput input, CallbackInfo ci) {
 		vnap$setHasNose(input.getBooleanOr("VillagerNewsHasNose", true));
 		vnap$setCosmetic(input.getIntOr("VillagerNewsCosmetic", 0));
+		vnap$setSignMessage(input.getIntOr("VillagerNewsSignMessage", -1));
 	}
 
 	@Redirect(
@@ -66,5 +71,15 @@ public abstract class VillagerDataMixin implements VillagerNewsData {
 	@Override
 	public void vnap$setCosmetic(int value) {
 		((Villager) (Object) this).getEntityData().set(VNAP_COSMETIC, Math.max(0, Math.min(4, value)));
+	}
+
+	@Override
+	public int vnap$signMessage() {
+		return ((Villager) (Object) this).getEntityData().get(VNAP_SIGN_MESSAGE);
+	}
+
+	@Override
+	public void vnap$setSignMessage(int value) {
+		((Villager) (Object) this).getEntityData().set(VNAP_SIGN_MESSAGE, Math.max(-1, Math.min(86, value)));
 	}
 }

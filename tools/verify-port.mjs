@@ -17,8 +17,12 @@ const handbookSource = readFileSync(join(root, "src/main/java/com/vnap/client/Ha
 const clientSource = readFileSync(join(root, "src/main/java/com/vnap/client/VillagerNewsAddonPortClient.java"), "utf8");
 const professionLayerSource = readFileSync(join(root, "src/main/java/com/vnap/mixin/client/VillagerProfessionLayerMixin.java"), "utf8");
 const subtitleSource = readFileSync(join(root, "src/main/java/com/vnap/client/DialogueSubtitleState.java"), "utf8");
+const soundStateSource = readFileSync(join(root, "src/main/java/com/vnap/client/DialogueSoundState.java"), "utf8");
+const animationStateSource = readFileSync(join(root, "src/main/java/com/vnap/client/DialogueAnimationState.java"), "utf8");
 const settingsSource = readFileSync(join(root, "src/main/java/com/vnap/config/VillagerNewsSettings.java"), "utf8");
+const settingsStateSource = readFileSync(join(root, "src/main/java/com/vnap/client/VillagerNewsSettingsState.java"), "utf8");
 const villagerDataSource = readFileSync(join(root, "src/main/java/com/vnap/mixin/VillagerDataMixin.java"), "utf8");
+const mixinConfiguration = readFileSync(join(resources, "villager-news-addon-port.mixins.json"), "utf8");
 const generatorSource = readFileSync(join(root, "tools/port-addon.mjs"), "utf8");
 const gradleProperties = readFileSync(join(root, "gradle.properties"), "utf8");
 const language = JSON.parse(readFileSync(join(modAssets, "lang", "en_us.json"), "utf8"));
@@ -51,6 +55,7 @@ for (const [id, group] of groups) {
 		subtitleCount += variant.subtitles.length;
     variantCount++;
     const sound = event.sounds[0];
+		check(typeof sound === "object" && sound.stream === true, `Dialogue ${id}.${variant.index} is not streamed`);
     const name = typeof sound === "string" ? sound : sound.name;
     const relative = name.replace("villager-news-addon-port:", "");
     check(existsSync(join(modAssets, "sounds", `${relative}.ogg`)), `Missing audio file for ${name}`);
@@ -59,12 +64,31 @@ for (const [id, group] of groups) {
 check(variantCount === 2212, `Expected 2212 synchronized variants, found ${variantCount}`);
 check(subtitleCount === 3741, `Expected 3741 timed subtitles, found ${subtitleCount}`);
 check(clientSource.includes("DialogueSubtitleState.start(payload)")
-  && clientSource.includes("ClientTickEvents.END_CLIENT_TICK.register(DialogueSubtitleState::tick)"),
+  && clientSource.includes("DialogueSubtitleState.register()")
+  && clientSource.includes("DialogueSubtitleState.tick(client)"),
 "The timed subtitle client is not registered");
 check(subtitleSource.includes("showSubtitles().get()")
-  && subtitleSource.includes("hud.setOverlayMessage")
-  && subtitleSource.includes("RANGE_SQUARED"), "The action-bar subtitle behavior is incomplete");
+  && subtitleSource.includes("HudElementRegistry.attachElementAfter")
+  && subtitleSource.includes("MAX_LINES = 4")
+  && subtitleSource.includes("subtitleScale")
+  && subtitleSource.includes("RANGE_SQUARED"), "The stacked subtitle HUD behavior is incomplete");
 check(animations.gestures.length === 46, `Expected 46 dialogue gestures, found ${animations.gestures.length}`);
+check(animations.locomotion?.duration === 0.4375
+  && Object.keys(animations.locomotion.tracks).length === 14
+  && animations.locomotion.tracks.left_leg_rx
+  && animations.locomotion.tracks.left_leg_ty
+  && animations.locomotion.tracks.right_leg_rx
+  && animations.locomotion.tracks.right_leg_ty,
+"The original Bedrock walking animation is incomplete");
+check(animations.idles?.length === 6 && animations.idles.every((idle) => idle.duration > 0
+  && Object.keys(idle.tracks).length > 0), "The six original Bedrock idle animations are incomplete");
+check(animations.continuousIdle === "animation.oreville_vn.fyqjnp"
+  && animations.targetLook === "animation.oreville_vn.vqhynx", "The continuous idle and target-look layers are missing");
+check(animationStateSource.includes("walkAnimation.position(partialTick)")
+  && animationStateSource.includes("IDLE_STATES")
+	&& animationStateSource.includes("horizontalDistanceSqr() > 0.0001")
+	&& animationStateSource.includes("startNext(tick)")
+	&& animationStateSource.includes("locomotion.valueAt"), "The client does not continuously play locomotion and stationary idle tracks");
 
 const referencedGroups = groups.filter(([id, group]) => behaviorSource.includes(`"${id}"`)
   || (group.title && behaviorSource.includes(`"${group.title}"`)));
@@ -74,7 +98,9 @@ check(unreferencedGroups.length === 0, `Found ${unreferencedGroups.length} dialo
 check(behaviorSource.includes("EntitySpawnReason.SPAWN_ITEM_USE"), "Spawn-egg dialogue does not use the server spawn reason");
 check(behaviorSource.includes("maintainSpeechTargets"), "Server-side subject facing is missing");
 check(behaviorSource.includes("mob.getNavigation().stop()")
-  && behaviorSource.includes("mob.setYBodyRot(yaw)")
+	&& behaviorSource.includes("mob.setYBodyRot(bodyYaw)")
+	&& behaviorSource.includes("mob.setYHeadRot(targetYaw)")
+	&& behaviorSource.includes("mob.setXRot(Mth.clamp(targetPitch")
   && behaviorSource.includes("holdListener"), "Bedrock speaking movement and mutual-facing locks are incomplete");
 check(behaviorSource.includes("reputation < -225")
   && behaviorSource.includes("reputation < -75")
@@ -85,9 +111,27 @@ check(behaviorSource.includes("negativeGossip")
 check(behaviorSource.includes("RECENT_VARIANTS")
   && behaviorSource.includes("Set.copyOf(recentVariants)"), "Dialogue variants can immediately repeat");
 check(behaviorSource.includes("droppedItems.size() >= 5"), "Dropped-item pile dialogue does not require a real pile");
-check(behaviorSource.includes("ClientboundStopSoundPacket"), "Interrupted dialogue audio is not stopped on clients");
+check(clientSource.includes("DialogueSoundState.start(payload)")
+  && clientSource.includes("DialogueSoundState.tick(client)")
+  && soundStateSource.includes("EntityBoundSoundInstance")
+  && soundStateSource.includes("getSoundManager().stop(active.instance())")
+  && !behaviorSource.includes("speaker.getX(), speaker.getY(), speaker.getZ(), variant.sound()"),
+"Dialogue sounds are not bound to and stopped for their exact speaker");
+check(animationStateSource.includes("ACTIVE.entrySet().removeIf")
+  && soundStateSource.includes("ACTIVE.entrySet().iterator()"), "Expired client dialogue state is not cleaned up");
 check((behaviorSource.match(/tickRateManager\(\)\.runsNormally\(\)/g) ?? []).length >= 2
   && behaviorSource.includes("stopActiveDialogue(server)"), "Dialogue is not paused and stopped by /tick freeze");
+check(behaviorSource.includes("!VillagerNewsSettings.dialogueEnabled()")
+  && settingsStateSource.includes("getConnection() != null"), "Muting dialogue is not handled safely");
+check((behaviorSource.match(/!villager\.isSleeping\(\)/g) ?? []).length >= 5
+  && behaviorSource.includes("if (sleeping)"), "Sleeping villagers still react through normal observer paths");
+check(behaviorSource.includes("delayVillagerSleep")
+  && behaviorSource.includes("processPendingSleep")
+  && behaviorSource.includes("PENDING_SLEEP.remove(villager.getUUID())")
+  && existsSync(join(root, "src/main/java/com/vnap/mixin/VillagerSleepMixin.java"))
+  && mixinConfiguration.includes("VillagerSleepMixin"), "Villager sleep dialogue timing and interruption are incomplete");
+check(behaviorSource.includes("updatedVillagers.add(villager.getUUID())")
+  && behaviorSource.includes("checkedPairs.add(pair)"), "Nearby multiplayer scans still repeat villager and pair work");
 check(behaviorSource.includes("tryCreateNaturalSpecial"), "Natural special-character spawning is missing");
 check(!behaviorSource.includes("InteractionResult.FAIL"), "Dialogue hooks still reject vanilla trading interactions");
 check(existsSync(join(root, "src/main/java/com/vnap/mixin/AbstractVillagerMixin.java")), "Trade completion mixin is missing");
@@ -118,6 +162,13 @@ check(behaviorSource.includes("VillagerNewsSettings.scaleCooldown")
   && behaviorSource.includes("VillagerNewsSettings.spawnSpecialVillagers"), "The server behavior does not apply every supported setting");
 check(villagerDataSource.includes("vnap$keepSpecialTradeOpen") && villagerDataSource.includes("isSpecialTrader"),
   "Special villagers still inherit the vanilla unemployed-villager trade closure");
+check(villagerDataSource.includes("VillagerNewsSignMessage")
+  && behaviorSource.includes("villager.setItemSlot(EquipmentSlot.MAINHAND")
+  && behaviorSource.includes("Math.floorMod(state.vnap$signMessage() + direction, 87)"),
+"Villagers do not hold, remove, and cycle their Bedrock signs");
+check(mixinConfiguration.includes("VillagerSoundMixin")
+  && existsSync(join(root, "src/main/java/com/vnap/mixin/VillagerSoundMixin.java")),
+"Vanilla villager death sounds are not deterministically suppressed");
 check(professionLayerSource.includes("vnap$alignAdultClothingWithEmfModel")
   && professionLayerSource.includes("return layer.getParentModel()"),
 "Villager profession clothing is not aligned with the EMF model");
@@ -144,8 +195,8 @@ for (const [profession, texture] of Object.entries(professionTextures)) {
   check(existsSync(join(resources, "assets", "minecraft", "textures", "entity", "villager", "profession", `${profession}.png`)),
     `${profession} profession texture was not generated`);
 }
-check(/^version=1\.2\.0$/m.test(gradleProperties), "The project version is not 1.2.0");
-check(language["guide.villager-news-addon-port.header"] === "Villager News 1.2.0", "The handbook version is not 1.2.0");
+check(/^version=1\.3\.0$/m.test(gradleProperties), "The project version is not 1.3.0");
+check(language["guide.villager-news-addon-port.header"] === "Villager News 1.3.0", "The handbook version is not 1.3.0");
 const merchantCheck = behaviorSource.indexOf("player.containerMenu instanceof MerchantMenu");
 const openingDialogue = behaviorSource.indexOf("trade_open:");
 check(merchantCheck >= 0 && openingDialogue > merchantCheck, "Trade opening dialogue still runs before the merchant menu opens");
@@ -154,6 +205,32 @@ for (const item of ["handbook", "mayor_hat", "microphone", "moustache", "testifi
   check(existsSync(join(modAssets, "items", `${item}.json`)), `Missing client item definition for ${item}`);
   check(existsSync(join(modAssets, "models", "item", `${item}.json`)), `Missing item model for ${item}`);
   check(existsSync(join(modAssets, "textures", "item", `${item}.png`)), `Missing item texture for ${item}`);
+}
+for (const item of ["mayor_villager_spawn_egg", "testificate_man_spawn_egg", "villager_5_spawn_egg",
+  "villager_9_spawn_egg", "untouchable_villager_spawn_egg", "wooly_spawn_egg"]) {
+  check(itemSource.includes(item.toUpperCase()), `Missing registered spawn egg ${item}`);
+  check(existsSync(join(modAssets, "items", `${item}.json`)), `Missing client item definition for ${item}`);
+  check(existsSync(join(modAssets, "models", "item", `${item}.json`)), `Missing item model for ${item}`);
+  check(existsSync(join(modAssets, "textures", "item", `${item}.png`)), `Missing original texture for ${item}`);
+  check(typeof language[`item.villager-news-addon-port.${item}`] === "string", `Missing item name for ${item}`);
+}
+check(itemSource.includes("ComponentSerialization.CODEC.encodeStart(NbtOps.INSTANCE")
+  && !itemSource.includes('{\\"text\\":\\"')
+  && !itemSource.includes('putByte("Color"'), "Spawn eggs still write malformed names or dye Wooly red");
+check(behaviorSource.includes("normalizeSpecialEntity(entity)")
+  && behaviorSource.includes("sheep.setColor(DyeColor.WHITE)")
+  && !behaviorSource.includes("sheep.setColor(DyeColor.RED)"), "Existing special entities are not repaired on load");
+for (const file of readdirSync(join(modAssets, "sounds", "voice")).filter((name) => name.endsWith(".ogg"))) {
+  const data = readFileSync(join(modAssets, "sounds", "voice", file));
+  let offset = 0;
+  while (offset + 27 <= data.length && data.toString("ascii", offset, offset + 4) === "OggS") {
+    const segmentCount = data[offset + 26];
+    let bodySize = 0;
+    for (let index = 0; index < segmentCount; index++) bodySize += data[offset + 27 + index];
+    const granule = data.readBigUInt64LE(offset + 6);
+    check(!(granule > 0xffffffffn && granule < 0x200000000n), `${file} has a malformed Bedrock OGG granule timestamp`);
+    offset += 27 + segmentCount + bodySize;
+  }
 }
 const wearableGeometry = {
   mayor_hat: { elementCount: 8, from: [2.4, 14.4, 2.4], to: [13.6, 16, 13.6], textureSize: [32, 32] },
@@ -243,7 +320,8 @@ for (const { file, localScale, armsRest } of [
   check(!animationText.includes('_l66l9.sx"'), `${file} still applies tooth scaling to the empty parent bone`);
   check(animationText.includes("_egfg3jgo.ty") && animationText.includes("vnap_brow_ty"), `${file} brow animation was not hoisted`);
   check(animationText.includes("6q6da5kmhh6j.sy") && animationText.includes("6q6da5kdgo6j.sy") && animationText.includes("2.02"), `${file} does not animate both eyelid halves`);
-  check(animationText.includes("_leftleg.rx\":\"sin(limb_swing") && animationText.includes("_rightleg.rx\":\"sin(limb_swing"), `${file} does not walk from the upper-leg pivots`);
+	check(animationText.includes("vnap_left_leg_rx") && animationText.includes("vnap_right_leg_rx"), `${file} does not animate both upper-leg pivots`);
+	check(!animationText.includes("sin(limb_swing"), `${file} still uses the simplified walk instead of the original Bedrock track`);
   check(!animationText.includes("limb_speed*(1-vnap_speaking)"), `${file} freezes its legs while dialogue is playing`);
   check(!animationText.includes("_jggl_leftleg.rx\":\"sin(limb_swing") && !animationText.includes("_jggl_rightleg.rx\":\"sin(limb_swing"), `${file} still walks from the foot pivots`);
   if (file !== "wandering_trader.jem") {
