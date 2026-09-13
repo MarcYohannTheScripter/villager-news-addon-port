@@ -1,0 +1,77 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "texture": "villager-news-addon-port:item/worn/moustache",
+    "particle": "villager-news-addon-port:item/worn/moustache"
+  },
+  "elements": [
+    {
+      "from": [
+        4.8,
+        4,
+        0.4
+      ],
+      "to": [
+        11.2,
+        5.6,
+        0.8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            4,
+            1
+          ],
+          "texture": "#texture"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            4,
+            1
+          ],
+          "texture": "#texture"
+        },
+        "east": {
+          "uv": [
+            3,
+            0,
+            4,
+            1
+          ],
+          "texture": "#texture"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "texture": "#texture"
+        },
+        "up": {
+          "uv": [
+            4,
+            1,
+            0,
+            0
+          ],
+          "texture": "#texture"
+        },
+        "down": {
+          "uv": [
+            4,
+            1,
+            0,
+            0
+          ],
+          "texture": "#texture"
+        }
+      }
+    }
+  ]
+}

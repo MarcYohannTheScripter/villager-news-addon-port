@@ -15,8 +15,12 @@ const behaviorSource = readFileSync(join(root, "src/main/java/com/vnap/dialogue/
 const itemSource = readFileSync(join(root, "src/main/java/com/vnap/item/VillagerNewsItems.java"), "utf8");
 const handbookSource = readFileSync(join(root, "src/main/java/com/vnap/client/HandbookScreen.java"), "utf8");
 const clientSource = readFileSync(join(root, "src/main/java/com/vnap/client/VillagerNewsAddonPortClient.java"), "utf8");
+const professionLayerSource = readFileSync(join(root, "src/main/java/com/vnap/mixin/client/VillagerProfessionLayerMixin.java"), "utf8");
+const subtitleSource = readFileSync(join(root, "src/main/java/com/vnap/client/DialogueSubtitleState.java"), "utf8");
 const settingsSource = readFileSync(join(root, "src/main/java/com/vnap/config/VillagerNewsSettings.java"), "utf8");
 const villagerDataSource = readFileSync(join(root, "src/main/java/com/vnap/mixin/VillagerDataMixin.java"), "utf8");
+const generatorSource = readFileSync(join(root, "tools/port-addon.mjs"), "utf8");
+const gradleProperties = readFileSync(join(root, "gradle.properties"), "utf8");
 const language = JSON.parse(readFileSync(join(modAssets, "lang", "en_us.json"), "utf8"));
 
 const ffmpeg = [
@@ -31,13 +35,20 @@ function check(condition, message) {
 const groups = Object.entries(catalog.groups);
 check(groups.length === 523, `Expected 523 dialogue groups, found ${groups.length}`);
 let variantCount = 0;
+let subtitleCount = 0;
 for (const [id, group] of groups) {
   check(group.variants?.length, `Dialogue ${id} has no variants`);
   check(animations.groups[id]?.length === group.variants.length, `Dialogue ${id} has mismatched animation variants`);
   for (const variant of group.variants) {
     const event = sounds[`dialogue.${id}.${variant.index}`];
     check(event?.sounds?.length === 1, `Dialogue ${id}.${variant.index} must have one exact sound`);
-    check(event.subtitle === "subtitles.villager-news-addon-port.talking", `Dialogue ${id}.${variant.index} has no subtitle`);
+    check(event.subtitle === undefined, `Dialogue ${id}.${variant.index} still uses the bottom-right subtitle overlay`);
+    check(variant.subtitles?.length > 0, `Dialogue ${id}.${variant.index} has no original subtitle timeline`);
+    check(variant.subtitles.every((entry, index) => typeof entry.key === "string"
+      && typeof language[entry.key] === "string" && language[entry.key].length > 0
+      && Number.isFinite(entry.time) && (index === 0 || entry.time >= variant.subtitles[index - 1].time)),
+      `Dialogue ${id}.${variant.index} has an invalid subtitle timeline`);
+		subtitleCount += variant.subtitles.length;
     variantCount++;
     const sound = event.sounds[0];
     const name = typeof sound === "string" ? sound : sound.name;
@@ -46,6 +57,13 @@ for (const [id, group] of groups) {
   }
 }
 check(variantCount === 2212, `Expected 2212 synchronized variants, found ${variantCount}`);
+check(subtitleCount === 3741, `Expected 3741 timed subtitles, found ${subtitleCount}`);
+check(clientSource.includes("DialogueSubtitleState.start(payload)")
+  && clientSource.includes("ClientTickEvents.END_CLIENT_TICK.register(DialogueSubtitleState::tick)"),
+"The timed subtitle client is not registered");
+check(subtitleSource.includes("showSubtitles().get()")
+  && subtitleSource.includes("hud.setOverlayMessage")
+  && subtitleSource.includes("RANGE_SQUARED"), "The action-bar subtitle behavior is incomplete");
 check(animations.gestures.length === 46, `Expected 46 dialogue gestures, found ${animations.gestures.length}`);
 
 const referencedGroups = groups.filter(([id, group]) => behaviorSource.includes(`"${id}"`)
@@ -55,6 +73,17 @@ check(referencedGroups.length === groups.length, `Expected all 523 server-trigge
 check(unreferencedGroups.length === 0, `Found ${unreferencedGroups.length} dialogue groups without Java triggers`);
 check(behaviorSource.includes("EntitySpawnReason.SPAWN_ITEM_USE"), "Spawn-egg dialogue does not use the server spawn reason");
 check(behaviorSource.includes("maintainSpeechTargets"), "Server-side subject facing is missing");
+check(behaviorSource.includes("mob.getNavigation().stop()")
+  && behaviorSource.includes("mob.setYBodyRot(yaw)")
+  && behaviorSource.includes("holdListener"), "Bedrock speaking movement and mutual-facing locks are incomplete");
+check(behaviorSource.includes("reputation < -225")
+  && behaviorSource.includes("reputation < -75")
+  && behaviorSource.includes("reputation >= 75")
+  && behaviorSource.includes("reputation >= 25"), "Bedrock reputation tiers are not preserved");
+check(behaviorSource.includes("negativeGossip")
+  && behaviorSource.includes("isNegativeReputation(first, player)"), "Player-directed gossip is not gated by bad reputation");
+check(behaviorSource.includes("RECENT_VARIANTS")
+  && behaviorSource.includes("Set.copyOf(recentVariants)"), "Dialogue variants can immediately repeat");
 check(behaviorSource.includes("droppedItems.size() >= 5"), "Dropped-item pile dialogue does not require a real pile");
 check(behaviorSource.includes("ClientboundStopSoundPacket"), "Interrupted dialogue audio is not stopped on clients");
 check((behaviorSource.match(/tickRateManager\(\)\.runsNormally\(\)/g) ?? []).length >= 2
@@ -89,6 +118,34 @@ check(behaviorSource.includes("VillagerNewsSettings.scaleCooldown")
   && behaviorSource.includes("VillagerNewsSettings.spawnSpecialVillagers"), "The server behavior does not apply every supported setting");
 check(villagerDataSource.includes("vnap$keepSpecialTradeOpen") && villagerDataSource.includes("isSpecialTrader"),
   "Special villagers still inherit the vanilla unemployed-villager trade closure");
+check(professionLayerSource.includes("vnap$alignAdultClothingWithEmfModel")
+  && professionLayerSource.includes("return layer.getParentModel()"),
+"Villager profession clothing is not aligned with the EMF model");
+const professionTextures = {
+  none: "din",
+  armorer: "djv",
+  butcher: "djw",
+  cartographer: "djx",
+  cleric: "djy",
+  farmer: "djz",
+  fisherman: "dka",
+  fletcher: "dkb",
+  leatherworker: "dkc",
+  librarian: "dkd",
+  mason: "dkg",
+  nitwit: "dkh",
+  shepherd: "dke",
+  toolsmith: "djg",
+  weaponsmith: "dkf",
+};
+for (const [profession, texture] of Object.entries(professionTextures)) {
+  check(generatorSource.includes(`"profession/${profession}.png": "${texture}"`),
+    `${profession} does not use its original Bedrock profession texture`);
+  check(existsSync(join(resources, "assets", "minecraft", "textures", "entity", "villager", "profession", `${profession}.png`)),
+    `${profession} profession texture was not generated`);
+}
+check(/^version=1\.2\.0$/m.test(gradleProperties), "The project version is not 1.2.0");
+check(language["guide.villager-news-addon-port.header"] === "Villager News 1.2.0", "The handbook version is not 1.2.0");
 const merchantCheck = behaviorSource.indexOf("player.containerMenu instanceof MerchantMenu");
 const openingDialogue = behaviorSource.indexOf("trade_open:");
 check(merchantCheck >= 0 && openingDialogue > merchantCheck, "Trade opening dialogue still runs before the merchant menu opens");
@@ -97,6 +154,44 @@ for (const item of ["handbook", "mayor_hat", "microphone", "moustache", "testifi
   check(existsSync(join(modAssets, "items", `${item}.json`)), `Missing client item definition for ${item}`);
   check(existsSync(join(modAssets, "models", "item", `${item}.json`)), `Missing item model for ${item}`);
   check(existsSync(join(modAssets, "textures", "item", `${item}.png`)), `Missing item texture for ${item}`);
+}
+const wearableGeometry = {
+  mayor_hat: { elementCount: 8, from: [2.4, 14.4, 2.4], to: [13.6, 16, 13.6], textureSize: [32, 32] },
+  moustache: { elementCount: 1, from: [4.8, 4, 0.4], to: [11.2, 5.6, 0.8], textureSize: [16, 16] },
+  testificate_man_helmet: { elementCount: 3, from: [0.72, 2.32, 0.72], to: [15.28, 20.08, 15.28], textureSize: [16, 32] },
+  villager_nose: { elementCount: 1, from: [6.4, 0, -1.6], to: [9.6, 6.4, 1.6], textureSize: [64, 64] },
+};
+for (const [item, expected] of Object.entries(wearableGeometry)) {
+  const definition = JSON.parse(readFileSync(join(modAssets, "items", `${item}.json`), "utf8"));
+  const worn = JSON.parse(readFileSync(join(modAssets, "models", "item", `${item}_worn.json`), "utf8"));
+  const textureFile = join(modAssets, "textures", "item", "worn", `${item}.png`);
+  const headCase = definition.model?.cases?.find((entry) => entry.when === "head");
+  check(definition.model?.type === "minecraft:select"
+    && definition.model?.property === "minecraft:display_context"
+    && headCase?.model?.model === `villager-news-addon-port:item/${item}_worn`,
+  `${item} does not use its worn model on a player head`);
+  check(definition.model?.fallback?.model === `villager-news-addon-port:item/${item}`,
+    `${item} does not preserve its inventory model`);
+  check(worn.elements?.length === expected.elementCount, `${item} has incomplete wearable geometry`);
+  check(worn.elements.every((element) => element.from?.length === 3 && element.to?.length === 3
+    && Object.keys(element.faces ?? {}).length > 0), `${item} has malformed wearable cubes`);
+  check(JSON.stringify(worn.elements[0].from) === JSON.stringify(expected.from)
+    && JSON.stringify(worn.elements[0].to) === JSON.stringify(expected.to),
+  `${item} is not anchored to the original Bedrock player-head coordinates`);
+  check(existsSync(textureFile), `${item} is missing its original wearable texture`);
+  const texture = readFileSync(textureFile);
+  check(texture.readUInt32BE(16) === expected.textureSize[0]
+    && texture.readUInt32BE(20) === expected.textureSize[1], `${item} has an unsafe atlas texture size`);
+  const rgba = execFileSync(ffmpeg, [
+    "-v", "error", "-i", textureFile, "-f", "rawvideo", "-pix_fmt", "rgba", "-",
+  ]);
+  let transparentPixels = 0;
+  let opaquePixels = 0;
+  for (let index = 3; index < rgba.length; index += 4) {
+    if (rgba[index] === 0) transparentPixels++;
+    if (rgba[index] === 255) opaquePixels++;
+  }
+  check(transparentPixels > 0 && opaquePixels > 0, `${item} wearable texture lost its alpha channel`);
 }
 check(existsSync(join(resources, "data", "villager-news-addon-port", "recipe", "handbook.json")), "Handbook recipe is missing");
 
@@ -158,12 +253,22 @@ for (const { file, localScale, armsRest } of [
     for (const cosmetic of ["mayor_hat", "helmet", "microphone", "moustache"]) {
       check(JSON.stringify(model).includes(`vnap_cosmetic_${cosmetic}`), `${file} is missing the ${cosmetic} cosmetic`);
     }
+    const wearablePrefix = file === "villager.jem" ? "villager_news" : "villager_news_baby";
+    const helmetBelt = all.find((entry) => entry.id === `${wearablePrefix}_extra_1_l6kla7a42l636dl`);
+    check(helmetBelt?.boxes?.[0]?.sizeAdd === 0.0625, `${file} has a belt coplanar with the villager robe`);
   }
 
   const head = base("headjgl2l6");
   const nose = base("fgk6");
   const arms = base("2jek");
   const bodywear = base("jg36");
+  if (file === "villager3.jem") {
+    const testificateBelt = all.find((entry) => entry.id === "testificate_extra_0_l6kla7a42l636dl");
+    check(rootModel.texture === "villager-news-addon-port:textures/entity/testificate_man.png",
+      "Testificate Man lost his original character texture");
+    check(testificateBelt?.boxes?.[0]?.sizeAdd === undefined,
+      "The named Testificate Man model was changed with the wearable belt adjustment");
+  }
   if (file === "villager2.jem") {
     const mayorExtra = all.find((entry) => entry.id === "mayor_extra_0_lghhat");
     check(head?.boxes?.some((box) => box.coordinates?.slice(3).includes(24)), "Mayor is not using the large baby base rig");
@@ -175,6 +280,8 @@ for (const { file, localScale, armsRest } of [
 	    const mayorHat = all.find((entry) => entry.id === "villager_news_extra_0_lghhat");
 	    const mayorMonocle = all.find((entry) => entry.id === "villager_news_extra_0_egfg4d6");
 	    const mayorAnimations = JSON.stringify(model.models.find((entry) => entry.id === "villager_news_extra_0_root")?.animations ?? []);
+	    check(animationText.includes('"villager_news_base_hat.visible":"vnap_cosmetic_mayor_hat==0&&vnap_cosmetic_helmet==0"'),
+	      "The ordinary villager headwear visibility is not a boolean EMF expression");
 	    check(mayorHat?.boxes?.some((box) => box.coordinates?.slice(3).includes(8)), "The villager Mayor hat is using the oversized special-character geometry");
 	    check(mayorAnimations.includes('"this.sx":"vnap_cosmetic_mayor_hat"')
 	      && mayorAnimations.includes('"villager_news_extra_0_lghhat.sx":0.9')

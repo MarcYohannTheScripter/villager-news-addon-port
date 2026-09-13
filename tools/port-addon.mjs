@@ -46,6 +46,21 @@ function writeText(file, value) {
   writeFileSync(file, value);
 }
 
+function readLang(file) {
+  const entries = new Map();
+  for (const sourceLine of readFileSync(file, "utf8").split(/\r?\n/)) {
+    const line = sourceLine.replace(/^\uFEFF/, "");
+    const separator = line.indexOf("=");
+    if (separator < 1) continue;
+    const key = line.slice(0, separator);
+    let value = line.slice(separator + 1);
+    const marker = value.lastIndexOf("\t#");
+    if (marker >= 0) value = value.slice(0, marker);
+    entries.set(key, value.trim());
+  }
+  return entries;
+}
+
 function walkFiles(root) {
   const files = [];
   for (const name of readdirSync(root)) {
@@ -689,7 +704,19 @@ function rootVillagerModels(prefix, texture, extras = [], {
       monocle.translate = vector(monocle.translate);
       monocle.translate[2] = cleanNumber(monocle.translate[2] + extra.monocleInset);
     }
+    if (extra.beltInflate !== undefined) {
+      const belt = findModelById(layer, `${prefix}_extra_${index}_l6kla7a42l636dl`);
+      if (!belt?.boxes?.length) throw new Error(`${prefix} cosmetic belt bone is missing`);
+      belt.boxes[0].sizeAdd = cleanNumber((belt.boxes[0].sizeAdd ?? 0) + extra.beltInflate);
+    }
     models.push(...layer);
+  }
+  if (prefix === "villager_news") {
+    const headwear = findModelById(models, `${prefix}_base_hat`);
+    if (!headwear) throw new Error("Villager headwear bone is missing");
+    appendAnimation(headwear, {
+      "this.visible": "vnap_cosmetic_mayor_hat==0&&vnap_cosmetic_helmet==0",
+    });
   }
   if (prefix !== "wandering_trader_news") {
     const nose = findModelById(models, `${prefix}_base_fgk6`);
@@ -836,13 +863,13 @@ function rootSheepModels(prefix, texture, sheared = false) {
 const modelDefinitions = {
   "villager.jem": { models: rootVillagerModels("villager_news", undefined, [
     { geometry: "geometry.oreville_vn.131968402", texture: "dtd", visibility: "vnap_cosmetic_mayor_hat", scaleXZ: 0.9, drop: 1.7, monocleInset: 1.75 },
-    { geometry: "geometry.oreville_vn.1221980082", texture: "djn", visibility: "vnap_cosmetic_helmet" },
+    { geometry: "geometry.oreville_vn.1221980082", texture: "djn", visibility: "vnap_cosmetic_helmet", beltInflate: 0.0625 },
     { geometry: "geometry.oreville_vn.1878756082", texture: "dta", visibility: "vnap_cosmetic_microphone" },
     { geometry: "geometry.oreville_vn.208670578", texture: "djh", visibility: "vnap_cosmetic_moustache" },
   ]) },
   "villager_baby.jem": { models: rootVillagerModels("villager_news_baby", undefined, [
     { geometry: "geometry.oreville_vn.292718674", texture: "dtd", visibility: "vnap_cosmetic_mayor_hat" },
-    { geometry: "geometry.oreville_vn.1221980082", texture: "djn", visibility: "vnap_cosmetic_helmet" },
+    { geometry: "geometry.oreville_vn.1221980082", texture: "djn", visibility: "vnap_cosmetic_helmet", beltInflate: 0.0625 },
     { geometry: "geometry.oreville_vn.1878756082", texture: "dta", visibility: "vnap_cosmetic_microphone" },
     { geometry: "geometry.oreville_vn.208670578", texture: "djh", visibility: "vnap_cosmetic_moustache" },
   ], {
@@ -934,6 +961,136 @@ function copyTexture(name, destination) {
   } else throw new Error(`Missing texture ${name}`);
 }
 
+const wearableItems = {
+  mayor_hat: { geometry: "geometry.oreville_vn.1064568764", texture: "eba", textureSize: [32, 32] },
+  moustache: { geometry: "geometry.oreville_vn.1940352316", texture: "ebc", textureSize: [16, 16] },
+  testificate_man_helmet: { geometry: "geometry.oreville_vn.-1144631652", texture: "ebd", textureSize: [16, 32] },
+  villager_nose: { geometry: "geometry.oreville_vn.834522044", texture: "dil", textureSize: [64, 64] },
+};
+
+function standardCubeFaces(cube) {
+  const [u, v] = cube.uv;
+  const [x, y, z] = cube.size;
+  return {
+    west: { uv: [u, v + z], uv_size: [z, y] },
+    north: { uv: [u + z, v + z], uv_size: [x, y] },
+    east: { uv: [u + z + x, v + z], uv_size: [z, y] },
+    south: { uv: [u + z + x + z, v + z], uv_size: [x, y] },
+    up: { uv: [u + z, v], uv_size: [x, z] },
+    down: { uv: [u + z + x, v], uv_size: [x, z] },
+  };
+}
+
+function wornItemFaces(cube, textureSize) {
+  const sourceFaces = Array.isArray(cube.uv) ? standardCubeFaces(cube) : cube.uv;
+  const sourceFaceByItemFace = {
+    north: "north",
+    south: "south",
+    east: "west",
+    west: "east",
+    up: "up",
+    down: "down",
+  };
+  const faces = {};
+  for (const [itemFace, sourceName] of Object.entries(sourceFaceByItemFace)) {
+    const source = sourceFaces?.[sourceName];
+    if (!source?.uv || !source?.uv_size) continue;
+    const [u, v] = source.uv;
+    const [width, height] = source.uv_size;
+    const face = {
+      uv: vector([
+        u * 16 / textureSize[0],
+        v * 16 / textureSize[1],
+        (u + width) * 16 / textureSize[0],
+        (v + height) * 16 / textureSize[1],
+      ]),
+      texture: "#texture",
+    };
+    if (source.uv_rotation) face.rotation = source.uv_rotation;
+    faces[itemFace] = face;
+  }
+  return faces;
+}
+
+function wornItemPoint(point) {
+  return vector([
+    8 - point[0] * 1.6,
+    (point[1] - 23) * 1.6,
+    8 + point[2] * 1.6,
+  ]);
+}
+
+function wornItemElement(cube, bone, textureSize) {
+  const inflate = cube.inflate ?? 0;
+  const minimum = cube.origin.map((value) => value - inflate);
+  const maximum = cube.origin.map((value, index) => value + cube.size[index] + inflate);
+  const element = {
+    from: wornItemPoint([maximum[0], minimum[1], minimum[2]]),
+    to: wornItemPoint([minimum[0], maximum[1], maximum[2]]),
+    faces: wornItemFaces(cube, textureSize),
+  };
+  const rotation = cube.rotation ?? bone.rotation;
+  if (rotation?.some(Boolean)) {
+    const activeAxes = axes.filter((axis, index) => rotation[index]);
+    if (activeAxes.length !== 1) throw new Error(`Unsupported wearable rotation ${JSON.stringify(rotation)}`);
+    const axis = activeAxes[0];
+    const index = axes.indexOf(axis);
+    element.rotation = {
+      origin: wornItemPoint(cube.pivot ?? bone.pivot),
+      axis,
+      angle: cleanNumber(rotation[index]),
+    };
+  }
+  return element;
+}
+
+for (const [item, definition] of Object.entries(wearableItems)) {
+  const geometry = geometryById.get(definition.geometry);
+  if (!geometry) throw new Error(`Missing wearable geometry ${definition.geometry}`);
+  const originalTextureSize = [geometry.description.texture_width, geometry.description.texture_height];
+  const wornTexture = join(modAssets, "textures", "item", "worn", `${item}.png`);
+  mkdirSync(dirname(wornTexture), { recursive: true });
+  const sourceTexture = join(textureSource, `${definition.texture}.png`);
+  if (!existsSync(sourceTexture)) throw new Error(`Missing wearable texture ${definition.texture}.png`);
+  if (originalTextureSize[0] === definition.textureSize[0] && originalTextureSize[1] === definition.textureSize[1]) {
+    copyFileSync(sourceTexture, wornTexture);
+  } else {
+    if (!ffmpeg) throw new Error(`Padding ${definition.texture}.png needs FFmpeg. Set FFMPEG_PATH to an FFmpeg executable.`);
+    execFileSync(ffmpeg, [
+      "-y", "-hide_banner", "-loglevel", "error", "-i", sourceTexture,
+      "-vf", `format=rgba,pad=${definition.textureSize[0]}:${definition.textureSize[1]}:0:0:color=black@0,format=rgba`,
+      "-pix_fmt", "rgba", "-frames:v", "1", wornTexture,
+    ]);
+  }
+  const elements = geometry.bones.flatMap((bone) =>
+    (bone.cubes ?? []).map((cube) => wornItemElement(cube, bone, definition.textureSize)));
+  writeJson(join(modAssets, "models", "item", `${item}_worn.json`), {
+    ambientocclusion: false,
+    textures: {
+      texture: `${modNamespace}:item/worn/${item}`,
+      particle: `${modNamespace}:item/worn/${item}`,
+    },
+    elements,
+  });
+  writeJson(join(modAssets, "items", `${item}.json`), {
+    model: {
+      type: "minecraft:select",
+      property: "minecraft:display_context",
+      cases: [{
+        when: "head",
+        model: {
+          type: "minecraft:model",
+          model: `${modNamespace}:item/${item}_worn`,
+        },
+      }],
+      fallback: {
+        type: "minecraft:model",
+        model: `${modNamespace}:item/${item}`,
+      },
+    },
+  });
+}
+
 const directlyUsedTextures = new Set(["dtd", "djn", "djh", "dta", "diq", "dix", "diw"]);
 for (const layers of Object.values(compositeTextures)) {
   for (const texture of layers) directlyUsedTextures.add(texture);
@@ -988,20 +1145,20 @@ const vanillaVillagerTextures = {
   "type/swamp.png": "djt",
   "type/taiga.png": "dju",
   "profession/none.png": "din",
-  "profession/armorer.png": "djz",
-  "profession/butcher.png": "dka",
-  "profession/cartographer.png": "dke",
-  "profession/cleric.png": "dkb",
-  "profession/farmer.png": "dkd",
-  "profession/fisherman.png": "djx",
-  "profession/fletcher.png": "djy",
-  "profession/leatherworker.png": "djv",
-  "profession/librarian.png": "dkf",
-  "profession/mason.png": "djg",
-  "profession/nitwit.png": "djw",
-  "profession/shepherd.png": "djc",
-  "profession/toolsmith.png": "dkg",
-  "profession/weaponsmith.png": "dkh",
+  "profession/armorer.png": "djv",
+  "profession/butcher.png": "djw",
+  "profession/cartographer.png": "djx",
+  "profession/cleric.png": "djy",
+  "profession/farmer.png": "djz",
+  "profession/fisherman.png": "dka",
+  "profession/fletcher.png": "dkb",
+  "profession/leatherworker.png": "dkc",
+  "profession/librarian.png": "dkd",
+  "profession/mason.png": "dkg",
+  "profession/nitwit.png": "dkh",
+  "profession/shepherd.png": "dke",
+  "profession/toolsmith.png": "djg",
+  "profession/weaponsmith.png": "dkf",
   "profession_level/stone.png": "dki",
   "profession_level/iron.png": "dkj",
   "profession_level/gold.png": "dkk",
@@ -1027,6 +1184,7 @@ for (const file of walkFiles(join(resourceRoot, "entity")).filter((path) => path
 }
 
 const soundDefinitions = readJson(join(resourceRoot, "sounds", "sound_definitions.json")).sound_definitions;
+const originalLanguage = readLang(join(resourceRoot, "texts", "en_US.lang"));
 const script = readFileSync(join(behaviorRoot, "scripts", "oreville", "ebi.js"), "utf8");
 const sourceFile = ts.createSourceFile("ebi.js", script, ts.ScriptTarget.Latest, true, ts.ScriptKind.JS);
 const metadataById = new Map();
@@ -1057,6 +1215,22 @@ function literalNumber(node, fallback = 0) {
     return node.operator === ts.SyntaxKind.MinusToken ? -Number(node.operand.text) : Number(node.operand.text);
   }
   return fallback;
+}
+
+function subtitleTimeline(variant) {
+  const timeline = property(variant, "aswuwr");
+  if (!ts.isObjectLiteralExpression(timeline)) return [];
+  const subtitles = [];
+  for (const entry of timeline.properties) {
+    if (!ts.isPropertyAssignment(entry) || !ts.isObjectLiteralExpression(entry.initializer)) continue;
+    const time = Number(entry.name.getText(sourceFile));
+    const key = literalText(property(entry.initializer, "ysyeto"));
+    if (!Number.isFinite(time) || !key) continue;
+    const value = originalLanguage.get(key);
+    if (value === undefined) throw new Error(`Missing subtitle translation ${key}`);
+    subtitles.push({ time: cleanNumber(time), text: value });
+  }
+  return subtitles.sort((left, right) => left.time - right.time);
 }
 
 function scanMetadata(node) {
@@ -1100,8 +1274,10 @@ function scanDialogue(node) {
       const outputName = source.split("/").at(-1);
       const duration = literalNumber(property(variant, "duration"));
       const weight = Math.max(1, Math.round(literalNumber(property(variant, "weight"), 1) * 100));
+      const subtitles = subtitleTimeline(variant);
+      if (!subtitles.length) throw new Error(`Missing subtitle for dialogue ${id}.${sounds.length}`);
       maximumDuration = Math.max(maximumDuration, duration);
-      sounds.push({ name: outputName, weight, duration, animationName: animationName ?? "" });
+      sounds.push({ name: outputName, weight, duration, animationName: animationName ?? "", subtitles });
       if (!seenSounds.has(outputName)) {
         copyFileSync(join(resourceRoot, `${source}.ogg`), join(modAssets, "sounds", "voice", `${outputName}.ogg`));
         seenSounds.add(outputName);
@@ -1257,6 +1433,12 @@ function detectSpeaker(metadata, id) {
 
 const catalog = { groups: {}, titles: {} };
 const javaSounds = {};
+const javaLanguageFile = join(modAssets, "lang", "en_us.json");
+const javaLanguage = existsSync(javaLanguageFile) ? readJson(javaLanguageFile) : {};
+for (const key of Object.keys(javaLanguage)) {
+  if (key === `subtitles.${modNamespace}.talking`
+    || key.startsWith(`subtitles.${modNamespace}.dialogue.`)) delete javaLanguage[key];
+}
 for (const [id, group] of dialogueGroups) {
   const metadata = metadataById.get(id) ?? { title: "", body: "" };
   catalog.groups[id] = {
@@ -1269,12 +1451,17 @@ for (const [id, group] of dialogueGroups) {
       duration: cleanNumber(sound.duration),
       weight: sound.weight,
       animation: sound.animationName,
+      subtitles: sound.subtitles,
     })),
   };
   if (metadata.title) catalog.titles[metadata.title] = id;
   for (const [index, sound] of group.sounds.entries()) {
+    catalog.groups[id].variants[index].subtitles = sound.subtitles.map((subtitle, subtitleIndex) => {
+      const key = `subtitles.${modNamespace}.dialogue.${id}.${index}.${subtitleIndex}`;
+      javaLanguage[key] = subtitle.text.replaceAll("%", "%%");
+      return { time: subtitle.time, key };
+    });
     javaSounds[`dialogue.${id}.${index}`] = {
-      subtitle: "subtitles.villager-news-addon-port.talking",
       sounds: [{
       name: `${modNamespace}:voice/${sound.name}`,
       stream: sound.duration >= 8,
@@ -1285,6 +1472,7 @@ for (const [id, group] of dialogueGroups) {
 writeJson(join(modAssets, "dialogues.json"), catalog);
 writeJson(join(modAssets, "handbook.json"), handbook);
 writeJson(join(modAssets, "sounds.json"), javaSounds);
+writeJson(javaLanguageFile, javaLanguage);
 
 const commonClientDescription = walkFiles(join(resourceRoot, "entity"))
   .filter((path) => path.endsWith(".json"))

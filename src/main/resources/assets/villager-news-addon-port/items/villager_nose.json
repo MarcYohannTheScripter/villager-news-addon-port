@@ -1,6 +1,19 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "villager-news-addon-port:item/villager_nose"
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
+      {
+        "when": "head",
+        "model": {
+          "type": "minecraft:model",
+          "model": "villager-news-addon-port:item/villager_nose_worn"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "villager-news-addon-port:item/villager_nose"
+    }
   }
 }

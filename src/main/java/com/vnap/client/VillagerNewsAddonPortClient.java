@@ -5,6 +5,7 @@ import com.vnap.item.VillagerNewsItems;
 import com.vnap.network.DialogueAnimationPayload;
 import com.vnap.network.VillagerNewsSettingsPayload;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
@@ -38,7 +39,10 @@ public final class VillagerNewsAddonPortClient implements ClientModInitializer {
 		}
 
 		ClientPlayNetworking.registerGlobalReceiver(DialogueAnimationPayload.TYPE, (payload, context) ->
-			context.client().execute(() -> DialogueAnimationState.start(payload))
+			context.client().execute(() -> {
+				DialogueAnimationState.start(payload);
+				DialogueSubtitleState.start(payload);
+			})
 		);
 		ClientPlayNetworking.registerGlobalReceiver(VillagerNewsSettingsPayload.TYPE, (payload, context) ->
 			context.client().execute(() -> VillagerNewsSettingsState.apply(payload))
@@ -49,6 +53,7 @@ public final class VillagerNewsAddonPortClient implements ClientModInitializer {
 			Minecraft.getInstance().setScreenAndShow(new HandbookScreen());
 			return InteractionResult.SUCCESS;
 		});
+		ClientTickEvents.END_CLIENT_TICK.register(DialogueSubtitleState::tick);
 		VillagerNewsAddonPort.LOGGER.info("Registered synchronized EMF facial and dialogue animations");
 	}
 

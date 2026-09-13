@@ -1,0 +1,226 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "texture": "villager-news-addon-port:item/worn/testificate_man_helmet",
+    "particle": "villager-news-addon-port:item/worn/testificate_man_helmet"
+  },
+  "elements": [
+    {
+      "from": [
+        0.72,
+        2.32,
+        0.72
+      ],
+      "to": [
+        15.28,
+        20.08,
+        15.28
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            8,
+            0,
+            16,
+            5
+          ],
+          "texture": "#texture"
+        },
+        "south": {
+          "uv": [
+            8,
+            5,
+            16,
+            10
+          ],
+          "texture": "#texture"
+        },
+        "east": {
+          "uv": [
+            8,
+            0,
+            0,
+            5
+          ],
+          "texture": "#texture"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            8,
+            5
+          ],
+          "texture": "#texture"
+        },
+        "up": {
+          "uv": [
+            0,
+            5.5,
+            8,
+            9.5
+          ],
+          "texture": "#texture"
+        }
+      }
+    },
+    {
+      "from": [
+        14.02197,
+        15.37662,
+        6.02059
+      ],
+      "to": [
+        15.62197,
+        24.97662,
+        12.42059
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4.25,
+            9.5,
+            4,
+            12.5
+          ],
+          "texture": "#texture"
+        },
+        "south": {
+          "uv": [
+            7.25,
+            9.5,
+            7,
+            12.5
+          ],
+          "texture": "#texture"
+        },
+        "east": {
+          "uv": [
+            4,
+            9.5,
+            0,
+            12.5
+          ],
+          "texture": "#texture"
+        },
+        "west": {
+          "uv": [
+            8,
+            9.5,
+            4,
+            12.5
+          ],
+          "texture": "#texture"
+        },
+        "up": {
+          "uv": [
+            8,
+            10,
+            4,
+            9.5
+          ],
+          "texture": "#texture",
+          "rotation": 90
+        },
+        "down": {
+          "uv": [
+            4,
+            12,
+            8,
+            12.5
+          ],
+          "texture": "#texture",
+          "rotation": 90
+        }
+      },
+      "rotation": {
+        "origin": [
+          15.6,
+          15.45858,
+          9.13573
+        ],
+        "axis": "x",
+        "angle": -45
+      }
+    },
+    {
+      "from": [
+        0.37803,
+        15.37662,
+        6.02059
+      ],
+      "to": [
+        1.97803,
+        24.97662,
+        12.42059
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            9.5,
+            4.25,
+            12.5
+          ],
+          "texture": "#texture"
+        },
+        "south": {
+          "uv": [
+            7,
+            9.5,
+            7.25,
+            12.5
+          ],
+          "texture": "#texture"
+        },
+        "east": {
+          "uv": [
+            4,
+            9.5,
+            8,
+            12.5
+          ],
+          "texture": "#texture"
+        },
+        "west": {
+          "uv": [
+            0,
+            9.5,
+            4,
+            12.5
+          ],
+          "texture": "#texture"
+        },
+        "up": {
+          "uv": [
+            8,
+            9.5,
+            4,
+            10
+          ],
+          "texture": "#texture",
+          "rotation": 90
+        },
+        "down": {
+          "uv": [
+            4,
+            12.5,
+            8,
+            12
+          ],
+          "texture": "#texture",
+          "rotation": 90
+        }
+      },
+      "rotation": {
+        "origin": [
+          0.4,
+          15.45858,
+          9.13573
+        ],
+        "axis": "x",
+        "angle": -45
+      }
+    }
+  ]
+}

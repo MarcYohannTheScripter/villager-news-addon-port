@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class DialogueCatalog {
@@ -42,6 +43,14 @@ public final class DialogueCatalog {
 				for (JsonElement variantElement : value.getAsJsonArray("variants")) {
 					JsonObject variantValue = variantElement.getAsJsonObject();
 					int index = variantValue.get("index").getAsInt();
+					List<SubtitleFrame> subtitles = new ArrayList<>();
+					for (JsonElement subtitleElement : variantValue.getAsJsonArray("subtitles")) {
+						JsonObject subtitleValue = subtitleElement.getAsJsonObject();
+						subtitles.add(new SubtitleFrame(
+							subtitleValue.get("time").getAsDouble(),
+							subtitleValue.get("key").getAsString()
+						));
+					}
 					Identifier soundId = VillagerNewsAddonPort.id("dialogue." + groupId + "." + index);
 					SoundEvent sound = Registry.register(
 						BuiltInRegistries.SOUND_EVENT,
@@ -53,7 +62,8 @@ public final class DialogueCatalog {
 						variantValue.get("duration").getAsDouble(),
 						variantValue.get("weight").getAsInt(),
 						variantValue.get("animation").getAsString(),
-						sound
+						sound,
+						List.copyOf(subtitles)
 					));
 					variantCount++;
 				}
@@ -110,6 +120,10 @@ public final class DialogueCatalog {
 		}
 
 		public DialogueVariant chooseVariant(int rareVoicelines) {
+			return chooseVariant(rareVoicelines, Set.of());
+		}
+
+		public DialogueVariant chooseVariant(int rareVoicelines, Set<Integer> excludedVariants) {
 			if (variants.isEmpty()) return null;
 			int minimum = variants.stream().mapToInt(DialogueVariant::weight).min().orElse(1);
 			int maximum = variants.stream().mapToInt(DialogueVariant::weight).max().orElse(1);
@@ -119,10 +133,14 @@ public final class DialogueCatalog {
 				int weight = variants.get(index).weight();
 				if (rareVoicelines == 0 && weight < maximum * 0.8) weight = 0;
 				else if (rareVoicelines == 2) weight = maximum + minimum - weight;
+				if (excludedVariants.contains(variants.get(index).index())) weight = 0;
 				weights[index] = Math.max(0, weight);
 				totalWeight += weights[index];
 			}
-			if (totalWeight <= 0) return variants.getFirst();
+			if (totalWeight <= 0) {
+				if (!excludedVariants.isEmpty()) return chooseVariant(rareVoicelines, Set.of());
+				return variants.getFirst();
+			}
 			int choice = ThreadLocalRandom.current().nextInt(Math.max(1, totalWeight));
 			for (int index = 0; index < variants.size(); index++) {
 				choice -= weights[index];
@@ -137,10 +155,14 @@ public final class DialogueCatalog {
 		double duration,
 		int weight,
 		String animation,
-		SoundEvent sound
+		SoundEvent sound,
+		List<SubtitleFrame> subtitles
 	) {
 		public long durationTicks() {
 			return Math.max(20L, (long) Math.ceil(duration * 20.0));
 		}
+	}
+
+	public record SubtitleFrame(double time, String key) {
 	}
 }

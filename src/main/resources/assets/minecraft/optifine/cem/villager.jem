@@ -1187,6 +1187,9 @@
           "villager_news_base_egfg3jgo.sz": "vnap_brow_sz"
         },
         {
+          "villager_news_base_hat.visible": "vnap_cosmetic_mayor_hat==0&&vnap_cosmetic_helmet==0"
+        },
+        {
           "villager_news_base_egml9.sx": "(0.75+vnap_mouth_width*0.25)*vnap_speaking+(1-vnap_speaking)",
           "villager_news_base_egml9.sy": "(1+vnap_mouth_open*1.5)*vnap_speaking+(1-vnap_speaking)",
           "villager_news_base_egml9.sz": "1"
@@ -2086,7 +2089,8 @@
                         19,
                         27,
                         12
-                      ]
+                      ],
+                      "sizeAdd": 0.0625
                     },
                     {
                       "coordinates": [

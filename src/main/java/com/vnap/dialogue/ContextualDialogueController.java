@@ -23,6 +23,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.Difficulty;
@@ -87,6 +88,7 @@ public final class ContextualDialogueController {
 	private static final Map<UUID, VillagerSnapshot> VILLAGER_STATES = new HashMap<>();
 	private static final Map<UUID, Map<String, Integer>> VILLAGER_INVENTORIES = new HashMap<>();
 	private static final Map<UUID, SpeechTarget> SPEECH_TARGETS = new HashMap<>();
+	private static final Map<UUID, Map<String, List<Integer>>> RECENT_VARIANTS = new HashMap<>();
 	private static final Map<UUID, Long> NO_WORKSTATION_SINCE = new HashMap<>();
 	private static final Map<UUID, Long> LAST_DANGER = new HashMap<>();
 	private static final Map<UUID, Long> NO_BELL_SINCE = new HashMap<>();
@@ -174,6 +176,7 @@ public final class ContextualDialogueController {
 			LAST_TRADER_INVISIBLE.remove(id);
 			VILLAGER_STATES.remove(id);
 			VILLAGER_INVENTORIES.remove(id);
+			RECENT_VARIANTS.remove(id);
 			NO_WORKSTATION_SINCE.remove(id);
 			LAST_DANGER.remove(id);
 			NO_BELL_SINCE.remove(id);
@@ -280,7 +283,12 @@ public final class ContextualDialogueController {
 			Entity speaker = pending.level.getEntity(pending.speakerId);
 			Entity target = pending.targetId == null ? null : pending.level.getEntity(pending.targetId);
 			if (speaker instanceof LivingEntity living && living.isAlive()) {
-				playId(living, pending.dialogueId, "queued:" + living.getUUID() + ":" + pending.dialogueId, 1L, target);
+				DialogueCatalog.DialogueGroup group = DialogueCatalog.byId(pending.dialogueId);
+				if (group != null && playId(living, pending.dialogueId,
+						"queued:" + living.getUUID() + ":" + pending.dialogueId, 1L, target)
+						&& target instanceof LivingEntity listener) {
+					holdListener(listener, living, group.durationTicks());
+				}
 			}
 			return true;
 		});
@@ -294,8 +302,8 @@ public final class ContextualDialogueController {
 				Entity speaker = level.getEntity(entry.getKey());
 				if (!(speaker instanceof Mob mob) || !mob.isAlive()) continue;
 				Entity target = speech.targetId == null ? null : level.getEntity(speech.targetId);
-				if (target != null && target.isAlive()) mob.getLookControl().setLookAt(target, 30.0F, 30.0F);
-				else mob.getLookControl().setLookAt(speech.position.x, speech.position.y, speech.position.z, 30.0F, 30.0F);
+				Vec3 position = target != null && target.isAlive() ? target.getEyePosition() : speech.position;
+				holdMob(mob, position);
 				return false;
 			}
 			return true;
@@ -359,10 +367,10 @@ public final class ContextualDialogueController {
 		String unavailable = unavailableTradeId(villager, player);
 		if (unavailable != null) return unavailable;
 		int reputation = villager.getPlayerReputation(player);
-		if (reputation <= -100) return "xduuwm";
-		if (reputation <= -15) return "qmdvft";
-		if (reputation >= 100) return "vlrsrn";
-		if (reputation >= 15) return "kuhvdv";
+		if (reputation < -225) return "xduuwm";
+		if (reputation < -75) return "qmdvft";
+		if (reputation >= 75) return "vlrsrn";
+		if (reputation >= 25) return "kuhvdv";
 		return profile.trade;
 	}
 
@@ -530,7 +538,7 @@ public final class ContextualDialogueController {
 			if (baby != null) {
 				if (ticks % 40L == 0L && playNearbyEntityContext(level, baby)) return;
 				String id = player.hasEffect(MobEffects.HERO_OF_THE_VILLAGE) ? "fzyrfm"
-					: baby.getPlayerReputation(player) < -15 ? "jfuftm" : "wtuguc";
+					: isNegativeReputation(baby, player) ? "jfuftm" : "wtuguc";
 				playId(baby, id, "baby_meet:" + baby.getUUID() + ":" + player.getUUID() + ":" + id, LONG_COOLDOWN, player);
 			}
 			return;
@@ -545,7 +553,8 @@ public final class ContextualDialogueController {
 		}
 		if (changedGameMode && playId(adult, gameMode.equals("creative") ? "ohtblt" : "fhhqxg",
 				"gamemode:" + player.getUUID() + ":" + gameMode, SHORT_COOLDOWN, player)) return;
-		if (playId(adult, cast(adult).approach, "approach:" + pair, LONG_COOLDOWN, player)) {
+		String approach = cast(adult) == CastProfile.VILLAGER ? reputationApproach(adult, player) : cast(adult).approach;
+		if (playId(adult, approach, "approach:" + pair, LONG_COOLDOWN, player)) {
 			return;
 		}
 
@@ -668,15 +677,6 @@ public final class ContextualDialogueController {
 	}
 
 	private static String playerContext(ServerPlayer player, Villager villager) {
-		int reputation = villager.getPlayerReputation(player);
-		if (player.hasEffect(MobEffects.HERO_OF_THE_VILLAGE)) return "Hero of the Village";
-		if (reputation <= -100 && BuiltInRegistries.ITEM.getKey(player.getMainHandItem().getItem()).getPath().endsWith("_sword")) {
-			return "Extremely Low Reputation with a Sword";
-		}
-		if (reputation <= -100) return "Extremely Low Reputation";
-		if (reputation <= -15) return "Low Reputation";
-		if (reputation >= 100) return "Extremely High Reputation";
-		if (reputation >= 15) return "High Reputation";
 		if (player.isFallFlying()) return "Glide with Elytra";
 		if (player.getAbilities().flying) return "Fly in Creative Mode";
 		if (player.isShiftKeyDown() && player.getDeltaMovement().horizontalDistanceSqr() > 0.002) return "Crouch-Walk";
@@ -711,6 +711,23 @@ public final class ContextualDialogueController {
 		if (armor == 4 && (armorMaterials.contains("diamond") || armorMaterials.contains("netherite"))) return "Wear High-Level Armor";
 		if (armor > 0) return "Wear Armor";
 		return null;
+	}
+
+	private static String reputationApproach(Villager villager, ServerPlayer player) {
+		if (player.hasEffect(MobEffects.HERO_OF_THE_VILLAGE)) return "gnetsk";
+		int reputation = villager.getPlayerReputation(player);
+		if (reputation < -225) {
+			return BuiltInRegistries.ITEM.getKey(player.getMainHandItem().getItem()).getPath().endsWith("_sword")
+				? "stuirs" : "zstdjn";
+		}
+		if (reputation < -75) return "tfzlsw";
+		if (reputation >= 75) return "kcbenk";
+		if (reputation >= 25) return "omgcte";
+		return "xfpjxq";
+	}
+
+	private static boolean isNegativeReputation(Villager villager, ServerPlayer player) {
+		return villager.getPlayerReputation(player) < -75;
 	}
 
 	private static boolean playCosmeticObservation(ServerPlayer player, Villager villager) {
@@ -758,7 +775,7 @@ public final class ContextualDialogueController {
 							? TWO_MISSING_NOSES_CONVERSATIONS : ONE_MISSING_NOSE_CONVERSATIONS;
 						List<String> sequence = choices.get(Math.floorMod(pair.hashCode() + (int) (ticks / LONG_COOLDOWN), choices.size()));
 						if (playId(first, sequence.getFirst(), "nose_conversation:" + pair + ":" + sequence.getFirst(), LONG_COOLDOWN, second)) {
-							markBusy(second, DialogueCatalog.byId(sequence.getFirst()).durationTicks());
+							holdListener(second, first, DialogueCatalog.byId(sequence.getFirst()).durationTicks());
 							queueConversation(level, first, second, sequence);
 							PAIR_TICKS.put(pair, 0);
 						}
@@ -771,21 +788,23 @@ public final class ContextualDialogueController {
 						Villager speaker = firstCast == CastProfile.VILLAGER ? first : second;
 						Villager subject = speaker == first ? second : first;
 						if (playId(speaker, meetId, "meet:" + pair, LONG_COOLDOWN, subject)) {
-							markBusy(subject, 80L);
+							holdListener(subject, speaker, 80L);
 							PAIR_TICKS.put(pair, 0);
 						}
 						return;
 					}
 					boolean atCampfire = nearBlock(level, first.blockPosition(), "campfire", 4)
 						&& nearBlock(level, second.blockPosition(), "campfire", 4);
+					boolean negativeGossip = isNegativeReputation(first, player) || isNegativeReputation(second, player);
 					String conversation = atCampfire ? CAMPFIRE_CONVERSATION.getFirst()
 						: first.getVehicle() != null && first.getVehicle() == second.getVehicle()
 						? "zqfvby"
-						: first.getDeltaMovement().horizontalDistanceSqr() + second.getDeltaMovement().horizontalDistanceSqr() < 0.0004
+						: negativeGossip && first.getDeltaMovement().horizontalDistanceSqr()
+							+ second.getDeltaMovement().horizontalDistanceSqr() < 0.0004
 							? (Math.floorMod(pair.hashCode() + (int) (ticks / LONG_COOLDOWN), 2) == 0 ? "wrjbdd" : GOSSIP_CONVERSATION.getFirst())
 							: wanderingConversation(pair).getFirst();
 					if (playId(first, conversation, "conversation:" + pair + ":" + conversation, LONG_COOLDOWN, second)) {
-						markBusy(second, DialogueCatalog.byId(conversation).durationTicks());
+						holdListener(second, first, DialogueCatalog.byId(conversation).durationTicks());
 						if (conversation.startsWith("gmrypk")) queueWanderingConversation(level, first, second, wanderingConversation(pair));
 						else if (atCampfire) queueConversation(level, first, second, CAMPFIRE_CONVERSATION);
 						else if (conversation.equals(GOSSIP_CONVERSATION.getFirst())) queueConversation(level, first, second, GOSSIP_CONVERSATION);
@@ -1530,19 +1549,28 @@ public final class ContextualDialogueController {
 				|| !level.getServer().tickRateManager().runsNormally()
 				|| !VillagerNewsSettings.dialogueEnabled() || isBusy(speaker)
 				|| !ready(cooldownKey, VillagerNewsSettings.scaleCooldown(cooldown))) return false;
-		DialogueCatalog.DialogueVariant variant = group.chooseVariant(VillagerNewsSettings.rareVoicelines());
+		Map<String, List<Integer>> speakerHistory = RECENT_VARIANTS.computeIfAbsent(speaker.getUUID(), ignored -> new HashMap<>());
+		List<Integer> recentVariants = speakerHistory.getOrDefault(group.id(), List.of());
+		DialogueCatalog.DialogueVariant variant = group.chooseVariant(VillagerNewsSettings.rareVoicelines(), Set.copyOf(recentVariants));
 		if (variant == null) return false;
 		level.playSound(null, speaker.getX(), speaker.getY(), speaker.getZ(), variant.sound(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 		DialogueAnimationNetwork.send(level, speaker, group.id(), variant.index(), (int) variant.durationTicks());
 		ACTIVE_SOUNDS.put(speaker.getUUID(), new ActiveSound(variant.sound().location(), ticks + variant.durationTicks()));
 		COOLDOWNS.put(cooldownKey, ticks);
+		int historySize = Math.min(3, group.variants().size() - 1);
+		if (historySize > 0) {
+			List<Integer> updatedHistory = new ArrayList<>(recentVariants);
+			updatedHistory.remove(Integer.valueOf(variant.index()));
+			updatedHistory.add(variant.index());
+			while (updatedHistory.size() > historySize) updatedHistory.removeFirst();
+			speakerHistory.put(group.id(), updatedHistory);
+		}
 		markBusy(speaker, variant.durationTicks() + 10L);
-		if (speaker instanceof Mob) {
-			if (target != null) {
-				SPEECH_TARGETS.put(speaker.getUUID(), new SpeechTarget(target.getUUID(), target.getEyePosition(), ticks + variant.durationTicks()));
-			} else if (targetPosition != null) {
-				SPEECH_TARGETS.put(speaker.getUUID(), new SpeechTarget(null, targetPosition, ticks + variant.durationTicks()));
-			}
+		if (speaker instanceof Mob mob) {
+			Vec3 position = target != null ? target.getEyePosition() : targetPosition;
+			SPEECH_TARGETS.put(speaker.getUUID(), new SpeechTarget(target == null ? null : target.getUUID(), position,
+				ticks + variant.durationTicks()));
+			holdMob(mob, position);
 		}
 		return true;
 	}
@@ -1574,6 +1602,34 @@ public final class ContextualDialogueController {
 
 	private static void markBusy(LivingEntity entity, long duration) {
 		BUSY_UNTIL.put(entity.getUUID(), ticks + duration);
+	}
+
+	private static void holdListener(LivingEntity listener, Entity speaker, long duration) {
+		markBusy(listener, duration);
+		if (listener instanceof Mob mob) {
+			Vec3 position = speaker.getEyePosition();
+			SPEECH_TARGETS.put(listener.getUUID(), new SpeechTarget(speaker.getUUID(), position, ticks + duration));
+			holdMob(mob, position);
+		}
+	}
+
+	private static void holdMob(Mob mob, Vec3 position) {
+		mob.getNavigation().stop();
+		mob.getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
+		if (mob.onGround() && !mob.isPassenger()) {
+			Vec3 movement = mob.getDeltaMovement();
+			mob.setDeltaMovement(0.0, movement.y, 0.0);
+		}
+		if (position == null) return;
+		mob.getLookControl().setLookAt(position.x, position.y, position.z, 90.0F, 90.0F);
+		double x = position.x - mob.getX();
+		double z = position.z - mob.getZ();
+		if (x * x + z * z > 0.0001) {
+			float yaw = (float) (Mth.atan2(z, x) * 180.0 / Math.PI) - 90.0F;
+			mob.setYRot(yaw);
+			mob.setYBodyRot(yaw);
+			mob.setYHeadRot(yaw);
+		}
 	}
 
 	private static void interrupt(LivingEntity speaker) {
