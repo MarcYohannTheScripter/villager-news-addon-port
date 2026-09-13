@@ -188,7 +188,7 @@ final class DialogueAnimationState {
 			idle.block();
 			return fallback;
 		}
-		idle.unblock((int) age);
+		idle.unblock(age);
 		return idle.valueAt(age, trackName, fallback);
 	}
 
@@ -297,38 +297,47 @@ final class DialogueAnimationState {
 	private static final class IdleState {
 		private boolean blocked = true;
 		private int activeIndex = -1;
-		private int previousIndex = -1;
-		private int startTick;
+		private int lastIndex = -1;
+		private int blendFromIndex = -1;
+		private float startTick;
 
 		void block() {
 			if (blocked) return;
 			blocked = true;
+			if (activeIndex >= 0) lastIndex = activeIndex;
 			activeIndex = -1;
+			blendFromIndex = -1;
 		}
 
-		void unblock(int tick) {
+		void unblock(float tick) {
 			if (!blocked) return;
 			blocked = false;
-			startNext(tick);
+			startNext(tick, -1);
 		}
 
 		float valueAt(float tick, String trackName, float fallback) {
-			if (activeIndex < 0) startNext((int) tick);
+			if (activeIndex < 0) startNext(tick, -1);
 			Gesture active = IDLES.get(activeIndex);
 			float elapsed = (tick - startTick) / 20.0F;
 			if (elapsed > active.duration()) {
-				startNext((int) tick);
+				float overrunTicks = (elapsed - active.duration()) * 20.0F;
+				startNext(tick - overrunTicks, activeIndex);
 				active = IDLES.get(activeIndex);
-				elapsed = 0.0F;
+				elapsed = (tick - startTick) / 20.0F;
 			}
-			return active.valueAt(elapsed, trackName, fallback);
+			float value = active.valueAt(elapsed, trackName, fallback);
+			if (elapsed >= BLEND_SECONDS) return value;
+			float previous = blendFromIndex < 0 ? fallback : IDLES.get(blendFromIndex)
+				.valueAt(IDLES.get(blendFromIndex).duration(), trackName, fallback);
+			return VariantTimeline.lerp(previous, value, VariantTimeline.blendCurve(elapsed / BLEND_SECONDS));
 		}
 
-		private void startNext(int tick) {
+		private void startNext(float tick, int blendFromIndex) {
 			int next = ThreadLocalRandom.current().nextInt(IDLES.size());
-			if (IDLES.size() > 1 && next == previousIndex) next = (next + 1) % IDLES.size();
+			if (IDLES.size() > 1 && next == lastIndex) next = (next + 1) % IDLES.size();
+			this.blendFromIndex = blendFromIndex;
 			activeIndex = next;
-			previousIndex = next;
+			lastIndex = next;
 			startTick = tick;
 		}
 	}

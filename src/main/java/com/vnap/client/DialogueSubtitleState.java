@@ -92,7 +92,7 @@ public final class DialogueSubtitleState {
 			VisibleSubtitle subtitle = visible.get(index);
 			float scale = subtitleScale(index, subtitle.distanceSquared());
 			drawCentered(graphics, minecraft, subtitle.text(), y, scale);
-			y -= (minecraft.font.lineHeight + 3.0F) * scale;
+			y -= minecraft.font.lineHeight + 3.0F;
 		}
 	}
 

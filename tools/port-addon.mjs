@@ -298,7 +298,7 @@ function convertGeometry(geometryId, { prefix, texture, attach, includeVanillaAn
     model.attach = attach || rootIndex > 0;
     model.translate = vector(origin.map((value) => -value));
     model.textureSize = [geometry.description.texture_width ?? 64, geometry.description.texture_height ?? 64];
-    if (texture) model.texture = `${modNamespace}:textures/entity/${texture}.png`;
+    if (texture) model.texture = texture.includes(":") ? texture : `${modNamespace}:textures/entity/${texture}.png`;
     if (includeVanillaAnimations) {
       const animations = animationsFor(bones, prefix);
       if (animations.length) model.animations = animations;
@@ -712,6 +712,9 @@ function rootVillagerModels(prefix, texture, extras = [], {
   rigScale = 1,
 } = {}) {
   const models = [...villagerLayer(baseGeometry, `${prefix}_base`, texture, false, rigScale)];
+  const arms = findModelById(models, `${prefix}_base_2jek`);
+  if (!arms) throw new Error(`${prefix} animated arms bone is missing`);
+  arms.attachments = { villager_item: [0, -5.75, -1.75] };
   for (const [index, extra] of extras.entries()) {
     const layer = villagerLayer(extra.geometry, `${prefix}_extra_${index}`, extra.texture, true, rigScale);
     if (extra.visibility) {
@@ -1146,6 +1149,7 @@ for (const layers of Object.values(compositeTextures)) {
 for (const texture of directlyUsedTextures) {
   copyTexture(texture, join(modAssets, "textures", "entity", `${texture}.png`));
 }
+copyTexture("dsx", join(modAssets, "textures", "entity", "sign_text.png"));
 
 function normalizeBinaryAlpha(name) {
   if (!ffmpeg) throw new Error(`Normalizing ${name}.png needs FFmpeg. Set FFMPEG_PATH to an FFmpeg executable.`);

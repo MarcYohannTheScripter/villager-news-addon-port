@@ -6,10 +6,13 @@ import com.vnap.network.DialogueAnimationPayload;
 import com.vnap.network.VillagerNewsSettingsPayload;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityRenderLayerRegistrationCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.VillagerRenderer;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityTypes;
 import traben.entity_model_features.EMFAnimationApi;
 
 import java.io.IOException;
@@ -37,6 +40,12 @@ public final class VillagerNewsAddonPortClient implements ClientModInitializer {
 		} catch (Exception exception) {
 			throw new IllegalStateException("Could not register Villager News EMF animation variables", exception);
 		}
+
+		LivingEntityRenderLayerRegistrationCallback.EVENT.register((entityType, entityRenderer, helper, context) -> {
+			if (entityType == EntityTypes.VILLAGER && entityRenderer instanceof VillagerRenderer villagerRenderer) {
+				helper.register(new VillagerNewsSignLayer(villagerRenderer));
+			}
+		});
 
 		ClientPlayNetworking.registerGlobalReceiver(DialogueAnimationPayload.TYPE, (payload, context) ->
 			context.client().execute(() -> {

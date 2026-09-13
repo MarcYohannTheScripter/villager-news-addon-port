@@ -3,7 +3,9 @@
   "package": "com.vnap.mixin.client",
   "compatibilityLevel": "JAVA_25",
   "client": [
-    "VillagerProfessionLayerMixin"
+    "VillagerProfessionLayerMixin",
+    "VillagerRendererMixin",
+    "VillagerRenderStateMixin"
   ],
   "injectors": {
     "defaultRequire": 1

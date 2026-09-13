@@ -15,7 +15,10 @@ const behaviorSource = readFileSync(join(root, "src/main/java/com/vnap/dialogue/
 const itemSource = readFileSync(join(root, "src/main/java/com/vnap/item/VillagerNewsItems.java"), "utf8");
 const handbookSource = readFileSync(join(root, "src/main/java/com/vnap/client/HandbookScreen.java"), "utf8");
 const clientSource = readFileSync(join(root, "src/main/java/com/vnap/client/VillagerNewsAddonPortClient.java"), "utf8");
+const signLayerSource = readFileSync(join(root, "src/main/java/com/vnap/client/VillagerNewsSignLayer.java"), "utf8");
 const professionLayerSource = readFileSync(join(root, "src/main/java/com/vnap/mixin/client/VillagerProfessionLayerMixin.java"), "utf8");
+const villagerRendererSource = readFileSync(join(root, "src/main/java/com/vnap/mixin/client/VillagerRendererMixin.java"), "utf8");
+const villagerSoundSource = readFileSync(join(root, "src/main/java/com/vnap/mixin/VillagerSoundMixin.java"), "utf8");
 const subtitleSource = readFileSync(join(root, "src/main/java/com/vnap/client/DialogueSubtitleState.java"), "utf8");
 const soundStateSource = readFileSync(join(root, "src/main/java/com/vnap/client/DialogueSoundState.java"), "utf8");
 const animationStateSource = readFileSync(join(root, "src/main/java/com/vnap/client/DialogueAnimationState.java"), "utf8");
@@ -24,6 +27,7 @@ const settingsStateSource = readFileSync(join(root, "src/main/java/com/vnap/clie
 const villagerDataSource = readFileSync(join(root, "src/main/java/com/vnap/mixin/VillagerDataMixin.java"), "utf8");
 const mixinConfiguration = readFileSync(join(resources, "villager-news-addon-port.mixins.json"), "utf8");
 const generatorSource = readFileSync(join(root, "tools/port-addon.mjs"), "utf8");
+const villagerModelSource = readFileSync(join(cem, "villager.jem"), "utf8");
 const gradleProperties = readFileSync(join(root, "gradle.properties"), "utf8");
 const language = JSON.parse(readFileSync(join(modAssets, "lang", "en_us.json"), "utf8"));
 
@@ -71,7 +75,9 @@ check(subtitleSource.includes("showSubtitles().get()")
   && subtitleSource.includes("HudElementRegistry.attachElementAfter")
   && subtitleSource.includes("MAX_LINES = 4")
   && subtitleSource.includes("subtitleScale")
-  && subtitleSource.includes("RANGE_SQUARED"), "The stacked subtitle HUD behavior is incomplete");
+	&& subtitleSource.includes("RANGE_SQUARED")
+	&& subtitleSource.includes("y -= minecraft.font.lineHeight + 3.0F")
+	&& !subtitleSource.includes("lineHeight + 3.0F) * scale"), "The stacked subtitle HUD behavior is incomplete");
 check(animations.gestures.length === 46, `Expected 46 dialogue gestures, found ${animations.gestures.length}`);
 check(animations.locomotion?.duration === 0.4375
   && Object.keys(animations.locomotion.tracks).length === 14
@@ -87,7 +93,8 @@ check(animations.continuousIdle === "animation.oreville_vn.fyqjnp"
 check(animationStateSource.includes("walkAnimation.position(partialTick)")
   && animationStateSource.includes("IDLE_STATES")
 	&& animationStateSource.includes("horizontalDistanceSqr() > 0.0001")
-	&& animationStateSource.includes("startNext(tick)")
+	&& animationStateSource.includes("startNext(tick, -1)")
+	&& animationStateSource.includes("blendFromIndex")
 	&& animationStateSource.includes("locomotion.valueAt"), "The client does not continuously play locomotion and stationary idle tracks");
 
 const referencedGroups = groups.filter(([id, group]) => behaviorSource.includes(`"${id}"`)
@@ -117,6 +124,9 @@ check(clientSource.includes("DialogueSoundState.start(payload)")
   && soundStateSource.includes("getSoundManager().stop(active.instance())")
   && !behaviorSource.includes("speaker.getX(), speaker.getY(), speaker.getZ(), variant.sound()"),
 "Dialogue sounds are not bound to and stopped for their exact speaker");
+check(soundStateSource.includes('!payload.groupId().equals("hivgme")'), "Villager death dialogue still stops with its dying entity");
+check(villagerSoundSource.includes("vnap$removeVanillaHurtSound")
+  && villagerSoundSource.includes("cir.setReturnValue(SoundEvents.EMPTY)"), "Vanilla villager hurt sounds can overlap dialogue");
 check(animationStateSource.includes("ACTIVE.entrySet().removeIf")
   && soundStateSource.includes("ACTIVE.entrySet().iterator()"), "Expired client dialogue state is not cleaned up");
 check((behaviorSource.match(/tickRateManager\(\)\.runsNormally\(\)/g) ?? []).length >= 2
@@ -124,7 +134,8 @@ check((behaviorSource.match(/tickRateManager\(\)\.runsNormally\(\)/g) ?? []).len
 check(behaviorSource.includes("!VillagerNewsSettings.dialogueEnabled()")
   && settingsStateSource.includes("getConnection() != null"), "Muting dialogue is not handled safely");
 check((behaviorSource.match(/!villager\.isSleeping\(\)/g) ?? []).length >= 5
-  && behaviorSource.includes("if (sleeping)"), "Sleeping villagers still react through normal observer paths");
+	&& behaviorSource.includes("if (sleeping)")
+	&& behaviorSource.includes('villager.isSleeping() && !group.id().equals("asqzby")'), "Sleeping villagers still react through normal observer paths");
 check(behaviorSource.includes("delayVillagerSleep")
   && behaviorSource.includes("processPendingSleep")
   && behaviorSource.includes("PENDING_SLEEP.remove(villager.getUUID())")
@@ -163,9 +174,30 @@ check(behaviorSource.includes("VillagerNewsSettings.scaleCooldown")
 check(villagerDataSource.includes("vnap$keepSpecialTradeOpen") && villagerDataSource.includes("isSpecialTrader"),
   "Special villagers still inherit the vanilla unemployed-villager trade closure");
 check(villagerDataSource.includes("VillagerNewsSignMessage")
-  && behaviorSource.includes("villager.setItemSlot(EquipmentSlot.MAINHAND")
+  && villagerDataSource.includes("VillagerNewsSignType")
+  && behaviorSource.includes("state.vnap$setSignType(offeredSign)")
   && behaviorSource.includes("Math.floorMod(state.vnap$signMessage() + direction, 87)"),
 "Villagers do not hold, remove, and cycle their Bedrock signs");
+check(behaviorSource.includes('equals("firework_rocket")')
+  && behaviorSource.includes('playId(villager, "dfdkli"')
+  && behaviorSource.includes('playId(villager, "zeykfp"'), "Firework spawn reactions are incomplete");
+check(behaviorSource.includes("playHomeChestReaction")
+  && behaviorSource.includes("MemoryModuleType.HOME")
+  && behaviorSource.includes('playId(villager, "qfhrlh"'), "Villager home chest reactions are incomplete");
+check(behaviorSource.includes("source.getDirectEntity() == player")
+  && behaviorSource.includes("weaponAttackDialogue(player.getMainHandItem())"), "Player attacks can trigger competing dialogue paths");
+check(villagerRendererSource.includes("StableVillagerData")
+  && villagerRendererSource.includes("tick - pendingSince >= 2")
+  && villagerRendererSource.includes("state.villagerData = stableData.resolve"), "Transient profession texture states are not filtered");
+check(!villagerModelSource.includes("villager_news_sign_board_")
+  && clientSource.includes("LivingEntityRenderLayerRegistrationCallback.EVENT.register")
+  && signLayerSource.includes('"textures/block/" + wood + "_sign.png"')
+  && !signLayerSource.includes("textures/entity/signs/")
+  && signLayerSource.includes("getPositionerForAttachment(EMFAttachment.Type.VILLAGER)")
+  && villagerModelSource.includes('"villager_item"')
+  && existsSync(join(root, "src/main/java/com/vnap/mixin/client/VillagerRendererMixin.java"))
+  && existsSync(join(modAssets, "textures", "entity", "sign_text.png")),
+"The original sign board or its 87-message text atlas is missing");
 check(mixinConfiguration.includes("VillagerSoundMixin")
   && existsSync(join(root, "src/main/java/com/vnap/mixin/VillagerSoundMixin.java")),
 "Vanilla villager death sounds are not deterministically suppressed");
@@ -195,8 +227,8 @@ for (const [profession, texture] of Object.entries(professionTextures)) {
   check(existsSync(join(resources, "assets", "minecraft", "textures", "entity", "villager", "profession", `${profession}.png`)),
     `${profession} profession texture was not generated`);
 }
-check(/^version=1\.3\.0$/m.test(gradleProperties), "The project version is not 1.3.0");
-check(language["guide.villager-news-addon-port.header"] === "Villager News 1.3.0", "The handbook version is not 1.3.0");
+check(/^version=1\.3\.1$/m.test(gradleProperties), "The project version is not 1.3.1");
+check(language["guide.villager-news-addon-port.header"] === "Villager News 1.3.1", "The handbook version is not 1.3.1");
 const merchantCheck = behaviorSource.indexOf("player.containerMenu instanceof MerchantMenu");
 const openingDialogue = behaviorSource.indexOf("trade_open:");
 check(merchantCheck >= 0 && openingDialogue > merchantCheck, "Trade opening dialogue still runs before the merchant menu opens");

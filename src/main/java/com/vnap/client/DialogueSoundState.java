@@ -31,7 +31,7 @@ public final class DialogueSoundState {
 			.filter(candidate -> candidate.index() == payload.variantIndex()).findFirst().orElse(null);
 		Entity entity = minecraft.level.getEntity(payload.entityId());
 		if (variant == null || entity == null) return;
-		boolean followsEntity = entity.isAlive();
+		boolean followsEntity = entity.isAlive() && !payload.groupId().equals("hivgme");
 		SoundInstance sound = followsEntity
 			? new EntityBoundSoundInstance(variant.sound(), SoundSource.NEUTRAL, 1.0F, 1.0F, entity, entity.getRandom().nextLong())
 			: new SimpleSoundInstance(variant.sound(), SoundSource.NEUTRAL, 1.0F, 1.0F, RandomSource.create(), entity.getX(), entity.getY(), entity.getZ());

@@ -17,8 +17,8 @@ public abstract class VillagerSoundMixin {
 	}
 
 	@Inject(method = "getHurtSound", at = @At("HEAD"), cancellable = true)
-	private void vnap$removeUnreachableHurtSound(DamageSource source, CallbackInfoReturnable<SoundEvent> cir) {
-		if (vnap$isUnreachable()) cir.setReturnValue(SoundEvents.EMPTY);
+	private void vnap$removeVanillaHurtSound(DamageSource source, CallbackInfoReturnable<SoundEvent> cir) {
+		cir.setReturnValue(SoundEvents.EMPTY);
 	}
 
 	@Inject(method = "getDeathSound", at = @At("HEAD"), cancellable = true)

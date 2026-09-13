@@ -12,4 +12,8 @@ public interface VillagerNewsData {
 	int vnap$signMessage();
 
 	void vnap$setSignMessage(int value);
+
+	int vnap$signType();
+
+	void vnap$setSignType(int value);
 }

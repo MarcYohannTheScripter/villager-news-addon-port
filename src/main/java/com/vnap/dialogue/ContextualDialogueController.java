@@ -214,23 +214,22 @@ public final class ContextualDialogueController {
 			if (level instanceof ServerLevel serverLevel) {
 				ItemStack held = player.getItemInHand(hand);
 				BlockState clicked = level.getBlockState(hitResult.getBlockPos());
+				String clickedPath = BuiltInRegistries.BLOCK.getKey(clicked.getBlock()).getPath();
 				String title = selectHeldBlockContext(held, clicked);
 				if (title == null && held.getItem() instanceof BlockItem blockItem) {
 					title = selectPlaceContext(blockItem.getBlock(), serverLevel, hitResult.getBlockPos());
 				} else if (title == null) {
 					title = selectUseBlockContext(clicked);
 				}
-				String clickedPath = BuiltInRegistries.BLOCK.getKey(clicked.getBlock()).getPath();
 				if (clickedPath.endsWith("_door") && clicked.hasProperty(BlockStateProperties.OPEN)
 						&& clicked.getValue(BlockStateProperties.OPEN)
 						&& !nearbyVillagers(serverLevel, hitResult.getLocation(), 3.0).isEmpty()) title = "Close a Door in a Villager's Face";
-				if (clickedPath.contains("chest") && nearBlock(serverLevel, hitResult.getBlockPos(), "bed", 6)) {
-					title = "Open a Chest in a Villager's House";
-				}
 				String heldPath = BuiltInRegistries.ITEM.getKey(held.getItem()).getPath();
 				if ((heldPath.equals("pumpkin") || heldPath.equals("carved_pumpkin"))
 						&& nearBlock(serverLevel, hitResult.getBlockPos(), "iron_block", 3)) title = "Build an Iron Golem Frame";
-				boolean played = title != null && playObserved(serverLevel, player, hitResult.getLocation(), title, SHORT_COOLDOWN);
+				boolean played = (clickedPath.equals("chest") || clickedPath.equals("trapped_chest"))
+					&& playHomeChestReaction(serverLevel, player, hitResult.getBlockPos());
+				if (!played) played = title != null && playObserved(serverLevel, player, hitResult.getLocation(), title, SHORT_COOLDOWN);
 				if (!played && BuiltInRegistries.BLOCK.getKey(clicked.getBlock()).getPath().equals("bell")) {
 					nearbyVillagers(serverLevel, hitResult.getLocation(), OBSERVER_RANGE).stream()
 						.filter(villager -> villager.isBaby() && !villager.isSleeping())
@@ -288,6 +287,10 @@ public final class ContextualDialogueController {
 
 	private static void onEntityLoad(Entity entity, ServerLevel level) {
 		normalizeSpecialEntity(entity);
+		if (BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).getPath().equals("firework_rocket")) {
+			playFireworkReactions(level, entity);
+			return;
+		}
 		if (entity instanceof Sheep sheep) {
 			if (isWooly(sheep) && sheep.getColor() == DyeColor.RED) sheep.setColor(DyeColor.WHITE);
 			return;
@@ -1054,6 +1057,34 @@ public final class ContextualDialogueController {
 		return false;
 	}
 
+	private static boolean playHomeChestReaction(ServerLevel level, Player player, BlockPos chestPos) {
+		boolean bedNearby = nearBlock(level, chestPos, "bed", 6);
+		return nearbyVillagers(level, Vec3.atCenterOf(chestPos), OBSERVER_RANGE).stream()
+			.filter(villager -> !villager.isBaby() && !villager.isSleeping() && cast(villager) == CastProfile.VILLAGER)
+			.filter(villager -> bedNearby || homeMatches(villager, chestPos, 12))
+			.filter(villager -> villager.hasLineOfSight(player))
+			.min(Comparator.comparingDouble(villager -> villager.distanceToSqr(player)))
+			.map(villager -> playId(villager, "qfhrlh", "home_chest:" + villager.getUUID(), SHORT_COOLDOWN, player))
+			.orElse(false);
+	}
+
+	private static boolean homeMatches(Villager villager, BlockPos pos, int range) {
+		return villager.getBrain().getMemory(MemoryModuleType.HOME)
+			.map(home -> home.isCloseEnough(villager.level().dimension(), pos, range)).orElse(false);
+	}
+
+	private static void playFireworkReactions(ServerLevel level, Entity firework) {
+		List<Villager> witnesses = nearbyVillagers(level, firework.position(), OBSERVER_RANGE).stream()
+			.filter(villager -> !villager.isSleeping() && cast(villager) == CastProfile.VILLAGER)
+			.filter(villager -> villager.hasLineOfSight(firework)).toList();
+		witnesses.stream().filter(villager -> !villager.isBaby())
+			.min(Comparator.comparingDouble(villager -> villager.distanceToSqr(firework)))
+			.ifPresent(villager -> playId(villager, "dfdkli", "firework_spawn:" + villager.getUUID(), SHORT_COOLDOWN, firework));
+		witnesses.stream().filter(Villager::isBaby)
+			.min(Comparator.comparingDouble(villager -> villager.distanceToSqr(firework)))
+			.ifPresent(villager -> playId(villager, "zeykfp", "firework_seen:" + villager.getUUID(), SHORT_COOLDOWN, firework));
+	}
+
 	private static void processVillagerState(Villager villager) {
 		ensureSpecialTrade(villager);
 		VillagerSnapshot previous = VILLAGER_STATES.get(villager.getUUID());
@@ -1315,12 +1346,19 @@ public final class ContextualDialogueController {
 		LAST_DANGER.put(villager.getUUID(), ticks);
 		interrupt(villager);
 		if (villager.isBaby()) {
-			playId(villager, "ecslqo", "hurt:" + villager.getUUID(), 1L, source.getEntity());
+			String id = source.getEntity() instanceof Player player && source.getDirectEntity() == player ? "ahcvzd" : "ecslqo";
+			playId(villager, id, "hurt:" + villager.getUUID(), 1L, source.getEntity());
 			return;
 		}
 		CastProfile profile = cast(villager);
 		if (profile != CastProfile.VILLAGER) {
-			playId(villager, profile.hurt, "hurt:" + villager.getUUID(), 1L, source.getEntity());
+			String id = source.getEntity() instanceof Player player && source.getDirectEntity() == player
+				? profile.attack : profile.hurt;
+			playId(villager, id, "hurt:" + villager.getUUID(), 1L, source.getEntity());
+			return;
+		}
+		if (source.getEntity() instanceof Player player && homeMatches(villager, villager.blockPosition(), 4)) {
+			playHomeAttackReaction(villager, player);
 			return;
 		}
 		String dialogue = damageDialogue(source);
@@ -1339,6 +1377,9 @@ public final class ContextualDialogueController {
 		if (direct.equals("arrow")) return "huhcbd";
 		if (direct.equals("firework_rocket")) return "gesjov";
 		if (direct.equals("potion") || direct.equals("lingering_potion")) return damage.contains("magic") ? "gacgtq" : "hmadgp";
+		if (source.getEntity() instanceof Player player && source.getDirectEntity() == player) {
+			return weaponAttackDialogue(player.getMainHandItem());
+		}
 		if (attacker.equals("evoker")) return "nkcoqb";
 		if (attacker.equals("pillager")) return "qhpyaw";
 		if (attacker.equals("ravager")) return "uveohs";
@@ -1396,15 +1437,17 @@ public final class ContextualDialogueController {
 				playId(villager, gift, "food_gift:" + villager.getUUID() + ":" + heldItem, SHORT_COOLDOWN, player);
 				return InteractionResult.PASS;
 			}
-			if (isStandingSign(heldStack) && !villager.isBaby()) {
-				ItemStack previous = villager.getMainHandItem();
-				if (previous.getItem() == heldStack.getItem()) return InteractionResult.SUCCESS;
-				if (!previous.isEmpty()) villager.spawnAtLocation((ServerLevel) villager.level(), previous.copy());
-				villager.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(heldStack.getItem()));
+			int offeredSign = signType(heldStack);
+			if (offeredSign >= 0 && !villager.isBaby()) {
+				VillagerNewsData state = data(villager);
+				int previousSign = state.vnap$signType();
+				if (previousSign == offeredSign) return InteractionResult.SUCCESS;
+				if (previousSign >= 0) villager.spawnAtLocation((ServerLevel) villager.level(), signItem(previousSign));
+				state.vnap$setSignType(offeredSign);
 				consume(player, heldStack);
 				villager.level().playSound(null, villager.blockPosition(), SoundEvents.HORSE_STEP_WOOD, SoundSource.NEUTRAL, 1.0F, 1.0F);
-				if (!isStandingSign(previous)) {
-					data(villager).vnap$setSignMessage(villager.getRandom().nextInt(87));
+				if (previousSign < 0) {
+					state.vnap$setSignMessage(villager.getRandom().nextInt(87));
 					playId(villager, "vqlrqf", "sign_gift:" + villager.getUUID(), SHORT_COOLDOWN, player);
 				}
 				return InteractionResult.SUCCESS;
@@ -1440,18 +1483,17 @@ public final class ContextualDialogueController {
 
 	private static InteractionResult interactWithCosmetic(Player player, Villager villager, ItemStack stack) {
 		VillagerNewsData state = data(villager);
-		ItemStack carried = villager.getMainHandItem();
-		if (stack.getItem() == Items.SHEARS && isStandingSign(carried)) {
+		if (stack.getItem() == Items.SHEARS && state.vnap$signType() >= 0) {
 			if (villager.level() instanceof ServerLevel level) {
-				villager.spawnAtLocation(level, carried.copy());
+				villager.spawnAtLocation(level, signItem(state.vnap$signType()));
 				level.playSound(null, villager.blockPosition(), SoundEvents.SHEEP_SHEAR, SoundSource.NEUTRAL, 1.0F, 1.0F);
 			}
-			villager.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
 			state.vnap$setSignMessage(-1);
+			state.vnap$setSignType(-1);
 			damageShears(player, stack);
 			return InteractionResult.SUCCESS;
 		}
-		if (isAxe(stack) && isStandingSign(carried)) {
+		if (isAxe(stack) && state.vnap$signType() >= 0) {
 			int direction = player.isShiftKeyDown() ? -1 : 1;
 			int message = Math.floorMod(state.vnap$signMessage() + direction, 87);
 			state.vnap$setSignMessage(message);
@@ -1545,6 +1587,42 @@ public final class ContextualDialogueController {
 		return path.endsWith("_sign") && !path.endsWith("_hanging_sign");
 	}
 
+	public static int signType(ItemStack stack) {
+		if (!isStandingSign(stack)) return -1;
+		return switch (BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath()) {
+			case "oak_sign" -> 0;
+			case "spruce_sign" -> 1;
+			case "birch_sign" -> 2;
+			case "jungle_sign" -> 3;
+			case "acacia_sign" -> 4;
+			case "dark_oak_sign" -> 5;
+			case "mangrove_sign" -> 6;
+			case "cherry_sign" -> 7;
+			case "pale_oak_sign" -> 8;
+			case "bamboo_sign" -> 9;
+			case "crimson_sign" -> 10;
+			case "warped_sign" -> 11;
+			default -> -1;
+		};
+	}
+
+	public static ItemStack signItem(int type) {
+		return new ItemStack(switch (type) {
+			case 1 -> Items.SPRUCE_SIGN;
+			case 2 -> Items.BIRCH_SIGN;
+			case 3 -> Items.JUNGLE_SIGN;
+			case 4 -> Items.ACACIA_SIGN;
+			case 5 -> Items.DARK_OAK_SIGN;
+			case 6 -> Items.MANGROVE_SIGN;
+			case 7 -> Items.CHERRY_SIGN;
+			case 8 -> Items.PALE_OAK_SIGN;
+			case 9 -> Items.BAMBOO_SIGN;
+			case 10 -> Items.CRIMSON_SIGN;
+			case 11 -> Items.WARPED_SIGN;
+			default -> Items.OAK_SIGN;
+		});
+	}
+
 	private static boolean isAxe(ItemStack stack) {
 		return BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath().endsWith("_axe");
 	}
@@ -1568,28 +1646,21 @@ public final class ContextualDialogueController {
 	}
 
 	private static void onAttackEntity(Player player, Entity entity) {
-		if (entity instanceof Villager villager) {
-			if (villager.isSleeping() && villager.level() instanceof ServerLevel level) {
-				INTERRUPTED_SLEEP.add(villager.getUUID());
-				villager.stopSleeping();
-				Villager witness = nearbyVillagers(level, villager.position(), 10.0).stream()
-					.filter(other -> other != villager && !other.isBaby() && other.hasLineOfSight(villager))
-					.min(Comparator.comparingDouble(other -> other.distanceToSqr(villager))).orElse(null);
-				if (witness != null && playId(witness, "slbqfwswxeva", "home_witness:" + witness.getUUID(), 20L, villager)) {
-					long due = ticks + DialogueCatalog.byId("slbqfwswxeva").durationTicks() + 2L;
-					PENDING_SPEECH.add(new PendingSpeech(level, villager.getUUID(), "slbqfwbayahw", witness.getUUID(), due));
-				} else playId(villager, "lpuocy", "attacked_home:" + villager.getUUID(), 20L, player);
-				return;
-			}
-			String id;
-			if (villager.isBaby()) id = "ahcvzd";
-			else {
-				CastProfile profile = cast(villager);
-				id = profile.attack;
-				if (profile == CastProfile.VILLAGER) id = weaponAttackDialogue(player.getMainHandItem());
-			}
-			playId(villager, id, "attack:" + villager.getUUID(), 20L, player);
-		}
+		if (!(entity instanceof Villager villager) || !villager.isSleeping()) return;
+		INTERRUPTED_SLEEP.add(villager.getUUID());
+		villager.stopSleeping();
+	}
+
+	private static void playHomeAttackReaction(Villager villager, Player player) {
+		if (!(villager.level() instanceof ServerLevel level)) return;
+		Villager witness = nearbyVillagers(level, villager.position(), 10.0).stream()
+			.filter(other -> other != villager && !other.isBaby() && !other.isSleeping()
+				&& cast(other) == CastProfile.VILLAGER && other.hasLineOfSight(villager))
+			.min(Comparator.comparingDouble(other -> other.distanceToSqr(villager))).orElse(null);
+		if (witness != null && playId(witness, "slbqfwswxeva", "home_witness:" + witness.getUUID(), 20L, villager)) {
+			long due = ticks + DialogueCatalog.byId("slbqfwswxeva").durationTicks() + 2L;
+			PENDING_SPEECH.add(new PendingSpeech(level, villager.getUUID(), "slbqfwbayahw", witness.getUUID(), due));
+		} else playId(villager, "lpuocy", "attacked_home:" + villager.getUUID(), 20L, player);
 	}
 
 	private static String weaponAttackDialogue(ItemStack stack) {
@@ -1802,7 +1873,9 @@ public final class ContextualDialogueController {
 			Entity target, Vec3 targetPosition) {
 		if (!(speaker.level() instanceof ServerLevel level) || !group.speaker().equals(speakerType(speaker))
 				|| !level.getServer().tickRateManager().runsNormally()
-				|| !VillagerNewsSettings.dialogueEnabled() || isBusy(speaker)
+				|| !VillagerNewsSettings.dialogueEnabled()
+				|| speaker instanceof Villager villager && villager.isSleeping() && !group.id().equals("asqzby")
+				|| isBusy(speaker)
 				|| !ready(cooldownKey, VillagerNewsSettings.scaleCooldown(cooldown))) return false;
 		Map<String, List<Integer>> speakerHistory = RECENT_VARIANTS.computeIfAbsent(speaker.getUUID(), ignored -> new HashMap<>());
 		List<Integer> recentVariants = speakerHistory.getOrDefault(group.id(), List.of());
