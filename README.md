@@ -5,6 +5,11 @@ It brings the original Villager News characters, models, animations, textures,
 voice acting, and contextual dialogue to Java Edition while retaining normal
 Minecraft villager gameplay.
 
+## Community
+
+Join the [Villager News Addon Port Discord server](https://discord.gg/vEpbtj2ChP)
+for support, updates, and discussion.
+
 ## Features
 
 - Detailed animated Villager News models converted for Entity Model Features
