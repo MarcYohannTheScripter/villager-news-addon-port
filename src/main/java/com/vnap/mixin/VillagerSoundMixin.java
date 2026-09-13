@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Villager.class)
 public abstract class VillagerSoundMixin {
 	@Inject(method = "getAmbientSound", at = @At("HEAD"), cancellable = true)
-	private void vnap$removeUnreachableAmbientSound(CallbackInfoReturnable<SoundEvent> cir) {
-		if (vnap$isUnreachable()) cir.setReturnValue(SoundEvents.EMPTY);
+	private void vnap$removeVanillaAmbientSound(CallbackInfoReturnable<SoundEvent> cir) {
+		cir.setReturnValue(SoundEvents.EMPTY);
 	}
 
 	@Inject(method = "getHurtSound", at = @At("HEAD"), cancellable = true)
@@ -24,10 +24,5 @@ public abstract class VillagerSoundMixin {
 	@Inject(method = "getDeathSound", at = @At("HEAD"), cancellable = true)
 	private void vnap$removeVanillaDeathSound(CallbackInfoReturnable<SoundEvent> cir) {
 		cir.setReturnValue(SoundEvents.EMPTY);
-	}
-
-	private boolean vnap$isUnreachable() {
-		String name = ((Villager) (Object) this).getName().getString();
-		return name.equalsIgnoreCase("Villager Unreachable") || name.equalsIgnoreCase("Can't Catch Me!");
 	}
 }

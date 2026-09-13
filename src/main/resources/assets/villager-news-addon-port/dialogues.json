@@ -27927,7 +27927,7 @@
     "cmkesu": {
       "title": "Player Wears the Mayor Hat",
       "body": "§eTrigger\n\n§7Wear the Mayor Hat near The Mayor.\n\n§eReaction\n\n§7Reactions to seeing you wear the Mayor Hat.",
-      "speaker": "villager",
+      "speaker": "mayor",
       "maximumDuration": 7.97,
       "variants": [
         {

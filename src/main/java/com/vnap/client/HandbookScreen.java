@@ -25,7 +25,9 @@ import java.util.Map;
 public final class HandbookScreen extends Screen {
 	private static final HandbookData DATA = load();
 	private static final int ROWS = 8;
-	private Page page = Page.HOME;
+	private final Screen parent;
+	private final boolean settingsOnly;
+	private Page page;
 	private Page returnPage = Page.TRIGGERS;
 	private int pageIndex;
 	private int entryIndex;
@@ -35,7 +37,19 @@ public final class HandbookScreen extends Screen {
 	private Entry detail;
 
 	public HandbookScreen() {
+		this(null, Page.HOME, false);
+	}
+
+	private HandbookScreen(Screen parent, Page page, boolean settingsOnly) {
 		super(Component.literal("Villager News"));
+		this.parent = parent;
+		this.page = page;
+		this.settingsOnly = settingsOnly;
+	}
+
+	public static HandbookScreen settingsScreen(Screen parent) {
+		VillagerNewsSettingsState.prepareConfigScreen();
+		return new HandbookScreen(parent, Page.SETTINGS, true);
 	}
 
 	@Override
@@ -199,7 +213,12 @@ public final class HandbookScreen extends Screen {
 	}
 
 	private void buildSettings(int left, int contentWidth) {
-		addText(left, 42, contentWidth, Component.literal("Dialogue settings are saved by the current server."), true);
+		boolean canEdit = VillagerNewsSettingsState.canEdit();
+		addText(left, 42, contentWidth, Component.literal(canEdit
+			? VillagerNewsSettingsState.localSettings()
+				? "Dialogue settings are saved for local worlds."
+				: "Dialogue settings are saved by the current server."
+			: "Server dialogue settings require operator permission."), true);
 		int labelWidth = Math.min(166, contentWidth / 2);
 		int buttonLeft = left + labelWidth;
 		int buttonWidth = contentWidth - labelWidth;
@@ -213,29 +232,38 @@ public final class HandbookScreen extends Screen {
 		}).bounds(buttonLeft, y, buttonWidth, 20).build());
 		y += 26;
 		addText(left, y + 6, labelWidth - 6, Component.literal("Villager Chattiness"), false);
-		addRenderableWidget(Button.builder(Component.literal(chattinessLabel(VillagerNewsSettingsState.chattiness())), button -> {
+		Button chattiness = Button.builder(Component.literal(chattinessLabel(VillagerNewsSettingsState.chattiness())), button -> {
 			VillagerNewsSettingsState.setChattiness(VillagerNewsSettingsState.chattiness() + 1);
 			button.setMessage(Component.literal(chattinessLabel(VillagerNewsSettingsState.chattiness())));
-		}).bounds(buttonLeft, y, buttonWidth, 20).build());
+		}).bounds(buttonLeft, y, buttonWidth, 20).build();
+		chattiness.active = canEdit;
+		addRenderableWidget(chattiness);
 		y += 26;
 		addText(left, y + 6, labelWidth - 6, Component.literal("Rare Voicelines"), false);
-		addRenderableWidget(Button.builder(Component.literal(rareLabel(VillagerNewsSettingsState.rareVoicelines())), button -> {
+		Button rareVoicelines = Button.builder(Component.literal(rareLabel(VillagerNewsSettingsState.rareVoicelines())), button -> {
 			VillagerNewsSettingsState.setRareVoicelines(VillagerNewsSettingsState.rareVoicelines() + 1);
 			button.setMessage(Component.literal(rareLabel(VillagerNewsSettingsState.rareVoicelines())));
-		}).bounds(buttonLeft, y, buttonWidth, 20).build());
+		}).bounds(buttonLeft, y, buttonWidth, 20).build();
+		rareVoicelines.active = canEdit;
+		addRenderableWidget(rareVoicelines);
 		y += 26;
 		addText(left, y + 6, labelWidth - 6, Component.literal("Spawn Special Villagers"), false);
-		addRenderableWidget(Button.builder(Component.literal(toggleLabel(VillagerNewsSettingsState.spawnSpecialVillagers())), button -> {
+		Button spawnSpecialVillagers = Button.builder(Component.literal(toggleLabel(VillagerNewsSettingsState.spawnSpecialVillagers())), button -> {
 			VillagerNewsSettingsState.setSpawnSpecialVillagers(!VillagerNewsSettingsState.spawnSpecialVillagers());
 			button.setMessage(Component.literal(toggleLabel(VillagerNewsSettingsState.spawnSpecialVillagers())));
-		}).bounds(buttonLeft, y, buttonWidth, 20).build());
+		}).bounds(buttonLeft, y, buttonWidth, 20).build();
+		spawnSpecialVillagers.active = canEdit;
+		addRenderableWidget(spawnSpecialVillagers);
 		y += 26;
 		addText(left, y + 6, labelWidth - 6, Component.literal("Villager Style"), false);
 		Button style = Button.builder(Component.literal("Villager News"), button -> {
 		}).bounds(buttonLeft, y, buttonWidth, 20).build();
 		style.active = false;
 		addRenderableWidget(style);
-		addBackButton(left, contentWidth, Page.HOME);
+		if (settingsOnly) {
+			addRenderableWidget(Button.builder(Component.literal("Done"), button -> onClose())
+				.bounds(left, height - 30, contentWidth, 20).build());
+		} else addBackButton(left, contentWidth, Page.HOME);
 	}
 
 	private static String toggleLabel(boolean enabled) {
@@ -332,6 +360,11 @@ public final class HandbookScreen extends Screen {
 	@Override
 	public boolean isPauseScreen() {
 		return false;
+	}
+
+	@Override
+	public void onClose() {
+		minecraft.setScreenAndShow(parent);
 	}
 
 	private static String clean(String value) {

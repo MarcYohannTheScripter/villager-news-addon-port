@@ -917,8 +917,8 @@
                   "attachments": {
                     "villager_item": [
                       0,
-                      -5.75,
-                      -1.75
+                      0,
+                      0
                     ]
                   }
                 }
@@ -1051,10 +1051,10 @@
           "this.sz": "vnap_root_sz"
         },
         {
-          "villager_news_base_waist.rx": "torad(head_pitch*0.17)+vnap_waist_rx",
+          "villager_news_base_waist.rx": "torad(vnap_look_pitch*0.17)+vnap_waist_rx",
           "villager_news_base_waist.tx": "vnap_waist_tx",
           "villager_news_base_waist.sx": "vnap_waist_sx",
-          "villager_news_base_waist.ry": "torad(head_yaw*0.3)+vnap_waist_ry",
+          "villager_news_base_waist.ry": "torad(vnap_look_yaw*0.3)+vnap_waist_ry",
           "villager_news_base_waist.ty": "-12+vnap_waist_ty",
           "villager_news_base_waist.sy": "vnap_waist_sy",
           "villager_news_base_waist.rz": "vnap_waist_rz",
@@ -1073,10 +1073,10 @@
           "villager_news_base_body.sz": "vnap_body_sz"
         },
         {
-          "villager_news_base_head.rx": "torad(head_pitch*0.5)+vnap_head_rx",
+          "villager_news_base_head.rx": "torad(vnap_look_pitch*0.5)+vnap_head_rx",
           "villager_news_base_head.tx": "vnap_head_tx",
           "villager_news_base_head.sx": "vnap_head_sx",
-          "villager_news_base_head.ry": "torad(head_yaw*0.77)+vnap_head_ry",
+          "villager_news_base_head.ry": "torad(vnap_look_yaw*0.77)+vnap_head_ry",
           "villager_news_base_head.ty": "vnap_head_ty",
           "villager_news_base_head.sy": "vnap_head_sy",
           "villager_news_base_head.rz": "vnap_head_rz",
@@ -1106,16 +1106,17 @@
           "villager_news_base_fgk6.sz": "vnap_nose_sz"
         },
         {
+          "villager_news_base_fgk6.visible": "vnap_has_nose==1",
           "villager_news_base_fgk6.sx": "vnap_nose_sx*vnap_has_nose",
           "villager_news_base_fgk6.sy": "vnap_nose_sy*vnap_has_nose",
           "villager_news_base_fgk6.sz": "vnap_nose_sz*vnap_has_nose"
         },
         {
           "villager_news_base_d67l_6q6.rx": "vnap_pupil_right_rx",
-          "villager_news_base_d67l_6q6.tx": "1.5+vnap_pupil_right_tx+if(head_yaw<-30,1,0)",
+          "villager_news_base_d67l_6q6.tx": "1.5+vnap_pupil_right_tx+max(-0.45,min(0.45,vnap_look_yaw/60))*-1",
           "villager_news_base_d67l_6q6.sx": "vnap_pupil_right_sx",
           "villager_news_base_d67l_6q6.ry": "vnap_pupil_right_ry",
-          "villager_news_base_d67l_6q6.ty": "-3.5+vnap_pupil_right_ty+if(head_pitch<-30,-1,0)",
+          "villager_news_base_d67l_6q6.ty": "-3.5+vnap_pupil_right_ty+max(-0.45,min(0.45,vnap_look_pitch/60))",
           "villager_news_base_d67l_6q6.sy": "vnap_pupil_right_sy",
           "villager_news_base_d67l_6q6.rz": "vnap_pupil_right_rz",
           "villager_news_base_d67l_6q6.tz": "-3.975+vnap_pupil_right_tz",
@@ -1123,10 +1124,10 @@
         },
         {
           "villager_news_base_ja89l_6q6.rx": "vnap_pupil_left_rx",
-          "villager_news_base_ja89l_6q6.tx": "-1.5+vnap_pupil_left_tx+if(head_yaw>30,-1,0)",
+          "villager_news_base_ja89l_6q6.tx": "-1.5+vnap_pupil_left_tx+max(-0.45,min(0.45,vnap_look_yaw/60))*-1",
           "villager_news_base_ja89l_6q6.sx": "vnap_pupil_left_sx",
           "villager_news_base_ja89l_6q6.ry": "vnap_pupil_left_ry",
-          "villager_news_base_ja89l_6q6.ty": "-3.5+vnap_pupil_left_ty+if(head_pitch<-30,-1,0)",
+          "villager_news_base_ja89l_6q6.ty": "-3.5+vnap_pupil_left_ty+max(-0.45,min(0.45,vnap_look_pitch/60))",
           "villager_news_base_ja89l_6q6.sy": "vnap_pupil_left_sy",
           "villager_news_base_ja89l_6q6.rz": "vnap_pupil_left_rz",
           "villager_news_base_ja89l_6q6.tz": "-3.975+vnap_pupil_left_tz",
@@ -1144,7 +1145,7 @@
           "villager_news_base_6q6da5kmhh6j.sz": "vnap_eye_group_sz"
         },
         {
-          "villager_news_base_6q6da5kmhh6j.sy": "if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.08,1+12.75*fmod(time+id*0.37,1.25+fmod(id,3)*0.5),if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.18,2.02,if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.26,2.02-12.75*(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)-0.18),1)))*if(head_pitch<-30,0,if(head_yaw>30,0.75,if(head_yaw<-30,0.75,1)))*vnap_eye_group_sy"
+          "villager_news_base_6q6da5kmhh6j.sy": "if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.08,1+12.75*fmod(time+id*0.37,1.25+fmod(id,3)*0.5),if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.18,2.02,if(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)<0.26,2.02-12.75*(fmod(time+id*0.37,1.25+fmod(id,3)*0.5)-0.18),1)))*vnap_eye_group_sy"
         },
         {
           "villager_news_base_6q6da5kmhh6jd67l.rx": "vnap_eye_right_rx",
@@ -1187,7 +1188,7 @@
           "villager_news_base_egfg3jgo.tx": "vnap_brow_tx",
           "villager_news_base_egfg3jgo.sx": "vnap_brow_sx",
           "villager_news_base_egfg3jgo.ry": "vnap_brow_ry",
-          "villager_news_base_egfg3jgo.ty": "-4+vnap_brow_ty+if(head_pitch<-30,-1,if(head_pitch>30,0,if(head_yaw>30,-0.25,if(head_yaw<-30,-0.25,0))))",
+          "villager_news_base_egfg3jgo.ty": "-4+vnap_brow_ty+if(vnap_look_pitch<-30,-1,if(vnap_look_pitch>30,0,if(vnap_look_yaw>30,-0.25,if(vnap_look_yaw<-30,-0.25,0))))",
           "villager_news_base_egfg3jgo.sy": "vnap_brow_sy",
           "villager_news_base_egfg3jgo.rz": "vnap_brow_rz",
           "villager_news_base_egfg3jgo.tz": "-4.15+vnap_brow_tz",
@@ -1767,10 +1768,10 @@
           "this.sz": "vnap_cosmetic_mayor_hat"
         },
         {
-          "villager_news_extra_0_waist.rx": "torad(head_pitch*0.17)+vnap_waist_rx",
+          "villager_news_extra_0_waist.rx": "torad(vnap_look_pitch*0.17)+vnap_waist_rx",
           "villager_news_extra_0_waist.tx": "vnap_waist_tx",
           "villager_news_extra_0_waist.sx": "vnap_waist_sx",
-          "villager_news_extra_0_waist.ry": "torad(head_yaw*0.3)+vnap_waist_ry",
+          "villager_news_extra_0_waist.ry": "torad(vnap_look_yaw*0.3)+vnap_waist_ry",
           "villager_news_extra_0_waist.ty": "-12+vnap_waist_ty",
           "villager_news_extra_0_waist.sy": "vnap_waist_sy",
           "villager_news_extra_0_waist.rz": "vnap_waist_rz",
@@ -1789,10 +1790,10 @@
           "villager_news_extra_0_body.sz": "vnap_body_sz"
         },
         {
-          "villager_news_extra_0_head.rx": "torad(head_pitch*0.5)+vnap_head_rx",
+          "villager_news_extra_0_head.rx": "torad(vnap_look_pitch*0.5)+vnap_head_rx",
           "villager_news_extra_0_head.tx": "vnap_head_tx",
           "villager_news_extra_0_head.sx": "vnap_head_sx",
-          "villager_news_extra_0_head.ry": "torad(head_yaw*0.77)+vnap_head_ry",
+          "villager_news_extra_0_head.ry": "torad(vnap_look_yaw*0.77)+vnap_head_ry",
           "villager_news_extra_0_head.ty": "0.25+vnap_head_ty",
           "villager_news_extra_0_head.sy": "vnap_head_sy",
           "villager_news_extra_0_head.rz": "vnap_head_rz",
@@ -2221,10 +2222,10 @@
           "this.sz": "vnap_cosmetic_helmet"
         },
         {
-          "villager_news_extra_1_waist.rx": "torad(head_pitch*0.17)+vnap_waist_rx",
+          "villager_news_extra_1_waist.rx": "torad(vnap_look_pitch*0.17)+vnap_waist_rx",
           "villager_news_extra_1_waist.tx": "vnap_waist_tx",
           "villager_news_extra_1_waist.sx": "vnap_waist_sx",
-          "villager_news_extra_1_waist.ry": "torad(head_yaw*0.3)+vnap_waist_ry",
+          "villager_news_extra_1_waist.ry": "torad(vnap_look_yaw*0.3)+vnap_waist_ry",
           "villager_news_extra_1_waist.ty": "-12+vnap_waist_ty",
           "villager_news_extra_1_waist.sy": "vnap_waist_sy",
           "villager_news_extra_1_waist.rz": "vnap_waist_rz",
@@ -2243,10 +2244,10 @@
           "villager_news_extra_1_body.sz": "vnap_body_sz"
         },
         {
-          "villager_news_extra_1_head.rx": "torad(head_pitch*0.5)+vnap_head_rx",
+          "villager_news_extra_1_head.rx": "torad(vnap_look_pitch*0.5)+vnap_head_rx",
           "villager_news_extra_1_head.tx": "vnap_head_tx",
           "villager_news_extra_1_head.sx": "vnap_head_sx",
-          "villager_news_extra_1_head.ry": "torad(head_yaw*0.77)+vnap_head_ry",
+          "villager_news_extra_1_head.ry": "torad(vnap_look_yaw*0.77)+vnap_head_ry",
           "villager_news_extra_1_head.ty": "vnap_head_ty",
           "villager_news_extra_1_head.sy": "vnap_head_sy",
           "villager_news_extra_1_head.rz": "vnap_head_rz",
@@ -2385,10 +2386,10 @@
           "this.sz": "vnap_cosmetic_microphone"
         },
         {
-          "villager_news_extra_2_waist.rx": "torad(head_pitch*0.17)+vnap_waist_rx",
+          "villager_news_extra_2_waist.rx": "torad(vnap_look_pitch*0.17)+vnap_waist_rx",
           "villager_news_extra_2_waist.tx": "vnap_waist_tx",
           "villager_news_extra_2_waist.sx": "vnap_waist_sx",
-          "villager_news_extra_2_waist.ry": "torad(head_yaw*0.3)+vnap_waist_ry",
+          "villager_news_extra_2_waist.ry": "torad(vnap_look_yaw*0.3)+vnap_waist_ry",
           "villager_news_extra_2_waist.ty": "-12+vnap_waist_ty",
           "villager_news_extra_2_waist.sy": "vnap_waist_sy",
           "villager_news_extra_2_waist.rz": "vnap_waist_rz",
@@ -2525,10 +2526,10 @@
           "this.sz": "vnap_cosmetic_moustache"
         },
         {
-          "villager_news_extra_3_waist.rx": "torad(head_pitch*0.17)+vnap_waist_rx",
+          "villager_news_extra_3_waist.rx": "torad(vnap_look_pitch*0.17)+vnap_waist_rx",
           "villager_news_extra_3_waist.tx": "vnap_waist_tx",
           "villager_news_extra_3_waist.sx": "vnap_waist_sx",
-          "villager_news_extra_3_waist.ry": "torad(head_yaw*0.3)+vnap_waist_ry",
+          "villager_news_extra_3_waist.ry": "torad(vnap_look_yaw*0.3)+vnap_waist_ry",
           "villager_news_extra_3_waist.ty": "-12+vnap_waist_ty",
           "villager_news_extra_3_waist.sy": "vnap_waist_sy",
           "villager_news_extra_3_waist.rz": "vnap_waist_rz",
@@ -2547,10 +2548,10 @@
           "villager_news_extra_3_body.sz": "vnap_body_sz"
         },
         {
-          "villager_news_extra_3_head.rx": "torad(head_pitch*0.5)+vnap_head_rx",
+          "villager_news_extra_3_head.rx": "torad(vnap_look_pitch*0.5)+vnap_head_rx",
           "villager_news_extra_3_head.tx": "vnap_head_tx",
           "villager_news_extra_3_head.sx": "vnap_head_sx",
-          "villager_news_extra_3_head.ry": "torad(head_yaw*0.77)+vnap_head_ry",
+          "villager_news_extra_3_head.ry": "torad(vnap_look_yaw*0.77)+vnap_head_ry",
           "villager_news_extra_3_head.ty": "vnap_head_ty",
           "villager_news_extra_3_head.sy": "vnap_head_sy",
           "villager_news_extra_3_head.rz": "vnap_head_rz",

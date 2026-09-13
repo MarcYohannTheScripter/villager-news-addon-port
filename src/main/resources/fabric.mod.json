@@ -18,6 +18,9 @@
 		],
 		"client": [
 			"com.vnap.client.VillagerNewsAddonPortClient"
+		],
+		"modmenu": [
+			"com.vnap.client.VillagerNewsModMenu"
 		]
 	},
 	"mixins": [

@@ -33,6 +33,7 @@ for support, updates, and discussion.
 - Persistent natural spawning for one of each special character in distant
   villages
 - A craftable Villager News Handbook
+- Optional Mod Menu configuration screen
 
 ## Requirements
 
@@ -45,6 +46,10 @@ for support, updates, and discussion.
 
 EMF, ETF, and ESF are external dependencies. This project does not bundle or
 modify them.
+
+Mod Menu is optional. When installed, its Configure button opens the Villager
+News settings directly. Without Mod Menu, the same settings remain available
+in the Villager News Handbook.
 
 ## Installation
 
@@ -120,6 +125,15 @@ On Linux or macOS:
 ```
 
 The distributable jar is written to `build/libs`.
+
+To include the operator-only dialogue test command in a development build, set
+`dialogue_test_command=true` in `gradle.properties` before building. Use
+`/dialoguetest <1-523>` in game to spawn the matching speaker and subject, play
+every variant from that dialogue group, and remove the test actors when each one ends.
+Use `/dialoguetest continuous` to run all 523 groups in order. Each group is
+announced with its variant number in chat, and the next variant begins one second
+after the current voice line finishes.
+The setting defaults to `false` for release builds.
 
 Run the asset and dialogue verification with:
 

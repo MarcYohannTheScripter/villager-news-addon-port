@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityRenderLayerRegistrationCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.VillagerRenderer;
 import net.minecraft.world.InteractionResult;
@@ -57,6 +58,12 @@ public final class VillagerNewsAddonPortClient implements ClientModInitializer {
 		ClientPlayNetworking.registerGlobalReceiver(VillagerNewsSettingsPayload.TYPE, (payload, context) ->
 			context.client().execute(() -> VillagerNewsSettingsState.apply(payload))
 		);
+		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
+			DialogueSoundState.clear(client);
+			DialogueAnimationState.clear();
+			DialogueSubtitleState.clear();
+			VillagerNewsSettingsState.reset();
+		});
 		UseItemCallback.EVENT.register((player, level, hand) -> {
 			if (!level.isClientSide()) return InteractionResult.PASS;
 			if (player.getItemInHand(hand).getItem() != VillagerNewsItems.HANDBOOK) return InteractionResult.PASS;

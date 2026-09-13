@@ -1,5 +1,7 @@
 package com.vnap;
 
+import com.vnap.command.DialogueTestCommand;
+import com.vnap.config.VillagerNewsBuildSettings;
 import com.vnap.config.VillagerNewsSettings;
 import com.vnap.dialogue.ContextualDialogueController;
 import com.vnap.dialogue.DialogueCatalog;
@@ -30,6 +32,7 @@ public class VillagerNewsAddonPort implements ModInitializer {
 		VillagerNewsSettingsNetwork.register();
 		DialogueCatalog.register();
 		ContextualDialogueController.register();
+		if (VillagerNewsBuildSettings.dialogueTestCommand()) DialogueTestCommand.register();
 		LOGGER.info("Villager News models, textures, and contextual dialogue are ready.");
 	}
 

@@ -12,6 +12,12 @@ const sounds = JSON.parse(readFileSync(join(modAssets, "sounds.json"), "utf8"));
 const animations = JSON.parse(readFileSync(join(modAssets, "dialogue_animations.json"), "utf8"));
 const handbook = JSON.parse(readFileSync(join(modAssets, "handbook.json"), "utf8"));
 const behaviorSource = readFileSync(join(root, "src/main/java/com/vnap/dialogue/ContextualDialogueController.java"), "utf8");
+const dialogueTestSource = readFileSync(join(root, "src/main/java/com/vnap/command/DialogueTestCommand.java"), "utf8");
+const buildSettingsSource = readFileSync(join(root, "src/main/java/com/vnap/config/VillagerNewsBuildSettings.java"), "utf8");
+const initializerSource = readFileSync(join(root, "src/main/java/com/vnap/VillagerNewsAddonPort.java"), "utf8");
+const buildSource = readFileSync(join(root, "build.gradle"), "utf8");
+const buildSettingsResource = readFileSync(join(resources, "villager-news-addon-port-build.properties"), "utf8");
+const fabricMod = JSON.parse(readFileSync(join(resources, "fabric.mod.json"), "utf8"));
 const itemSource = readFileSync(join(root, "src/main/java/com/vnap/item/VillagerNewsItems.java"), "utf8");
 const handbookSource = readFileSync(join(root, "src/main/java/com/vnap/client/HandbookScreen.java"), "utf8");
 const clientSource = readFileSync(join(root, "src/main/java/com/vnap/client/VillagerNewsAddonPortClient.java"), "utf8");
@@ -24,6 +30,10 @@ const soundStateSource = readFileSync(join(root, "src/main/java/com/vnap/client/
 const animationStateSource = readFileSync(join(root, "src/main/java/com/vnap/client/DialogueAnimationState.java"), "utf8");
 const settingsSource = readFileSync(join(root, "src/main/java/com/vnap/config/VillagerNewsSettings.java"), "utf8");
 const settingsStateSource = readFileSync(join(root, "src/main/java/com/vnap/client/VillagerNewsSettingsState.java"), "utf8");
+const modMenuSource = readFileSync(join(root, "src/main/java/com/vnap/client/VillagerNewsModMenu.java"), "utf8");
+const settingsNetworkSource = readFileSync(join(root, "src/main/java/com/vnap/network/VillagerNewsSettingsNetwork.java"), "utf8");
+const settingsPayloadSource = readFileSync(join(root, "src/main/java/com/vnap/network/VillagerNewsSettingsPayload.java"), "utf8");
+const abstractVillagerSource = readFileSync(join(root, "src/main/java/com/vnap/mixin/AbstractVillagerMixin.java"), "utf8");
 const villagerDataSource = readFileSync(join(root, "src/main/java/com/vnap/mixin/VillagerDataMixin.java"), "utf8");
 const mixinConfiguration = readFileSync(join(resources, "villager-news-addon-port.mixins.json"), "utf8");
 const generatorSource = readFileSync(join(root, "tools/port-addon.mjs"), "utf8");
@@ -90,24 +100,109 @@ check(animations.idles?.length === 6 && animations.idles.every((idle) => idle.du
   && Object.keys(idle.tracks).length > 0), "The six original Bedrock idle animations are incomplete");
 check(animations.continuousIdle === "animation.oreville_vn.fyqjnp"
   && animations.targetLook === "animation.oreville_vn.vqhynx", "The continuous idle and target-look layers are missing");
+check(animations.turnLeft === "animation.oreville_vn.aiqbsm"
+	&& animations.turnRight === "animation.oreville_vn.pypqgk"
+	&& animationStateSource.includes("TURN_STATES")
+	&& animationStateSource.includes("legRotation(time")
+	&& animationStateSource.includes("legLift(time"),
+"The original left-turn and right-turn animation controller is missing");
 check(animationStateSource.includes("walkAnimation.position(partialTick)")
   && animationStateSource.includes("IDLE_STATES")
 	&& animationStateSource.includes("horizontalDistanceSqr() > 0.0001")
 	&& animationStateSource.includes("startNext(tick, -1)")
 	&& animationStateSource.includes("blendFromIndex")
-	&& animationStateSource.includes("locomotion.valueAt"), "The client does not continuously play locomotion and stationary idle tracks");
+	&& animationStateSource.includes("getGameTimeDeltaPartialTick(true)")
+	&& animationStateSource.includes("IDLE_BLEND_SECONDS")
+	&& animationStateSource.includes("idle.update(age, canIdle)")
+	&& animationStateSource.includes("poseWeightAt(active.elapsedSeconds())")
+	&& animationStateSource.includes("LOOK_STATES")
+	&& animationStateSource.includes("Mth.wrapDegrees(targetYaw - yaw)")
+	&& animationStateSource.includes("previous.poseSnapshot()")
+	&& animationStateSource.includes("active.transition(variableName, result)")
+	&& animationStateSource.includes("EMPTY_TIMELINE")
+	&& animationStateSource.includes("if (active) advance(tick)")
+	&& animationStateSource.includes("locomotion.valueAt"), "The client does not continuously and smoothly play locomotion and stationary idle tracks");
+	check(generatorSource.includes("torad(vnap_look_pitch*0.5)")
+		&& generatorSource.includes("torad(vnap_look_yaw*0.77)")
+		&& generatorSource.includes("max(-0.45,min(0.45,vnap_look_yaw/60))*-1")
+		&& generatorSource.includes("max(-0.45,min(0.45,vnap_look_pitch/60))")
+		&& !generatorSource.includes("lookEyeScale")
+		&& !generatorSource.includes('rotationTerms.push("torad(head_pitch*0.5)")')
+		&& !generatorSource.includes('rotationTerms.push("torad(head_yaw*0.77)")'),
+	"The villager rig still applies unsmoothed vanilla look rotations");
+check(behaviorSource.includes("easedRotation(mob.yBodyRot")
+	&& behaviorSource.includes("easedRotation(mob.getYHeadRot()")
+	&& behaviorSource.includes("easedRotation(mob.getXRot()")
+	&& behaviorSource.includes("distance * proportion, 0.2F, maximumStep"),
+"Dialogue participants snap into vanilla-style subject-facing rotations");
 
 const referencedGroups = groups.filter(([id, group]) => behaviorSource.includes(`"${id}"`)
   || (group.title && behaviorSource.includes(`"${group.title}"`)));
 const unreferencedGroups = groups.filter((entry) => !referencedGroups.includes(entry));
 check(referencedGroups.length === groups.length, `Expected all 523 server-triggered dialogue groups, found ${referencedGroups.length}`);
 check(unreferencedGroups.length === 0, `Found ${unreferencedGroups.length} dialogue groups without Java triggers`);
+check(/^dialogue_test_command=(true|false)$/m.test(gradleProperties)
+  && buildSource.includes('filesMatching("villager-news-addon-port-build.properties")')
+  && buildSettingsResource.includes("dialogue_test_command=${dialogue_test_command}")
+  && buildSettingsSource.includes('getProperty("dialogue_test_command", "false")')
+  && initializerSource.includes("if (VillagerNewsBuildSettings.dialogueTestCommand()) DialogueTestCommand.register()"),
+"The dialogue test command is not guarded by the disabled-by-default build setting");
+check(dialogueTestSource.includes('Commands.literal("dialoguetest")')
+	&& dialogueTestSource.includes("IntegerArgumentType.integer(1, DialogueCatalog.groups().size())")
+	&& dialogueTestSource.includes("new ArrayList<>(DialogueCatalog.groups().values())")
+	&& dialogueTestSource.includes("CLIENT_TRACKING_DELAY")
+	&& dialogueTestSource.includes("playTestDialogue")
+	&& dialogueTestSource.includes("removeSession")
+	&& dialogueTestSource.includes("entity.discard()"),
+"The numbered dialogue test command lifecycle is incomplete");
+check(dialogueTestSource.includes('Commands.literal("continuous")')
+	&& dialogueTestSource.includes("CONTINUOUS_GAP = 20L")
+	&& dialogueTestSource.includes("variantOffset + 1 < group.variants().size()")
+	&& dialogueTestSource.includes("run.number = number + 1")
+	&& dialogueTestSource.includes("session.variant.index()")
+	&& dialogueTestSource.includes('Component.literal("[Dialogue "')
+	&& dialogueTestSource.includes("Continuous dialogue test complete"),
+"The continuous dialogue test sequence is incomplete");
+check(soundStateSource.includes("PENDING_TIMEOUT_NANOS")
+	&& soundStateSource.includes("tryStart(minecraft, payload)")
+	&& soundStateSource.includes("PendingSound")
+	&& soundStateSource.includes("!entity.isSilent()"),
+"Dialogue audio is discarded before newly spawned test actors reach the client");
+check(dialogueTestSource.includes('case "mayor" -> "The Mayor"')
+  && dialogueTestSource.includes('case "testificate_man" -> "Testificate Man"')
+  && dialogueTestSource.includes('case "number_5" -> "Villager #5"')
+  && dialogueTestSource.includes('case "number_9" -> "Villager #9"')
+  && dialogueTestSource.includes("requiresBabySpeaker")
+	&& dialogueTestSource.includes("setProfession")
+	&& dialogueTestSource.includes("createSubject"),
+"Dialogue tests do not reproduce speaker and subject context");
+check(dialogueTestSource.includes("isCosmeticRecipientDialogue(group.id())")
+	&& dialogueTestSource.includes('id.equals("cxeziv")')
+	&& dialogueTestSource.includes('id.equals("bygaxwbayahw")')
+	&& dialogueTestSource.includes('id.equals("bygaxwfobzlt")')
+	&& dialogueTestSource.includes('id.equals("ckniqq")')
+	&& dialogueTestSource.includes("specialSubjectName(title) != null")
+	&& !dialogueTestSource.includes('title.startsWith("Meet ")'),
+"Dialogue tests confuse cosmetic or no-nose speakers with their subjects");
+check(dialogueTestSource.includes('group.id().equals("qffeco")')
+	&& dialogueTestSource.includes('createEntity(level, "iron_golem")')
+	&& !dialogueTestSource.includes('Map.entry("Iron Golem Targets the Player", "iron_golem")'),
+"The iron-golem attack test confuses the attacker with the spoken-to player");
+check((behaviorSource.match(/entity\.entityTags\(\)\.contains\(DIALOGUE_TEST_TAG\)/g) ?? []).length >= 4
+  && behaviorSource.includes("!entity.entityTags().contains(DIALOGUE_TEST_TAG)"),
+"Dialogue test actors can be interrupted or enter normal dialogue selection");
 check(behaviorSource.includes("EntitySpawnReason.SPAWN_ITEM_USE"), "Spawn-egg dialogue does not use the server spawn reason");
 check(behaviorSource.includes("maintainSpeechTargets"), "Server-side subject facing is missing");
+check(behaviorSource.includes("NEARBY_SUBJECT_RANGE = 8.0")
+	&& behaviorSource.includes("speaker.distanceToSqr(entity) <= NEARBY_SUBJECT_RANGE * NEARBY_SUBJECT_RANGE")
+	&& behaviorSource.includes("filter(speaker::hasLineOfSight)")
+	&& behaviorSource.includes("if (speech.lockMovement) holdMob(mob, position)")
+	&& behaviorSource.includes("else faceMob(mob, position)"),
+"Nearby observations can select distant or hidden subjects, or mobile dialogue loses subject tracking");
 check(behaviorSource.includes("mob.getNavigation().stop()")
 	&& behaviorSource.includes("mob.setYBodyRot(bodyYaw)")
-	&& behaviorSource.includes("mob.setYHeadRot(targetYaw)")
-	&& behaviorSource.includes("mob.setXRot(Mth.clamp(targetPitch")
+	&& behaviorSource.includes("mob.setYHeadRot(headYaw)")
+	&& behaviorSource.includes("mob.setXRot(easedRotation")
   && behaviorSource.includes("holdListener"), "Bedrock speaking movement and mutual-facing locks are incomplete");
 check(behaviorSource.includes("reputation < -225")
   && behaviorSource.includes("reputation < -75")
@@ -117,6 +212,77 @@ check(behaviorSource.includes("negativeGossip")
   && behaviorSource.includes("isNegativeReputation(first, player)"), "Player-directed gossip is not gated by bad reputation");
 check(behaviorSource.includes("RECENT_VARIANTS")
   && behaviorSource.includes("Set.copyOf(recentVariants)"), "Dialogue variants can immediately repeat");
+check(behaviorSource.includes("playHurtWitness(entity)")
+	&& behaviorSource.includes('playSharedId(witness, "pkvhpv"')
+	&& behaviorSource.includes('playSharedId(witness, "pmqrpb"')
+	&& behaviorSource.includes("entity instanceof WanderingTrader")
+	&& behaviorSource.includes("entity instanceof Sheep sheep && isWooly(sheep)")
+	&& !behaviorSource.includes("cast(witness) == CastProfile.VILLAGER"),
+"Special and regular villagers cannot react when another villager-like entity is hurt or dies");
+check(behaviorSource.includes("playDamageDialogue(villager, dialogue")
+	&& behaviorSource.includes("isPlaying(speaker, id) || !ready(cooldownKey, cooldown)")
+	&& behaviorSource.includes("source.getEntity() == null ? SHORT_COOLDOWN")
+	&& behaviorSource.includes("new ActiveSound(group.id()")
+	&& behaviorSource.includes("sound.groupId.equals(groupId)")
+	&& behaviorSource.includes("DAMAGE_LOCK_DIALOGUES")
+	&& behaviorSource.includes("hasDamageLock(entity)")
+	&& ["elryje", "onindz", "rogpvp", "etkxko", "igebly", "vnaodx"]
+		.every((id) => behaviorSource.includes(`"${id}"`)),
+"Repeated damage interrupts and restarts the same active hurt dialogue");
+check(behaviorSource.includes("COSMETIC_RECIPIENT_DIALOGUES")
+	&& behaviorSource.includes('case 2 -> "cxeziv"')
+	&& behaviorSource.includes('case 3 -> "riezum"')
+	&& behaviorSource.includes('case 4 -> "rlkdqd"')
+	&& !behaviorSource.includes("CastProfile expected = switch (cosmetic)"),
+"Cosmetic recipient dialogue is assigned to the nearby special villager");
+check(behaviorSource.includes('NUMBER_5("xccwah", "legnsy", "sclaoa", "behifz", "behifz")')
+  && behaviorSource.includes('TESTIFICATE_MAN("nmwmrz", "luoibc", "mpbnsm", "fzoqwd", "fzoqwd")'),
+"Special villagers use incompatible regular-villager attack dialogue");
+check(behaviorSource.includes("MOBILE_DIALOGUES")
+  && behaviorSource.includes("!MOBILE_DIALOGUES.contains(group.id())")
+  && behaviorSource.includes('"uzdxum"') && behaviorSource.includes('"behifz"'),
+"Damage dialogue still removes knockback or prevents fleeing");
+check(catalog.groups.cmkesu?.speaker === "mayor"
+	&& generatorSource.includes('"cmkesu"')
+	&& behaviorSource.includes("profile == CastProfile.MAYOR) id = \"cmkesu\""),
+"The Mayor-hat observation is assigned to the wrong speaker");
+check(behaviorSource.includes('Map.entry("armor_stand", "ckniqq")')
+	&& behaviorSource.includes('Map.entry("cave_spider", "gtmfpl")')
+	&& behaviorSource.includes("playSharedId")
+	&& behaviorSource.includes("sharedAdult && sharedVillagerVoice")
+	&& behaviorSource.includes('DialogueCatalog.byTitle(title, "villager")')
+	&& behaviorSource.includes('new PendingSpeech(level, parent.getUUID(), "fbuabj", villager.getUUID(), ticks + 2L, true)')
+	&& behaviorSource.includes('playSharedId(villager, "dfdkli"')
+	&& behaviorSource.includes('playSharedId(villager, "ikrwzy"')
+	&& behaviorSource.includes('playSharedId(witness, "slbqfwswxeva"')
+	&& behaviorSource.includes('playSharedId(speaker, id, "time_skip:"')
+	&& behaviorSource.includes('playSharedId(speaker, id, "difficulty:"'),
+"Nearby-entity contexts are incomplete or blocked for special adult villagers");
+check(behaviorSource.includes("playIronGolemAttackWitness(entity, source)")
+	&& behaviorSource.includes('hurtType.equals("iron_golem")')
+	&& behaviorSource.includes('attackerType.equals("iron_golem")')
+	&& behaviorSource.includes('playSharedId(witness, "qffeco"')
+	&& behaviorSource.includes("target = player")
+	&& behaviorSource.includes('direct.equals("snowball")')
+	&& behaviorSource.includes('direct.equals("falling_block")'),
+"Damage observers or projectile and falling-block reactions have incorrect subjects");
+check(behaviorSource.includes("entity instanceof WanderingTrader trader")
+	&& behaviorSource.includes('attacker instanceof Player ? "vevdkl" : "wyvzhk"')
+	&& behaviorSource.includes("cast(villager) == CastProfile.UNREACHABLE")
+	&& behaviorSource.includes("speaker instanceof WanderingTrader")
+	&& behaviorSource.includes("sharedAdult ? playSharedId"),
+"Wandering Trader or Villager Unreachable hurt dialogue is rejected by speaker validation");
+check(behaviorSource.includes('playSharedId(witness, id, "player_death:"')
+	&& behaviorSource.includes('playSharedTitle(adult, "Stare at a Villager"')
+	&& behaviorSource.includes('playSharedTitle(adult, "Stand Completely Still"')
+	&& behaviorSource.includes("playSharedTitle(adult, playerContext")
+	&& behaviorSource.includes('return "Stand on a Villager\'s Bed";'),
+"Shared player observers are blocked for named adult villagers or use the wrong actor");
+check(behaviorSource.includes('playSharedId(villagers.getFirst(), "kzemrz"')
+	&& behaviorSource.includes('playSharedId(adult, "pbmrxx"')
+	&& behaviorSource.includes("Villager gatheringSpeaker = villagers.stream()")
+	&& behaviorSource.includes("!villager.isBaby() && !villager.isSleeping()"),
+"Named villagers block crowd, baby, or difficulty observations");
 check(behaviorSource.includes("droppedItems.size() >= 5"), "Dropped-item pile dialogue does not require a real pile");
 check(clientSource.includes("DialogueSoundState.start(payload)")
   && clientSource.includes("DialogueSoundState.tick(client)")
@@ -124,9 +290,21 @@ check(clientSource.includes("DialogueSoundState.start(payload)")
   && soundStateSource.includes("getSoundManager().stop(active.instance())")
   && !behaviorSource.includes("speaker.getX(), speaker.getY(), speaker.getZ(), variant.sound()"),
 "Dialogue sounds are not bound to and stopped for their exact speaker");
-check(soundStateSource.includes('!payload.groupId().equals("hivgme")'), "Villager death dialogue still stops with its dying entity");
+check(soundStateSource.includes('!payload.groupId().equals("hivgme")')
+  && soundStateSource.includes('!payload.groupId().equals("ecslqo")'), "Villager death dialogue still stops with its dying entity");
+check(behaviorSource.includes("BABY_DIALOGUES")
+  && behaviorSource.includes("matchesSpeaker(speaker, group)")
+  && behaviorSource.includes('if (villager.isBaby()) playId(villager, "ecslqo"')
+  && behaviorSource.includes('else playSharedId(villager, "hivgme"')
+  && behaviorSource.includes('if (villager.isBaby()) return BABY_DIALOGUES.contains(group.id())')
+  && behaviorSource.includes('"cxeziv", "riezum", "rlkdqd"'),
+"Baby villagers can speak adult dialogue or use the adult death voice");
 check(villagerSoundSource.includes("vnap$removeVanillaHurtSound")
   && villagerSoundSource.includes("cir.setReturnValue(SoundEvents.EMPTY)"), "Vanilla villager hurt sounds can overlap dialogue");
+check(villagerSoundSource.includes("vnap$removeVanillaAmbientSound")
+  && abstractVillagerSource.includes("vnap$removeVanillaTradeSound")
+  && abstractVillagerSource.includes("vnap$removeVanillaTradeUpdatedSound")
+  && abstractVillagerSource.includes("vnap$removeVanillaCelebrateSound"), "Vanilla villager voice sounds can leak through ESF");
 check(animationStateSource.includes("ACTIVE.entrySet().removeIf")
   && soundStateSource.includes("ACTIVE.entrySet().iterator()"), "Expired client dialogue state is not cleaned up");
 check((behaviorSource.match(/tickRateManager\(\)\.runsNormally\(\)/g) ?? []).length >= 2
@@ -171,6 +349,26 @@ check(settingsSource.includes("scaleCooldown") && settingsSource.includes("rareV
 check(behaviorSource.includes("VillagerNewsSettings.scaleCooldown")
   && behaviorSource.includes("VillagerNewsSettings.rareVoicelines")
   && behaviorSource.includes("VillagerNewsSettings.spawnSpecialVillagers"), "The server behavior does not apply every supported setting");
+check(settingsNetworkSource.includes("Permissions.COMMANDS_GAMEMASTER")
+  && settingsNetworkSource.includes("if (!canEdit(context.player()))")
+  && settingsPayloadSource.includes("boolean canEdit")
+  && settingsStateSource.includes("if (!canEdit) return")
+  && handbookSource.includes("require operator permission"), "Handbook server settings are not permission protected");
+check(buildSource.includes('compileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"')
+  && /^modmenu_version=20\.0\.2$/m.test(gradleProperties)
+  && fabricMod.entrypoints?.modmenu?.includes("com.vnap.client.VillagerNewsModMenu")
+  && !fabricMod.depends?.modmenu
+  && modMenuSource.includes("implements ModMenuApi")
+  && modMenuSource.includes("HandbookScreen::settingsScreen")
+  && handbookSource.includes("public static HandbookScreen settingsScreen(Screen parent)")
+  && handbookSource.includes("if (settingsOnly)")
+  && settingsStateSource.includes("prepareConfigScreen")
+  && settingsStateSource.includes("VillagerNewsSettings.update"),
+"Optional Mod Menu configuration does not preserve local and server settings behavior");
+check(behaviorSource.includes("ServerLifecycleEvents.SERVER_STOPPING")
+  && behaviorSource.includes("private static void clearState()")
+  && clientSource.includes("ClientPlayConnectionEvents.DISCONNECT")
+  && clientSource.includes("DialogueSoundState.clear(client)"), "World shutdown leaves dialogue state active");
 check(villagerDataSource.includes("vnap$keepSpecialTradeOpen") && villagerDataSource.includes("isSpecialTrader"),
   "Special villagers still inherit the vanilla unemployed-villager trade closure");
 check(villagerDataSource.includes("VillagerNewsSignMessage")
@@ -179,8 +377,8 @@ check(villagerDataSource.includes("VillagerNewsSignMessage")
   && behaviorSource.includes("Math.floorMod(state.vnap$signMessage() + direction, 87)"),
 "Villagers do not hold, remove, and cycle their Bedrock signs");
 check(behaviorSource.includes('equals("firework_rocket")')
-  && behaviorSource.includes('playId(villager, "dfdkli"')
-  && behaviorSource.includes('playId(villager, "zeykfp"'), "Firework spawn reactions are incomplete");
+	&& behaviorSource.includes('playSharedId(villager, "dfdkli"')
+	&& behaviorSource.includes('playId(villager, "zeykfp"'), "Firework spawn reactions are incomplete");
 check(behaviorSource.includes("playHomeChestReaction")
   && behaviorSource.includes("MemoryModuleType.HOME")
   && behaviorSource.includes('playId(villager, "qfhrlh"'), "Villager home chest reactions are incomplete");
@@ -194,10 +392,14 @@ check(!villagerModelSource.includes("villager_news_sign_board_")
   && signLayerSource.includes('"textures/block/" + wood + "_sign.png"')
   && !signLayerSource.includes("textures/entity/signs/")
   && signLayerSource.includes("getPositionerForAttachment(EMFAttachment.Type.VILLAGER)")
+  && signLayerSource.includes("-5.75F / 16.0F")
   && villagerModelSource.includes('"villager_item"')
   && existsSync(join(root, "src/main/java/com/vnap/mixin/client/VillagerRendererMixin.java"))
   && existsSync(join(modAssets, "textures", "entity", "sign_text.png")),
 "The original sign board or its 87-message text atlas is missing");
+check(/"villager_item":\s*\[\s*0,\s*0,\s*0\s*\]/.test(villagerModelSource)
+  && villagerModelSource.includes('.visible": "vnap_has_nose==1"'),
+"Held items or sheared noses retain the wrong model visibility transform");
 check(mixinConfiguration.includes("VillagerSoundMixin")
   && existsSync(join(root, "src/main/java/com/vnap/mixin/VillagerSoundMixin.java")),
 "Vanilla villager death sounds are not deterministically suppressed");
@@ -227,8 +429,8 @@ for (const [profession, texture] of Object.entries(professionTextures)) {
   check(existsSync(join(resources, "assets", "minecraft", "textures", "entity", "villager", "profession", `${profession}.png`)),
     `${profession} profession texture was not generated`);
 }
-check(/^version=1\.3\.1$/m.test(gradleProperties), "The project version is not 1.3.1");
-check(language["guide.villager-news-addon-port.header"] === "Villager News 1.3.1", "The handbook version is not 1.3.1");
+check(/^version=1\.3\.2$/m.test(gradleProperties), "The project version is not 1.3.2");
+check(language["guide.villager-news-addon-port.header"] === "Villager News 1.3.2", "The handbook version is not 1.3.2");
 const merchantCheck = behaviorSource.indexOf("player.containerMenu instanceof MerchantMenu");
 const openingDialogue = behaviorSource.indexOf("trade_open:");
 check(merchantCheck >= 0 && openingDialogue > merchantCheck, "Trade opening dialogue still runs before the merchant menu opens");
@@ -557,6 +759,8 @@ for (const target of ["root", "waist", "body", "head", "head_inner", "arms", "le
 for (const file of readdirSync(cem).filter((name) => name.endsWith(".jem"))) {
   JSON.parse(readFileSync(join(cem, file), "utf8"));
 }
+
+check(gradleProperties.includes("version=1.3.2"), "Mod version is not 1.3.2");
 
 console.log(JSON.stringify({
   dialogueGroups: groups.length,

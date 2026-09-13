@@ -2,6 +2,8 @@
   "framesPerSecond": 24,
   "continuousIdle": "animation.oreville_vn.fyqjnp",
   "targetLook": "animation.oreville_vn.vqhynx",
+  "turnLeft": "animation.oreville_vn.aiqbsm",
+  "turnRight": "animation.oreville_vn.pypqgk",
   "groups": {
     "kxrhxt": [
       {

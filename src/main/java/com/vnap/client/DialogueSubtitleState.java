@@ -57,7 +57,7 @@ public final class DialogueSubtitleState {
 
 	public static void tick(Minecraft minecraft) {
 		if (minecraft.level == null || minecraft.player == null) {
-			ACTIVE.clear();
+			clear();
 			return;
 		}
 		long now = System.nanoTime();
@@ -67,6 +67,10 @@ public final class DialogueSubtitleState {
 			Entity entity = minecraft.level.getEntity(entry.getKey());
 			if (now >= entry.getValue().endNanos() || entity != null && !entity.isAlive()) iterator.remove();
 		}
+	}
+
+	public static void clear() {
+		ACTIVE.clear();
 	}
 
 	private static void render(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker) {

@@ -616,14 +616,13 @@ function addRigBoneAnimation(models, prefix, boneName, target, rigScale = 1) {
     const suffix = axes[axis];
     const rotationTerms = [];
 		const translationTerms = [`vnap_${target}_t${suffix}`];
-		if (boneName === "head" && axis === 0) rotationTerms.push("torad(head_pitch*0.5)");
-		if (boneName === "head" && axis === 1) rotationTerms.push("torad(head_yaw*0.77)");
-		if (boneName === "waist" && axis === 0) rotationTerms.push("torad(head_pitch*0.17)");
-		if (boneName === "waist" && axis === 1) rotationTerms.push("torad(head_yaw*0.3)");
-		if (target === "pupil_left" && axis === 0) translationTerms.push("if(head_yaw>30,-1,0)");
-		if (target === "pupil_right" && axis === 0) translationTerms.push("if(head_yaw<-30,1,0)");
-		if ((target === "pupil_left" || target === "pupil_right") && axis === 1) translationTerms.push("if(head_pitch<-30,-1,0)");
-		if (target === "brow" && axis === 1) translationTerms.push("if(head_pitch<-30,-1,if(head_pitch>30,0,if(head_yaw>30,-0.25,if(head_yaw<-30,-0.25,0))))");
+		if (boneName === "head" && axis === 0) rotationTerms.push("torad(vnap_look_pitch*0.5)");
+		if (boneName === "head" && axis === 1) rotationTerms.push("torad(vnap_look_yaw*0.77)");
+		if (boneName === "waist" && axis === 0) rotationTerms.push("torad(vnap_look_pitch*0.17)");
+		if (boneName === "waist" && axis === 1) rotationTerms.push("torad(vnap_look_yaw*0.3)");
+		if ((target === "pupil_left" || target === "pupil_right") && axis === 0) translationTerms.push("max(-0.45,min(0.45,vnap_look_yaw/60))*-1");
+		if ((target === "pupil_left" || target === "pupil_right") && axis === 1) translationTerms.push("max(-0.45,min(0.45,vnap_look_pitch/60))");
+		if (target === "brow" && axis === 1) translationTerms.push("if(vnap_look_pitch<-30,-1,if(vnap_look_pitch>30,0,if(vnap_look_yaw>30,-0.25,if(vnap_look_yaw<-30,-0.25,0))))");
 		rotationTerms.push(`vnap_${target}_r${suffix}`);
     expressions[`this.r${suffix}`] = numberExpression(rotate[axis], rotationTerms.join("+"));
 		expressions[`this.t${suffix}`] = numberExpression(translate[axis], translationTerms.join("+"));
@@ -661,13 +660,12 @@ function addRootVillagerAnimations(models, prefix, rigScale = 1) {
 
   const blinkTime = "fmod(time+id*0.37,1.25+fmod(id,3)*0.5)";
 	const blink = `if(${blinkTime}<0.08,1+12.75*${blinkTime},if(${blinkTime}<0.18,2.02,if(${blinkTime}<0.26,2.02-12.75*(${blinkTime}-0.18),1)))`;
-	const lookEyeScale = "if(head_pitch<-30,0,if(head_yaw>30,0.75,if(head_yaw<-30,0.75,1)))";
-  for (const [boneName, target] of [
+	for (const [boneName, target] of [
     ["6q6da5kmhh6j", "eye_group"],
     ["6q6da5kdgo6j", "lower_face"],
   ]) {
 		const eye = findModelById(models, `${prefix}_${boneName}`);
-		if (eye) appendAnimation(eye, { "this.sy": `${blink}*${target === "eye_group" ? `${lookEyeScale}*` : ""}vnap_${target}_sy` });
+		if (eye) appendAnimation(eye, { "this.sy": `${blink}*vnap_${target}_sy` });
   }
 }
 
@@ -714,7 +712,7 @@ function rootVillagerModels(prefix, texture, extras = [], {
   const models = [...villagerLayer(baseGeometry, `${prefix}_base`, texture, false, rigScale)];
   const arms = findModelById(models, `${prefix}_base_2jek`);
   if (!arms) throw new Error(`${prefix} animated arms bone is missing`);
-  arms.attachments = { villager_item: [0, -5.75, -1.75] };
+  arms.attachments = { villager_item: [0, 0, 0] };
   for (const [index, extra] of extras.entries()) {
     const layer = villagerLayer(extra.geometry, `${prefix}_extra_${index}`, extra.texture, true, rigScale);
     if (extra.visibility) {
@@ -761,6 +759,7 @@ function rootVillagerModels(prefix, texture, extras = [], {
   if (prefix !== "wandering_trader_news") {
     const nose = findModelById(models, `${prefix}_base_fgk6`);
     if (nose) appendAnimation(nose, {
+      "this.visible": "vnap_has_nose==1",
       "this.sx": "vnap_nose_sx*vnap_has_nose",
       "this.sy": "vnap_nose_sy*vnap_has_nose",
       "this.sz": "vnap_nose_sz*vnap_has_nose",
@@ -1460,12 +1459,12 @@ const handbook = {
 
 const knownSpeakers = new Map();
 for (const [speaker, ids] of Object.entries({
-  mayor: ["dpwhhs", "xxehbq", "njyapy", "ssbhiv", "ltdnvy", "bgzmea", "shrrya"],
-  number_5: ["xccwah", "legnsy", "sclaoa", "behifz", "nfdery", "msofrj"],
-  number_9: ["kzogzi", "ezgbfw", "snnkrl", "wrbvvp", "asuufu", "hvjfnk"],
-  testificate_man: ["nmwmrz", "luoibc", "mpbnsm", "fzoqwd", "ctzfzj", "rdugrl", "xcjort"],
+  mayor: ["dpwhhs", "xxehbq", "njyapy", "ssbhiv", "ltdnvy", "bgzmea", "shrrya", "cmkesu"],
+  number_5: ["xccwah", "legnsy", "sclaoa", "behifz", "nfdery", "msofrj", "mjyhgw"],
+  number_9: ["kzogzi", "ezgbfw", "snnkrl", "wrbvvp", "asuufu", "hvjfnk", "adhvqz"],
+  testificate_man: ["nmwmrz", "luoibc", "mpbnsm", "fzoqwd", "ctzfzj", "rdugrl", "xcjort", "rooiup", "pbbywc"],
   unreachable: ["eltxge"],
-  wandering_trader: ["hxlyuc", "stqafd", "yubpbb", "kxoqky", "bvrbhy", "erbcfn", "uzdvsi"],
+  wandering_trader: ["hxlyuc", "stqafd", "yubpbb", "kxoqky", "bvrbhy", "erbcfn", "uzdvsi", "vggdrt", "jkeahu", "myajyt", "dbzjqi"],
   wooly: ["uvtocs", "vmohcm", "fskcce", "jqaekk", "eyiraw", "ncyeaw"],
 })) {
   for (const id of ids) knownSpeakers.set(id, speaker);
@@ -1757,6 +1756,8 @@ writeJson(join(modAssets, "dialogue_animations.json"), {
 	framesPerSecond: bakedFramesPerSecond,
 	continuousIdle: commonAnimationAliases.uchrur,
 	targetLook: commonAnimationAliases.target,
+	turnLeft: commonAnimationAliases.ygfsnh,
+	turnRight: commonAnimationAliases.wwoxne,
 	groups: dialogueAnimationData,
 	gestures: bakedGestures,
 	locomotion: locomotionAnimation,
