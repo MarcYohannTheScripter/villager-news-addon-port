@@ -223,11 +223,10 @@ public final class HandbookScreen extends Screen {
 		int buttonLeft = left + labelWidth;
 		int buttonWidth = contentWidth - labelWidth;
 		int y = 66;
-		addText(left, y + 6, labelWidth - 6, Component.literal("Show Subtitles"), false);
-		addRenderableWidget(Button.builder(Component.literal(toggleLabel(minecraft.options.showSubtitles().get())), button -> {
-			boolean enabled = !minecraft.options.showSubtitles().get();
-			minecraft.options.showSubtitles().set(enabled);
-			minecraft.options.save();
+		addText(left, y + 6, labelWidth - 6, Component.literal("Villager News Subtitles"), false);
+		addRenderableWidget(Button.builder(Component.literal(toggleLabel(VillagerNewsClientSettings.showSubtitles())), button -> {
+			boolean enabled = !VillagerNewsClientSettings.showSubtitles();
+			VillagerNewsClientSettings.setShowSubtitles(enabled);
 			button.setMessage(Component.literal(toggleLabel(enabled)));
 		}).bounds(buttonLeft, y, buttonWidth, 20).build());
 		y += 26;

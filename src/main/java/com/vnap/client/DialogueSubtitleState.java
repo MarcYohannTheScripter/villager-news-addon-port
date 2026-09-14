@@ -75,7 +75,7 @@ public final class DialogueSubtitleState {
 
 	private static void render(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker) {
 		Minecraft minecraft = Minecraft.getInstance();
-		if (minecraft.level == null || minecraft.player == null || !minecraft.options.showSubtitles().get()) return;
+		if (minecraft.level == null || minecraft.player == null || !VillagerNewsClientSettings.showSubtitles()) return;
 		long now = System.nanoTime();
 		List<VisibleSubtitle> visible = new ArrayList<>();
 		for (Map.Entry<UUID, ActiveSubtitle> entry : ACTIVE.entrySet()) {

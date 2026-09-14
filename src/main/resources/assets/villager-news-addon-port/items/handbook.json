@@ -1,6 +1,40 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "villager-news-addon-port:item/handbook"
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
+      {
+        "when": "thirdperson_righthand",
+        "model": {
+          "type": "minecraft:model",
+          "model": "villager-news-addon-port:item/handbook_held"
+        }
+      },
+      {
+        "when": "thirdperson_lefthand",
+        "model": {
+          "type": "minecraft:model",
+          "model": "villager-news-addon-port:item/handbook_held"
+        }
+      },
+      {
+        "when": "firstperson_righthand",
+        "model": {
+          "type": "minecraft:model",
+          "model": "villager-news-addon-port:item/handbook_held"
+        }
+      },
+      {
+        "when": "firstperson_lefthand",
+        "model": {
+          "type": "minecraft:model",
+          "model": "villager-news-addon-port:item/handbook_held"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "villager-news-addon-port:item/handbook"
+    }
   }
 }

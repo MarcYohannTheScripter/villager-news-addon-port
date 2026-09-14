@@ -16,4 +16,10 @@ public interface VillagerNewsData {
 	int vnap$signType();
 
 	void vnap$setSignType(int value);
+
+	boolean vnap$hasOriginalVillagerState();
+
+	void vnap$captureOriginalVillagerState();
+
+	void vnap$restoreOriginalVillagerState();
 }

@@ -42,11 +42,16 @@ public final class DialogueAnimationState {
 	private static final Map<UUID, IdleState> IDLE_STATES = new ConcurrentHashMap<>();
 	private static final Map<UUID, LookState> LOOK_STATES = new ConcurrentHashMap<>();
 	private static final Map<UUID, TurnState> TURN_STATES = new ConcurrentHashMap<>();
+	private static final Map<UUID, LocomotionState> LOCOMOTION_STATES = new ConcurrentHashMap<>();
 	private static final float BLEND_SECONDS = 0.3F;
 	private static final float IDLE_BLEND_SECONDS = 0.24F;
 	private static final float MOUTH_BLEND_SECONDS = 0.15F;
 	private static final float TURN_SECONDS = 0.5F;
+	private static final float LOCOMOTION_BLEND_SECONDS = 0.2F;
+	private static final float RUN_ENTER_SPEED = 0.6F;
+	private static final float RUN_EXIT_SPEED = 0.3F;
 	private static Gesture locomotion = new Gesture(0.0F, Map.of());
+	private static Gesture runLocomotion = new Gesture(0.0F, Map.of());
 	private static float framesPerSecond = 24.0F;
 
 	private DialogueAnimationState() {
@@ -61,6 +66,7 @@ public final class DialogueAnimationState {
 				GESTURES.add(readGesture(gestureElement.getAsJsonObject()));
 			}
 			locomotion = readGesture(root.getAsJsonObject("locomotion"));
+			runLocomotion = readGesture(root.getAsJsonObject("runLocomotion"));
 			for (JsonElement idleElement : root.getAsJsonArray("idles")) IDLES.add(readGesture(idleElement.getAsJsonObject()));
 			for (Map.Entry<String, JsonElement> group : root.getAsJsonObject("groups").entrySet()) {
 				List<VariantTimeline> variants = new ArrayList<>();
@@ -114,6 +120,7 @@ public final class DialogueAnimationState {
 		IDLE_STATES.keySet().removeIf(id -> minecraft.level.getEntity(id) == null);
 		LOOK_STATES.keySet().removeIf(id -> minecraft.level.getEntity(id) == null);
 		TURN_STATES.keySet().removeIf(id -> minecraft.level.getEntity(id) == null);
+		LOCOMOTION_STATES.keySet().removeIf(id -> minecraft.level.getEntity(id) == null);
 	}
 
 	static void clear() {
@@ -121,6 +128,7 @@ public final class DialogueAnimationState {
 		IDLE_STATES.clear();
 		LOOK_STATES.clear();
 		TURN_STATES.clear();
+		LOCOMOTION_STATES.clear();
 	}
 
 	static void start(DialogueAnimationPayload payload) {
@@ -220,22 +228,28 @@ public final class DialogueAnimationState {
 		float speed = entity.walkAnimation.speed(partialTick);
 		IdleState idle = IDLE_STATES.computeIfAbsent(id, ignored -> new IdleState());
 		TurnState turn = TURN_STATES.computeIfAbsent(id, ignored -> new TurnState());
-		boolean moving = speed > 0.01F && entity.getDeltaMovement().horizontalDistanceSqr() > 0.0001;
+		LocomotionState locomotionState = LOCOMOTION_STATES.computeIfAbsent(id, ignored -> new LocomotionState());
+		double horizontalDistanceSqr = entity.getDeltaMovement().horizontalDistanceSqr();
+		boolean moving = speed > 0.01F && horizontalDistanceSqr > 0.0001;
+		boolean groundedMovement = !entity.isSleeping() && entity.onGround() && moving;
 		boolean canIdle = !entity.isSleeping() && entity.onGround() && !moving && !IDLES.isEmpty();
 		idle.update(age, canIdle);
+		locomotionState.update(age, speed, groundedMovement);
 		if (!(entity instanceof Villager)) turn.update(age, entity.yBodyRot, !entity.isSleeping() && entity.onGround());
 		float base = idle.valueAt(age, trackName, fallback);
-		if (!entity.isSleeping() && entity.onGround() && moving && locomotion.duration() > 0.0F) {
+		if (groundedMovement && locomotion.duration() > 0.0F) {
 			float phase = entity.walkAnimation.position(partialTick) * 0.6662F / ((float) Math.PI * 2.0F);
 			float cycle = phase - (float) Math.floor(phase);
-			float value = locomotion.valueAt(cycle * locomotion.duration(), trackName, fallback);
+			float walkValue = locomotion.valueAt(cycle * locomotion.duration(), trackName, fallback);
+			float runValue = runLocomotion.duration() > 0.0F
+				? runLocomotion.valueAt(cycle * runLocomotion.duration(), trackName, fallback)
+				: walkValue;
+			float value = VariantTimeline.lerp(walkValue, runValue, locomotionState.runWeight());
 			float weight = Math.min(1.0F, speed * 0.9F);
 			base = trackName.endsWith("_sx") || trackName.endsWith("_sy") || trackName.endsWith("_sz")
 				? base * VariantTimeline.lerp(fallback, value, weight)
 				: base + (value - fallback) * weight;
 		}
-		float dialogueWeight = active == null ? 0.0F : active.timeline().poseWeightAt(active.elapsedSeconds());
-		base = VariantTimeline.lerp(fallback, base, 1.0F - dialogueWeight);
 		float turnValue = turn.valueAt(age, trackName, fallback);
 		float turnWeight = Mth.clamp(1.1F - speed, 0.01F, 1.0F);
 		return trackName.endsWith("_sx") || trackName.endsWith("_sy") || trackName.endsWith("_sz")
@@ -376,6 +390,35 @@ public final class DialogueAnimationState {
 
 		private static float lerp(float from, float to, float progress) {
 			return from + (to - from) * progress;
+		}
+	}
+
+	private static final class LocomotionState {
+		private boolean running;
+		private float smoothedSpeed;
+		private float runWeight;
+		private float lastUpdateTick = Float.NaN;
+
+		void update(float tick, float movementSpeed, boolean canMove) {
+			if (Float.compare(lastUpdateTick, tick) == 0) return;
+			if (Float.isNaN(lastUpdateTick) || tick < lastUpdateTick || tick - lastUpdateTick > 5.0F) {
+				smoothedSpeed = movementSpeed;
+				running = canMove && movementSpeed > RUN_ENTER_SPEED;
+				runWeight = running ? 1.0F : 0.0F;
+				lastUpdateTick = tick;
+				return;
+			}
+			float elapsedTicks = tick - lastUpdateTick;
+			lastUpdateTick = tick;
+			float speedBlend = 1.0F - (float) Math.pow(0.3, elapsedTicks);
+			smoothedSpeed = VariantTimeline.lerp(smoothedSpeed, movementSpeed, speedBlend);
+			running = canMove && (running ? smoothedSpeed >= RUN_EXIT_SPEED : smoothedSpeed > RUN_ENTER_SPEED);
+			float step = elapsedTicks / (LOCOMOTION_BLEND_SECONDS * 20.0F);
+			runWeight = running ? Math.min(1.0F, runWeight + step) : Math.max(0.0F, runWeight - step);
+		}
+
+		float runWeight() {
+			return runWeight;
 		}
 	}
 

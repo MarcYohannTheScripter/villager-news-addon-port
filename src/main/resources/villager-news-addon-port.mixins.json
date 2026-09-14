@@ -5,6 +5,7 @@
   "mixins": [
     "AbstractVillagerMixin",
     "SheepSoundMixin",
+    "SpawnEggItemMixin",
     "VillagerDataMixin",
     "VillagerSleepMixin",
     "VillagerSoundMixin"

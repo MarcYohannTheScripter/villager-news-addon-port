@@ -1011,6 +1011,31 @@ for (const [item, texture] of Object.entries({
   copyTexture(texture, join(modAssets, "textures", "item", `${item}.png`));
 }
 
+const heldItems = {
+  handbook: {
+    geometry: "geometry.oreville_vn.-1897072036",
+    texture: "eaz",
+    center: [0, 0, 0],
+    display: {
+      thirdperson_righthand: { rotation: [-75, 0, 0], translation: [0, 3, 1], scale: [0.55, 0.55, 0.55] },
+      thirdperson_lefthand: { rotation: [-75, 0, 0], translation: [0, 3, 1], scale: [0.55, 0.55, 0.55] },
+      firstperson_righthand: { rotation: [90, 0, 180], translation: [0, 4, 1.13], scale: [0.68, 0.68, 0.68] },
+      firstperson_lefthand: { rotation: [90, 0, 180], translation: [0, 4, 1.13], scale: [0.68, 0.68, 0.68] },
+    },
+  },
+  microphone: {
+    geometry: "geometry.oreville_vn.96833500",
+    texture: "ebb",
+    center: [0, 5, 0],
+    display: {
+      thirdperson_righthand: { rotation: [0, -90, -125], translation: [0, 4, 0.5], scale: [0.85, 0.85, 0.85] },
+      thirdperson_lefthand: { rotation: [0, 90, 125], translation: [0, 4, 0.5], scale: [0.85, 0.85, 0.85] },
+      firstperson_righthand: { rotation: [0, -90, 25], translation: [1.13, 3.2, 1.13], scale: [0.68, 0.68, 0.68] },
+      firstperson_lefthand: { rotation: [0, 90, -25], translation: [1.13, 3.2, 1.13], scale: [0.68, 0.68, 0.68] },
+    },
+  },
+};
+
 const wearableItems = {
   mayor_hat: { geometry: "geometry.oreville_vn.1064568764", texture: "eba", textureSize: [32, 32] },
   moustache: { geometry: "geometry.oreville_vn.1940352316", texture: "ebc", textureSize: [16, 16] },
@@ -1136,6 +1161,94 @@ for (const [item, definition] of Object.entries(wearableItems)) {
       fallback: {
         type: "minecraft:model",
         model: `${modNamespace}:item/${item}`,
+      },
+    },
+  });
+}
+
+function heldItemPoint(point, center) {
+  return vector([
+    8 - (point[0] - center[0]),
+    8 + point[1] - center[1],
+    8 + point[2] - center[2],
+  ]);
+}
+
+function heldItemRotation(cube, bone, bonesByName) {
+  const rotations = [];
+  if (cube.rotation?.some(Boolean)) {
+    rotations.push({ rotation: cube.rotation, pivot: cube.pivot ?? bone.pivot ?? [0, 0, 0] });
+  }
+  for (let current = bone; current; current = current.parent ? bonesByName.get(current.parent) : undefined) {
+    if (current.rotation?.some(Boolean)) {
+      rotations.push({ rotation: current.rotation, pivot: current.pivot ?? [0, 0, 0] });
+    }
+  }
+  if (rotations.length > 1) throw new Error("Unsupported nested held-item rotations on " + bone.name);
+  return rotations[0];
+}
+
+function heldItemElement(cube, bone, bonesByName, textureSize, center) {
+  const inflate = cube.inflate ?? 0;
+  const opposite = cube.origin.map((value, index) => value + cube.size[index]);
+  const minimum = cube.origin.map((value, index) => Math.min(value, opposite[index]) - inflate);
+  const maximum = cube.origin.map((value, index) => Math.max(value, opposite[index]) + inflate);
+  const element = {
+    from: heldItemPoint([maximum[0], minimum[1], minimum[2]], center),
+    to: heldItemPoint([minimum[0], maximum[1], maximum[2]], center),
+    faces: wornItemFaces(cube, textureSize),
+  };
+  const transform = heldItemRotation(cube, bone, bonesByName);
+  if (transform) {
+    element.rotation = {
+      origin: heldItemPoint(transform.pivot, center),
+      x: cleanNumber(transform.rotation[0]),
+      y: cleanNumber(transform.rotation[1]),
+      z: cleanNumber(transform.rotation[2]),
+    };
+  }
+  return element;
+}
+
+const handContexts = [
+  "thirdperson_righthand",
+  "thirdperson_lefthand",
+  "firstperson_righthand",
+  "firstperson_lefthand",
+];
+
+for (const [item, definition] of Object.entries(heldItems)) {
+  const geometry = geometryById.get(definition.geometry);
+  if (!geometry) throw new Error("Missing held-item geometry " + definition.geometry);
+  const textureSize = [geometry.description.texture_width, geometry.description.texture_height];
+  const bonesByName = new Map(geometry.bones.map((bone) => [bone.name, bone]));
+  const elements = geometry.bones.flatMap((bone) =>
+    (bone.cubes ?? []).filter((cube) => cube.origin && cube.size && cube.uv)
+      .map((cube) => heldItemElement(cube, bone, bonesByName, textureSize, definition.center)));
+  copyTexture(definition.texture, join(modAssets, "textures", "item", "held", item + ".png"));
+  writeJson(join(modAssets, "models", "item", item + "_held.json"), {
+    ambientocclusion: false,
+    textures: {
+      texture: modNamespace + ":item/held/" + item,
+      particle: modNamespace + ":item/held/" + item,
+    },
+    elements,
+    display: definition.display,
+  });
+  writeJson(join(modAssets, "items", item + ".json"), {
+    model: {
+      type: "minecraft:select",
+      property: "minecraft:display_context",
+      cases: handContexts.map((context) => ({
+        when: context,
+        model: {
+          type: "minecraft:model",
+          model: modNamespace + ":item/" + item + "_held",
+        },
+      })),
+      fallback: {
+        type: "minecraft:model",
+        model: modNamespace + ":item/" + item,
       },
     },
   });
@@ -1744,6 +1857,7 @@ const bakedGestures = gestureNames.map((gestureName) => ({
 	...bakeAnimationLayers([gestureName, ...(gestureCompanions[gestureName] ?? [])]),
 }));
 const locomotionAnimation = bakeAnimationLayers(["move"]);
+const runLocomotionAnimation = bakeAnimationLayers(["xjouii"]);
 const idleAnimations = ["unjyad", "supuhq", "qvpghh", "edhave", "kvjhyc", "igrbri"]
 	.map((name) => ({ name, ...bakeAnimationLayers([name]) }));
 
@@ -1761,6 +1875,7 @@ writeJson(join(modAssets, "dialogue_animations.json"), {
 	groups: dialogueAnimationData,
 	gestures: bakedGestures,
 	locomotion: locomotionAnimation,
+	runLocomotion: runLocomotionAnimation,
 	idles: idleAnimations,
 });
 

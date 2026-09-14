@@ -22,6 +22,7 @@ import java.util.function.Supplier;
 public final class VillagerNewsAddonPortClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
+		VillagerNewsClientSettings.load();
 		try {
 			DialogueAnimationState.load();
 			registerFloat("vnap_speaking", DialogueAnimationState::speaking, "Whether the Villager News character is speaking");

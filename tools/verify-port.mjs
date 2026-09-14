@@ -40,6 +40,8 @@ const generatorSource = readFileSync(join(root, "tools/port-addon.mjs"), "utf8")
 const villagerModelSource = readFileSync(join(cem, "villager.jem"), "utf8");
 const gradleProperties = readFileSync(join(root, "gradle.properties"), "utf8");
 const language = JSON.parse(readFileSync(join(modAssets, "lang", "en_us.json"), "utf8"));
+const handbookHeldModel = JSON.parse(readFileSync(join(modAssets, "models", "item", "handbook_held.json"), "utf8"));
+const microphoneHeldModel = JSON.parse(readFileSync(join(modAssets, "models", "item", "microphone_held.json"), "utf8"));
 
 const ffmpeg = [
   process.env.FFMPEG_PATH,
@@ -81,7 +83,7 @@ check(clientSource.includes("DialogueSubtitleState.start(payload)")
   && clientSource.includes("DialogueSubtitleState.register()")
   && clientSource.includes("DialogueSubtitleState.tick(client)"),
 "The timed subtitle client is not registered");
-check(subtitleSource.includes("showSubtitles().get()")
+check(subtitleSource.includes("VillagerNewsClientSettings.showSubtitles()")
   && subtitleSource.includes("HudElementRegistry.attachElementAfter")
   && subtitleSource.includes("MAX_LINES = 4")
   && subtitleSource.includes("subtitleScale")
@@ -96,6 +98,25 @@ check(animations.locomotion?.duration === 0.4375
   && animations.locomotion.tracks.right_leg_rx
   && animations.locomotion.tracks.right_leg_ty,
 "The original Bedrock walking animation is incomplete");
+check(animations.runLocomotion?.duration === 0.4375
+  && animations.runLocomotion.tracks.left_leg_rx
+  && animations.runLocomotion.tracks.left_leg_ty
+  && animations.runLocomotion.tracks.right_leg_rx
+  && animations.runLocomotion.tracks.right_leg_ty,
+"The original Bedrock running animation is incomplete");
+check(animationStateSource.includes("RUN_ENTER_SPEED = 0.6F")
+  && animationStateSource.includes("RUN_EXIT_SPEED = 0.3F")
+  && animationStateSource.includes("locomotionState.update(age, speed, groundedMovement)"),
+"The original Bedrock run transition thresholds are not applied");
+check(JSON.stringify(handbookHeldModel.display.thirdperson_righthand.rotation) === "[-75,0,0]"
+  && JSON.stringify(handbookHeldModel.display.thirdperson_lefthand.rotation) === "[-75,0,0]"
+  && JSON.stringify(handbookHeldModel.display.firstperson_righthand.rotation) === "[90,0,180]"
+  && JSON.stringify(handbookHeldModel.display.firstperson_lefthand.rotation) === "[90,0,180]"
+  && JSON.stringify(microphoneHeldModel.display.thirdperson_righthand.rotation) === "[0,-90,-125]"
+  && JSON.stringify(microphoneHeldModel.display.thirdperson_lefthand.rotation) === "[0,90,125]",
+"The original Bedrock held-item orientations are not applied");
+check(!animationStateSource.includes("poseWeightAt(active.elapsedSeconds())"),
+"Dialogue gestures still suppress the locomotion leg tracks");
 check(animations.idles?.length === 6 && animations.idles.every((idle) => idle.duration > 0
   && Object.keys(idle.tracks).length > 0), "The six original Bedrock idle animations are incomplete");
 check(animations.continuousIdle === "animation.oreville_vn.fyqjnp"
@@ -108,7 +129,7 @@ check(animations.turnLeft === "animation.oreville_vn.aiqbsm"
 "The original left-turn and right-turn animation controller is missing");
 check(animationStateSource.includes("walkAnimation.position(partialTick)")
   && animationStateSource.includes("IDLE_STATES")
-	&& animationStateSource.includes("horizontalDistanceSqr() > 0.0001")
+	&& animationStateSource.includes("horizontalDistanceSqr > 0.0001")
 	&& animationStateSource.includes("startNext(tick, -1)")
 	&& animationStateSource.includes("blendFromIndex")
 	&& animationStateSource.includes("getGameTimeDeltaPartialTick(true)")
@@ -121,7 +142,10 @@ check(animationStateSource.includes("walkAnimation.position(partialTick)")
 	&& animationStateSource.includes("active.transition(variableName, result)")
 	&& animationStateSource.includes("EMPTY_TIMELINE")
 	&& animationStateSource.includes("if (active) advance(tick)")
-	&& animationStateSource.includes("locomotion.valueAt"), "The client does not continuously and smoothly play locomotion and stationary idle tracks");
+	&& animationStateSource.includes("locomotion.valueAt")
+	&& animationStateSource.includes("runLocomotion.valueAt")
+	&& animationStateSource.includes("RUN_ENTER_SPEED")
+	&& animationStateSource.includes("RUN_EXIT_SPEED"), "The client does not continuously and smoothly play locomotion and stationary idle tracks");
 	check(generatorSource.includes("torad(vnap_look_pitch*0.5)")
 		&& generatorSource.includes("torad(vnap_look_yaw*0.77)")
 		&& generatorSource.includes("max(-0.45,min(0.45,vnap_look_yaw/60))*-1")
@@ -466,6 +490,39 @@ for (const file of readdirSync(join(modAssets, "sounds", "voice")).filter((name)
     offset += 27 + segmentCount + bodySize;
   }
 }
+const heldGeometry = {
+  handbook: { elementCount: 12, textureSize: [19, 12], geometry: "geometry.oreville_vn.-1897072036", texture: "eaz" },
+  microphone: { elementCount: 2, textureSize: [16, 16], geometry: "geometry.oreville_vn.96833500", texture: "ebb" },
+};
+const heldContexts = new Set([
+  "thirdperson_righthand",
+  "thirdperson_lefthand",
+  "firstperson_righthand",
+  "firstperson_lefthand",
+]);
+for (const [item, expected] of Object.entries(heldGeometry)) {
+  const definition = JSON.parse(readFileSync(join(modAssets, "items", item + ".json"), "utf8"));
+  const held = JSON.parse(readFileSync(join(modAssets, "models", "item", item + "_held.json"), "utf8"));
+  const textureFile = join(modAssets, "textures", "item", "held", item + ".png");
+  const contexts = new Set(definition.model?.cases?.map((entry) => entry.when));
+  check(definition.model?.type === "minecraft:select"
+    && definition.model?.property === "minecraft:display_context"
+    && [...heldContexts].every((context) => contexts.has(context)),
+  item + " does not use its original 3D model in every hand context");
+  check(definition.model?.fallback?.model === "villager-news-addon-port:item/" + item,
+    item + " does not preserve its inventory model");
+  check(held.elements?.length === expected.elementCount
+    && held.elements.every((element) => element.from?.length === 3 && element.to?.length === 3
+      && Object.keys(element.faces ?? {}).length > 0),
+  item + " has incomplete held geometry");
+  check(existsSync(textureFile), item + " is missing its original held texture");
+  const texture = readFileSync(textureFile);
+  check(texture.readUInt32BE(16) === expected.textureSize[0]
+    && texture.readUInt32BE(20) === expected.textureSize[1], item + " held texture has the wrong dimensions");
+  check(generatorSource.includes(expected.geometry) && generatorSource.includes('texture: "' + expected.texture + '"'),
+    item + " held model is not reproducible from the original attachable");
+}
+
 const wearableGeometry = {
   mayor_hat: { elementCount: 8, from: [2.4, 14.4, 2.4], to: [13.6, 16, 13.6], textureSize: [32, 32] },
   moustache: { elementCount: 1, from: [4.8, 4, 0.4], to: [11.2, 5.6, 0.8], textureSize: [16, 16] },

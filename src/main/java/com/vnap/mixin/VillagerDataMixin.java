@@ -9,6 +9,7 @@ import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.entity.npc.villager.VillagerData;
 import net.minecraft.world.entity.npc.villager.VillagerProfession;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,6 +30,10 @@ public abstract class VillagerDataMixin implements VillagerNewsData {
 	private static final EntityDataAccessor<Integer> VNAP_SIGN_MESSAGE = SynchedEntityData.defineId(Villager.class, EntityDataSerializers.INT);
 	@Unique
 	private static final EntityDataAccessor<Integer> VNAP_SIGN_TYPE = SynchedEntityData.defineId(Villager.class, EntityDataSerializers.INT);
+	@Unique
+	private VillagerData vnap$originalVillagerData;
+	@Unique
+	private MerchantOffers vnap$originalVillagerOffers;
 
 	@Inject(method = "defineSynchedData", at = @At("TAIL"))
 	private void vnap$defineData(SynchedEntityData.Builder builder, CallbackInfo ci) {
@@ -44,6 +49,10 @@ public abstract class VillagerDataMixin implements VillagerNewsData {
 		output.putInt("VillagerNewsCosmetic", vnap$cosmetic());
 		output.putInt("VillagerNewsSignMessage", vnap$signMessage());
 		output.putInt("VillagerNewsSignType", vnap$signType());
+		if (vnap$originalVillagerData != null && vnap$originalVillagerOffers != null) {
+			output.store("VillagerNewsOriginalData", VillagerData.CODEC, vnap$originalVillagerData);
+			output.store("VillagerNewsOriginalOffers", MerchantOffers.CODEC, vnap$originalVillagerOffers);
+		}
 	}
 
 	@Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
@@ -55,6 +64,12 @@ public abstract class VillagerDataMixin implements VillagerNewsData {
 		int equippedSign = ContextualDialogueController.signType(((Villager) (Object) this).getMainHandItem());
 		vnap$setSignType(input.getIntOr("VillagerNewsSignType", equippedSign >= 0 ? equippedSign : signMessage >= 0 ? 0 : -1));
 		if (equippedSign >= 0) ((Villager) (Object) this).setItemSlot(net.minecraft.world.entity.EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+		vnap$originalVillagerData = input.read("VillagerNewsOriginalData", VillagerData.CODEC).orElse(null);
+		vnap$originalVillagerOffers = input.read("VillagerNewsOriginalOffers", MerchantOffers.CODEC).orElse(null);
+		if (vnap$originalVillagerData == null || vnap$originalVillagerOffers == null) {
+			vnap$originalVillagerData = null;
+			vnap$originalVillagerOffers = null;
+		}
 	}
 
 	@Redirect(
@@ -71,6 +86,32 @@ public abstract class VillagerDataMixin implements VillagerNewsData {
 		return ContextualDialogueController.isSpecialTrader(villager)
 			? value.withProfession(villager.level().registryAccess(), VillagerProfession.NONE).withLevel(1)
 			: value;
+	}
+
+	@Override
+	public boolean vnap$hasOriginalVillagerState() {
+		return vnap$originalVillagerData != null && vnap$originalVillagerOffers != null;
+	}
+
+	@Override
+	public void vnap$captureOriginalVillagerState() {
+		if (vnap$hasOriginalVillagerState()) return;
+		Villager villager = (Villager) (Object) this;
+		vnap$originalVillagerData = villager.getVillagerData();
+		vnap$originalVillagerOffers = villager.getOffers().copy();
+	}
+
+	@Override
+	public void vnap$restoreOriginalVillagerState() {
+		if (!vnap$hasOriginalVillagerState()) return;
+		Villager villager = (Villager) (Object) this;
+		VillagerData originalData = vnap$originalVillagerData;
+		MerchantOffers originalOffers = vnap$originalVillagerOffers.copy();
+		vnap$originalVillagerData = null;
+		vnap$originalVillagerOffers = null;
+		villager.setVillagerData(originalData);
+		villager.getOffers().clear();
+		villager.getOffers().addAll(originalOffers);
 	}
 
 	@Override
