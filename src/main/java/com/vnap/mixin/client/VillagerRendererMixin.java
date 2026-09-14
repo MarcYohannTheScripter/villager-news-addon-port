@@ -1,6 +1,7 @@
 package com.vnap.mixin.client;
 
 import com.vnap.client.VillagerNewsRenderState;
+import com.vnap.client.DialogueAnimationState;
 import com.vnap.entity.VillagerNewsData;
 import net.minecraft.client.renderer.entity.VillagerRenderer;
 import net.minecraft.client.renderer.entity.state.VillagerRenderState;
@@ -23,6 +24,7 @@ public abstract class VillagerRendererMixin {
 		StableVillagerData stableData = VNAP$STABLE_DATA.computeIfAbsent(villager,
 			ignored -> new StableVillagerData(state.villagerData));
 		state.villagerData = stableData.resolve(state.villagerData, villager.tickCount);
+		DialogueAnimationState.trackBodyRotation(villager, state.bodyRot, villager.tickCount + partialTick);
 		VillagerNewsData data = (VillagerNewsData) villager;
 		VillagerNewsRenderState renderState = (VillagerNewsRenderState) state;
 		renderState.vnap$setSignMessage(data.vnap$signMessage());

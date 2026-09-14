@@ -26,7 +26,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
-final class DialogueAnimationState {
+public final class DialogueAnimationState {
 	private static final String DATA_PATH = "/assets/villager-news-addon-port/dialogue_animations.json";
 	private static final String[] TARGETS = {
 		"root", "waist", "body", "head", "head_inner", "arms",
@@ -205,6 +205,11 @@ final class DialogueAnimationState {
 		return active == null ? result : active.transition(variableName, result);
 	}
 
+	public static void trackBodyRotation(Villager villager, float bodyRotation, float age) {
+		TURN_STATES.computeIfAbsent(villager.getUUID(), ignored -> new TurnState())
+			.update(age, bodyRotation, villager.isAlive() && !villager.isSleeping() && villager.onGround());
+	}
+
 	private static float baseTransform(String trackName, float fallback, ActiveDialogue active) {
 		EMFEntity emfEntity = EMFAnimationApi.getCurrentEntity();
 		if (!(emfEntity instanceof LivingEntity entity)
@@ -218,7 +223,7 @@ final class DialogueAnimationState {
 		boolean moving = speed > 0.01F && entity.getDeltaMovement().horizontalDistanceSqr() > 0.0001;
 		boolean canIdle = !entity.isSleeping() && entity.onGround() && !moving && !IDLES.isEmpty();
 		idle.update(age, canIdle);
-		turn.update(age, entity.yBodyRot, !entity.isSleeping() && entity.onGround());
+		if (!(entity instanceof Villager)) turn.update(age, entity.yBodyRot, !entity.isSleeping() && entity.onGround());
 		float base = idle.valueAt(age, trackName, fallback);
 		if (!entity.isSleeping() && entity.onGround() && moving && locomotion.duration() > 0.0F) {
 			float phase = entity.walkAnimation.position(partialTick) * 0.6662F / ((float) Math.PI * 2.0F);

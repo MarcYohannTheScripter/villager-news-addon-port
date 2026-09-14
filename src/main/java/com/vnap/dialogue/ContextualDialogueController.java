@@ -38,6 +38,7 @@ import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.animal.sheep.Sheep;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.npc.villager.Villager;
+import net.minecraft.world.entity.npc.villager.VillagerProfession;
 import net.minecraft.world.entity.npc.wanderingtrader.WanderingTrader;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -90,12 +91,13 @@ public final class ContextualDialogueController {
 	private static final Map<UUID, VillagerSnapshot> VILLAGER_STATES = new HashMap<>();
 	private static final Map<UUID, Map<String, Integer>> VILLAGER_INVENTORIES = new HashMap<>();
 	private static final Map<UUID, SpeechTarget> SPEECH_TARGETS = new HashMap<>();
-	private static final Map<UUID, Map<String, List<Integer>>> RECENT_VARIANTS = new HashMap<>();
+	private static final Map<String, List<Integer>> SHARED_RECENT_VARIANTS = new HashMap<>();
 	private static final Map<UUID, Long> NO_WORKSTATION_SINCE = new HashMap<>();
 	private static final Map<UUID, Long> LAST_DANGER = new HashMap<>();
 	private static final Map<UUID, Long> NO_BELL_SINCE = new HashMap<>();
 	private static final Map<UUID, TradeSession> ACTIVE_TRADES = new HashMap<>();
 	private static final Map<UUID, UnreachableState> UNREACHABLE_STATES = new HashMap<>();
+	private static final Set<UUID> ACTIVE_PLAYER_ENCOUNTERS = new HashSet<>();
 	private static final Map<UUID, PendingSleep> PENDING_SLEEP = new HashMap<>();
 	private static final Set<UUID> SLEEP_BYPASS = new HashSet<>();
 	private static final Set<UUID> INTERRUPTED_SLEEP = new HashSet<>();
@@ -208,13 +210,13 @@ public final class ContextualDialogueController {
 			LAST_TRADER_INVISIBLE.remove(id);
 			VILLAGER_STATES.remove(id);
 			VILLAGER_INVENTORIES.remove(id);
-			RECENT_VARIANTS.remove(id);
 			NO_WORKSTATION_SINCE.remove(id);
 			LAST_DANGER.remove(id);
 			NO_BELL_SINCE.remove(id);
 			PLAYER_OBSERVATIONS.remove(id);
 			PLAYER_DEATHS.remove(id);
 			ACTIVE_TRADES.remove(id);
+			ACTIVE_PLAYER_ENCOUNTERS.remove(id);
 			ACTIVE_TRADES.entrySet().removeIf(entry -> entry.getValue().traderId.equals(id));
 			UNREACHABLE_STATES.remove(id);
 			PENDING_SLEEP.remove(id);
@@ -514,6 +516,7 @@ public final class ContextualDialogueController {
 		processUnreachableVillagers(server);
 		if (!VillagerNewsSettings.dialogueEnabled()) {
 			stopActiveDialogue(server);
+			ACTIVE_PLAYER_ENCOUNTERS.clear();
 			return;
 		}
 		ACTIVE_SOUNDS.entrySet().removeIf(entry -> entry.getValue().endTick <= ticks);
@@ -527,6 +530,16 @@ public final class ContextualDialogueController {
 			processTimeChange(level);
 			processDifficultyChange(level);
 			for (ServerPlayer player : level.players()) {
+				if (player.gameMode().getName().equals("spectator")) {
+					ACTIVE_PLAYER_ENCOUNTERS.remove(player.getUUID());
+					PlayerObservation observation = PLAYER_OBSERVATIONS.computeIfAbsent(player.getUUID(), ignored -> new PlayerObservation());
+					observation.lastPosition = player.position();
+					observation.lastGameMode = "spectator";
+					observation.lastPlayerContext = null;
+					observation.stillTicks = 0;
+					observation.stareTicks = 0;
+					continue;
+				}
 				processPlayer(level, player);
 				processWanderingTrader(level, player);
 				processWooly(level, player);
@@ -551,12 +564,13 @@ public final class ContextualDialogueController {
 		VILLAGER_STATES.clear();
 		VILLAGER_INVENTORIES.clear();
 		SPEECH_TARGETS.clear();
-		RECENT_VARIANTS.clear();
+		SHARED_RECENT_VARIANTS.clear();
 		NO_WORKSTATION_SINCE.clear();
 		LAST_DANGER.clear();
 		NO_BELL_SINCE.clear();
 		ACTIVE_TRADES.clear();
 		UNREACHABLE_STATES.clear();
+		ACTIVE_PLAYER_ENCOUNTERS.clear();
 		PENDING_SLEEP.clear();
 		SLEEP_BYPASS.clear();
 		INTERRUPTED_SLEEP.clear();
@@ -791,14 +805,16 @@ public final class ContextualDialogueController {
 				.filter(villager -> cast(villager) != CastProfile.UNREACHABLE).filter(villager -> villager.hasLineOfSight(player))
 				.min(Comparator.comparingDouble(villager -> villager.distanceToSqr(player))).orElse(null);
 			if (baby != null) {
+				boolean firstNotice = ACTIVE_PLAYER_ENCOUNTERS.add(player.getUUID());
 				if (ticks % 40L == 0L && playNearbyEntityContext(level, baby)) return;
 				String id = player.hasEffect(MobEffects.HERO_OF_THE_VILLAGE) ? "fzyrfm"
 					: isNegativeReputation(baby, player) ? "jfuftm" : "wtuguc";
-				playId(baby, id, "baby_meet:" + baby.getUUID() + ":" + player.getUUID() + ":" + id, LONG_COOLDOWN, player);
-			}
+				if (firstNotice) playId(baby, id, "player_greeting:" + player.getUUID(), LONG_COOLDOWN, player);
+			} else ACTIVE_PLAYER_ENCOUNTERS.remove(player.getUUID());
 			return;
 		}
 
+		boolean firstNotice = ACTIVE_PLAYER_ENCOUNTERS.add(player.getUUID());
 		String pair = player.getUUID() + ":" + adult.getUUID();
 		if (playCosmeticObservation(player, adult)) return;
 		if (player.getBoundingBox().inflate(0.15).intersects(adult.getBoundingBox()) && movement.horizontalDistanceSqr() > 0.002) {
@@ -809,10 +825,10 @@ public final class ContextualDialogueController {
 		if (changedGameMode && playSharedId(adult, gameMode.equals("creative") ? "ohtblt" : "fhhqxg",
 				"gamemode:" + player.getUUID() + ":" + gameMode, SHORT_COOLDOWN, player)) return;
 		CastProfile adultProfile = cast(adult);
-		if (adultProfile != CastProfile.VILLAGER && player.hasEffect(MobEffects.HERO_OF_THE_VILLAGE)
-				&& playSharedId(adult, "gnetsk", "hero:" + pair, LONG_COOLDOWN, player)) return;
+		if (firstNotice && adultProfile != CastProfile.VILLAGER && player.hasEffect(MobEffects.HERO_OF_THE_VILLAGE)
+				&& playSharedId(adult, "gnetsk", "player_greeting:" + player.getUUID(), LONG_COOLDOWN, player)) return;
 		String approach = adultProfile == CastProfile.VILLAGER ? reputationApproach(adult, player) : adultProfile.approach;
-		if (playId(adult, approach, "approach:" + pair, LONG_COOLDOWN, player)) {
+		if (firstNotice && playId(adult, approach, "player_greeting:" + player.getUUID(), LONG_COOLDOWN, player)) {
 			return;
 		}
 
@@ -832,7 +848,10 @@ public final class ContextualDialogueController {
 		}
 
 		String playerContext = playerContext(player, adult);
-		if (playerContext != null && playSharedTitle(adult, playerContext, "player:" + pair + ":" + playerContext, LONG_COOLDOWN, player)) return;
+		boolean changedPlayerContext = playerContext != null && !playerContext.equals(observation.lastPlayerContext);
+		observation.lastPlayerContext = playerContext;
+		if (changedPlayerContext && playSharedTitle(adult, playerContext,
+				"player_context:" + player.getUUID() + ":" + playerContext, LONG_COOLDOWN, player)) return;
 		long nearbyPlayers = level.players().stream().filter(other -> other.distanceToSqr(adult) <= 64.0).count();
 		if (nearbyPlayers >= 2 && playSharedId(adult, "cstyvg", "player_crowd:" + adult.getUUID(), LONG_COOLDOWN, player)) return;
 
@@ -936,7 +955,7 @@ public final class ContextualDialogueController {
 
 	private static String playerContext(ServerPlayer player, Villager villager) {
 		if (player.isFallFlying()) return "Glide with Elytra";
-		if (player.getAbilities().flying) return "Fly in Creative Mode";
+		if (player.gameMode().getName().equals("creative") && player.getAbilities().flying) return "Fly in Creative Mode";
 		if (player.isShiftKeyDown() && player.getDeltaMovement().horizontalDistanceSqr() > 0.002) return "Crouch-Walk";
 		if (player.getHealth() <= player.getMaxHealth() * 0.3F) return "Low Health";
 		if (player.hasEffect(MobEffects.INVISIBILITY)) return "Invisibility";
@@ -1030,14 +1049,17 @@ public final class ContextualDialogueController {
 			}
 			if (villagers.size() >= 8 && playSharedId(villagers.getFirst(), "kzemrz", "villager_crowd:" + player.getUUID(), LONG_COOLDOWN, player)) return;
 			Villager gatheringSpeaker = villagers.stream().filter(villager -> cast(villager) == CastProfile.VILLAGER).findFirst().orElse(null);
-			if (gatheringSpeaker != null && villagers.size() >= 3 && playId(gatheringSpeaker, "ebfifz",
-					"gathering:" + player.getUUID(), LONG_COOLDOWN, villagers.get(1))) return;
+			Villager gatheringTarget = gatheringSpeaker == null ? null : nearestConversationPartner(gatheringSpeaker, villagers);
+			if (gatheringTarget != null && villagers.size() >= 3 && playId(gatheringSpeaker, "ebfifz",
+					"gathering:" + player.getUUID(), LONG_COOLDOWN, gatheringTarget)) return;
 			for (int firstIndex = 0; firstIndex < villagers.size(); firstIndex++) {
 				Villager first = villagers.get(firstIndex);
+				Villager nearestPartner = nearestConversationPartner(first, villagers);
+				if (nearestPartner == null) continue;
 				for (int secondIndex = firstIndex + 1; secondIndex < villagers.size(); secondIndex++) {
 					Villager second = villagers.get(secondIndex);
 					String pair = orderedPair(first.getUUID(), second.getUUID());
-					if (!checkedPairs.add(pair) || first.distanceToSqr(second) > 25.0 || isBusy(first) || isBusy(second)) continue;
+					if (second != nearestPartner || !checkedPairs.add(pair) || isBusy(first) || isBusy(second)) continue;
 					int togetherTicks = PAIR_TICKS.merge(pair, 100, Integer::sum);
 					if (togetherTicks < 200) continue;
 					boolean firstHasNose = data(first).vnap$hasNose();
@@ -1121,6 +1143,14 @@ public final class ContextualDialogueController {
 			PENDING_SPEECH.add(new PendingSpeech(level, speaker.getUUID(), id, target.getUUID(), due));
 			due += DialogueCatalog.byId(id).durationTicks() + 2L;
 		}
+	}
+
+	private static Villager nearestConversationPartner(Villager villager, List<Villager> candidates) {
+		return candidates.stream()
+			.filter(candidate -> candidate != villager && !isBusy(candidate))
+			.filter(candidate -> villager.distanceToSqr(candidate) <= 6.25 && villager.hasLineOfSight(candidate))
+			.min(Comparator.comparingDouble(villager::distanceToSqr))
+			.orElse(null);
 	}
 
 	private static boolean nearBlock(ServerLevel level, BlockPos origin, String pathPart, int range) {
@@ -2040,20 +2070,23 @@ public final class ContextualDialogueController {
 				|| speaker instanceof Villager villager && villager.isSleeping() && !group.id().equals("asqzby")
 				|| isBusy(speaker)
 				|| !ready(cooldownKey, VillagerNewsSettings.scaleCooldown(cooldown))) return false;
-		Map<String, List<Integer>> speakerHistory = RECENT_VARIANTS.computeIfAbsent(speaker.getUUID(), ignored -> new HashMap<>());
-		List<Integer> recentVariants = speakerHistory.getOrDefault(group.id(), List.of());
+		List<Integer> recentVariants = SHARED_RECENT_VARIANTS.getOrDefault(group.id(), List.of());
 		DialogueCatalog.DialogueVariant variant = group.chooseVariant(VillagerNewsSettings.rareVoicelines(), Set.copyOf(recentVariants));
 		if (variant == null) return false;
 		DialogueAnimationNetwork.send(level, speaker, group.id(), variant.index(), (int) variant.durationTicks());
 		ACTIVE_SOUNDS.put(speaker.getUUID(), new ActiveSound(group.id(), ticks + variant.durationTicks()));
 		COOLDOWNS.put(cooldownKey, ticks);
-		int historySize = Math.min(3, group.variants().size() - 1);
+		int maximumWeight = group.variants().stream().mapToInt(DialogueCatalog.DialogueVariant::weight).max().orElse(1);
+		int eligibleVariants = VillagerNewsSettings.rareVoicelines() == 0
+			? (int) group.variants().stream().filter(candidate -> candidate.weight() >= maximumWeight * 0.8).count()
+			: group.variants().size();
+		int historySize = Math.min(8, eligibleVariants - 1);
 		if (historySize > 0) {
 			List<Integer> updatedHistory = new ArrayList<>(recentVariants);
 			updatedHistory.remove(Integer.valueOf(variant.index()));
 			updatedHistory.add(variant.index());
 			while (updatedHistory.size() > historySize) updatedHistory.removeFirst();
-			speakerHistory.put(group.id(), updatedHistory);
+			SHARED_RECENT_VARIANTS.put(group.id(), updatedHistory);
 		}
 		markBusy(speaker, variant.durationTicks() + 10L);
 		if (speaker instanceof Mob mob) {
@@ -2156,6 +2189,7 @@ public final class ContextualDialogueController {
 	private static void holdMob(Mob mob, Vec3 position) {
 		mob.getNavigation().stop();
 		mob.getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
+		mob.getBrain().eraseMemory(MemoryModuleType.LOOK_TARGET);
 		if (mob.onGround() && !mob.isPassenger()) {
 			Vec3 movement = mob.getDeltaMovement();
 			mob.setDeltaMovement(0.0, movement.y, 0.0);
@@ -2165,7 +2199,7 @@ public final class ContextualDialogueController {
 
 	private static void faceMob(Mob mob, Vec3 position) {
 		if (position == null) return;
-		mob.getLookControl().setLookAt(position.x, position.y, position.z, 4.0F, 3.0F);
+		mob.getLookControl().setLookAt(position.x, position.y, position.z, 15.0F, 10.0F);
 		double x = position.x - mob.getX();
 		double y = position.y - mob.getEyeY();
 		double z = position.z - mob.getZ();
@@ -2173,14 +2207,14 @@ public final class ContextualDialogueController {
 		if (horizontal > 0.01) {
 			float targetYaw = (float) (Mth.atan2(z, x) * 180.0 / Math.PI) - 90.0F;
 			float headOffset = Mth.clamp(Mth.wrapDegrees(targetYaw - mob.yBodyRot), -65.0F, 65.0F);
-			float bodyYaw = easedRotation(mob.yBodyRot, targetYaw - headOffset, 3.0F, 0.08F);
-			float headYaw = easedRotation(mob.getYHeadRot(), targetYaw, 4.0F, 0.1F);
+			float bodyYaw = easedRotation(mob.yBodyRot, targetYaw - headOffset, 12.0F, 0.35F);
+			float headYaw = easedRotation(mob.getYHeadRot(), targetYaw, 15.0F, 0.4F);
 			mob.setYRot(bodyYaw);
 			mob.setYBodyRot(bodyYaw);
 			mob.setYHeadRot(headYaw);
 		}
 		float targetPitch = (float) (-(Mth.atan2(y, horizontal) * 180.0 / Math.PI));
-		mob.setXRot(easedRotation(mob.getXRot(), Mth.clamp(targetPitch, -90.0F, 90.0F), 2.0F, 0.08F));
+		mob.setXRot(easedRotation(mob.getXRot(), Mth.clamp(targetPitch, -90.0F, 90.0F), 10.0F, 0.3F));
 	}
 
 	private static float easedRotation(float current, float target, float maximumStep, float proportion) {
@@ -2224,7 +2258,14 @@ public final class ContextualDialogueController {
 			case NUMBER_9 -> VillagerNewsItems.MICROPHONE;
 			default -> null;
 		};
-		if (result == null || villager.getOffers().stream().anyMatch(offer -> offer.getResult().getItem() == result)) return;
+		if (result == null) return;
+		if (!villager.getVillagerData().profession().is(VillagerProfession.NONE)) {
+			villager.setVillagerData(villager.getVillagerData()
+				.withProfession(villager.level().registryAccess(), VillagerProfession.NONE)
+				.withLevel(1));
+		}
+		villager.getOffers().removeIf(offer -> offer.getResult().getItem() != result);
+		if (villager.getOffers().stream().anyMatch(offer -> offer.getResult().getItem() == result)) return;
 		int price = profile == CastProfile.MAYOR ? 24 : 16;
 		villager.getOffers().add(new MerchantOffer(new ItemCost(Items.EMERALD, price), new ItemStack(result), 16, 2, 0.1F));
 	}
@@ -2377,6 +2418,7 @@ public final class ContextualDialogueController {
 		private int breakStreak;
 		private long lastBreakTick = Long.MIN_VALUE / 2;
 		private String lastGameMode;
+		private String lastPlayerContext;
 		private BlockPos lastGroundPos = BlockPos.ZERO;
 		private String lastGroundBlock = "";
 	}

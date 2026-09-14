@@ -6,6 +6,8 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.npc.villager.Villager;
+import net.minecraft.world.entity.npc.villager.VillagerData;
+import net.minecraft.world.entity.npc.villager.VillagerProfession;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -13,6 +15,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
@@ -60,6 +63,14 @@ public abstract class VillagerDataMixin implements VillagerNewsData {
 	)
 	private void vnap$keepSpecialTradeOpen(Villager villager) {
 		if (!ContextualDialogueController.isSpecialTrader(villager)) villager.setTradingPlayer(null);
+	}
+
+	@ModifyVariable(method = "setVillagerData", at = @At("HEAD"), argsOnly = true)
+	private VillagerData vnap$preventSpecialProfession(VillagerData value) {
+		Villager villager = (Villager) (Object) this;
+		return ContextualDialogueController.isSpecialTrader(villager)
+			? value.withProfession(villager.level().registryAccess(), VillagerProfession.NONE).withLevel(1)
+			: value;
 	}
 
 	@Override
